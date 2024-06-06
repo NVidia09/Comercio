@@ -465,7 +465,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         campo3 = 'cod_barras'
         valor = str(self.lineEdit_BuscarArticulo.text())
         articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor)
-        self.lineEdit_BuscarArticulo.returnPressed.connect(self.limpiar_busquedas)
+        ##########################################ELIMINE LA LINEA QUE LIMPIA EL CAMPO DE BUSQUEDA AL DAR ENTER C/LECTOR
+        #self.lineEdit_BuscarArticulo.returnPressed.connect(self.limpiar_busquedas)
+        #################################################################################
         self.tabla_Articulos.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
             self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
