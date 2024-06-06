@@ -1,0 +1,391 @@
+Articulo: 
+            Código: 3232232
+            Nombre: ewewewe
+            Modelo: sddsdds
+            Marca: -sdsdsdsd
+            Categoría: sdsdsd
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 23334.0
+            Precio de venta: 43443.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 12
+        
+Articulo: 
+            Código: 3232242
+            Nombre: sddsdd
+            Modelo: sddsdsdss
+            Marca: ddsdsdsd
+            Categoría: -
+            SKU: -
+            Color: ssddsds
+            Característica: -
+            Precio de costo: 21221.0
+            Precio de venta: 2323.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 2323
+        
+Articulo: 
+            Código: 233333
+            Nombre: MOUSE GAMER PY89
+            Modelo: PY89
+            Marca: DELL
+            Categoría: MOUSE
+            SKU: XSDEEERRR
+            Color: PLATEADO
+            Característica: USB
+            Precio de costo: 5000.0
+            Precio de venta: 6500.0
+            IVA: 10.0
+            Proveedor: AIR
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 5
+        
+Articulo: 
+            Código: 233343
+            Nombre: MONITOR BENQ 32" LCD TR45
+            Modelo: TR45
+            Marca: BENQ
+            Categoría: MONITOR
+            SKU: XBBBBCVVVV
+            Color: NEGRO
+            Característica: LCD
+            Precio de costo: 25000.0
+            Precio de venta: 28500.0
+            IVA: 10.0
+            Proveedor: AIR
+            Tamaño: 32
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 6
+        
+Articulo: 
+            Código: 233353
+            Nombre: TECLADO GENIUS GAMER SD900
+            Modelo: SD900
+            Marca: GENIUS
+            Categoría: TECLADO
+            SKU: XCSSSS
+            Color: BLANCO
+            Característica: -
+            Precio de costo: 5600.0
+            Precio de venta: 7800.0
+            IVA: 10.0
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 6
+        
+Articulo: 
+            Código: 233363
+            Nombre: AURICULAR TRUST GAMING BN200
+            Modelo: BN200
+            Marca: TRUST
+            Categoría: AURICULARES
+            SKU: XC233344KK
+            Color: NEGRO/ROJO
+            Característica: USB
+            Precio de costo: 6789.0
+            Precio de venta: 7654.0
+            IVA: 21.0
+            Proveedor: AIR
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 3
+            Margen de ganancia: 18
+        
+Articulo: 
+            Código: 233373
+            Nombre: FDSFDSF
+            Modelo: SDFFSDF
+            Marca: -FFFSFF
+            Categoría: SDFFDFSDF
+            SKU: -
+            Color: SDFDSDSFSFF
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233383
+            Nombre: fdggdggdg
+            Modelo: fdgddfggdg
+            Marca: gdggg
+            Categoría: fdgdgdggdg
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233393
+            Nombre: fdgdggdg
+            Modelo: gdfggfg
+            Marca: dfgggdgdg
+            Categoría: -dfgfdggg
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233403
+            Nombre: dfdsffsf
+            Modelo: dsffsff
+            Marca: dsfdffdf
+            Categoría: -sdffsffsdf
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233413
+            Nombre: vcxcvxvxcv
+            Modelo: fdsfsff
+            Marca: sdffsfsdf
+            Categoría: sdfffsffsdf
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233423
+            Nombre: fdggdgdfg
+            Modelo: gfdgggfgg
+            Marca: fdgdgdggdfg
+            Categoría: fdggdgdfgg
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 0
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233373
+            Nombre: fsff
+            Modelo: -fsdfsfsd
+            Marca: sdfsff
+            Categoría: -sdfsfsfsfsffs
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 0.0
+            Precio de venta: 0.0
+            IVA: 0.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 2
+            Margen de ganancia: 0
+        
+Articulo: 
+            Código: 233373
+            Nombre: tertret
+            Modelo: rtette
+            Marca: HP
+            Categoría: IMPRESORAS
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 3333.0
+            Precio de venta: 32333.0
+            IVA: 21.0
+            Proveedor: -
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 2
+            Margen de ganancia: 21
+        
+Articulo: 
+            Código: 233373
+            Nombre: fsdfdsfsd
+            Modelo: dsfsdff
+            Marca: HP
+            Categoría: IMPRESORAS
+            SKU: -
+            Color: -
+            Característica: -
+            Precio de costo: 2133.0
+            Precio de venta: 12331231.0
+            IVA: 0.0
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 1
+            Margen de ganancia: 12
+        
+Articulo: 
+            Código: 233373
+            Nombre: MONITOR PHILIPS 24# PH345
+            Modelo: PH345
+            Marca: PHILIPS
+            Categoría: MONITORES
+            SKU: XXCCCCCC
+            Color: BLANCO
+            Característica: -
+            Precio de costo: 23455.0
+            Precio de venta: 26789.0
+            IVA: 10.0
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 3
+            Margen de ganancia: 18
+        
+Articulo: 
+            Código: 233383
+            Nombre: IMPRESORA HP DESKJET 3785
+            Modelo: 3785
+            Marca: HP
+            Categoría: IMPRESORAS
+            SKU: X45JK890H
+            Color: BLANCA/ROJA
+            Característica: -
+            Precio de costo: 12600.0
+            Precio de venta: 14800.0
+            IVA: 10.5
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 6
+            Margen de ganancia: 18
+        
+Articulo: 
+            Código: 233393
+            Nombre: IMPRESORA EPSON LT900
+            Modelo: LT900
+            Marca: EPSON
+            Categoría: IMPRESORAS
+            SKU: CV23SDF3233
+            Color: NEGRO
+            Característica: -
+            Precio de costo: 460000.0
+            Precio de venta: 550000.0
+            IVA: 10.5
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 10
+            Margen de ganancia: 18
+        

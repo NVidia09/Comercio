@@ -1,0 +1,2944 @@
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIntValidator
+from PyQt5.QtWidgets import QMessageBox, QLineEdit, QDateEdit
+from PyQt5.uic.properties import QtGui
+from PyQt5 import QtGui
+
+
+from conexion_db import Conexion
+from cursor_del_pool import CursorDelPool
+from clienteDAO import ClienteDAO
+from articuloDAO import ArticuloDAO
+from logger_base import log
+from PyQt5 import QtWidgets
+import sys
+from diseño_nuevo import Ui_MainWindow  # Importa el diseño convertido
+from negocio import cliente, cajaDAO, articulo
+from negocio.EmpresaDAO import EmpresaDAO
+from negocio.articulo import Articulo
+from negocio.cajaDAO import CajaDAO
+from negocio.cliente import Cliente
+from negocio.detalleFactura import detalleFactura
+from negocio.detalleFacturaDAO import detalleFacturaDAO
+from negocio.empresa import Empresa
+from negocio.factura import Factura
+from negocio.facturaDAO import FacturaDAO
+from negocio.funciones import Funciones
+from negocio.pendientes import Pendiente
+from negocio.pendientesDAO import PendientesDAO
+from negocio.proveedor import Proveedor
+from negocio.proveedorDAO import ProveedorDAO
+from negocio.ventana_agregar_articulo import Ui_ventana_agregar_articulo
+from negocio.ventana_agregar_cliente_factura import Ui_ventana_agregar_cliente_factura
+from negocio.ventana_datos_empresaa import Ui_ventana_Datos_Empresa
+from negocio.ventana_marca import Ui_ventana_Marca
+from negocio.ventana_nueva_categoria import Ui_ventana_nueva_categoria
+from negocio.ventana_nueva_marca import Ui_ventana_nueva_marca
+from negocio.ventana_proveedor import Ui_ventana_proveedores
+from ventana_categoria import Ui_ventana_Categorias
+import locale
+from datetime import datetime
+
+# Establecer la localización en español (España)
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+
+item = 0
+categoria_seleccionada = ""
+
+
+
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, **kwargs):
+        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+        self.setupUi(self)  # Inicializa el diseño
+        # self.Ui_ventana_agregar_articulo = QtWidgets.QDialog()
+        self.tableWidget_SelecionarArticuloFactura = QtWidgets.QTableWidget()
+
+        self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
+        self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
+        self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
+
+        self.dialogo_categoria = QtWidgets.QDialog()
+        self.ui = Ui_ventana_Categorias()
+        self.ui.setupUi(self.dialogo_categoria)
+
+        self.dialogo_agregar_cliente_factura = QtWidgets.QDialog()
+        self.ui_agregar_cliente_Fact = Ui_ventana_agregar_cliente_factura()
+        self.ui_agregar_cliente_Fact.setupUi(self.dialogo_agregar_cliente_factura)
+
+        self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
+        self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
+        self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
+
+        self.dateEdit_fechavencimientoFactura.setDate(datetime.now())
+        self.setWindowFlag(Qt.FramelessWindowHint)
+
+        self.bt_Articulos.clicked.connect(self.listar_articulos)
+        self.bt_Clientes.clicked.connect(self.listar_clientes)
+        self.bt_Proveedores.clicked.connect(self.listar_proveedores)
+        self.bt_Empresa.clicked.connect(self.listar_empresa)
+        #self.bt_grabar_datos_empresa.clicked.connect(self.grabar_datos_empresa)
+
+        self.bt_Facturacion.clicked.connect(self.modulo_facturacion)
+        self.bt_nuevaFactura.clicked.connect(self.nueva_factura)
+        self.tableWidget_ultimasFacturas.cellClicked.connect(self.seleccionar_factura)
+
+        self.bt_NuevoArticulo.clicked.connect(self.mostrar_insertar_articulo)
+        self.bt_CancelarNvoArticulo.clicked.connect(self.borrar_campos_nuevo_articulo)
+        #self.bt_BuscarArticulo.clicked.connect(self.buscar_articulo)
+        self.lineEdit_BuscarArticulo.textChanged.connect(self.buscar_articulo)
+        self.bt_ModificarArticulo.clicked.connect(self.modificar_articulo)
+        self.bt_EliminarArticulo.clicked.connect(self.eliminar_articulo)
+        # self.Bt_Actualizar.clicked.connect(self.mostrar_actualizar_persona)
+        # self.Bt_Eliminar.clicked.connect(self.mostrar_eliminar_persona)
+        self.bt_Minimizar.clicked.connect(self.showMinimized)
+        self.bt_Cerrar.clicked.connect(self.close)
+        self.bt_Maximizar.clicked.connect(self.showMaximized)
+        self.bt_Restaurar.clicked.connect(self.showNormal)
+        self.label_capturaSeleccion.hide()
+        #obtener "id" al hacer click en un la tabla Articulos
+        self.tabla_Articulos.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
+        self.tabla_Articulos.itemSelectionChanged.connect(self.on_selec_change)
+        #obtener "id" al hacer click en un la tabla Clientes
+        self.tablaClientes.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
+        self.tablaClientes.itemSelectionChanged.connect(self.on_selec_change_cliente)
+        #llamar método para filtrar articulos
+        self.bt_FiltrarArticulo.clicked.connect(self.filtrar_articulo)
+        #empiezan los botones de los clientes
+        self.lineEdit_BuscarArticulo_2.textChanged.connect(self.buscar_cliente)
+        self.bt_ModificarCliente.clicked.connect(self.modificar_cliente)
+        self.bt_EliminarCliente.clicked.connect(self.eliminar_cliente)
+        self.bt_NuevoCliente.clicked.connect(self.mostrar_insertar_cliente)
+        self.bt_BuscarCliente.clicked.connect(self.buscar_cliente)
+        #empiezan los botones de los proveedores
+        self.lineEdit_BuscarArticulo_3.textChanged.connect(self.buscar_proveedor)
+        self.bt_ModificarProveedor.clicked.connect(self.modificar_proveedor)
+        self.bt_NuevoProveedor.clicked.connect(self.mostrar_insertar_proveedor)
+        self.bt_EliminarProveedor.clicked.connect(self.eliminar_proveedor)
+        self.bt_BuscarProveedor.clicked.connect(self.buscar_proveedor)
+
+        #acciones botones selecciona/agregar nueva categoría
+        self.bt_CategoriaNvoArticulo.clicked.connect(self.seleccionar_categoria)
+        #acciones botones selecciona/agregar nueva marca
+        self.bt_MarcaNvoArticulo.clicked.connect(self.seleccionar_marca)
+        #acciones botones selecciona/agregar nuevo proveedor
+        self.bt_ProveedorNvoArticulo.clicked.connect(self.seleccionar_proveedor)
+
+        self.ui_ventana_empresa.bt_cancelar_datos_empresa.clicked.connect(self.Ui_ventana_Datos_Empresa.close)
+
+
+        ##################################################################
+        ##
+        ##                     AGREGAR CLIENTE A NUEVA FACTURA
+        ##
+        ##################################################################
+
+        self.bt_seleccionaClienteNvaFactura.clicked.connect(self.seleccionar_cliente_nueva_factura)
+        self.ui_agregar_cliente_Fact.lineEdit_BuscarItemArticuloNvaFactura.textChanged.connect(self.buscar_cliente_nueva_factura)
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
+
+
+        #################################################################
+        #
+        #               BUSCAR ARTICULOS EN NUEVA FACTURA
+        #
+        #################################################################
+
+
+        self.bt_AgregarArticuloNvaFactura.clicked.connect(self.agregar_articulo_nueva_factura)
+        self.dialogo_agregar_Art_Factura = QtWidgets.QDialog()
+        self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
+        self.ui_ventana_agr_articulo.setupUi(self.dialogo_agregar_Art_Factura)
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(lambda:self.agregar_articulo_nueva_factura2())
+
+        #################################################################
+        #
+        #            ACTUALIZAR EL VALOR DEL PRECIO UNITARIO AL MODIFICAR LA CELDA DE CANTIDAD DEL ARTICULO
+        #################################################################
+        self.tableWidgetDetalleNvaFactura.cellChanged.connect(self.actualizar_subtotal)
+        self.tableWidgetDetalleNvaFactura.cellChanged.connect(self.actualizar_subtotal_factura)
+
+        ################################################################
+        #
+        #           PROCESO DE GUARDADO DE LA FACTURA
+        #
+        ################################################################
+        self.bt_Facturar.clicked.connect(self.guardar_factura)
+        self.bt_CancelarFactura.clicked.connect(self.cancelar_factura)
+
+        ################################################################
+        #
+        #           SELECCIONAR FACTURA POR CLIENTE
+        #
+        ################################################################
+        #self.tablaClientes.itemSelectionChanged.connect(self.seleccionar_factura_cliente)
+        self.tablaClientes.cellClicked.connect(self.seleccionar_factura_cliente)
+        #self.tablaFacturasCliente.itemSelectionChanged.connect(self.seleccionar_detalle_factura_cliente)
+        self.tablaFacturasCliente.cellClicked.connect(self.seleccionar_detalle_factura_cliente)
+
+        ###############################################################
+        #
+        #           COBRAR FACTURAS PENDIENTES
+        #
+        ###############################################################
+        self.bt_Cobrar_Factura_Cliente.clicked.connect(self.cobrar_factura_cliente)
+        self.tablaCobrarFacturasCliente.cellClicked.connect(self.seleccionar_detalle_factura_cobrar_cliente)
+        self.tableWidget_facturasImpagas.cellDoubleClicked.connect(self.cobrar_factura_cliente_facturacion)
+        self.bt_Cobrar.clicked.connect(self.cobrar_factura_cliente_pendiente)
+        self.comboBox_TpoPagoCobrarFactura.currentTextChanged.connect(self.on_combobox_changed)
+
+        ###############################################################
+        #
+        #           SECCION CAJA
+        #
+        ###############################################################
+        self.bt_Caja.clicked.connect(self.modulo_caja)
+        self.comboBox_FormaPagoNvoCobro.currentTextChanged.connect(self.combo_formapago_change)
+        self.bt_NvoCobro.clicked.connect(self.nuevo_cobro)
+        self.bt_CancelarNvoCobro.clicked.connect(self.cancelar_nuevo_cobro)
+
+        ###############################################################
+        #
+        #           SECCION STOCK
+        #
+        ###############################################################
+        self.pushButton_ModificarPrecio.clicked.connect(self.modulo_stock_mod_precio)
+        self.pushButton_ModificarStock.clicked.connect(self.modulo_stock_mod_stock)
+        self.comboBox_ModificarPrecio_2.currentTextChanged.connect(self.combo_mod_precio_change)
+
+
+
+
+
+    def listar_articulos(self):
+        articulos = ArticuloDAO.seleccionar()
+        self.stackedWidget.setCurrentIndex(1)
+        self.tabla_Articulos.setRowCount(len(articulos))
+        for i, articulo in enumerate(articulos):
+            self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+            self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+            self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+            self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+            self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+            self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+            self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+            self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+            self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+            log.debug(articulo)
+        # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
+        last_row = self.tabla_Articulos.rowCount() - 1
+        last_codigo = self.tabla_Articulos.item(last_row, 0)
+        self.tabla_Articulos.resizeColumnsToContents()
+        self.tabla_Articulos.resizeRowsToContents()
+        self.lineEdit_codigoNvoArticulo_2.setText(str(int(last_codigo.text()) + 10))
+        self.lineEdit_codigoNvoArticulo_2.setDisabled(True)
+
+        query_art_minimos = "SELECT * FROM articulos WHERE stock <= stock_minimo"
+        with CursorDelPool() as cursor:
+            cursor.execute(query_art_minimos)
+            registros = cursor.fetchall()
+            self.tableWidget_StockMinimo.setRowCount(len(registros))
+            for i, registro in enumerate(registros):
+                self.tableWidget_StockMinimo.setItem(i, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
+                self.tableWidget_StockMinimo.setItem(i, 1, QtWidgets.QTableWidgetItem(registro[1]))
+                self.tableWidget_StockMinimo.setItem(i, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
+                self.tableWidget_StockMinimo.setItem(i, 3, QtWidgets.QTableWidgetItem(str(registro[4])))
+                self.tableWidget_StockMinimo.setItem(i, 4, QtWidgets.QTableWidgetItem(str(registro[18])))
+                self.tableWidget_StockMinimo.setItem(i, 5, QtWidgets.QTableWidgetItem(str(registro[20])))
+                self.tableWidget_StockMinimo.resizeColumnsToContents()
+                self.tableWidget_StockMinimo.resizeRowsToContents()
+
+
+
+    def listar_clientes(self):
+        clientes = ClienteDAO.seleccionar()
+        self.stackedWidget.setCurrentIndex(2)
+        self.tablaClientes.setRowCount(len(clientes))
+        for i, cliente in enumerate(clientes):
+            self.tablaClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(str(cliente.codigo)))
+            self.tablaClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cliente.nombre))
+            self.tablaClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cliente.apellido))
+            self.tablaClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(cliente.dni))
+            self.tablaClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(cliente.empresa))
+            self.tablaClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(cliente.cuit))
+            self.tablaClientes.setItem(i, 6, QtWidgets.QTableWidgetItem(cliente.telefono))
+            self.tablaClientes.setItem(i, 7, QtWidgets.QTableWidgetItem(cliente.email))
+            self.tablaClientes.setItem(i, 8, QtWidgets.QTableWidgetItem(cliente.direccion))
+            self.tablaClientes.setItem(i, 9, QtWidgets.QTableWidgetItem(cliente.numero))
+            self.tablaClientes.setItem(i, 10, QtWidgets.QTableWidgetItem(cliente.localidad))
+            self.tablaClientes.setItem(i, 11, QtWidgets.QTableWidgetItem(cliente.provincia))
+            self.tablaClientes.setItem(i, 12, QtWidgets.QTableWidgetItem(cliente.pais))
+            self.tablaClientes.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente.observaciones))
+            self.tablaClientes.setItem(i, 14, QtWidgets.QTableWidgetItem(cliente.condiva))
+            log.debug(cliente)
+        # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
+        last_row_cliente = self.tablaClientes.rowCount() - 1
+        last_codigo_cliente = self.tablaClientes.item(last_row_cliente, 0)
+        self.tablaClientes.resizeColumnsToContents()
+        self.tablaClientes.resizeRowsToContents()
+        self.lineEdit_codigoNvoCliente.setText(str(int(last_codigo_cliente.text()) + 10))
+        self.lineEdit_codigoNvoCliente.setDisabled(True)
+
+    def listar_proveedores(self):
+        proveedores = ProveedorDAO.seleccionar()
+        self.stackedWidget.setCurrentIndex(3)
+        self.tablaProveedores.setRowCount(len(proveedores))
+        for i, proveedor in enumerate(proveedores):
+            self.tablaProveedores.setItem(i, 0, QtWidgets.QTableWidgetItem(str(proveedor.codproveedor)))
+            self.tablaProveedores.setItem(i, 1, QtWidgets.QTableWidgetItem(proveedor.razonsocial))
+            self.tablaProveedores.setItem(i, 2, QtWidgets.QTableWidgetItem(proveedor.cuit))
+            self.tablaProveedores.setItem(i, 3, QtWidgets.QTableWidgetItem(proveedor.domicilio))
+            self.tablaProveedores.setItem(i, 4, QtWidgets.QTableWidgetItem(proveedor.ciudad))
+            self.tablaProveedores.setItem(i, 5, QtWidgets.QTableWidgetItem(proveedor.provincia))
+            self.tablaProveedores.setItem(i, 6, QtWidgets.QTableWidgetItem(proveedor.pais))
+            self.tablaProveedores.setItem(i, 7, QtWidgets.QTableWidgetItem(proveedor.telefono))
+            self.tablaProveedores.setItem(i, 8, QtWidgets.QTableWidgetItem(proveedor.web))
+            self.tablaProveedores.setItem(i, 9, QtWidgets.QTableWidgetItem(proveedor.email))
+            self.tablaProveedores.setItem(i, 10, QtWidgets.QTableWidgetItem(proveedor.cuenta))
+            self.tablaProveedores.setItem(i, 11, QtWidgets.QTableWidgetItem(proveedor.password))
+            self.tablaProveedores.setItem(i, 12, QtWidgets.QTableWidgetItem(proveedor.observaciones))
+            log.debug(proveedor)
+        # Setea el código del nuevo proveedor en 10 unidades más que el último proveedor ingresado
+        last_row_proveedor = self.tablaProveedores.rowCount() - 1
+        last_codigo_proveedor = self.tablaProveedores.item(last_row_proveedor, 0)
+        self.tablaProveedores.resizeColumnsToContents()
+        self.tablaProveedores.resizeRowsToContents()
+        ########CAMBIAR EL LINEEDIT DE CODIGO DE PROVEEDOR
+        self.lineEdit_codigoNvoProveedor.setText(str(int(last_codigo_proveedor.text()) + 10))
+        self.lineEdit_codigoNvoProveedor.setDisabled(True)
+
+
+    ###########################################################################################################
+    ###########################################################################################################
+    #
+    #                                   EMPIEZA LA PARTE DE LOS ARTICULOS
+    #
+    ###########################################################################################################
+    ###########################################################################################################
+
+    def mostrar_insertar_articulo(self):
+        self.stackedWidget.setCurrentIndex(4)
+        self.bt_guardarNvoArticulo.clicked.connect(self.insertar_articulo)
+
+    def insertar_articulo(self):
+        codigo = self.lineEdit_codigoNvoArticulo_2.text()
+        nombre = self.lineEdit_nombreNvoArticulo.text()
+        modelo = self.lineEdit_modeloNvoArticulo.text()
+        marca = self.lineEdit_marcaNvoArticulo.text()
+        categoria = self.lineEdit_categoriaNvoArticulo.text()
+        sku = self.lineEdit_skuNvoArticulo.text()
+        color = self.lineEdit_colorNvoArticulo.text()
+        caracteristica = self.lineEdit_caracteristicaNvoArticulo.text()
+        precio_costo = float(self.lineEdit_preciocostoNvoArticulo.text())
+        precio_venta = float(self.lineEdit_precioventaNvoArticulo.text())
+        iva = float(self.lineEdit_ivaNvoArticulo.text())
+        proveedor = self.lineEdit_proveedorNvoArticulo.text()
+        tamaño = self.lineEdit_tamanoNvoArticulo.text()
+        ancho = self.lineEdit_anchoNvoArticulo.text()
+        largo = self.lineEdit_largoNvoArticulo.text()
+        profundidad = self.lineEdit_profundidadNvoArticulo.text()
+        peso = self.lineEdit_pesoNvoArticulo.text()
+        peso_envalado = self.lineEdit_pesoenvaladoNvoArticulo.text()
+        stock = self.lineEdit_stockNvoArticulo.text()
+        margen_ganancia = self.lineEdit_margenNvoArticulo.text()
+        stock_minimo = self.lineEdit_stockMinimoNvoArticulo.text()
+        articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo)
+        articulos_insertados = ArticuloDAO.insertar(articulo)
+        log.debug(f'Articulos insertados: {articulos_insertados}')
+        #self.label_ingresar_msg2.setText('Articulo ingresado correctamente')
+        QMessageBox.information(self, "Artículo Ingresado",
+                                "El artículo ha sido ingresado correctamente",)
+        self.listar_articulos()
+        ##### BORRA LOS LINEEDIT DESPUES DE INGRESAR EL ARTICULO
+        self.borrar_campos_nuevo_articulo()
+        ##############
+        linea10 = '-'
+        linea11 = '0'
+        self.lineEdit_nombreNvoArticulo.setText(linea10)
+        self.lineEdit_modeloNvoArticulo.setText(linea10)
+        self.lineEdit_marcaNvoArticulo.setText(linea10)
+        self.lineEdit_categoriaNvoArticulo.setText(linea10)
+        self.lineEdit_skuNvoArticulo.setText(linea10)
+        self.lineEdit_colorNvoArticulo.setText(linea10)
+        self.lineEdit_caracteristicaNvoArticulo.setText(linea10)
+        self.lineEdit_preciocostoNvoArticulo.setText(linea11)
+        self.lineEdit_precioventaNvoArticulo.setText(linea11)
+        self.lineEdit_ivaNvoArticulo.setText(linea11)
+        self.lineEdit_proveedorNvoArticulo.setText(linea11)
+        self.lineEdit_tamanoNvoArticulo.setText(linea11)
+        self.lineEdit_anchoNvoArticulo.setText(linea11)
+        self.lineEdit_largoNvoArticulo.setText(linea11)
+        self.lineEdit_profundidadNvoArticulo.setText(linea11)
+        self.lineEdit_pesoNvoArticulo.setText(linea11)
+        self.lineEdit_pesoenvaladoNvoArticulo.setText(linea11)
+        self.lineEdit_stockNvoArticulo.setText(linea11)
+        self.lineEdit_margenNvoArticulo.setText(linea11)
+        self.lineEdit_stockMinimoNvoArticulo.setText(linea11)
+        self.label_ingresar_msg2.clear()
+        return
+
+    def borrar_campos_nuevo_articulo(self):
+        self.lineEdit_nombreNvoArticulo.clear()
+        self.lineEdit_modeloNvoArticulo.clear()
+        self.lineEdit_marcaNvoArticulo.clear()
+        self.lineEdit_categoriaNvoArticulo.clear()
+        self.lineEdit_skuNvoArticulo.clear()
+        self.lineEdit_colorNvoArticulo.clear()
+        self.lineEdit_caracteristicaNvoArticulo.clear()
+        self.lineEdit_preciocostoNvoArticulo.clear()
+        self.lineEdit_precioventaNvoArticulo.clear()
+        self.lineEdit_ivaNvoArticulo.clear()
+        self.lineEdit_proveedorNvoArticulo.clear()
+        self.lineEdit_tamanoNvoArticulo.clear()
+        self.lineEdit_anchoNvoArticulo.clear()
+        self.lineEdit_largoNvoArticulo.clear()
+        self.lineEdit_profundidadNvoArticulo.clear()
+        self.lineEdit_pesoNvoArticulo.clear()
+        self.lineEdit_pesoenvaladoNvoArticulo.clear()
+        self.lineEdit_stockNvoArticulo.clear()
+        self.lineEdit_margenNvoArticulo.clear()
+        self.lineEdit_stockMinimoNvoArticulo.clear()
+        self.label_ingresar_msg2.clear()
+
+
+    def buscar_articulo(self):
+        campo1 = 'nombre'
+        campo2 = 'codigo'
+        valor = str(self.lineEdit_BuscarArticulo.text())
+        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, valor)
+        self.tabla_Articulos.setRowCount(len(articulos))
+        for i, articulo in enumerate(articulos):
+            self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+            self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+            self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+            self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+            self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+            self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+            self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+            self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+            self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+            self.tabla_Articulos.resizeColumnsToContents()
+            self.tabla_Articulos.resizeRowsToContents()
+            log.debug(articulo)
+
+
+    def on_selec_change(self):
+        row = self.tabla_Articulos.currentRow()
+        item = self.tabla_Articulos.item(row, 0)
+        if item is not None:
+            self.label_capturaSeleccion.setText(item.text())
+            print(f'Fila seleccionada: {item.text()}')
+    def modificar_articulo(self):
+        #valor_codigo = self.label_capturaSeleccion.text()
+        #codigo = self.tabla_Articulos.item(int(valor_codigo), 0).text()
+        #row = int(valor_codigo)
+        row= self.tabla_Articulos.currentRow()
+        codigo = int(self.tabla_Articulos.item(row, 0).text())
+        nombre = str(self.tabla_Articulos.item(row, 1).text())
+        modelo = str(self.tabla_Articulos.item(row, 2).text())
+        marca = str(self.tabla_Articulos.item(row, 3).text())
+        categoria = str(self.tabla_Articulos.item(row, 4).text())
+        sku = str(self.tabla_Articulos.item(row, 5).text())
+        color = str(self.tabla_Articulos.item(row, 6).text())
+        caracteristica = str(self.tabla_Articulos.item(row, 7).text())
+        precio_costo_str = self.tabla_Articulos.item(row, 8).text()
+        precio_costo_str = precio_costo_str.replace('$', '').replace(',', '')
+        precio_costo = float(precio_costo_str)
+        #precio_costo = float(self.tabla_Articulos.item(row, 8).text())
+        precio_venta_str = self.tabla_Articulos.item(row, 9).text()
+        precio_venta_str = precio_venta_str.replace('$', '').replace(',', '')
+        precio_venta = float(precio_venta_str)
+        #precio_venta = float(self.tabla_Articulos.item(row, 9).text())
+        #iva_str = self.tabla_Articulos.item(row, 10).text
+        #iva = float(iva_str) if iva_str != 'None' else 0.0
+        iva = float(self.tabla_Articulos.item(row, 10).text())
+        proveedor = str(self.tabla_Articulos.item(row, 11).text())
+        tamaño = float(self.tabla_Articulos.item(row, 12).text())
+        ancho = float(self.tabla_Articulos.item(row, 13).text())
+        largo = float(self.tabla_Articulos.item(row, 14).text())
+        profundidad = float(self.tabla_Articulos.item(row, 15).text())
+        peso = float(self.tabla_Articulos.item(row, 16).text())
+        peso_envalado = float(self.tabla_Articulos.item(row, 17).text())
+        stock = int(self.tabla_Articulos.item(row, 18).text())
+        margen_ganancia = float(self.tabla_Articulos.item(row, 19).text())
+        stock_minimo = int(self.tabla_Articulos.item(row, 20).text())
+        button = QMessageBox.question(self, "Modificar Artículo", "Está seguro que desea modificar el artículo?", )
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo)
+            articulos_actualizados = ArticuloDAO.actualizar(articulo)
+            log.debug(f'Articulos actualizados: {articulos_actualizados}')
+            self.label_ingresar_msg2.setText('Articulo actualizado correctamente')
+            QMessageBox.information(self, "Artículo Modificado",
+                                    "El artículo ha sido modificado correctamente", )
+        else:
+            print("NO!")
+            self.listar_articulos()
+            return
+
+    def filtrar_articulo(self):
+
+        campo = self.comboBox_FiltrarArticuloCampo.currentText()
+        condicion = self.comboBox_FiltrarArticuloCondicion.currentText()
+        valor1 = self.lineEditValor1.text()
+        valor2 = None
+
+        if condicion == 'Igual a...':
+            articulos = ArticuloDAO.filtrar_articulo_igual(campo, valor1)
+            self.tabla_Articulos.setRowCount(len(articulos))
+            for i, articulo in enumerate(articulos):
+                self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+                self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+                self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+                self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+                self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+                self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+                self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+                self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+                self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+                self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+                self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+                self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+                self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+                self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+                self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+                self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+                self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+                self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+                self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                log.debug(articulo)
+                self.tabla_Articulos.resizeColumnsToContents()
+                self.tabla_Articulos.resizeRowsToContents()
+                if self.comboBox_FiltrarArticuloCondicion.changeEvent:
+                    self.lineEditValor1.setText('')
+                    self.lineEditValor1_2.setText('')
+
+        elif condicion == 'Mayor que...':
+            articulos = ArticuloDAO.filtrar_articulo_mayor(campo, valor1)
+            self.tabla_Articulos.setRowCount(len(articulos))
+            for i, articulo in enumerate(articulos):
+                self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+                self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+                self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+                self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+                self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+                self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+                self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+                self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+                self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+                self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+                self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+                self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+                self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+                self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+                self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+                self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+                self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+                self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+                self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                log.debug(articulo)
+                self.tabla_Articulos.resizeColumnsToContents()
+                self.tabla_Articulos.resizeRowsToContents()
+                if self.comboBox_FiltrarArticuloCondicion.changeEvent:
+                    self.lineEditValor1.setText('')
+                    self.lineEditValor1_2.setText('')
+
+        elif condicion == 'Menor que...':
+            articulos = ArticuloDAO.filtrar_articulo_menor(campo, valor1)
+            self.tabla_Articulos.setRowCount(len(articulos))
+            for i, articulo in enumerate(articulos):
+                self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+                self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+                self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+                self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+                self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+                self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+                self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+                self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+                self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+                self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+                self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+                self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+                self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+                self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+                self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+                self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+                self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+                self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+                self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                log.debug(articulo)
+                self.tabla_Articulos.resizeColumnsToContents()
+                self.tabla_Articulos.resizeRowsToContents()
+                if self.comboBox_FiltrarArticuloCondicion.changeEvent:
+                    self.lineEditValor1.setText('')
+                    self.lineEditValor1_2.setText('')
+
+        elif condicion == 'Entre...':
+            if self.lineEditValor1_2.text() == 'Valor 2' or self.lineEditValor1.text() == 'Valor 1':
+                QMessageBox.information(self, "Información faltante",
+                                        "Por favor, ingrese ambos valores para la condición 'Entre...'")
+                return
+            valor2 = self.lineEditValor1_2.text()
+            if not valor1 or not valor2:
+                QMessageBox.information(self, "Información faltante",
+                                        "Por favor, ingrese ambos valores para la condición 'Entre...'")
+                return
+            articulos = ArticuloDAO.filtrar_articulo_entre(campo, valor1, valor2)
+            self.tabla_Articulos.setRowCount(len(articulos))
+            for i, articulo in enumerate(articulos):
+                self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+                self.tabla_Articulos.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+                self.tabla_Articulos.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+                self.tabla_Articulos.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+                self.tabla_Articulos.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+                self.tabla_Articulos.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+                self.tabla_Articulos.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+                self.tabla_Articulos.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+                self.tabla_Articulos.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                self.tabla_Articulos.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+                self.tabla_Articulos.setItem(i, 10, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                self.tabla_Articulos.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+                self.tabla_Articulos.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+                self.tabla_Articulos.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+                self.tabla_Articulos.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+                self.tabla_Articulos.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+                self.tabla_Articulos.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+                self.tabla_Articulos.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+                self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+                self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+                self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                log.debug(articulo)
+                self.tabla_Articulos.resizeColumnsToContents()
+                self.tabla_Articulos.resizeRowsToContents()
+                if self.comboBox_FiltrarArticuloCondicion.changeEvent:
+                    self.lineEditValor1.setText('')
+                    self.lineEditValor1_2.setText('')
+
+    def eliminar_articulo(self):
+        row = self.tabla_Articulos.currentRow()
+        item = self.tabla_Articulos.item(row, 0)
+        if item is not None:
+            self.label_capturaSeleccion.setText(item.text())
+            print(f'Fila seleccionada: {item.text()}')
+        codigo = self.tabla_Articulos.item(row, 0).text()
+        nombre = self.tabla_Articulos.item(row, 1).text()
+        modelo = self.tabla_Articulos.item(row, 2).text()
+        marca = self.tabla_Articulos.item(row, 3).text()
+        categoria = self.tabla_Articulos.item(row, 4).text()
+        sku = self.tabla_Articulos.item(row, 5).text()
+        color = self.tabla_Articulos.item(row, 6).text()
+        caracteristica = self.tabla_Articulos.item(row, 7).text()
+        precio_costo = self.tabla_Articulos.item(row, 8).text()
+        precio_venta = self.tabla_Articulos.item(row, 9).text()
+        iva = self.tabla_Articulos.item(row, 10).text()
+        proveedor = self.tabla_Articulos.item(row, 11).text()
+        tamaño = self.tabla_Articulos.item(row, 12).text()
+        ancho = self.tabla_Articulos.item(row, 13).text()
+        largo = self.tabla_Articulos.item(row, 14).text()
+        profundidad = self.tabla_Articulos.item(row, 15).text()
+        peso = self.tabla_Articulos.item(row, 16).text()
+        peso_envalado = self.tabla_Articulos.item(row, 17).text()
+        stock = self.tabla_Articulos.item(row, 18).text()
+        margen_ganancia = self.tabla_Articulos.item(row, 19).text()
+        stock_minimo = self.tabla_Articulos.item(row, 20).text()
+        button = QMessageBox.question(self, "Eliminar Artículo", "Está seguro que desea eliminar el artículo?",)
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo,
+                                precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado,
+                                stock, margen_ganancia, stock_minimo)
+            articulos_eliminados = ArticuloDAO.eliminar(articulo)
+            log.debug(f'Articulos eliminados: {articulos_eliminados}')
+            # self.label_ingresar_msg2.setText('Articulo eliminado correctamente')
+            QMessageBox.information(self, "Artículo Eliminado",
+                                    "El artículo ha sido eliminado correctamente", )
+        else:
+            print("NO!")
+        self.listar_articulos()
+        return
+
+
+    ###########################################################################################################
+    ###########################################################################################################
+    #
+    #                                   EMPIEZA LA PARTE DEL CLIENTE
+    #
+    ###########################################################################################################
+    ###########################################################################################################
+
+
+    def on_selec_change_cliente(self):
+        row = self.tablaClientes.currentRow()
+        item = self.tablaClientes.item(row, 0)
+        if item is not None:
+            self.label_capturaSeleccion.setText(item.text())
+            print(f'Fila seleccionada: {item.text()}')
+    def modificar_cliente(self):
+        row = self.tablaClientes.currentRow()
+        codigo = int(self.tablaClientes.item(row, 0).text())
+        nombre = str(self.tablaClientes.item(row, 1).text())
+        apellido = str(self.tablaClientes.item(row, 2).text())
+        dni = str(self.tablaClientes.item(row, 3).text())
+        empresa = str(self.tablaClientes.item(row, 4).text())
+        cuit = str(self.tablaClientes.item(row, 5).text())
+        telefono = str(self.tablaClientes.item(row, 6).text())
+        email = str(self.tablaClientes.item(row, 7).text())
+        direccion = str(self.tablaClientes.item(row, 8).text())
+        numero = str(self.tablaClientes.item(row, 9).text())
+        localidad = str(self.tablaClientes.item(row, 10).text())
+        provincia = str(self.tablaClientes.item(row, 11).text())
+        pais = str(self.tablaClientes.item(row, 12).text())
+        #observaciones = str(self.tablaClientes.item(row, 13).text())
+        item = self.tablaClientes.item(row, 13)
+        condiva = self.tablaClientes.item(row, 14).text()
+        if item is not None:
+            observaciones = str(item.text())
+        else:
+            observaciones = None
+
+        button = QMessageBox.question(self, "Modificar Cliente", "Está seguro que desea modificar el cliente?", )
+
+        if nombre == '' or nombre.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Nombre no puede estar vacío o no ser sólo letras", )
+            self.tablaClientes.item(row, 1).setText('')
+            self.tablaClientes.setCurrentCell(row, 1)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 1))
+            return
+
+        if apellido == '' or apellido.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Apellido no puede estar vacío o no ser sólo letras", )
+            self.tablaClientes.item(row, 2).setText('')
+            self.tablaClientes.setCurrentCell(row, 2)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 2))
+            return
+
+        try:
+            int_dni = int(dni)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de DNI no puede estar vacío o no ser números enteros", )
+            self.tablaClientes.item(row, 3).setText('')
+            self.tablaClientes.setCurrentCell(row, 5)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 3))
+            return
+
+        try:
+            int_cuit = int(cuit)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de CUIT/CUIL no puede estar vacío o no ser números enteros", )
+            self.tablaClientes.item(row, 5).setText('')
+            self.tablaClientes.setCurrentCell(row, 5)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 5))
+            return
+
+        try:
+            int_telefono = int(telefono)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor del Teléfono debe ser sólo números enteros", )
+            self.tablaClientes.item(row, 6).setText('')
+            self.tablaClientes.setCurrentCell(row, 6)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 6))
+            return
+
+        if localidad == '' or localidad.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Localidad no puede estar vacío o no ser sólo letras", )
+            self.tablaClientes.item(row, 10).setText('')
+            self.tablaClientes.setCurrentCell(row, 10)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 10))
+            return
+
+        if provincia == '' or provincia.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Provincia no puede estar vacío o no ser sólo letras", )
+            self.tablaClientes.item(row, 11).setText('')
+            self.tablaClientes.setCurrentCell(row, 11)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 11))
+            return
+
+        if pais == '' or pais.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de País no puede estar vacío o no ser sólo letras", )
+            self.tablaClientes.item(row, 12).setText('')
+            self.tablaClientes.setCurrentCell(row, 12)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 12))
+            return
+
+        if condiva == '' or condiva.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Condición IVA no puede estar vacío o no ser Responsable Inscripto, Monotributista, Consumidor Final o Exento", )
+            self.tablaClientes.item(row, 14).setText('')
+            self.tablaClientes.setCurrentCell(row, 14)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 14))
+            return
+        elif condiva != 'RESPONSABLE INSCRIPTO' and condiva != 'MONOTRIBUTISTA' and condiva != 'CONSUMIDOR FINAL' and condiva != 'EXENTO':
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Condición IVA no puede estar vacío o no ser Responsable Inscripto, Monotributista, Consumidor Final o Exento", )
+            self.tablaClientes.item(row, 14).setText('')
+            self.tablaClientes.setCurrentCell(row, 14)
+            self.tablaClientes.editItem(self.tablaClientes.item(row, 14))
+            return
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+            clientes_actualizados = ClienteDAO.actualizar(cliente)
+            log.debug(f'Clientes actualizados: {clientes_actualizados}')
+            self.label_ingresar_msg2.setText('Cliente actualizado correctamente')
+            QMessageBox.information(self, "Cliente Modificado",
+                                    "El cliente ha sido modificado correctamente", )
+        else:
+            print("NO!")
+            self.listar_clientes()
+            return
+
+    def eliminar_cliente(self):
+        row = self.tablaClientes.currentRow()
+        item = self.tablaClientes.item(row, 0)
+        if item is not None:
+            self.label_capturaSeleccion.setText(item.text())
+            print(f'Fila seleccionada: {item.text()}')
+        codigo = self.tablaClientes.item(row, 0).text()
+        nombre = self.tablaClientes.item(row, 1).text()
+        apellido = self.tablaClientes.item(row, 2).text()
+        dni = self.tablaClientes.item(row, 3).text()
+        empresa = self.tablaClientes.item(row, 4).text()
+        cuit = self.tablaClientes.item(row, 5).text()
+        telefono = self.tablaClientes.item(row, 6).text()
+        email = self.tablaClientes.item(row, 7).text()
+        direccion = self.tablaClientes.item(row, 8).text()
+        numero = self.tablaClientes.item(row, 9).text()
+        localidad = self.tablaClientes.item(row, 10).text()
+        provincia = self.tablaClientes.item(row, 11).text()
+        pais = self.tablaClientes.item(row, 12).text()
+        #observaciones = self.tablaClientes.item(row, 13).text()
+        item = self.tablaClientes.item(row, 13)
+        condiva = self.tablaClientes.item(row, 14).text()
+        if item is not None:
+            observaciones = str(item.text())
+        else:
+            observaciones = None
+
+        button = QMessageBox.question(self, "Eliminar Cliente", "Está seguro que desea eliminar el cliente?", )
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+            clientes_eliminados = ClienteDAO.eliminar(cliente)
+            log.debug(f'Clientes eliminados: {clientes_eliminados}')
+            # self.label_ingresar_msg2.setText('Cliente eliminado correctamente')
+            QMessageBox.information(self, "Cliente Eliminado",
+                                    "El cliente ha sido eliminado correctamente", )
+        else:
+            print("NO!")
+        self.listar_clientes()
+        return
+
+
+    def mostrar_insertar_cliente(self):
+        self.stackedWidget.setCurrentIndex(5)
+        self.bt_guardarNvoCliente.clicked.connect(self.insertar_cliente)
+
+
+    def insertar_cliente(self):
+        codigo = self.lineEdit_codigoNvoCliente.text()
+        nombre = self.lineEdit_nombreNvoCliente.text()
+        apellido = self.lineEdit_apellidoNvoCliente.text()
+        dni = self.lineEdit_lineEdit_dniNvoCliente.text()
+        empresa = self.lineEdit_empresaNvoCliente.text()
+        cuit = self.lineEdit_cuitNvoCliente.text()
+        telefono = self.lineEdit_telefonoNvoCliente.text()
+        email = self.lineEdit_emailNvoCliente.text()
+        direccion = self.lineEdit_direccionNvoCliente.text()
+        numero = self.lineEdit_numerolNvoCliente.text()
+        localidad = self.lineEdit_localidadNvoCliente.text()
+        provincia = self.lineEdit_provinciaNvoCliente.text()
+        pais = self.lineEdit_paisNvoCliente.text()
+        observaciones = self.lineEdit_obsercacionesNvoCliente.text()
+        condiva = self.comboBox_CondIVANvoCliente.currentText()
+        #item = self.lineEdit_obsercacionesNvoCliente.text()
+        # if item is not None:
+        #     observaciones = str(item.text())
+        # else:
+        #     observaciones = None
+
+        if nombre == '' or nombre.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Nombre no puede estar vacío o no ser sólo letras", )
+            self.lineEdit_nombreNvoCliente.setText('')
+            self.lineEdit_nombreNvoCliente.setFocus()
+            return
+
+        if apellido == '' or apellido.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Apellido no puede estar vacío o no ser sólo letras", )
+            self.lineEdit_apellidoNvoCliente.setText('')
+            self.lineEdit_apellidoNvoCliente.setFocus()
+            return
+
+        try:
+            int_dni = int(dni)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de DNI no puede estar vacío o no ser números enteros", )
+            self.lineEdit_lineEdit_dniNvoCliente.setText('')
+            self.lineEdit_lineEdit_dniNvoCliente.setFocus()
+            return
+
+        try:
+            int_cuit = int(cuit)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de CUIT/CUIL no puede estar vacío o no ser números enteros", )
+            self.lineEdit_cuitNvoCliente.setText('')
+            self.lineEdit_cuitNvoCliente.setFocus()
+            return
+
+        try:
+            int_telefono = int(telefono)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor del Teléfono debe ser sólo números enteros", )
+            self.lineEdit_telefonoNvoCliente.setText('')
+            self.lineEdit_telefonoNvoCliente.setFocus()
+            return
+
+
+
+        cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+        clientes_insertados = ClienteDAO.insertar(cliente)
+        log.debug(f'Clientes insertados: {clientes_insertados}')
+        self.label_ingresar_msg2.setText('Cliente ingresado correctamente')
+        QMessageBox.information(self, "Cliente Ingresado",
+                                "El cliente ha sido ingresado correctamente", )
+        self.listar_clientes()
+        return
+
+    def buscar_cliente(self):
+        campo1 = 'nombre'
+        campo2 = 'apellido'
+        campo3 = 'empresa'
+        valor = str(self.lineEdit_BuscarArticulo_2.text())
+        clientes = ClienteDAO.buscar_cliente(campo1, campo2, campo3, valor)
+        self.tablaClientes.setRowCount(len(clientes))
+        for i, cliente in enumerate(clientes):
+            self.tablaClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(str(cliente.codigo)))
+            self.tablaClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cliente.nombre))
+            self.tablaClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cliente.apellido))
+            self.tablaClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(cliente._dni))
+            self.tablaClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(cliente.empresa))
+            self.tablaClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(cliente._cuit))
+            self.tablaClientes.setItem(i, 6, QtWidgets.QTableWidgetItem(cliente._telefono))
+            self.tablaClientes.setItem(i, 7, QtWidgets.QTableWidgetItem(cliente._email))
+            self.tablaClientes.setItem(i, 8, QtWidgets.QTableWidgetItem(cliente._direccion))
+            self.tablaClientes.setItem(i, 9, QtWidgets.QTableWidgetItem(cliente._numero))
+            self.tablaClientes.setItem(i, 10, QtWidgets.QTableWidgetItem(cliente._localidad))
+            self.tablaClientes.setItem(i, 11, QtWidgets.QTableWidgetItem(cliente._provincia))
+            self.tablaClientes.setItem(i, 12, QtWidgets.QTableWidgetItem(cliente._pais))
+            self.tablaClientes.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente._observaciones))
+            self.tablaClientes.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente._condiva))
+            self.tablaClientes.resizeColumnsToContents()
+            self.tablaClientes.resizeRowsToContents()
+            log.debug(cliente)
+
+
+
+    ##############################################################################################
+    ##############################################################################################
+    #
+    #                           EMPIEZA PARTE PROVEEDORES
+    #
+    #
+    ##############################################################################################
+
+    ##############################################################################################
+
+    def modificar_proveedor(self):
+        row = self.tablaProveedores.currentRow()
+        codproveedor = int(self.tablaProveedores.item(row, 0).text())
+        razonsocial = str(self.tablaProveedores.item(row, 1).text())
+        cuit = str(self.tablaProveedores.item(row, 2).text())
+        domicilio = str(self.tablaProveedores.item(row, 3).text())
+        ciudad = str(self.tablaProveedores.item(row, 4).text())
+        provincia = str(self.tablaProveedores.item(row, 5).text())
+        pais = str(self.tablaProveedores.item(row, 6).text())
+        telefono = str(self.tablaProveedores.item(row, 7).text())
+        web = str(self.tablaProveedores.item(row, 8).text())
+        email = str(self.tablaProveedores.item(row, 9).text())
+        cuenta = str(self.tablaProveedores.item(row, 10).text())
+        password = str(self.tablaProveedores.item(row, 11).text())
+        #observaciones = str(self.tablaProveedores.item(row, 12).text())
+        item = self.tablaProveedores.item(row, 12)
+        if item is not None:
+            observaciones = str(item.text())
+        else:
+            observaciones = None
+        button = QMessageBox.question(self, "Modificar Proveedor", "Está seguro que desea modificar el proveedor?", )
+
+        try:
+            int_cuit = int(cuit)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de CUIT no puede estar vacío o no ser números enteros", )
+            self.tablaProveedores.item(row, 2).setText('')
+            self.tablaProveedores.setCurrentCell(row, 2)
+            self.tablaProveedores.editItem(self.tablaProveedores.item(row, 2))
+            return
+
+        if ciudad == '' or ciudad.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Ciudad no puede estar vacío o no ser sólo letras", )
+            self.tablaProveedores.item(row, 4).setText('')
+            self.tablaProveedores.setCurrentCell(row, 4)
+            self.tablaProveedores.editItem(self.tablaProveedores.item(row, 4))
+            return
+
+        if provincia == '' or provincia.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Provincia no puede estar vacío o no ser sólo letras", )
+            self.tablaProveedores.item(row, 5).setText('')
+            self.tablaProveedores.setCurrentCell(row, 5)
+            self.tablaProveedores.editItem(self.tablaProveedores.item(row, 5))
+            return
+
+        if pais == '' or pais.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de País no puede estar vacío o no ser sólo letras", )
+            self.tablaProveedores.item(row, 6).setText('')
+            self.tablaProveedores.setCurrentCell(row, 6)
+            self.tablaProveedores.editItem(self.tablaProveedores.item(row, 6))
+            return
+
+        try:
+            int_telefono = int(telefono)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor del Teléfono debe ser sólo números enteros", )
+            self.tablaProveedores.item(row, 7).setText('')
+            self.tablaProveedores.setCurrentCell(row, 7)
+            self.tablaProveedores.editItem(self.tablaProveedores.item(row, 7))
+            return
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+            proveedores_actualizados = ProveedorDAO.actualizar(proveedor)
+            log.debug(f'Clientes actualizados: {proveedores_actualizados}')
+            self.label_ingresar_msg2.setText('Proveedor actualizado correctamente')
+            QMessageBox.information(self, "Proveedor Modificado",
+                                    "El proveedor ha sido modificado correctamente", )
+        else:
+            print("NO!")
+            self.listar_proveedores()
+            return
+
+    def mostrar_insertar_proveedor(self):
+        self.stackedWidget.setCurrentIndex(6)
+        self.bt_guardarNvoProveedor.clicked.connect(self.insertar_proveedor)
+
+    def insertar_proveedor(self):
+        codproveedor = self.lineEdit_codigoNvoProveedor.text()
+        razonsocial = self.lineEdit_razonsocialNvoProveedor.text()
+        cuit = self.lineEdit_cuitNvoProveedor.text()
+        domicilio = self.lineEdit_domicilioNvoProveedor.text()
+        ciudad = self.lineEdit_ciudadNvoProveedor.text()
+        provincia = self.lineEdit_provinciaNvoProveedor.text()
+        pais = self.lineEdit_paisNvoProveedor.text()
+        telefono = self.lineEdit_telefonoNvoProveedor.text()
+        web = self.lineEdit_weblNvoProveedor.text()
+        email = self.lineEdit_emailNvoProveedor.text()
+        cuenta = self.lineEdit_cuentaNvoProveedor.text()
+        password = self.lineEdit_passwordNvoProveedor.text()
+        observaciones = self.lineEdit_obsercacionesNvoProveedor.text()
+        #item = self.lineEdit_obsercacionesNvoCliente.text()
+        # if item is not None:
+        #     observaciones = str(item.text())
+        # else:
+        #     observaciones = None
+
+        try:
+            int_cuit = int(cuit)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de CUIT no puede estar vacío o no ser números enteros", )
+            self.lineEdit_cuitNvoProveedor.setText('')
+            self.lineEdit_cuitNvoProveedor.setFocus()
+            return
+
+        if ciudad == '' or ciudad.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Ciudad no puede estar vacío o no ser sólo letras", )
+            self.lineEdit_ciudadNvoProveedor.setText('')
+            self.lineEdit_ciudadNvoProveedor.setFocus()
+            return
+
+        if provincia == '' or provincia.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de Provincia no puede estar vacío o no ser sólo letras", )
+            self.lineEdit_provinciaNvoProveedor.setText('')
+            self.lineEdit_provinciaNvoProveedor.setFocus()
+            return
+
+        if pais == '' or pais.isdigit():
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor de País no puede estar vacío o no ser sólo letras", )
+            self.lineEdit_paisNvoProveedor.setText('')
+            self.lineEdit_paisNvoProveedor.setFocus()
+            return
+
+        try:
+            int_telefono = int(telefono)
+        except ValueError:
+            QMessageBox.information(self, "Error de Validación",
+                                    "El valor del Teléfono debe ser sólo números enteros", )
+            self.lineEdit_telefonoNvoProveedor.setText('')
+            self.lineEdit_telefonoNvoProveedor.setFocus()
+            return
+
+        proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+        proveedores_insertados = ProveedorDAO.insertar(proveedor)
+        log.debug(f'Clientes insertados: {proveedores_insertados}')
+        self.label_ingresar_msg2.setText('Proveedor ingresado correctamente')
+        QMessageBox.information(self, "Proveedor Ingresado",
+                                "El proveedor ha sido ingresado correctamente", )
+        self.listar_proveedores()
+        return
+
+    def eliminar_proveedor(self):
+        row = self.tablaProveedores.currentRow()
+        item = self.tablaProveedores.item(row, 0)
+        if item is not None:
+            self.label_capturaSeleccion.setText(item.text())
+            print(f'Fila seleccionada: {item.text()}')
+        codproveedor = self.tablaProveedores.item(row, 0).text()
+        razonsocial = self.tablaProveedores.item(row, 1).text()
+        cuit = self.tablaProveedores.item(row, 2).text()
+        domicilio = self.tablaProveedores.item(row, 3).text()
+        ciudad = self.tablaProveedores.item(row, 4).text()
+        provincia = self.tablaProveedores.item(row, 5).text()
+        pais = self.tablaProveedores.item(row, 6).text()
+        telefono = self.tablaProveedores.item(row, 7).text()
+        web = self.tablaProveedores.item(row, 8).text()
+        email = self.tablaProveedores.item(row, 9).text()
+        cuenta = self.tablaProveedores.item(row, 10).text()
+        password = self.tablaProveedores.item(row, 11).text()
+        observaciones = self.tablaProveedores.item(row, 12).text()
+        #item = self.tablaProveedores.item(row, 13)
+        #if item is not None:
+        #    observaciones = str(item.text())
+        #else:
+        #    observaciones = None
+
+        button = QMessageBox.question(self, "Eliminar Proveedor", "Está seguro que desea eliminar el proveedor?", )
+
+        if button == QMessageBox.Yes:
+            print("SI!")
+            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+            proveedores_eliminados = ProveedorDAO.eliminar(proveedor)
+            log.debug(f'Proveedores eliminados: {proveedores_eliminados}')
+            # self.label_ingresar_msg2.setText('Proveedor eliminado correctamente')
+            QMessageBox.information(self, "Proveedor Eliminado",
+                                    "El proveedor ha sido eliminado correctamente", )
+        else:
+            print("NO!")
+        self.listar_proveedores()
+        return
+
+    def buscar_proveedor(self):
+        campo1 = 'razonsocial'
+        campo2 = 'cuit'
+        campo3 = 'web'
+        valor = str(self.lineEdit_BuscarArticulo_3.text())
+        proveedores = ProveedorDAO.buscar_proveedor(campo1, campo2, campo3, valor)
+        self.tablaProveedores.setRowCount(len(proveedores))
+        for i, proveedor in enumerate(proveedores):
+            self.tablaProveedores.setItem(i, 0, QtWidgets.QTableWidgetItem(str(proveedor.codproveedor)))
+            self.tablaProveedores.setItem(i, 1, QtWidgets.QTableWidgetItem(proveedor.razonsocial))
+            self.tablaProveedores.setItem(i, 2, QtWidgets.QTableWidgetItem(proveedor._cuit))
+            self.tablaProveedores.setItem(i, 3, QtWidgets.QTableWidgetItem(proveedor._domicilio))
+            self.tablaProveedores.setItem(i, 4, QtWidgets.QTableWidgetItem(proveedor._ciudad))
+            self.tablaProveedores.setItem(i, 5, QtWidgets.QTableWidgetItem(proveedor._provincia))
+            self.tablaProveedores.setItem(i, 6, QtWidgets.QTableWidgetItem(proveedor._pais))
+            self.tablaProveedores.setItem(i, 7, QtWidgets.QTableWidgetItem(proveedor._telefono))
+            self.tablaProveedores.setItem(i, 8, QtWidgets.QTableWidgetItem(proveedor._web))
+            self.tablaProveedores.setItem(i, 9, QtWidgets.QTableWidgetItem(proveedor._email))
+            self.tablaProveedores.setItem(i, 10, QtWidgets.QTableWidgetItem(proveedor._cuenta))
+            self.tablaProveedores.setItem(i, 11, QtWidgets.QTableWidgetItem(proveedor._password))
+            self.tablaProveedores.setItem(i, 12, QtWidgets.QTableWidgetItem(proveedor._observaciones))
+            log.debug(proveedor)
+            self.tablaProveedores.resizeColumnsToContents()
+            self.tablaProveedores.resizeRowsToContents()
+
+
+
+    ##############################################################################################
+    #
+    #                   SELECCIONAR CATEGORIA NUEVO ARTICULO
+    #
+    ##############################################################################################
+
+    def seleccionar_categoria(self):
+        self.dialogo_categoria = QtWidgets.QDialog()
+        self.ui = Ui_ventana_Categorias()
+        self.ui.setupUi(self.dialogo_categoria)
+
+        #Obtener las categorias de la base de datos
+        categorias = ArticuloDAO.seleccionar_categorias()
+
+        # Crear un modelo para la lista
+        model = QtGui.QStandardItemModel()
+
+        # Añadir las categorías al modelo
+        for categoria in categorias:
+            item = QtGui.QStandardItem(categoria)
+            model.appendRow(item)
+
+
+        # Asignar el modelo a la lista
+        self.ui.listView_categorias.setModel(model)
+        self.ui.bt_SeleccionarCategoria.clicked.connect(self.seleccionada_categoria)
+        self.ui.bt_AgregarCategoria.clicked.connect(self.mostrar_agregar_categoria)
+        self.dialogo_categoria.exec_()
+
+
+    def seleccionada_categoria(self):
+        index = self.ui.listView_categorias.currentIndex()
+        item = index.data()
+        self.lineEdit_categoriaNvoArticulo.setText(item)
+        self.lineEdit.setText(item)
+        categoria_seleccionada = item
+        self.dialogo_categoria.close()
+
+    def mostrar_agregar_categoria(self):
+        self.dialogo_categoria.close()
+        self.dialogo_categoria = QtWidgets.QDialog()
+        self.ui = Ui_ventana_nueva_categoria()
+        self.ui.setupUi(self.dialogo_categoria)
+        self.ui.bt_GuardarCategoria.clicked.connect(self.agregar_categoria)
+        self.dialogo_categoria.exec_()
+
+
+    def agregar_categoria(self):
+        categoria = self.ui.lineEdit_nuevoCodCategoria_2.text()
+        categorias = ArticuloDAO.agregar_categoria(categoria)
+        log.debug(f'Categorias insertadas: {categorias}')
+        self.label_ingresar_msg2.setText('Categoría ingresada correctamente')
+        QMessageBox.information(self, "Categoría Ingresada",
+                                "La categoría ha sido ingresada correctamente", )
+        self.dialogo_categoria.close()
+        return
+
+    ##############################################################################################
+    #
+    #                   SELECCIONAR MARCA NUEVO ARTICULO
+    #
+    ##############################################################################################
+
+    def seleccionar_marca(self):
+        self.dialogo_marca = QtWidgets.QDialog()
+        self.ui = Ui_ventana_Marca()
+        self.ui.setupUi(self.dialogo_marca)
+
+        # Obtener las categorias de la base de datos
+        marcas = ArticuloDAO.seleccionar_marcas()
+
+        # Crear un modelo para la lista
+        model = QtGui.QStandardItemModel()
+
+        # Añadir las categorías al modelo
+        for marca in marcas:
+            item = QtGui.QStandardItem(marca)
+            model.appendRow(item)
+
+        # Asignar el modelo a la lista
+        self.ui.listView_marcas.setModel(model)
+        self.ui.bt_SeleccionarMarca.clicked.connect(self.seleccionada_marca)
+        self.ui.bt_AgregarMarca.clicked.connect(self.mostrar_agregar_marcas)
+        self.dialogo_marca.exec_()
+
+    def seleccionada_marca(self):
+        index = self.ui.listView_marcas.currentIndex()
+        item = index.data()
+        self.lineEdit_marcaNvoArticulo.setText(item)
+        categoria_seleccionada = item
+        self.dialogo_marca.close()
+
+    def mostrar_agregar_marcas(self):
+        self.dialogo_marca.close()
+        self.dialogo_marca = QtWidgets.QDialog()
+        self.ui = Ui_ventana_nueva_marca()
+        self.ui.setupUi(self.dialogo_marca)
+        self.ui.bt_GuardarMarca.clicked.connect(self.agregar_marca)
+        self.dialogo_marca.exec_()
+
+    def agregar_marca(self):
+        marca = self.ui.lineEdit_nuevoDescripcionMarca.text()
+        marcas = ArticuloDAO.agregar_marca(marca)
+        log.debug(f'Categorias insertadas: {marcas}')
+        self.label_ingresar_msg2.setText('Marca ingresada correctamente')
+        QMessageBox.information(self, "Marca Ingresada",
+                                    "La marca ha sido ingresada correctamente", )
+        self.dialogo_marca.close()
+        return
+
+        ##############################################################################################
+        #
+        #                   SELECCIONAR PROVEEDOR
+        #
+        ##############################################################################################
+
+    def seleccionar_proveedor(self):
+        self.dialogo_proveedor = QtWidgets.QDialog()
+        self.ui = Ui_ventana_proveedores()
+        self.ui.setupUi(self.dialogo_proveedor)
+
+        # Obtener las proveedores de la base de datos
+        proveedores = ProveedorDAO.seleccionar_proveedores()
+
+        # Crear un modelo para la lista
+        model = QtGui.QStandardItemModel()
+
+        # Añadir las categorías al modelo
+        for proveedor in proveedores:
+            item = QtGui.QStandardItem(proveedor)
+            model.appendRow(item)
+
+        # Asignar el modelo a la lista
+        self.ui.listView_proveedores.setModel(model)
+        self.ui.bt_SeleccionarProveedor.clicked.connect(self.seleccionado_proveedor)
+        self.dialogo_proveedor.exec_()
+
+    def seleccionado_proveedor(self):
+        index = self.ui.listView_proveedores.currentIndex()
+        item = index.data()
+        self.lineEdit_proveedorNvoArticulo.setText(item)
+        self.dialogo_proveedor.close()
+
+
+    ##############################################################################################
+    #
+    #                   NUEVA FACTURA
+    #
+    ##############################################################################################
+
+    def seleccionar_cliente_nueva_factura(self):
+        # self.dialogo_agregar_cliente_factura = QtWidgets.QDialog()
+        # self.ui_agregar_cliente_Fact = Ui_ventana_agregar_cliente_factura()
+        # self.ui_agregar_cliente_Fact.setupUi(self.dialogo_agregar_cliente_factura)
+        self.dialogo_agregar_cliente_factura.setMaximumSize(1029, 540)  # Ancho máximo 800, altura máxima 600
+        self.dialogo_agregar_cliente_factura.setMinimumSize(1029, 540)  # Ancho mínimo 400, altura mínima 300
+
+        # Obtener los clientes de la base de datos
+        clientes = ClienteDAO.seleccionar()
+
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setRowCount(len(clientes))
+        for i, cliente in enumerate(clientes):
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(cliente.codigo)))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(cliente.nombre))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(cliente.apellido))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(cliente.dni))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(cliente.empresa))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(cliente.cuit))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(cliente.telefono))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(cliente.email))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(cliente.direccion))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(cliente.numero))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(cliente.localidad))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(cliente.provincia))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(cliente.pais))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente.observaciones))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(cliente.condiva))
+
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeColumnsToContents()
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeRowsToContents()
+        #self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
+
+        # Crear un modelo para la lista
+        #model = QtGui.QStandardItemModel()
+
+        # Añadir las categorías al modelo
+        #for cliente in clientes:
+        #    item = QtGui.QStandardItem(clientes)
+        #    model.appendRow(item)
+
+        # Asignar el modelo a la lista
+        #self.ui.listView_clientes.setModel(model)
+        #self.ui.tableWidgetAgregarClienteNvaFactura.setModel(model)
+        #self.ui.bt_SeleccionarCliente.clicked.connect(self.seleccionado_cliente)
+        self.dialogo_agregar_cliente_factura.exec_()
+
+    def buscar_cliente_nueva_factura(self):
+        campo1 = 'nombre'
+        campo2 = 'apellido'
+        campo3 = 'empresa'
+        valor1 = str(self.ui_agregar_cliente_Fact.lineEdit_BuscarItemArticuloNvaFactura.text())
+        clientes = ClienteDAO.buscar_cliente(campo1, campo2, campo3, valor1)
+
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setRowCount(len(clientes))
+        for i, cliente in enumerate(clientes):
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(cliente.codigo)))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                cliente.nombre))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                cliente.apellido))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                cliente.dni))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                cliente.empresa))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(
+                cliente.cuit))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(
+                cliente.telefono))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                cliente.email))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                cliente.direccion))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                cliente.numero))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(
+                cliente.localidad))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(
+                cliente.provincia))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(
+                cliente.pais))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(
+                cliente.observaciones))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(
+                cliente.cond_iva))
+
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeColumnsToContents()
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeRowsToContents()
+
+    def modulo_facturacion(self):
+        self.stackedWidget.setCurrentIndex(0)
+        # lista = FacturaDAO.seleccionar()
+        # tabla = self.tableWidget_ultimasFacturas
+        # Funciones.fx_cargarTablaX(lista, self.tableWidget_ultimasFacturas, limpiaTabla=True)
+        facturas = FacturaDAO.seleccionar()
+        self.tableWidget_ultimasFacturas.setRowCount(len(facturas))
+        for i, factura in enumerate(facturas):
+            self.tableWidget_ultimasFacturas.setItem(i, 0, QtWidgets.QTableWidgetItem(str(factura.serie)))
+            self.tableWidget_ultimasFacturas.setItem(i, 1, QtWidgets.QTableWidgetItem(str(factura.codfactura)))
+            self.tableWidget_ultimasFacturas.setItem(i, 2, QtWidgets.QTableWidgetItem(str(factura.tipo)))
+            self.tableWidget_ultimasFacturas.setItem(i, 3, QtWidgets.QTableWidgetItem(str(factura.fecha)))
+            self.tableWidget_ultimasFacturas.setItem(i, 4, QtWidgets.QTableWidgetItem(str(factura.codcliente)))
+            self.tableWidget_ultimasFacturas.setItem(i, 5, QtWidgets.QTableWidgetItem(str(factura.cliente)))
+            self.tableWidget_ultimasFacturas.setItem(i, 6, QtWidgets.QTableWidgetItem(str(factura.estado)))
+            self.tableWidget_ultimasFacturas.setItem(i, 7, QtWidgets.QTableWidgetItem(str(factura.subtotal)))
+            self.tableWidget_ultimasFacturas.setItem(i, 8, QtWidgets.QTableWidgetItem(str(factura.iva)))
+            self.tableWidget_ultimasFacturas.setItem(i, 9, QtWidgets.QTableWidgetItem(str(factura.total)))
+            self.tableWidget_ultimasFacturas.setItem(i, 10, QtWidgets.QTableWidgetItem(str(factura.formapago)))
+
+
+
+        self.tableWidget_ultimasFacturas.resizeColumnsToContents()
+        self.tableWidget_ultimasFacturas.resizeRowsToContents()
+        self.buscar_fact_pendiente()
+        self.buscar_fact_cobrar()
+
+
+    def seleccionar_factura(self):
+        row = self.tableWidget_ultimasFacturas.currentRow()
+        codfactura = int(self.tableWidget_ultimasFacturas.item(row, 1).text())
+        detalles = detalleFacturaDAO.busca_detalle(codfactura)
+        self.tableWidget_detalleultimasFacturas_2.setRowCount(len(detalles))
+        for i, detalle in enumerate(detalles):
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 1, QtWidgets.QTableWidgetItem(detalle.descripcion))
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+             self.tableWidget_detalleultimasFacturas_2.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.iva)))
+             self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+             self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+             log.debug(detalle)
+        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(detalles)
+
+    def nueva_factura(self):
+        self.stackedWidget.setCurrentIndex(7)
+
+
+        # Obtener la fecha y hora actual
+        now = datetime.now()
+
+        # Convertir la fecha y hora a una cadena de texto en español
+        now_str = now.strftime('%d/%m/%Y, %H:%M:%S')
+
+        # Establecer el texto del QLineEdit
+        self.lineEdit_fechaNvaFactura.setText(now_str)
+        self.lineEdit_fechaNvaFactura.setReadOnly(True)
+        ############################################
+        #       LLENAR LOS DATOS DE LA FACTURA CON LOS DATOS DE LA EMPRESA DE LA BD#####3
+        #
+        ###########################################
+        empresa = EmpresaDAO.seleccionar()[0]
+        self.label_71.setText(empresa.razonsocial)
+        self.label_68.setText(empresa.nombrefantasia)
+        self.lineEdit_cuitNvaFactura.setText(str(empresa.cuit))
+        self.label_91.setText(empresa.categoria)
+        self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
+        self.lineEdit_inicioActNvaFactura_2.setText(empresa.inicioactividades)
+
+        domicilio = empresa.domicilio
+        localidad = empresa.localidad
+        provincia = empresa.provincia
+        pais = empresa.pais
+        direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
+        #self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
+        self.label_72.setText(direccion_completa_empresa)
+
+        self.lineEdit_serieNvaFactura.setText("1")
+
+        query_NroFactura = "SELECT DISTINCT ON (codfactura) * FROM facturas ORDER BY codfactura DESC"
+
+        with CursorDelPool() as cursor:
+            cursor.execute(query_NroFactura)
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10])
+                facturas.append(factura)
+            if facturas:
+                self.lineEdit_numeroNvaFactura.setText(str(facturas[0].codfactura + 1))
+            else:
+                self.lineEdit_numeroNvaFactura.setText("1")  # or handle the error as you see fit
+            return facturas
+
+
+
+    def agregar_articulo_nueva_factura(self):
+
+        # self.dialogo_agregar_Art_Factura = QtWidgets.QDialog()
+        # self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
+        # self.ui_ventana_agr_articulo.setupUi(self.dialogo_agregar_Art_Factura)
+        #self.ui.lineEdit_BuscarArticuloNvaFactura3.textChanged.connect(self.buscar_articulo_nueva_factura)
+        #self.ui.bt_AgregarArticuloNvaFactura.clicked.connect(self.buscar_articulo_nueva_factura)
+        articulos = ArticuloDAO.seleccionar()
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
+        for i, articulo in enumerate(articulos):
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5,
+                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6,
+                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                str(articulo._margen_ganancia)))
+            log.debug(articulo)
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeColumnsToContents()
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeRowsToContents()
+        self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.textChanged.connect(self.buscar_articulo_nueva_factura)
+        self.dialogo_agregar_Art_Factura.exec_()
+
+
+    def buscar_articulo_nueva_factura(self):
+        campo1 = 'nombre'
+        campo2 = 'codigo'
+        valor1 = self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.text()
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.clearContents()
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(0)
+        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, valor1)
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
+        for i, articulo in enumerate(articulos):
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+            log.debug(articulo)
+        return
+
+
+        #self.bt_guardarNvaFactura.clicked.connect(self.guardar_nueva_factura)
+
+    def agregar_articulo_nueva_factura2(self):
+        tabla = self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura
+        lista = Funciones.fx_leer_seleccion_tabla(tabla)[0]
+        print(lista)
+        print("metodo llamado")
+        precio_costo_str = tabla.item(tabla.currentRow(), 5).text().replace('$', '').replace(',', '')
+        importe_iva = (float(precio_costo_str) * float(tabla.item(tabla.currentRow(), 7).text()))/100
+        precio_unitario = float(precio_costo_str) + importe_iva
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
+        total = 0
+        # Itera sobre cada fila
+        # for row in range(num_rows):
+        #     # Obtén el valor de la columna "cantidad" (asumiendo que es la columna 0)
+        #     cantidad = float(self.tableWidgetDetalleNvaFactura.item(row, 2).text())
+        #
+        #     # Multiplica la cantidad por el precio unitario
+        #     total = cantidad * precio_unitario
+        #
+        #     # Si quieres actualizar un campo en la tabla con el total, puedes hacerlo aquí
+        #     # Por ejemplo, si el total debe ir en la columna 5, puedes hacer:
+        #     #self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(str(total)))
+        nueva_lista = []
+        for i in lista:
+            nueva_lista.append([i[0], i[1], "1", i[5], i[7], importe_iva, precio_unitario, precio_unitario])
+            #self.label_subtotal_factura.setText(str(round(precio_unitario, 2)))
+        print(nueva_lista)
+        Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+        self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+        self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+        self.verificarExistencias()
+        self.actualizar_subtotal_factura()
+
+
+    def verificarExistencias(self):
+        tabla = self.tableWidgetDetalleNvaFactura
+        lista = Funciones.fx_leer_seleccion_tabla(tabla)[0]
+        for i in lista:
+            codarticulo = i[0]
+            cantidad = i[2]
+            stock = ArticuloDAO.verificar_existencias(codarticulo)
+            if cantidad > stock:
+                QMessageBox.warning(self, "Stock Insuficiente",
+                                    "El stock del artículo seleccionado es insuficiente", )
+                return
+            else:
+                pass
+
+
+    def actualizar_subtotal_factura(self):
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
+
+        # Inicializa el total
+        sub_total_factura = 0.0
+        sub_total_iva = 0.0
+        total_factura = 0.0
+
+        # Itera sobre cada fila
+        for row in range(num_rows):
+            # Obtén el valor de la columna subtotal (asumiendo que es la columna 7)
+            item_factura = self.tableWidgetDetalleNvaFactura.item(row, 7)
+            item_iva = self.tableWidgetDetalleNvaFactura.item(row, 5)
+
+
+            if item_factura is not None:
+                subtotal_factura_str = item_factura.text()
+                sub_total_factura += float(subtotal_factura_str)
+
+            if item_iva is not None:
+                sub_total_iva_str = item_iva.text()
+                sub_total_iva += float(sub_total_iva_str)
+
+        # Actualiza label_subtotal_factura con el total
+        self.label_subtotal_factura.setText(str(round(sub_total_factura - sub_total_iva, 2)))
+        self.label_iva_factura.setText(str(round(sub_total_iva, 2)))
+        self.label_total_Nva_factura.setText(str(float(round(sub_total_factura, 2))))
+
+    def actualizar_subtotal(self, row, column):
+        # Verifica si la celda cambiada es de la columna "cantidad" (asumiendo que es la columna 2)
+        if column == 2:
+            # Obtiene el valor de la celda "cantidad"
+            cantidad_item = self.tableWidgetDetalleNvaFactura.item(row, column)
+            if cantidad_item is not None:
+                cantidad = float(cantidad_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+
+            ###########################################################
+            codigoarticulo = self.tableWidgetDetalleNvaFactura.item(row, 0)
+            cantidad_item = self.tableWidgetDetalleNvaFactura.item(row, 2)
+            if cantidad_item is not None:
+                cantidad = int(cantidad_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+
+            stock = ArticuloDAO.verificar_existencias(codigoarticulo)
+            if cantidad > stock:
+                QMessageBox.warning(self, "Stock Insuficiente",
+                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(cantidad, stock))
+                return
+            ####################################################################
+
+
+
+            # Obtiene el valor de la celda "precio unitario" (asumiendo que es la columna 6)
+            precio_unitario_item = self.tableWidgetDetalleNvaFactura.item(row, 6)
+            iva_item = self.tableWidgetDetalleNvaFactura.item(row, 5)
+            if precio_unitario_item is not None:
+                precio_unitario = float(precio_unitario_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+            if iva_item is not None:
+                iva = float(iva_item.text())
+            else:
+                return
+
+            # Calcula el subtotal
+            subtotal = cantidad * precio_unitario
+            importe_iva_item = cantidad * iva
+
+            # Actualiza la celda "subtotal" (asumiendo que es la columna 7)
+            self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal,2)))))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 5, QtWidgets.QTableWidgetItem(str((round(importe_iva_item,2)))))
+
+            self.actualizar_subtotal_factura()
+
+    def agregar_cliente_click(self):
+        row = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.currentRow()
+        #row = self.tableWidgetDetalleNvaFactura.currentRow()
+        #item1 = self.tableWidgetAgregarClienteNvaFactura.item(row, 0)
+        #if item1 is not None:
+
+        ### CONCATENAR VALORES DE NOMBRE Y APELLIDO JUNTOS
+        nombre = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 1).text()
+        apellido = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 2).text()
+        nombre_completo = " ".join([nombre, apellido])
+        self.lineEdit_clienteNvaFactura.setText(nombre_completo)
+        ###########################################
+        #self.lineEdit_clienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 1).text())
+        #self.lineEdit_domclienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 8).text())
+
+        # concatenar los valores de direccion, numero, localidad, provincia en un solo lineedit
+        direccion = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 8).text()
+        numero = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 9).text()
+        localidad = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 10).text()
+        provincia = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
+        pais = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 12).text()
+        # Concatenar los valores con espacios entre ellos
+        direccion_completa = " ".join([direccion, numero, localidad, provincia, pais])
+        #cond_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
+
+        self.lineEdit_domclienteNvaFactura.setText(direccion_completa)
+        ############################
+        self.lineEdit_codclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 0).text())
+        self.lineEdit_cuitclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 5).text())
+        self.lineEdit_dniclienteNvaFactura_2.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 3).text())
+        self.lineEdit_telclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 6).text())
+        self.lineEdit_emailclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 7).text())
+        #self.lineEdit_IvaclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14).text())
+        item_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14)
+        if item_iva is not None:
+             self.lineEdit_IvaclienteNvaFactura.setText(item_iva.text())
+
+        if self.lineEdit_IvaclienteNvaFactura.text() == 'RESPONSABLE INSCRIPTO' and self.label_91.text() == 'RESPONSABLE INSCRIPTO':
+            self.label_90.setText('A')
+        elif self.lineEdit_IvaclienteNvaFactura.text() == 'CONSUMIDOR FINAL' and self.label_91.text() == 'RESPONSABLE INSCRIPTO':
+            self.label_90.setText('B')
+        else:
+            self.label_91.text() == 'MONOTRIBUTO'
+            self.label_90.setText('C')
+
+        self.dialogo_agregar_cliente_factura.close()
+
+        self.label_84.setText(provincia)
+
+        self.lineEdit_clienteNvaFactura.setReadOnly(True)
+        self.lineEdit_domclienteNvaFactura.setReadOnly(True)
+        self.lineEdit_codclienteNvaFactura.setReadOnly(True)
+        self.lineEdit_cuitclienteNvaFactura.setReadOnly(True)
+        self.lineEdit_dniclienteNvaFactura_2.setReadOnly(True)
+        self.lineEdit_telclienteNvaFactura.setReadOnly(True)
+        self.lineEdit_emailclienteNvaFactura.setReadOnly(True)
+        self.lineEdit_IvaclienteNvaFactura.setReadOnly(True)
+
+        return
+        #self.lineEdit_clienteNvaFactura.setText = self.Ui_ventana_agregar_cliente_factura.tableWidgetAgregarClienteNvaFactura.item(row, 0).text()
+
+    def listar_empresa(self):
+        # self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
+        # self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
+        # self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
+        self.Ui_ventana_Datos_Empresa.setMaximumSize(453, 500)  # Ancho máximo 800, altura máxima 600
+        self.Ui_ventana_Datos_Empresa.setMinimumSize(453, 540)  # Ancho mínimo 400, altura mínima 300
+
+        query_vacia = EmpresaDAO.seleccionar_vacia()
+        if not query_vacia == []:
+            self.ui_ventana_empresa.lineEdit_razon_social_empresa.setText(query_vacia[0].razonsocial)
+            self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setText(query_vacia[0].nombrefantasia)
+            self.ui_ventana_empresa.lineEdit_cuit_empresa.setText(str(query_vacia[0].cuit))
+            self.ui_ventana_empresa.lineEdit_categoria_empresa.setText(query_vacia[0].categoria)
+            self.ui_ventana_empresa.lineEdit_iibb_empresa.setText(str(query_vacia[0].iibb))
+            # iibb_text = self.ui_ventana_empresa.lineEdit_iibb_empresa.text()
+            # if iibb_text:
+            #     iibb = int(iibb_text)
+            # else:
+            #     iibb = 0  # or handle the error as you see fit
+            self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setText(query_vacia[0].inicioactividades)
+            self.ui_ventana_empresa.lineEdit_domicilio_empresa.setText(query_vacia[0].domicilio)
+            self.ui_ventana_empresa.lineEdit_localidad_empresa.setText(query_vacia[0].localidad)
+            self.ui_ventana_empresa.lineEdit_provincia_empresa.setText(query_vacia[0].provincia)
+            self.ui_ventana_empresa.lineEdit_pais_empresa.setText(query_vacia[0].pais)
+
+        self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(True)
+        self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(True)
+
+
+        self.Ui_ventana_Datos_Empresa.bt = QtWidgets.QPushButton(self)
+        self.ui_ventana_empresa.bt_grabar_datos_empresa.setObjectName("bt_grabar_datos_empresa")
+        self.ui_ventana_empresa.bt_grabar_datos_empresa.clicked.connect(self.ingresar_datos_empresa)
+        self.ui_ventana_empresa.bt_cancelar_datos_empresa.clicked.connect(self.Ui_ventana_Datos_Empresa.close)
+
+        self.Ui_ventana_Datos_Empresa.exec_()
+
+    def ingresar_datos_empresa(self):
+        query_vacia = EmpresaDAO.seleccionar_vacia()
+        if query_vacia == []:
+            razonsocial = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
+            nombrefantasia = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
+            cuit = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
+            categoria = self.ui_ventana_empresa.lineEdit_categoria_empresa.text()
+            iibb = int(self.ui_ventana_empresa.lineEdit_iibb_empresa.text())
+            inicioactividades = self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.text()
+            domicilio = self.ui_ventana_empresa.lineEdit_domicilio_empresa.text()
+            localidad = self.ui_ventana_empresa.lineEdit_localidad_empresa.text()
+            provincia = self.ui_ventana_empresa.lineEdit_provincia_empresa.text()
+            pais = self.ui_ventana_empresa.lineEdit_pais_empresa.text()
+            direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
+            empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais)
+            empresas_insertadas = EmpresaDAO.insertar(empresa)
+            log.debug(f'Empresas insertadas: {empresas_insertadas}')
+            self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
+            QMessageBox.information(self, "Empresa Ingresada",
+                                    "La empresa ha sido ingresada correctamente", )
+            self.Ui_ventana_Datos_Empresa.close()
+            return
+        else:
+            QMessageBox.information(self, "La Empresa ya ha sido Ingresada anteriormente",
+                                    "La empresa ha sido ingresada anteriormente, no puede ingresarse los valores de una nueva, modifique los actuales", )
+
+
+
+        # empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais)
+        # empresas_insertadas = EmpresaDAO.insertar(empresa)
+        # log.debug(f'Empresas insertadas: {empresas_insertadas}')
+        # self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
+        # QMessageBox.information(self, "Empresa Ingresada",
+        #                         "La empresa ha sido ingresada correctamente", )
+        #self.Ui_ventana_Datos_Empresa.close()
+        return
+
+    def guardar_factura(self):
+        # Obtener los datos de la factura
+        codfactura = self.lineEdit_numeroNvaFactura.text()
+        codcliente = self.lineEdit_codclienteNvaFactura.text()
+        cliente = self.lineEdit_clienteNvaFactura.text()
+        fecha = self.lineEdit_fechaNvaFactura.text()
+        subtotal = self.label_subtotal_factura.text()
+        iva = self.label_iva_factura.text()
+        total = self.label_total_Nva_factura.text()
+        serie = self.lineEdit_serieNvaFactura.text()
+        estado = self.comboBox_EstadoFactura.currentText()
+        formapago = self.comboBox_FormaPagoFact.currentText()
+        tipo = self.label_90.text()
+        entrega = self.comboBox_Retira.currentText()
+
+        # Crear un objeto Factura
+        factura = Factura(serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, tipo, entrega)
+
+        # Insertar la factura en la base de datos
+        facturas_insertadas = FacturaDAO.insertar(factura)
+        log.debug(f'Facturas insertadas: {facturas_insertadas}')
+
+# Obtener los detalles de la factura
+
+        self.tableWidgetDetalleNvaFactura.rowCount()
+        for row in range(self.tableWidgetDetalleNvaFactura.rowCount()):
+            codarticulo = self.tableWidgetDetalleNvaFactura.item(row, 0).text()
+            descripcion = self.tableWidgetDetalleNvaFactura.item(row, 1).text()
+            cantidad = self.tableWidgetDetalleNvaFactura.item(row, 2).text()
+            precio_unitario = self.tableWidgetDetalleNvaFactura.item(row, 3).text().replace('$', '').replace(',', '')
+            importe_iva = self.tableWidgetDetalleNvaFactura.item(row, 5).text()
+            subtotal = self.tableWidgetDetalleNvaFactura.item(row, 7).text()
+            #precioventa = self.detallefactura.precioventa.replace('$', '').replace(',', '')
+            #valores = (detallefactura.serie, detallefactura.codfactura, detallefactura.codarticulo, detallefactura.descripcion, detallefactura.cantidad, float(precioventa), detallefactura.importe, detallefactura.iva)
+            detalle = detalleFactura(serie, codfactura, codarticulo, descripcion, cantidad, precio_unitario, subtotal, importe_iva, tipo)
+            detalleFacturaDAO.insertar(detalle)
+            #################################
+            # DESCONTAR STOCK DE LOS ARTICULOS
+            #################################
+            query_stock = "UPDATE articulos SET stock = stock - %s WHERE codigo = %s"
+            valores = (cantidad, codarticulo)
+            with CursorDelPool() as cursor:
+                cursor.execute(query_stock, valores)
+
+
+
+        log.debug(f'Detalles insertados: {detalle}')
+
+        self.label_ingresar_msg2.setText('Factura ingresada correctamente')
+        QMessageBox.information(self, "Factura Ingresada",
+                                "La factura ha sido ingresada correctamente", )
+
+
+
+
+        self.lineEdit_clienteNvaFactura.clear()
+        self.lineEdit_domclienteNvaFactura.clear()
+        self.lineEdit_codclienteNvaFactura.clear()
+        self.lineEdit_cuitclienteNvaFactura.clear()
+        self.lineEdit_dniclienteNvaFactura_2.clear()
+        self.lineEdit_telclienteNvaFactura.clear()
+        self.lineEdit_emailclienteNvaFactura.clear()
+        self.tableWidgetDetalleNvaFactura.clearContents()
+        while self.tableWidgetDetalleNvaFactura.rowCount() > 0:
+            self.tableWidgetDetalleNvaFactura.removeRow(0)
+
+
+        codpendiente = 10
+        nombre = cliente
+        importe = total
+        pagos = 0
+        saldo = total
+        fechacancelada = "0"
+
+        pendiente = Pendiente(codpendiente, serie, codfactura, estado, fecha, codcliente, nombre,  importe, pagos, saldo, fechacancelada)
+
+        # Insertar la factura en la base de datos
+        pendientes_insertadas = PendientesDAO.insertar(pendiente)
+        log.debug(f'Facturas insertadas: {pendientes_insertadas}')
+
+
+        # Cerrar la ventana
+        self.stackedWidget.setCurrentIndex(1)
+        return
+
+
+    def cancelar_factura(self):
+        self.lineEdit_clienteNvaFactura.clear()
+        self.lineEdit_domclienteNvaFactura.clear()
+        self.lineEdit_codclienteNvaFactura.clear()
+        self.lineEdit_cuitclienteNvaFactura.clear()
+        self.lineEdit_dniclienteNvaFactura_2.clear()
+        self.lineEdit_telclienteNvaFactura.clear()
+        self.lineEdit_emailclienteNvaFactura.clear()
+        self.tableWidgetDetalleNvaFactura.clearContents()
+        return
+
+    def buscar_fact_pendiente(self):
+        campo= 'ENVIO'
+        pendientes = FacturaDAO.buscar_factura_pendiente(campo)
+        if pendientes not in []:
+            self.tableWidget_facturaspendientesentrega.setRowCount(len(pendientes))
+            for i, pendiente in enumerate(pendientes):
+                self.tableWidget_facturaspendientesentrega.setItem(i, 0, QtWidgets.QTableWidgetItem(str(pendiente.serie)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 1, QtWidgets.QTableWidgetItem(str(pendiente.codfactura)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 2, QtWidgets.QTableWidgetItem(str(pendiente.tipo)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 3, QtWidgets.QTableWidgetItem(str(pendiente.fecha)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 4, QtWidgets.QTableWidgetItem(pendiente.estado))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 5, QtWidgets.QTableWidgetItem(str(pendiente.subtotal)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 6, QtWidgets.QTableWidgetItem(str(pendiente.iva)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 7, QtWidgets.QTableWidgetItem(str(pendiente.total)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 8, QtWidgets.QTableWidgetItem(str(pendiente.formapago)))
+                self.tableWidget_facturaspendientesentrega.resizeColumnsToContents()
+                self.tableWidget_facturaspendientesentrega.resizeRowsToContents()
+            return
+
+    def buscar_fact_cobrar(self):
+        campo1 = 'PENDIENTE'
+        #campo2 = 'CHEQUE'
+        pendientes = FacturaDAO.buscar_factura_cobrar(campo1)
+        self.tableWidget_facturasImpagas.setRowCount(len(pendientes))
+        for i, pendiente in enumerate(pendientes):
+            self.tableWidget_facturasImpagas.setItem(i, 0, QtWidgets.QTableWidgetItem(str(pendiente.serie)))
+            self.tableWidget_facturasImpagas.setItem(i, 1, QtWidgets.QTableWidgetItem(str(pendiente.codfactura)))
+            self.tableWidget_facturasImpagas.setItem(i, 2, QtWidgets.QTableWidgetItem(str(pendiente.tipo)))
+            self.tableWidget_facturasImpagas.setItem(i, 3, QtWidgets.QTableWidgetItem(str(pendiente.fecha)))
+            self.tableWidget_facturasImpagas.setItem(i, 4, QtWidgets.QTableWidgetItem(pendiente.estado))
+            self.tableWidget_facturasImpagas.setItem(i, 5, QtWidgets.QTableWidgetItem(str(pendiente.subtotal)))
+            self.tableWidget_facturasImpagas.setItem(i, 6, QtWidgets.QTableWidgetItem(str(pendiente.iva)))
+            self.tableWidget_facturasImpagas.setItem(i, 7, QtWidgets.QTableWidgetItem(str(pendiente.total)))
+            self.tableWidget_facturasImpagas.setItem(i, 8, QtWidgets.QTableWidgetItem(str(pendiente.formapago)))
+            self.tableWidget_facturasImpagas.resizeColumnsToContents()
+            self.tableWidget_facturaspendientesentrega.resizeRowsToContents()
+        return
+
+    def seleccionar_factura_cliente(self):
+        self.tablaArticulosFacturaCliente.clearContents()
+        row = self.tablaClientes.currentRow()
+        codcliente = int(self.tablaClientes.item(row, 0).text())
+        nombre = self.tablaClientes.item(row, 2).text()
+        facturas = FacturaDAO.seleccionar_factura_cliente(codcliente, nombre)
+        self.tablaFacturasCliente.setRowCount(len(facturas))
+        for i, factura in enumerate(facturas):
+            self.tablaFacturasCliente.setItem(i, 0, QtWidgets.QTableWidgetItem(str(factura.serie)))
+            self.tablaFacturasCliente.setItem(i, 1, QtWidgets.QTableWidgetItem(str(factura.codfactura)))
+            self.tablaFacturasCliente.setItem(i, 2, QtWidgets.QTableWidgetItem(str(factura.tipo)))
+            self.tablaFacturasCliente.setItem(i, 3, QtWidgets.QTableWidgetItem(str(factura.fecha)))
+            self.tablaFacturasCliente.setItem(i, 4, QtWidgets.QTableWidgetItem(str(factura.codcliente)))
+            self.tablaFacturasCliente.setItem(i, 5, QtWidgets.QTableWidgetItem(str(factura.cliente)))
+            self.tablaFacturasCliente.setItem(i, 6, QtWidgets.QTableWidgetItem(str(factura.estado)))
+            self.tablaFacturasCliente.setItem(i, 7, QtWidgets.QTableWidgetItem(str(factura.subtotal)))
+            self.tablaFacturasCliente.setItem(i, 8, QtWidgets.QTableWidgetItem(str(factura.iva)))
+            self.tablaFacturasCliente.setItem(i, 9, QtWidgets.QTableWidgetItem(str(factura.total)))
+            self.tablaFacturasCliente.setItem(i, 10, QtWidgets.QTableWidgetItem(str(factura.formapago)))
+            self.tablaFacturasCliente.resizeColumnsToContents()
+            self.tablaFacturasCliente.resizeRowsToContents()
+            log.debug(factura)
+        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(facturas)
+
+    def seleccionar_detalle_factura_cliente(self):
+        row = self.tablaFacturasCliente.currentRow()
+        serie = int(self.tablaFacturasCliente.item(row, 0).text())
+        codfactura = self.tablaFacturasCliente.item(row, 1).text()
+        detalles = detalleFacturaDAO.seleccionar_detalle_factura_cliente(serie, codfactura)
+        self.tablaArticulosFacturaCliente.setRowCount(len(detalles))
+        for i, detalle in enumerate(detalles):
+            self.tablaArticulosFacturaCliente.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.serie)))
+            self.tablaArticulosFacturaCliente.setItem(i, 1, QtWidgets.QTableWidgetItem(str(detalle.codfactura)))
+            self.tablaArticulosFacturaCliente.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.tipo)))
+            self.tablaArticulosFacturaCliente.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
+            self.tablaArticulosFacturaCliente.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.descripcion)))
+            self.tablaArticulosFacturaCliente.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
+            self.tablaArticulosFacturaCliente.setItem(i, 6, QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
+            self.tablaArticulosFacturaCliente.setItem(i, 7, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+            self.tablaArticulosFacturaCliente.setItem(i, 8, QtWidgets.QTableWidgetItem(str(detalle.iva)))
+            self.tablaArticulosFacturaCliente.resizeColumnsToContents()
+            self.tablaArticulosFacturaCliente.resizeRowsToContents()
+            log.debug(detalles)
+        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(detalles)
+
+    def cobrar_factura_cliente(self):
+        if not self.tablaFacturasCliente.selectedItems():
+            QMessageBox.information(self, "Seleccione una Factura",
+                                    "Debe seleccionar una Factura para poder continuar", )
+            return
+        row = self.tablaFacturasCliente.currentRow()
+        serie = int(self.tablaFacturasCliente.item(row, 0).text())
+        codfactura = self.tablaFacturasCliente.item(row, 1).text()
+        codcliente = self.tablaFacturasCliente.item(row, 4).text()
+        if self.tablaFacturasCliente.item(row, 6).text() != 'PENDIENTE':
+            QMessageBox.information(self, "La Factura no se puede cobrar ",
+                                    "La factura ya ha sido cancelada previamente, no se encuentra pendiente de pago", )
+            return
+
+        facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
+
+
+        self.stackedWidget.setCurrentIndex(8)
+
+        # Obtener la fecha y hora actual
+        now = datetime.now()
+
+        # Convertir la fecha y hora a una cadena de texto en español
+        now_str = now.strftime('%d/%m/%Y, %H:%M:%S')
+
+        # Establecer el texto del QLineEdit
+        self.lineEdit_fechaCobrarFactura.setText(now_str)
+        self.lineEdit_fechaCobrarFactura.setReadOnly(True)
+        print(facturas)
+        self.tablaCobrarFacturasCliente.setRowCount(len(facturas))
+        for i, factura in enumerate(facturas):
+            self.tablaCobrarFacturasCliente.setItem(i, 0, QtWidgets.QTableWidgetItem(str(factura.serie)))
+            self.tablaCobrarFacturasCliente.setItem(i, 1, QtWidgets.QTableWidgetItem(str(factura.codfactura)))
+            self.tablaCobrarFacturasCliente.setItem(i, 2, QtWidgets.QTableWidgetItem(str(factura.tipo)))
+            self.tablaCobrarFacturasCliente.setItem(i, 3, QtWidgets.QTableWidgetItem(str(factura.fecha)))
+            self.tablaCobrarFacturasCliente.setItem(i, 4, QtWidgets.QTableWidgetItem(str(factura.codcliente)))
+            self.tablaCobrarFacturasCliente.setItem(i, 5, QtWidgets.QTableWidgetItem(str(factura.cliente)))
+            self.tablaCobrarFacturasCliente.setItem(i, 6, QtWidgets.QTableWidgetItem(str(factura.estado)))
+            self.tablaCobrarFacturasCliente.setItem(i, 7, QtWidgets.QTableWidgetItem(str(factura.subtotal)))
+            self.tablaCobrarFacturasCliente.setItem(i, 8, QtWidgets.QTableWidgetItem(str(factura.iva)))
+            self.tablaCobrarFacturasCliente.setItem(i, 9, QtWidgets.QTableWidgetItem(str(factura.total)))
+            self.tablaCobrarFacturasCliente.setItem(i, 10, QtWidgets.QTableWidgetItem(str(factura.formapago)))
+            self.tablaCobrarFacturasCliente.resizeColumnsToContents()
+            self.tablaCobrarFacturasCliente.resizeRowsToContents()
+            log.debug(factura)
+
+        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(facturas)
+
+        item = self.tablaCobrarFacturasCliente.item(0, 5)
+        if item is not None:
+            self.lineEdit_clienteCobrarFactura.setText(item.text())
+        else:
+            # Handle the case where the item does not exist
+            # For example, you might want to clear the line edit or show an error message
+            self.lineEdit_clienteCobrarFactura.clear()
+        #self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
+        self.lineEdit_codclienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 4).text())
+        self.lineEdit_serieNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 0).text())
+        self.lineEdit_numeroNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 1).text())
+        self.lineEdit_fechaNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 3).text())
+        self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+
+
+
+        cliente = self.tablaCobrarFacturasCliente.item(0, 4).text()
+        with CursorDelPool() as cursor:
+            #query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
+            query = f"SELECT * FROM clientes WHERE codigo = {cliente} ORDER BY codigo ASC"
+            #cursor.execute(query, (f'%{cliente}%'))
+            cursor.execute(query, (cliente,))
+            registros = cursor.fetchall()
+            clientes = []
+            for registro in registros:
+                cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14])
+                clientes.append(cliente)
+                self.lineEdit_dniclienteCobrarFactura.setText(clientes[0].dni)
+                self.lineEdit_telclienteCobrarFactura.setText(clientes[0].telefono)
+                self.lineEdit_emailclienteCobrarFactura.setText(clientes[0].email)
+                self.lineEdit_IvaclienteCobraraFactura.setText(clientes[0].condiva)
+                self.lineEdit_domclienteCobrarFactura.setText(clientes[0].direccion)
+                self.lineEdit_cuitclienteCobrarFactura.setText(clientes[0].cuit)
+            return clientes
+
+
+
+
+
+
+
+    def seleccionar_detalle_factura_cobrar_cliente(self):
+        row = self.tablaCobrarFacturasCliente.currentRow()
+        serie = int(self.tablaCobrarFacturasCliente.item(row, 0).text())
+        codfactura = self.tablaCobrarFacturasCliente.item(row, 1).text()
+        detalles = detalleFacturaDAO.seleccionar_detalle_factura_cliente(serie, codfactura)
+        self.tablaDetalleCobrarFacturaCliente.setRowCount(len(detalles))
+        for i, detalle in enumerate(detalles):
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.serie)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 1, QtWidgets.QTableWidgetItem(str(detalle.codfactura)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.tipo)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.descripcion)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 6, QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 7, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+            self.tablaDetalleCobrarFacturaCliente.setItem(i, 8, QtWidgets.QTableWidgetItem(str(detalle.iva)))
+            self.tablaDetalleCobrarFacturaCliente.resizeColumnsToContents()
+            self.tablaDetalleCobrarFacturaCliente.resizeRowsToContents()
+            log.debug(detalles)
+        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(detalles)
+
+    def cobrar_factura_cliente_facturacion(self):
+        row = self.tableWidget_facturasImpagas.currentRow()
+        serie = int(self.tableWidget_facturasImpagas.item(row, 0).text())
+        codfactura = self.tableWidget_facturasImpagas.item(row, 1).text()
+        #codcliente = self.tableWidget_facturasImpagas.item(row, 4).text()
+        if self.tableWidget_facturasImpagas.item(row, 4).text() != 'PENDIENTE':
+            QMessageBox.information(self, "La Factura no se puede cobrar ",
+                                    "La factura ya ha sido cancelada previamente, no está pendiente de pago", )
+            return
+
+        facturas = FacturaDAO.cobrar_factura_cliente1(serie, codfactura)
+
+        query_pendientes = "SELECT * FROM pendientes WHERE codfactura = %s"
+        valor2 = (codfactura,)
+        with CursorDelPool() as cursor:
+            cursor.execute(query_pendientes, valor2)
+            registros = cursor.fetchall()
+            pendientes = []
+            for registro in registros:
+                pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10])
+                pendientes.append(pendiente)
+                #self.lineEdit_clienteCobrarFactura.setText(pendientes[0].nombre)
+                #self.lineEdit_codclienteCobrarFactura.setText(pendientes[0].codcliente)
+                #self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
+                #self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
+                #self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
+                self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].importe)))
+                self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
+                #self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+            #return pendientes
+
+        self.stackedWidget.setCurrentIndex(8)
+
+        # Obtener la fecha y hora actual
+        now = datetime.now()
+
+        # Convertir la fecha y hora a una cadena de texto en español
+        now_str = now.strftime('%d/%m/%Y, %H:%M:%S')
+
+        # Establecer el texto del QLineEdit
+        self.lineEdit_fechaCobrarFactura.setText(now_str)
+        self.lineEdit_fechaCobrarFactura.setReadOnly(True)
+
+        self.tablaCobrarFacturasCliente.setRowCount(len(facturas))
+        for i, factura in enumerate(facturas):
+            self.tablaCobrarFacturasCliente.setItem(i, 0, QtWidgets.QTableWidgetItem(str(factura.serie)))
+            self.tablaCobrarFacturasCliente.setItem(i, 1, QtWidgets.QTableWidgetItem(str(factura.codfactura)))
+            self.tablaCobrarFacturasCliente.setItem(i, 2, QtWidgets.QTableWidgetItem(str(factura.tipo)))
+            self.tablaCobrarFacturasCliente.setItem(i, 3, QtWidgets.QTableWidgetItem(str(factura.fecha)))
+            self.tablaCobrarFacturasCliente.setItem(i, 4, QtWidgets.QTableWidgetItem(str(factura.codcliente)))
+            self.tablaCobrarFacturasCliente.setItem(i, 5, QtWidgets.QTableWidgetItem(str(factura.cliente)))
+            self.tablaCobrarFacturasCliente.setItem(i, 6, QtWidgets.QTableWidgetItem(str(factura.estado)))
+            self.tablaCobrarFacturasCliente.setItem(i, 7, QtWidgets.QTableWidgetItem(str(factura.subtotal)))
+            self.tablaCobrarFacturasCliente.setItem(i, 8, QtWidgets.QTableWidgetItem(str(factura.iva)))
+            self.tablaCobrarFacturasCliente.setItem(i, 9, QtWidgets.QTableWidgetItem(str(factura.total)))
+            self.tablaCobrarFacturasCliente.setItem(i, 10, QtWidgets.QTableWidgetItem(str(factura.formapago)))
+            self.tablaCobrarFacturasCliente.resizeColumnsToContents()
+            self.tablaCobrarFacturasCliente.resizeRowsToContents()
+            log.debug(factura)
+            # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+            # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+            # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        log.debug(facturas)
+
+        item = self.tablaCobrarFacturasCliente.item(0, 5)
+        if item is not None:
+            self.lineEdit_clienteCobrarFactura.setText(item.text())
+        else:
+            # Handle the case where the item does not exist
+            # For example, you might want to clear the line edit or show an error message
+            self.lineEdit_clienteCobrarFactura.clear()
+        #self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
+        self.lineEdit_codclienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 4).text())
+        self.lineEdit_serieNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 0).text())
+        self.lineEdit_numeroNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 1).text())
+        self.lineEdit_fechaNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 3).text())
+        #self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+
+        cliente = self.tablaCobrarFacturasCliente.item(0, 4).text()
+        with CursorDelPool() as cursor:
+            # query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
+            query = f"SELECT * FROM clientes WHERE codigo = {cliente} ORDER BY codigo ASC"
+            # cursor.execute(query, (f'%{cliente}%'))
+            cursor.execute(query, (cliente,))
+            registros = cursor.fetchall()
+            clientes = []
+            for registro in registros:
+                cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14])
+                clientes.append(cliente)
+                self.lineEdit_dniclienteCobrarFactura.setText(clientes[0].dni)
+                self.lineEdit_telclienteCobrarFactura.setText(clientes[0].telefono)
+                self.lineEdit_emailclienteCobrarFactura.setText(clientes[0].email)
+                self.lineEdit_IvaclienteCobraraFactura.setText(clientes[0].condiva)
+                self.lineEdit_domclienteCobrarFactura.setText(clientes[0].direccion)
+                self.lineEdit_cuitclienteCobrarFactura.setText(clientes[0].cuit)
+            return clientes
+
+    def cobrar_factura_cliente_pendiente(self):
+        pagos_text = self.lineEdit_PagosCobrarFactura.text()
+        pagos = float(pagos_text) if pagos_text else 0.0
+        importe = float(self.lineEdit_ImporteCobrarFactura.text())
+        pagos = pagos + importe
+        saldo = float(self.lineEdit_SaldoCobrarFactura.text()) - pagos
+        estado = ''
+        fechacancelada = self.lineEdit_fechaCobrarFactura.text()
+        print(f"Valor de saldo: {saldo}")
+        if saldo == 0:
+            estado = 'CANCELADA'
+            fechacancelada = self.lineEdit_fechaCobrarFactura.text()
+            query_modificar_factura = "UPDATE facturas SET estado = %s WHERE codfactura = %s"
+            valor = (estado, self.lineEdit_numeroNvaFactura_2.text())
+            with CursorDelPool() as cursor:
+                cursor.execute(query_modificar_factura, valor)
+            QMessageBox.information(self, "Factura Cobrada", "La factura ha sido cobrada correctamente", )
+        else:
+            estado = 'PENDIENTE'
+            fechacancelada = '-'
+            query_modificar_factura = "UPDATE facturas SET estado = %s WHERE codfactura = %s"
+            valor = (estado, self.lineEdit_numeroNvaFactura_2.text())
+            with CursorDelPool() as cursor:
+                cursor.execute(query_modificar_factura, valor)
+            QMessageBox.information(self, "Factura Cobrada", "La factura ha sido cobrada parcialmente", )
+        query_cobro = "UPDATE pendientes SET estado = %s, importe = %s, pagos = %s, saldo = %s, fechacancelada = %s WHERE codfactura = %s"
+        valores = (estado, importe, pagos, saldo, fechacancelada, self.lineEdit_numeroNvaFactura_2.text())
+        with CursorDelPool() as cursor:
+            cursor.execute(query_cobro, valores)
+            self.stackedWidget.setCurrentIndex(1)
+            #return
+        ###################################################################
+        #
+        #   CARGAMOS EL REGISTRO DEL PAGO EN LA TABLA CAJA
+        ###################################################################
+        fecha_cobro = self.lineEdit_fechaCobrarFactura.text()
+        tipo = 'COBRO'
+        serie = self.lineEdit_serieNvaFactura_2.text()
+        codfactura = self.lineEdit_numeroNvaFactura_2.text()
+        concepto = 'Factura N° ' + str(serie) + '-' + str(codfactura)
+        formapago = self.comboBox_FormaPagoCobrarFactura.currentText()
+        tarjeta = self.comboBox_TarjetaCobrarFactura.currentText()
+        banco = self.comboBox_BancoCobrarFactura.currentText()
+        total = importe
+
+        query_caja = "INSERT INTO caja (fecha, tipo, concepto, formapago, tarjeta, banco, total) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        valores = (fecha_cobro, tipo, concepto, formapago, tarjeta, banco, total)
+        with CursorDelPool() as cursor:
+            cursor.execute(query_caja, valores)
+        QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
+
+
+
+
+
+
+
+
+
+
+    def on_combobox_changed(self):
+        row = self.tableWidget_facturasImpagas.currentRow()
+        codfactura = self.tableWidget_facturasImpagas.item(row, 1).text()
+        query_pendientes = "SELECT * FROM pendientes WHERE codfactura = %s"
+        valor2 = (codfactura,)
+        with CursorDelPool() as cursor:
+            cursor.execute(query_pendientes, valor2)
+            registros = cursor.fetchall()
+            pendientes = []
+            for registro in registros:
+                pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10])
+                pendientes.append(pendiente)
+                # self.lineEdit_clienteCobrarFactura.setText(pendientes[0].nombre)
+                # self.lineEdit_codclienteCobrarFactura.setText(pendientes[0].codcliente)
+                # self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
+                # self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
+                # self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
+                self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].importe)))
+                self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
+                # self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+            # return pendientes
+        if not self.lineEdit_PagosCobrarFactura.text() == 0.0 or self.lineEdit_PagosCobrarFactura.text() == '':
+            if self.comboBox_TpoPagoCobrarFactura.currentText() == 'TOTAL':
+                saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
+                #self.lineEdit_ImporteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+                self.lineEdit_ImporteCobrarFactura.setText("{:.2f}".format(saldo1))
+                self.lineEdit_ImporteCobrarFactura.setReadOnly(True)
+                #self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
+                self.lineEdit_PagosCobrarFactura.setReadOnly(True)
+            elif self.comboBox_TpoPagoCobrarFactura.currentText() == 'PARCIAL':
+                self.lineEdit_ImporteCobrarFactura.setText('')
+                self.lineEdit_ImporteCobrarFactura.setReadOnly(False)
+                #self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
+                self.lineEdit_ImporteCobrarFactura.setFocus()  # Poner el foco en el lineEdit
+                if self.lineEdit_ImporteCobrarFactura.text() == '':
+                    QMessageBox.information(self, "Importe Incorrecto",
+                                           "No se ha ingresado un importe. Por favor, ingrese un importe.")
+                    self.lineEdit_ImporteCobrarFactura.setFocus()
+
+                else:
+                    self.lineEdit_PagosCobrarFactura.setReadOnly(True)
+                    self.lineEdit_SaldoCobrarFactura.setReadOnly(True)
+                    importe1 = self.lineEdit_ImporteCobrarFactura.text()
+                    saldo2 = str(float(pendientes[0].saldo) - float(self.lineEdit_ImporteCobrarFactura.text()))
+                    while float(self.lineEdit_ImporteCobrarFactura.text()) > float(saldo2):
+                        QMessageBox.information(self, "Importe Incorrecto",
+                                                "El importe ingresado es mayor al saldo pendiente. Por favor, ingrese un importe menor o igual al saldo pendiente.")
+                        self.lineEdit_ImporteCobrarFactura.setFocus()
+
+                # else:
+                #     QMessageBox.information(self, "Importe Incorrecto",
+                #                             "No se ha ingresado un importe. Por favor, ingrese un importe.")
+                self.lineEdit_ImporteCobrarFactura.setFocus()
+            else:
+                pagos_text = self.lineEdit_PagosCobrarFactura.text()
+                pagos = float(pagos_text) if pagos_text else 0.0
+                resto = float("{:.2f}".format(float(self.lineEdit_SaldoCobrarFactura.text()) - pagos))
+                self.lineEdit_ImporteCobrarFactura.setText("{:.2f}".format(resto))
+                self.lineEdit_SaldoCobrarFactura.setReadOnly(True)
+
+    ########################################################################
+    #
+    #          PARTE DEL MODULO CAJA
+    #
+    ########################################################################
+    def modulo_caja(self):
+        self.stackedWidget.setCurrentIndex(9)
+        self.lineEdit_fechaCobrarFactura_4.setReadOnly(True)
+        # Obtener la fecha y hora actual
+        now = datetime.now()
+        # Convertir la fecha y hora a una cadena de texto en español
+        now_str = now.strftime('%d/%m/%Y, %H:%M:%S')
+
+        registros = CajaDAO.seleccionar_cobro()
+        self.tableWidget_ultimosCobros.setRowCount(len(registros))
+        for i, detalle in enumerate(registros):
+            self.tableWidget_ultimosCobros.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.id)))
+            self.tableWidget_ultimosCobros.setItem(i, 1, QtWidgets.QTableWidgetItem(str(detalle.fecha)))
+            self.tableWidget_ultimosCobros.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.tipo)))
+            self.tableWidget_ultimosCobros.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.concepto)))
+            self.tableWidget_ultimosCobros.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.formapago)))
+            self.tableWidget_ultimosCobros.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.tarjeta)))
+            self.tableWidget_ultimosCobros.setItem(i, 6, QtWidgets.QTableWidgetItem(str(detalle.banco)))
+            self.tableWidget_ultimosCobros.setItem(i, 7, QtWidgets.QTableWidgetItem(str(detalle.total)))
+            self.tableWidget_ultimosCobros.resizeColumnsToContents()
+            self.tableWidget_ultimosCobros.resizeRowsToContents()
+            log.debug(registros)
+
+        registros = CajaDAO.seleccionar_pago()
+        self.tableWidget_ultimosCobros_2.setRowCount(len(registros))
+        for i, detalle in enumerate(registros):
+            self.tableWidget_ultimosCobros_2.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.id)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 1, QtWidgets.QTableWidgetItem(str(detalle.fecha)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.tipo)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.concepto)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.formapago)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.tarjeta)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 6, QtWidgets.QTableWidgetItem(str(detalle.banco)))
+            self.tableWidget_ultimosCobros_2.setItem(i, 7, QtWidgets.QTableWidgetItem(str(detalle.total)))
+            self.tableWidget_ultimosCobros_2.resizeColumnsToContents()
+            self.tableWidget_ultimosCobros_2.resizeRowsToContents()
+            log.debug(registros)
+
+
+        # Establecer el texto del QLineEdit
+        self.lineEdit_fechaCobrarFactura_4.setText(now_str)
+        self.lineEdit_fechaCobrarFactura_4.setReadOnly(True)
+
+
+    def nuevo_cobro(self):
+        fecha_cobro = self.lineEdit_fechaCobrarFactura_4.text()
+        tipo = self.comboBox_TpoPagoNvoCobro.currentText()
+        concepto = self.lineEdit_ConceptoNvoCobro.text()
+        formapago = self.comboBox_FormaPagoNvoCobro.currentText()
+        tarjeta = self.comboBox_TarjetaCobrarFactura_4.currentText()
+        banco = self.comboBox_BancoCobrarFactura_4.currentText()
+        total = self.lineEdit_ImporteNvoCobro.text()
+
+        query_caja = "INSERT INTO caja (fecha, tipo, concepto, formapago, tarjeta, banco, total) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        valores = (fecha_cobro, tipo, concepto, formapago, tarjeta, banco, total)
+        with CursorDelPool() as cursor:
+            cursor.execute(query_caja, valores)
+        QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
+
+        self.lineEdit_ConceptoNvoCobro.setText('')
+        self.lineEdit_ImporteNvoCobro.setText('')
+        self.lineEdit_ConceptoNvoCobro.setText('')
+
+
+
+
+
+
+    def combo_formapago_change(self):
+        if self.comboBox_FormaPagoNvoCobro.currentText() == 'CONTADO':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(True)
+            self.comboBox_TarjetaCobrarFactura_4.setText = '-'
+            self.comboBox_BancoCobrarFactura_4.setDisabled(True)
+            self.comboBox_BancoCobrarFactura_4.setText = '-'
+            self.lineEdit_ConceptoNvoCobro.setFocus()
+        elif self.comboBox_FormaPagoNvoCobro.currentText() == 'TARJ. CREDITO':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(False)
+            self.comboBox_TarjetaCobrarFactura_4.setFocus()
+            self.comboBox_BancoCobrarFactura_4.setDisabled(False)
+        elif self.comboBox_FormaPagoNvoCobro.currentText() == 'DEBITO':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(False)
+            self.comboBox_TarjetaCobrarFactura_4.setFocus()
+            self.comboBox_BancoCobrarFactura_4.setDisabled(False)
+        elif self.comboBox_FormaPagoNvoCobro.currentText() == 'CHEQUE':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(True)
+            self.comboBox_TarjetaCobrarFactura_4.setText = '-'
+            self.comboBox_BancoCobrarFactura_4.setDisabled(True)
+            self.comboBox_BancoCobrarFactura_4.setText = '-'
+            self.lineEdit_ConceptoNvoCobro.setFocus()
+        elif self.comboBox_FormaPagoNvoCobro.currentText() == 'TRANSFERENCIA':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(True)
+            self.comboBox_TarjetaCobrarFactura_4.setText = '-'
+            self.comboBox_BancoCobrarFactura_4.setDisabled(False)
+            self.comboBox_BancoCobrarFactura_4.setFocus()
+        elif self.comboBox_FormaPagoNvoCobro.currentText() == 'MERCADOPAGO':
+            self.comboBox_TarjetaCobrarFactura_4.setDisabled(True)
+            self.comboBox_TarjetaCobrarFactura_4.setText = '-'
+            self.comboBox_BancoCobrarFactura_4.setDisabled(True)
+            self.comboBox_BancoCobrarFactura_4.setText = '-'
+            self.lineEdit_ConceptoNvoCobro.setFocus()
+        else:
+            self.comboBox_TarjetaCobrarFactura_4.setFocus()
+
+    def cancelar_nuevo_cobro(self):
+        self.lineEdit_ConceptoNvoCobro.setText('')
+        self.lineEdit_ImporteNvoCobro.setText('')
+        self.lineEdit_ConceptoNvoCobro.setText('')
+
+    ########################################################################
+    #
+    #                       MODIFICAR VALORES DE ARTICULOS
+    ########################################################################
+
+
+    def modulo_stock_mod_precio(self):
+        if self.comboBox_ModificarPrecio.currentText() == 'AUMENTAR %':
+            if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarPrecio.text())
+
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarPrecio.setFocus()
+                        else:
+                            valor = valor / 100
+                            valor += 1
+                            query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta * %s  WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            elif self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = valor / 100
+                        valor += 1
+                        query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta * %s WHERE categoria = %s"
+                        # Obtén la fila seleccionada
+                        #row = self.tabla_Articulos.currentRow()
+                        # Obtén el valor de la columna 0 para la fila seleccionada
+                        categoria_seleccionada = self.lineEdit.text()
+                        valor2 = (valor, categoria_seleccionada)
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, valor2)
+                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+
+            elif self.comboBox_ModificarPrecio_2.currentText() == 'TODOS':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = valor / 100
+                        valor += 1
+                        query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta * %s"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+        if self.comboBox_ModificarPrecio.currentText() == 'DISMINUIR %':
+            if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarPrecio.text())
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarPrecio.setFocus()
+                        else:
+                            valor_nuevo = valor / 100
+                            query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta - ((precio_venta * %s) / 100) WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        #valor = valor / 100
+                        #valor += 1
+                        query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta - ((precio_venta * %s) / 100) WHERE categoria = %s"
+                        # Obtén la fila seleccionada
+                        # row = self.tabla_Articulos.currentRow()
+                        # Obtén el valor de la columna 0 para la fila seleccionada
+                        categoria_seleccionada = self.lineEdit.text()
+                        valor2 = (valor, categoria_seleccionada)
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, valor2)
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
+
+            elif self.comboBox_ModificarPrecio_2.currentText() == 'TODOS':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor_nuevo = valor / 100
+                        query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta - ((precio_venta * %s) / 100)"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+        if self.comboBox_ModificarPrecio.currentText() == '+ VALOR FIJO':
+            if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarPrecio.text())
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarPrecio.setFocus()
+                        else:
+                            query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric + %s)::money WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        #valor = valor / 100
+                        #valor += 1
+                        query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric + %s)::money WHERE categoria = %s"
+                        # Obtén la fila seleccionada
+                        # row = self.tabla_Articulos.currentRow()
+                        # Obtén el valor de la columna 0 para la fila seleccionada
+                        categoria_seleccionada = self.lineEdit.text()
+                        valor2 = (valor, categoria_seleccionada)
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, valor2)
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
+
+
+            elif self.comboBox_ModificarPrecio_2.currentText() == 'TODOS':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric + %s)::money"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+        if self.comboBox_ModificarPrecio.currentText() == '- VALOR FIJO':
+            if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarPrecio.text())
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarPrecio.setFocus()
+                        else:
+                            query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric - %s)::money WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        #valor = valor / 100
+                        #valor += 1
+                        query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric - %s)::money WHERE categoria = %s"
+                        # Obtén la fila seleccionada
+                        # row = self.tabla_Articulos.currentRow()
+                        # Obtén el valor de la columna 0 para la fila seleccionada
+                        categoria_seleccionada = self.lineEdit.text()
+                        valor2 = (valor, categoria_seleccionada)
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, valor2)
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
+
+            elif self.comboBox_ModificarPrecio_2.currentText() == 'TODOS':
+                if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarPrecio.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarPrecio.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarPrecio.setFocus()
+                    else:
+                        query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric - %s)::money"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+
+    def modulo_stock_mod_stock(self):
+        if self.comboBox_ModificarStock.currentText() == 'AUMENTAR':
+            if self.comboBox_ModificarStock_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarStock.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarStock.text())
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarStock.setFocus()
+                        else:
+                            query_mod_valor = "UPDATE articulos SET stock = stock + %s WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            else:
+                if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarStock.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarStock.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarStock.setFocus()
+                    else:
+                        query_mod_valor = "UPDATE articulos SET stock = stock + %s"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
+
+        if self.comboBox_ModificarStock.currentText() == 'DISMINUIR':
+            if self.comboBox_ModificarStock_2.currentText() == 'SOLO ARTICULO':
+                if not self.tabla_Articulos.selectedItems():
+                    QMessageBox.information(self, "Seleccionar Articulo a Modificar",
+                                            "Tiene que seleccionar un Articulo para poder continuar", )
+                    return
+                else:
+                    if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarStock.setFocus()
+                    else:
+                        valor = float(self.lineEdit_ValorModificarStock.text())
+                        if valor <= 0:
+                            QMessageBox.information(self, "Valor Incorrecto",
+                                                    "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                            self.lineEdit_ValorModificarStock.setFocus()
+                        else:
+                            query_mod_valor = "UPDATE articulos SET stock = stock - %s WHERE codigo = %s"
+                            # Obtén la fila seleccionada
+                            row = self.tabla_Articulos.currentRow()
+                            # Obtén el valor de la columna 0 para la fila seleccionada
+                            valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
+                            with CursorDelPool() as cursor:
+                                cursor.execute(query_mod_valor, valor2)
+                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+
+            else:
+                if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
+                    QMessageBox.information(self, "Valor Incorrecto",
+                                            "No se ha ingresado un valor. Por favor, ingrese un valor mayor a 0.")
+                    self.lineEdit_ValorModificarStock.setFocus()
+                else:
+                    valor = float(self.lineEdit_ValorModificarStock.text())
+                    if valor <= 0:
+                        QMessageBox.information(self, "Valor Incorrecto",
+                                                "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
+                        self.lineEdit_ValorModificarStock.setFocus()
+                    else:
+                        query_mod_valor = "UPDATE articulos SET stock = stock - %s"
+                        with CursorDelPool() as cursor:
+                            cursor.execute(query_mod_valor, (valor,))
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
+
+
+    def combo_mod_precio_change(self):
+        if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
+
+            categorias = ArticuloDAO.seleccionar_categorias()
+
+            # Crear un modelo para la lista
+            model = QtGui.QStandardItemModel()
+
+            # Añadir las categorías al modelo
+            for categoria in categorias:
+                item = QtGui.QStandardItem(categoria)
+                model.appendRow(item)
+
+            # Asignar el modelo a la lista
+            self.ui.listView_categorias.setModel(model)
+            self.ui.bt_SeleccionarCategoria.clicked.connect(self.seleccionada_categoria)
+            self.ui.bt_AgregarCategoria.clicked.connect(self.mostrar_agregar_categoria)
+            self.dialogo_categoria.exec_()
+
+
+
+if __name__ == '__main__':
+
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())

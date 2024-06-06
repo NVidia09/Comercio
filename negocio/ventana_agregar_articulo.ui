@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ventana_agregar_articulo</class>
+ <widget class="QDialog" name="ventana_agregar_articulo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>870</width>
+    <height>589</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>870</width>
+    <height>589</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>870</width>
+    <height>589</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color:#000000
+}</string>
+  </property>
+  <widget class="QLineEdit" name="lineEdit_BuscarArticuloFacturaNueva">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>40</y>
+     <width>361</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+background-color:#ffffff;
+}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bt_AgregarArticuloNvaFactura">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>40</y>
+     <width>93</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Orbitron SemiBold</family>
+     <pointsize>8</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+background-color:#2caeff;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}</string>
+   </property>
+   <property name="text">
+    <string>AGREGAR</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget_SelecionarArticuloFactura">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>851</width>
+     <height>491</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableView{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+}
+
+QTableView QTableCornerButton::section {
+   	border-top-left-radius: 5px;
+    border: 0.5px solid #6c6c6c;
+ background-color: #BF060C26; 
+}
+QTableView QHeaderView::section::last:horizontal{
+	border-top-right-radius: 5px;
+}
+
+
+QTableView QHeaderView::section::first:horizontal {
+	border-top-left-radius: 5px;
+}
+
+
+
+ QTableView ::section{
+	padding: 2px 5px ;
+	color: #D9D9D9 ;
+	  qproperty-alignment: AlignCenter;
+	border: 1px solid grey;
+	background-color:#1f232a;
+	height: 35;
+}
+
+
+ QTableView QHeaderView::section:vertical {
+ border: 0.5px solid #6c6c6c;
+	padding: 1px;
+  font-weight: bold; /* Poner en negrita */
+  font-size: 10px; /* Tamaño de la letra */
+  padding: 1px;
+color: #FFEFEEFA;
+ background-color: #BF060C26; 
+}
+
+QTableView::item:selected {
+    background-color:#FF1EB0ED;
+	color: white;
+}
+
+/*
+QTableView::item:selected {
+    background-color:#FF1EB0ED;
+	color: white;
+}
+*/
+
+/*
+QTableView::item:selected:!focus {
+    background-color:#FF1EB0ED;
+	color: white;
+}
+*/
+
+QHeaderView { 
+qproperty-defaultAlignment: AlignCenter; 
+}
+
+	/* centrar titulos y dar padding */
+QTableView QHeaderView::section:horizontal {
+  font-weight: bold; /* Poner en negrita */
+  font-size: 14px; /* Tamaño de la letra */
+ /* padding: 2px 5px ;
+  margin: 2px;*/
+   text-align: center;
+	padding: 2px;
+  color: #FFEFEEFA;
+ border: 0.5px solid #6c6c6c;
+ background-color: #BF060C26;
+}
+</string>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>CODIGO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PRODUCTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>MODELO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>MARCA</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>CATEGORIA</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PRECIO_COSTO</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>PRECIO_VENTA</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>IVA</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>STOCK</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>MARGEN</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
