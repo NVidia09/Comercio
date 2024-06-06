@@ -389,3 +389,27 @@ Articulo:
             Stock: 10
             Margen de ganancia: 18
         
+Articulo: 
+            Código: 233403
+            Nombre: PENDRIVE MAXELL 4 GB BT
+            Modelo: 4GB BT
+            Marca: MAXELL
+            Categoría: PENDRIVES
+            SKU: XC7788MMMMM
+            Color: NEGRO/MORADO
+            Característica: USB
+            Precio de costo: 4500.0
+            Precio de venta: 5300.0
+            IVA: 10.5
+            Proveedor: INFOANDINA
+            Tamaño: 0
+            Ancho: 0
+            Largo: 0
+            Profundidad: 0
+            Peso: 0
+            Peso envalado: 0
+            Stock: 7
+            Margen de ganancia: 23
+            Stock mínimo: 2
+            Código de barras: 1110987654321
+        

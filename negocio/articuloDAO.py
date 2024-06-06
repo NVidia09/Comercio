@@ -66,7 +66,7 @@ class ArticuloDAO:
                 return None
 
     @classmethod
-    def buscar_articulo_nombre(cls, campo1, campo2, valor):
+    def buscar_articulo_nombre(cls, campo1, campo2, campo3, valor):
         # with CursorDelPool() as cursor:
         #     cursor.execute(cls._BUSCA_ARTICULO_NOMBRE, (articulo_buscar3,))
         #     registro = cursor.fetchone()
@@ -79,14 +79,40 @@ class ArticuloDAO:
         #     else:
         #         return None
         with CursorDelPool() as cursor:
-            query = f"SELECT * FROM articulos WHERE {campo1} ILIKE %s OR {campo2}::text ILIKE %s ORDER BY codigo ASC"
-            cursor.execute(query, (f'%{valor}%', f'%{valor}%'))
+            query = f"SELECT * FROM articulos WHERE {campo1} ILIKE %s OR {campo2}::text ILIKE %s OR {campo3}::text ILIKE %s ORDER BY codigo ASC"
+            cursor.execute(query, (f'%{valor}%', f'%{valor}%', f'%{valor}%'))
             registros = cursor.fetchall()
             articulos = []
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
                             registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
+                articulos.append(articulo)
+            return articulos
+
+    @classmethod
+    def buscar_articulo_lector(cls, campo1, valor):
+        # with CursorDelPool() as cursor:
+        #     cursor.execute(cls._BUSCA_ARTICULO_NOMBRE, (articulo_buscar3,))
+        #     registro = cursor.fetchone()
+        #     if registro is not None:
+        #         articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+        #                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+        #                             registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
+        #                             registro[18], registro[19], registro[20], registro[21])
+        #         return articulo
+        #     else:
+        #         return None
+        with CursorDelPool() as cursor:
+            query = f"SELECT * FROM articulos WHERE CAST(cod_barras AS TEXT) ILIKE %s ORDER BY codigo ASC"
+            cursor.execute(query, (f'%{valor}%', ))
+            registros = cursor.fetchall()
+            articulos = []
+            for registro in registros:
+                articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                    registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                    registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
+                                    registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 

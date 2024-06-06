@@ -144,7 +144,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #
         #################################################################
 
-
+        #self.lineEdit_BuscarArticuloNvaFactura1.textChanged.connect(self.buscar_articulo_nueva_factura_lector)
+        self.lineEdit_BuscarArticuloNvaFactura1.returnPressed.connect(self.buscar_articulo_nueva_factura_lector)
         self.bt_AgregarArticuloNvaFactura.clicked.connect(self.agregar_articulo_nueva_factura)
         self.dialogo_agregar_Art_Factura = QtWidgets.QDialog()
         self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
@@ -418,12 +419,53 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_codBarrasNvoArticulo.clear()
         self.label_ingresar_msg2.clear()
 
+###########################################################################################################
+#
+#                                 Empieza FACTURAS
+
+###########################################################################################################
+
+    def limpiar_busquedas(self):
+        self.lineEdit_BuscarArticulo.clear()
+        self.lineEdit_BuscarArticulo.setFocus()
+        self.lineEdit_BuscarArticulo.setCursorPosition(0)
+
+    def limpiar_busquedas_lector(self):
+        self.lineEdit_BuscarArticuloNvaFactura1.clear()
+        self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
+        self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
+
+    def buscar_articulo_nueva_factura_lector(self):
+        campo1 = 'cod_barras'
+        valor = str(self.lineEdit_BuscarArticuloNvaFactura1.text())
+        articulos = ArticuloDAO.buscar_articulo_lector(campo1, valor)
+        #self.lineEdit_BuscarArticuloNvaFactura1.returnPressed.connect(self.limpiar_busquedas_lector)
+        self.lineEdit_BuscarArticuloNvaFactura1.clear()
+        self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
+        self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
+
+        nueva_lista = []
+        for i in articulos:
+            precio_costo_str = i.precio_costo.replace('$', '').replace(',', '')
+            importe_iva = (float(precio_costo_str) * float(i.iva)) / 100
+            precio_unitario = float(precio_costo_str) + importe_iva
+            nueva_lista.append(
+                [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
+
+        Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+        self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+        self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+        self.verificarExistencias()
+        self.actualizar_subtotal_factura()
+
 
     def buscar_articulo(self):
         campo1 = 'nombre'
         campo2 = 'codigo'
+        campo3 = 'cod_barras'
         valor = str(self.lineEdit_BuscarArticulo.text())
-        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, valor)
+        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor)
+        self.lineEdit_BuscarArticulo.returnPressed.connect(self.limpiar_busquedas)
         self.tabla_Articulos.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
             self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
@@ -447,8 +489,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
             self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
             self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
-            self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras))
-            )
+            self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
             self.tabla_Articulos.resizeColumnsToContents()
             self.tabla_Articulos.resizeRowsToContents()
             log.debug(articulo)
@@ -1415,6 +1456,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #self.ui.listView_clientes.setModel(model)
         #self.ui.tableWidgetAgregarClienteNvaFactura.setModel(model)
         #self.ui.bt_SeleccionarCliente.clicked.connect(self.seleccionado_cliente)
+        self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
+        self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
         self.dialogo_agregar_cliente_factura.exec_()
 
     def buscar_cliente_nueva_factura(self):
@@ -1459,6 +1502,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeColumnsToContents()
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeRowsToContents()
+            self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
+            self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
 
     def modulo_facturacion(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -1510,6 +1555,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def nueva_factura(self):
         self.stackedWidget.setCurrentIndex(7)
+        self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
+        self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
 
 
         # Obtener la fecha y hora actual
@@ -1604,10 +1651,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def buscar_articulo_nueva_factura(self):
         campo1 = 'nombre'
         campo2 = 'codigo'
+        campo3 = 'cod_barras'
         valor1 = self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.text()
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.clearContents()
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(0)
-        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, valor1)
+        articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor1)
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
@@ -1992,6 +2040,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def cancelar_factura(self):
+        self.tableWidgetDetalleNvaFactura.removeRow(0)
         self.lineEdit_clienteNvaFactura.clear()
         self.lineEdit_domclienteNvaFactura.clear()
         self.lineEdit_codclienteNvaFactura.clear()

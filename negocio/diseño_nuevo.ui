@@ -1788,6 +1788,9 @@ background-color:#39ffa3;
 background-color:#ffffff;
 }</string>
             </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
            </widget>
            <widget class="QPushButton" name="bt_NuevoArticulo">
             <property name="geometry">
@@ -2100,6 +2103,11 @@ QTableView QHeaderView::section:horizontal {
             <column>
              <property name="text">
               <string>STOCK_MINIMO</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>COD_BARRAS</string>
              </property>
             </column>
            </widget>
@@ -5694,7 +5702,7 @@ background-color:#ffffff;
           <property name="geometry">
            <rect>
             <x>1048</x>
-            <y>600</y>
+            <y>670</y>
             <width>60</width>
             <height>61</height>
            </rect>
@@ -5735,7 +5743,7 @@ border:5px;
           <property name="geometry">
            <rect>
             <x>930</x>
-            <y>600</y>
+            <y>670</y>
             <width>60</width>
             <height>61</height>
            </rect>
@@ -5939,6 +5947,52 @@ border:5px;
           </property>
           <property name="text">
            <string>Stock Mínimo:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_codBarrasNvoArticulo">
+          <property name="geometry">
+           <rect>
+            <x>820</x>
+            <y>600</y>
+            <width>291</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_289">
+          <property name="geometry">
+           <rect>
+            <x>680</x>
+            <y>600</y>
+            <width>121</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Código Barras</string>
           </property>
          </widget>
         </widget>
@@ -9837,6 +9891,29 @@ color:#ffffff
          </property>
          <property name="text">
           <string>Entrega:</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bt_LectorBarras_2">
+         <property name="geometry">
+          <rect>
+           <x>490</x>
+           <y>473</y>
+           <width>81</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>escaner-de-codigo-de-barras.png</normaloff>escaner-de-codigo-de-barras.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
          </property>
         </widget>
        </widget>
