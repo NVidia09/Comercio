@@ -2781,6 +2781,29 @@ border-radius: 5px;
              </property>
             </widget>
            </widget>
+           <widget class="QPushButton" name="bt_LectorBarras">
+            <property name="geometry">
+             <rect>
+              <x>480</x>
+              <y>5</y>
+              <width>81</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>escaner-de-codigo-de-barras.png</normaloff>escaner-de-codigo-de-barras.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>

@@ -3,7 +3,7 @@ class Articulo:
 
     def __init__(self, codigo=None, nombre=None, modelo=None, marca=None, categoria=None, sku=None, color=None,
                  caracteristica=None, precio_costo=None, precio_venta=None, iva=None, proveedor=None, tamaño=None,
-                 ancho=None, largo=None, profundidad=None, peso=None, peso_envalado=None, stock=None, margen_ganancia=None, stock_minimo=None):
+                 ancho=None, largo=None, profundidad=None, peso=None, peso_envalado=None, stock=None, margen_ganancia=None, stock_minimo=None, cod_barras=None):
         self._codigo = codigo
         self._nombre = nombre
         self._modelo = modelo
@@ -25,6 +25,7 @@ class Articulo:
         self._stock = stock
         self._margen_ganancia = margen_ganancia
         self._stock_minimo = stock_minimo
+        self._cod_barras = cod_barras
 
     def __str__(self):
         return f'''
@@ -49,6 +50,7 @@ class Articulo:
             Stock: {self._stock}
             Margen de ganancia: {self._margen_ganancia}
             Stock mínimo: {self._stock_minimo}
+            Código de barras: {self._cod_barras}
         '''
 
     @property
@@ -218,6 +220,15 @@ class Articulo:
     @stock_minimo.setter
     def stock_minimo(self, stock_minimo):
         self._stock_minimo = stock_minimo
+
+    @property
+    def cod_barras(self):
+        return self._cod_barras
+
+    @cod_barras.setter
+    def cod_barras(self, cod_barras):
+        self._cod_barras = cod_barras
+
 
 
 

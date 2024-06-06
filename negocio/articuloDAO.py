@@ -11,8 +11,8 @@ class ArticuloDAO:
 
     _SELECCIONAR = "SELECT * FROM articulos ORDER BY codigo ASC"
     _SELECCIONAR_ORDENADO = "SELECT * FROM articulos ORDER BY nombre, categoria ASC"
-    _INSERTAR = "INSERT INTO articulos(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    _ACTUALIZAR = 'UPDATE articulos SET nombre=%s, modelo=%s, marca=%s, categoria=%s, sku=%s, color=%s, caracteristica=%s, precio_costo=%s, precio_venta=%s, iva=%s, proveedor=%s, tamaño=%s, ancho=%s, largo=%s, profundidad=%s, peso=%s, peso_envalado=%s, stock=%s, margen_ganancia=%s, stock_minimo=%s WHERE codigo = %s'
+    _INSERTAR = "INSERT INTO articulos(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    _ACTUALIZAR = 'UPDATE articulos SET nombre=%s, modelo=%s, marca=%s, categoria=%s, sku=%s, color=%s, caracteristica=%s, precio_costo=%s, precio_venta=%s, iva=%s, proveedor=%s, tamaño=%s, ancho=%s, largo=%s, profundidad=%s, peso=%s, peso_envalado=%s, stock=%s, margen_ganancia=%s, stock_minimo=%s, cod_barras=%s WHERE codigo = %s'
     _ELIMINAR = "DELETE FROM articulos WHERE codigo = %s"
     _BUSCA_ARTICULO = "SELECT * FROM articulos WHERE codigo = %s"
     _BUSCA_ARTICULO_NOMBRE = "SELECT * FROM articulos WHERE nombre  LIKE %s"
@@ -34,7 +34,7 @@ class ArticuloDAO:
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                   registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                                  registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                                  registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
@@ -46,7 +46,7 @@ class ArticuloDAO:
             if registro is not None:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                   registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                                  registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                                  registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 return articulo
             else:
                 return None
@@ -60,7 +60,7 @@ class ArticuloDAO:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                     registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
                                     registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
-                                    registro[18], registro[19], registro[20])
+                                    registro[18], registro[19], registro[20], registro[21])
                 return articulo
             else:
                 return None
@@ -74,7 +74,7 @@ class ArticuloDAO:
         #         articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
         #                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
         #                             registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
-        #                             registro[18], registro[19], registro[20])
+        #                             registro[18], registro[19], registro[20], registro[21])
         #         return articulo
         #     else:
         #         return None
@@ -86,14 +86,14 @@ class ArticuloDAO:
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
     @classmethod
     def insertar(cls, articulo):
         with CursorDelPool() as cursor:
-            valores = (articulo.codigo, articulo.nombre, articulo.modelo, articulo.marca, articulo.categoria, articulo.sku, articulo.color, articulo.caracteristica, articulo.precio_costo, articulo.precio_venta, articulo.iva, articulo.proveedor, articulo.tamaño, articulo.ancho, articulo.largo, articulo.profundidad, articulo.peso, articulo.peso_envalado, articulo.stock, articulo.margen_ganancia, articulo.stock_minimo)
+            valores = (articulo.codigo, articulo.nombre, articulo.modelo, articulo.marca, articulo.categoria, articulo.sku, articulo.color, articulo.caracteristica, articulo.precio_costo, articulo.precio_venta, articulo.iva, articulo.proveedor, articulo.tamaño, articulo.ancho, articulo.largo, articulo.profundidad, articulo.peso, articulo.peso_envalado, articulo.stock, articulo.margen_ganancia, articulo.stock_minimo, articulo.cod_barras)
             cursor.execute(cls._INSERTAR, valores)
             log.debug(f'Articulo ingresado: {articulo}')
 
@@ -111,7 +111,7 @@ class ArticuloDAO:
     @classmethod
     def actualizar(cls, articulo):
         with CursorDelPool() as cursor:
-            valores = (articulo.nombre, articulo.modelo, articulo.marca, articulo.categoria, articulo.sku, articulo.color, articulo.caracteristica, articulo.precio_costo, articulo.precio_venta, articulo.iva, articulo.proveedor, articulo.tamaño, articulo.ancho, articulo.largo, articulo.profundidad, articulo.peso, articulo.peso_envalado, articulo.stock, articulo.margen_ganancia, articulo.stock_minimo, articulo.codigo)
+            valores = (articulo.nombre, articulo.modelo, articulo.marca, articulo.categoria, articulo.sku, articulo.color, articulo.caracteristica, articulo.precio_costo, articulo.precio_venta, articulo.iva, articulo.proveedor, articulo.tamaño, articulo.ancho, articulo.largo, articulo.profundidad, articulo.peso, articulo.peso_envalado, articulo.stock, articulo.margen_ganancia, articulo.stock_minimo, articulo.cod_barras, articulo.codigo)
             cursor.execute(cls._ACTUALIZAR, valores)
             log.debug(f'Articulo actualizado: {articulo}')
             return cursor.rowcount
@@ -135,7 +135,7 @@ class ArticuloDAO:
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
@@ -150,7 +150,7 @@ class ArticuloDAO:
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
@@ -165,7 +165,7 @@ class ArticuloDAO:
             for registro in registros:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                             registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
-                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20])
+                            registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
@@ -180,7 +180,7 @@ class ArticuloDAO:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                     registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
                                     registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
-                                    registro[18], registro[19], registro[20])
+                                    registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 

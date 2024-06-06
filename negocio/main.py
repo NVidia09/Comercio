@@ -213,6 +213,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
         self.stackedWidget.setCurrentIndex(1)
+        self.lineEdit_BuscarArticulo.setFocus()
+        self.lineEdit_BuscarArticulo.setCursorPosition(0)
         self.tabla_Articulos.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
             self.tabla_Articulos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
@@ -236,6 +238,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
             self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
             self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+            self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
             log.debug(articulo)
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
         last_row = self.tabla_Articulos.rowCount() - 1
@@ -354,7 +357,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         stock = self.lineEdit_stockNvoArticulo.text()
         margen_ganancia = self.lineEdit_margenNvoArticulo.text()
         stock_minimo = self.lineEdit_stockMinimoNvoArticulo.text()
-        articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo)
+        cod_barras = self.lineEdit_codBarrasNvoArticulo.text()
+        articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras)
         articulos_insertados = ArticuloDAO.insertar(articulo)
         log.debug(f'Articulos insertados: {articulos_insertados}')
         #self.label_ingresar_msg2.setText('Articulo ingresado correctamente')
@@ -386,6 +390,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_stockNvoArticulo.setText(linea11)
         self.lineEdit_margenNvoArticulo.setText(linea11)
         self.lineEdit_stockMinimoNvoArticulo.setText(linea11)
+        self.lineEdit_codBarrasNvoArticulo.setText('')
         self.label_ingresar_msg2.clear()
         return
 
@@ -410,6 +415,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_stockNvoArticulo.clear()
         self.lineEdit_margenNvoArticulo.clear()
         self.lineEdit_stockMinimoNvoArticulo.clear()
+        self.lineEdit_codBarrasNvoArticulo.clear()
         self.label_ingresar_msg2.clear()
 
 
@@ -441,6 +447,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
             self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
             self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+            self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras))
+            )
             self.tabla_Articulos.resizeColumnsToContents()
             self.tabla_Articulos.resizeRowsToContents()
             log.debug(articulo)
@@ -486,11 +494,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         stock = int(self.tabla_Articulos.item(row, 18).text())
         margen_ganancia = float(self.tabla_Articulos.item(row, 19).text())
         stock_minimo = int(self.tabla_Articulos.item(row, 20).text())
+        cod_barras = str(self.tabla_Articulos.item(row, 21).text())
         button = QMessageBox.question(self, "Modificar Artículo", "Está seguro que desea modificar el artículo?", )
 
         if button == QMessageBox.Yes:
             print("SI!")
-            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo)
+            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras)
             articulos_actualizados = ArticuloDAO.actualizar(articulo)
             log.debug(f'Articulos actualizados: {articulos_actualizados}')
             self.label_ingresar_msg2.setText('Articulo actualizado correctamente')
@@ -533,6 +542,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
                 self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
                 self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
                 log.debug(articulo)
                 self.tabla_Articulos.resizeColumnsToContents()
                 self.tabla_Articulos.resizeRowsToContents()
@@ -565,6 +575,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
                 self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
                 self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
                 log.debug(articulo)
                 self.tabla_Articulos.resizeColumnsToContents()
                 self.tabla_Articulos.resizeRowsToContents()
@@ -597,6 +608,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
                 self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
                 self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
                 log.debug(articulo)
                 self.tabla_Articulos.resizeColumnsToContents()
                 self.tabla_Articulos.resizeRowsToContents()
@@ -638,6 +650,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.tabla_Articulos.setItem(i, 18, QtWidgets.QTableWidgetItem(str(articulo._stock)))
                 self.tabla_Articulos.setItem(i, 19, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
                 self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
+                self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
                 log.debug(articulo)
                 self.tabla_Articulos.resizeColumnsToContents()
                 self.tabla_Articulos.resizeRowsToContents()
@@ -672,13 +685,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         stock = self.tabla_Articulos.item(row, 18).text()
         margen_ganancia = self.tabla_Articulos.item(row, 19).text()
         stock_minimo = self.tabla_Articulos.item(row, 20).text()
+        cod_barras = self.tabla_Articulos.item(row, 21).text()
         button = QMessageBox.question(self, "Eliminar Artículo", "Está seguro que desea eliminar el artículo?",)
 
         if button == QMessageBox.Yes:
             print("SI!")
             articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo,
                                 precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado,
-                                stock, margen_ganancia, stock_minimo)
+                                stock, margen_ganancia, stock_minimo, cod_barras)
             articulos_eliminados = ArticuloDAO.eliminar(articulo)
             log.debug(f'Articulos eliminados: {articulos_eliminados}')
             # self.label_ingresar_msg2.setText('Articulo eliminado correctamente')
