@@ -222,10 +222,11 @@ background-color:#ffffff;
        <property name="styleSheet">
         <string notr="true">QStackedWidget{
 background-color:#ffffff;
-}</string>
+}
+</string>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>10</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -1633,6 +1634,35 @@ color:#ffffff
            <property name="styleSheet">
             <string notr="true">QFrame{
 background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
            </property>
            <property name="frameShape">
@@ -2145,6 +2175,24 @@ QTableView QHeaderView::section:horizontal {
               <height>30</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">
+QComboBox{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QComboBox:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QComboBox:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+</string>
+            </property>
             <item>
              <property name="text">
               <string>nombre</string>
@@ -2237,6 +2285,24 @@ background-color:#39ffa3;
               <width>16777215</width>
               <height>30</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">
+QComboBox{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QComboBox:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QComboBox:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+</string>
             </property>
             <item>
              <property name="text">
@@ -2797,6 +2863,11 @@ border-radius: 5px;
               <width>81</width>
               <height>41</height>
              </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color:#ffffff
+}</string>
             </property>
             <property name="text">
              <string/>
@@ -3395,6 +3466,35 @@ QTableView QHeaderView::section:horizontal {
          <property name="styleSheet">
           <string notr="true">QFrame{
 background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
          </property>
          <property name="frameShape">
@@ -3905,6 +4005,35 @@ color:#ffffff
          <property name="styleSheet">
           <string notr="true">QFrame{
 background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
          </property>
          <property name="frameShape">
@@ -4632,6 +4761,39 @@ color:#ffffff
          <property name="styleSheet">
           <string notr="true">QWidget{
 background-color:#ffffff;
+}
+
+QFrame{
+background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
          </property>
          <widget class="QLineEdit" name="lineEdit_nombreNvoArticulo">
@@ -5466,10 +5628,10 @@ background-color:#ffffff;
          <widget class="QLabel" name="label_11">
           <property name="geometry">
            <rect>
-            <x>480</x>
+            <x>490</x>
             <y>160</y>
-            <width>31</width>
-            <height>16</height>
+            <width>21</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="font">
@@ -5492,10 +5654,10 @@ background-color:#ffffff;
          <widget class="QLabel" name="label_20">
           <property name="geometry">
            <rect>
-            <x>480</x>
+            <x>490</x>
             <y>210</y>
-            <width>31</width>
-            <height>16</height>
+            <width>21</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="font">
@@ -5518,10 +5680,10 @@ background-color:#ffffff;
          <widget class="QLabel" name="label_22">
           <property name="geometry">
            <rect>
-            <x>480</x>
+            <x>490</x>
             <y>510</y>
-            <width>31</width>
-            <height>16</height>
+            <width>21</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="font">
@@ -5544,10 +5706,10 @@ background-color:#ffffff;
          <widget class="QLabel" name="label_23">
           <property name="geometry">
            <rect>
-            <x>480</x>
+            <x>490</x>
             <y>560</y>
-            <width>31</width>
-            <height>16</height>
+            <width>21</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="font">
@@ -5570,10 +5732,10 @@ background-color:#ffffff;
          <widget class="QLabel" name="label_24">
           <property name="geometry">
            <rect>
-            <x>1110</x>
-            <y>150</y>
-            <width>31</width>
-            <height>16</height>
+            <x>1120</x>
+            <y>110</y>
+            <width>21</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="font">
@@ -6057,6 +6219,35 @@ color:#ffffff
          <property name="styleSheet">
           <string notr="true">QWidget{
 background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
          </property>
          <widget class="QLineEdit" name="lineEdit_nombreNvoCliente">
@@ -6972,6 +7163,24 @@ border:5px;
             <height>30</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">
+QComboBox{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QComboBox:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QComboBox:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+</string>
+          </property>
           <item>
            <property name="text">
             <string>CONSUMIDOR FINAL</string>
@@ -7013,6 +7222,35 @@ border:5px;
          <property name="styleSheet">
           <string notr="true">QWidget{
 background-color:#ffffff;
+}
+
+QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}
+
+QComboBox:{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
 }</string>
          </property>
          <widget class="QLineEdit" name="lineEdit_razonsocialNvoProveedor">
@@ -9148,11 +9386,14 @@ background-color:#ffffff;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
          </property>
          <property name="text">
           <string>AGREGAR</string>
@@ -9587,11 +9828,14 @@ QTableView QHeaderView::section:horizontal {
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
          </property>
          <property name="text">
           <string>FACTURAR</string>
@@ -9623,11 +9867,14 @@ background-color:#39ffa3;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
          </property>
          <property name="text">
           <string>CANCELAR</string>
@@ -11428,11 +11675,14 @@ color:#ffffff
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
          </property>
          <property name="text">
           <string>CANCELAR</string>
@@ -11464,11 +11714,14 @@ background-color:#39ffa3;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
          </property>
          <property name="text">
           <string>COBRAR</string>
@@ -12261,11 +12514,14 @@ color:#ffffff
           <property name="styleSheet">
            <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+
+</string>
           </property>
           <property name="text">
            <string>CANCELAR</string>
@@ -12297,11 +12553,13 @@ background-color:#39ffa3;
           <property name="styleSheet">
            <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
 background-color:#39ffa3;
-}</string>
+}
+</string>
           </property>
           <property name="text">
            <string>GRABAR</string>
@@ -12667,11 +12925,6 @@ color:#ffffff
           <item>
            <property name="text">
             <string>COBRO</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>PAGO</string>
            </property>
           </item>
          </widget>
@@ -13095,6 +13348,7 @@ color:#ffffff
           <property name="styleSheet">
            <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
@@ -13131,6 +13385,7 @@ background-color:#39ffa3;
           <property name="styleSheet">
            <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
@@ -13522,7 +13777,7 @@ QTableView QHeaderView::section:horizontal {
           </column>
          </widget>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_BuscarArticulo_7">
+        <widget class="QLineEdit" name="lineEdit_BuscarClienteCtaCte">
          <property name="geometry">
           <rect>
            <x>22</x>
@@ -13660,6 +13915,7 @@ background-color:#ffffff;
          <property name="styleSheet">
           <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
@@ -13679,6 +13935,14 @@ background-color:#39ffa3;
            <height>591</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">QGroupBox{
 background-color:#b3b3b3;
@@ -13687,8 +13951,414 @@ border-radius: 5px;
 }</string>
          </property>
          <property name="title">
-          <string/>
+          <string>RESUMEN CUENTA CORRIENTE</string>
          </property>
+         <widget class="QLineEdit" name="lineEdit_VolumenCompras">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_290">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>60</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string>VOLUMEN COMPRAS</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_SaldoPendienteCtaCte">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>110</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_291">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>110</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string> SALDO PENDIENTE</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_CobradoCtaCte">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>160</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_292">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>160</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string> COBRADO</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_CantidadComprasCtaCte">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>210</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_293">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>210</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string> CANT. COMPRAS</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_UltCompraCtaCte">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>260</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_294">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>260</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string> ULT. COMPRA</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_UltPagoCtaCte">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>310</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_295">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>310</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string>ULT. PAGO</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_MontoAutorizado">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>360</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_296">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>360</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string>MONTO AUTORIZADO</string>
+          </property>
+         </widget>
         </widget>
        </widget>
       </widget>

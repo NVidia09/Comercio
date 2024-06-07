@@ -22,9 +22,18 @@
      <height>28</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Orbitron</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
@@ -101,9 +110,18 @@ background-color:#39ffa3
      <height>28</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Orbitron</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{

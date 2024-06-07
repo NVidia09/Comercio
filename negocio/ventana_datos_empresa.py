@@ -17,7 +17,20 @@ class Ui_ventana_Datos_Empresa(object):
         ventana_Datos_Empresa.resize(453, 510)
         ventana_Datos_Empresa.setMinimumSize(QtCore.QSize(453, 510))
         ventana_Datos_Empresa.setMaximumSize(QtCore.QSize(453, 510))
-        ventana_Datos_Empresa.setStyleSheet("")
+        ventana_Datos_Empresa.setStyleSheet("QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}")
         self.labelArticulo_2 = QtWidgets.QLabel(ventana_Datos_Empresa)
         self.labelArticulo_2.setGeometry(QtCore.QRect(10, 10, 431, 40))
         self.labelArticulo_2.setMinimumSize(QtCore.QSize(0, 40))
@@ -135,6 +148,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_grabar_datos_empresa.setFont(font)
         self.bt_grabar_datos_empresa.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -152,6 +166,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_cancelar_datos_empresa.setFont(font)
         self.bt_cancelar_datos_empresa.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"

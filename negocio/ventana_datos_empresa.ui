@@ -26,7 +26,20 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QLineEdit{
+border-radius:10px;
+border:2px solid rgb(114, 117, 126)
+}
+
+QLineEdit:hover{
+border-radius:10px;
+border:2px solid rgb(44, 182, 125)
+}
+
+QLineEdit:focus{
+border-radius:10px;
+border:2px solid rgb(127, 90, 240)
+}</string>
   </property>
   <widget class="QLabel" name="labelArticulo_2">
    <property name="geometry">
@@ -357,6 +370,7 @@ color:#ffffff
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{
@@ -393,6 +407,7 @@ background-color:#39ffa3;
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{

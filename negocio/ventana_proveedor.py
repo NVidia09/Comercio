@@ -20,8 +20,14 @@ class Ui_ventana_proveedores(object):
 "}")
         self.bt_SeleccionarProveedor = QtWidgets.QPushButton(ventana_proveedores)
         self.bt_SeleccionarProveedor.setGeometry(QtCore.QRect(260, 90, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_SeleccionarProveedor.setFont(font)
         self.bt_SeleccionarProveedor.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"

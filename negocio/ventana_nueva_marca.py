@@ -11,14 +11,21 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ventana_nueva_marca(object):
+class Ui_ventana_nueva_marca (object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Nueva Marca")
+        Dialog.setObjectName("Dialog")
         Dialog.resize(421, 174)
         self.bt_GuardarMarca = QtWidgets.QPushButton(Dialog)
         self.bt_GuardarMarca.setGeometry(QtCore.QRect(120, 130, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_GuardarMarca.setFont(font)
         self.bt_GuardarMarca.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -47,8 +54,15 @@ class Ui_ventana_nueva_marca(object):
         self.label.setObjectName("label")
         self.bt_CancelarMarca = QtWidgets.QPushButton(Dialog)
         self.bt_CancelarMarca.setGeometry(QtCore.QRect(240, 130, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_CancelarMarca.setFont(font)
         self.bt_CancelarMarca.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"

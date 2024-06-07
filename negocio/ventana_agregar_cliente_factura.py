@@ -150,6 +150,7 @@ class Ui_ventana_agregar_cliente_factura(object):
         self.bt_BuscarItemArticuloNvaFactura.setFont(font)
         self.bt_BuscarItemArticuloNvaFactura.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"

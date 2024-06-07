@@ -168,6 +168,7 @@ background-color:#ffffff;
    <property name="styleSheet">
     <string notr="true">QPushButton{
 background-color:#2caeff;
+border-radius:10px;
 }
 
 QPushButton:hover{

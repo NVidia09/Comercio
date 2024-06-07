@@ -117,7 +117,8 @@ class Ui_MainWindow(object):
         self.stackedWidget = QtWidgets.QStackedWidget(self.horizontalLayoutWidget_3)
         self.stackedWidget.setStyleSheet("QStackedWidget{\n"
 "background-color:#ffffff;\n"
-"}")
+"}\n"
+"")
         self.stackedWidget.setObjectName("stackedWidget")
         self.pgFacturacion = QtWidgets.QWidget()
         self.pgFacturacion.setObjectName("pgFacturacion")
@@ -957,6 +958,35 @@ class Ui_MainWindow(object):
         self.frame_articulo.setMinimumSize(QtCore.QSize(0, 65))
         self.frame_articulo.setStyleSheet("QFrame{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.frame_articulo.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_articulo.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -1206,6 +1236,22 @@ class Ui_MainWindow(object):
         self.comboBox_FiltrarArticuloCampo.setGeometry(QtCore.QRect(1120, 10, 151, 30))
         self.comboBox_FiltrarArticuloCampo.setMinimumSize(QtCore.QSize(0, 30))
         self.comboBox_FiltrarArticuloCampo.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.comboBox_FiltrarArticuloCampo.setStyleSheet("\n"
+"QComboBox{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QComboBox:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QComboBox:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"")
         self.comboBox_FiltrarArticuloCampo.setObjectName("comboBox_FiltrarArticuloCampo")
         self.comboBox_FiltrarArticuloCampo.addItem("")
         self.comboBox_FiltrarArticuloCampo.addItem("")
@@ -1235,6 +1281,22 @@ class Ui_MainWindow(object):
         self.comboBox_FiltrarArticuloCondicion.setGeometry(QtCore.QRect(1280, 10, 151, 30))
         self.comboBox_FiltrarArticuloCondicion.setMinimumSize(QtCore.QSize(0, 30))
         self.comboBox_FiltrarArticuloCondicion.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.comboBox_FiltrarArticuloCondicion.setStyleSheet("\n"
+"QComboBox{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QComboBox:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QComboBox:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"")
         self.comboBox_FiltrarArticuloCondicion.setObjectName("comboBox_FiltrarArticuloCondicion")
         self.comboBox_FiltrarArticuloCondicion.addItem("")
         self.comboBox_FiltrarArticuloCondicion.addItem("")
@@ -1489,6 +1551,9 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
         self.bt_LectorBarras = QtWidgets.QPushButton(self.frame_articulo)
         self.bt_LectorBarras.setGeometry(QtCore.QRect(480, 5, 81, 41))
+        self.bt_LectorBarras.setStyleSheet("QPushButton{\n"
+"background-color:#ffffff\n"
+"}")
         self.bt_LectorBarras.setText("")
         icon10 = QtGui.QIcon()
         icon10.addPixmap(QtGui.QPixmap("escaner-de-codigo-de-barras.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -1878,6 +1943,35 @@ class Ui_MainWindow(object):
         self.frame_cliente.setMinimumSize(QtCore.QSize(0, 65))
         self.frame_cliente.setStyleSheet("QFrame{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.frame_cliente.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_cliente.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -2082,6 +2176,35 @@ class Ui_MainWindow(object):
         self.frame_cliente_2.setMinimumSize(QtCore.QSize(0, 65))
         self.frame_cliente_2.setStyleSheet("QFrame{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.frame_cliente_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_cliente_2.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -2529,6 +2652,39 @@ class Ui_MainWindow(object):
         self.widget.setFont(font)
         self.widget.setStyleSheet("QWidget{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QFrame{\n"
+"background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.widget.setObjectName("widget")
         self.lineEdit_nombreNvoArticulo = QtWidgets.QLineEdit(self.widget)
@@ -2749,7 +2905,7 @@ class Ui_MainWindow(object):
         self.lineEdit_stockNvoArticulo.setClearButtonEnabled(True)
         self.lineEdit_stockNvoArticulo.setObjectName("lineEdit_stockNvoArticulo")
         self.label_11 = QtWidgets.QLabel(self.widget)
-        self.label_11.setGeometry(QtCore.QRect(480, 160, 31, 16))
+        self.label_11.setGeometry(QtCore.QRect(490, 160, 21, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -2759,7 +2915,7 @@ class Ui_MainWindow(object):
         self.label_11.setAlignment(QtCore.Qt.AlignCenter)
         self.label_11.setObjectName("label_11")
         self.label_20 = QtWidgets.QLabel(self.widget)
-        self.label_20.setGeometry(QtCore.QRect(480, 210, 31, 16))
+        self.label_20.setGeometry(QtCore.QRect(490, 210, 21, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -2769,7 +2925,7 @@ class Ui_MainWindow(object):
         self.label_20.setAlignment(QtCore.Qt.AlignCenter)
         self.label_20.setObjectName("label_20")
         self.label_22 = QtWidgets.QLabel(self.widget)
-        self.label_22.setGeometry(QtCore.QRect(480, 510, 31, 16))
+        self.label_22.setGeometry(QtCore.QRect(490, 510, 21, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -2779,7 +2935,7 @@ class Ui_MainWindow(object):
         self.label_22.setAlignment(QtCore.Qt.AlignCenter)
         self.label_22.setObjectName("label_22")
         self.label_23 = QtWidgets.QLabel(self.widget)
-        self.label_23.setGeometry(QtCore.QRect(480, 560, 31, 16))
+        self.label_23.setGeometry(QtCore.QRect(490, 560, 21, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -2789,7 +2945,7 @@ class Ui_MainWindow(object):
         self.label_23.setAlignment(QtCore.Qt.AlignCenter)
         self.label_23.setObjectName("label_23")
         self.label_24 = QtWidgets.QLabel(self.widget)
-        self.label_24.setGeometry(QtCore.QRect(1110, 150, 31, 16))
+        self.label_24.setGeometry(QtCore.QRect(1120, 110, 21, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
@@ -2938,6 +3094,35 @@ class Ui_MainWindow(object):
         self.widget_2.setFont(font)
         self.widget_2.setStyleSheet("QWidget{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.widget_2.setObjectName("widget_2")
         self.lineEdit_nombreNvoCliente = QtWidgets.QLineEdit(self.widget_2)
@@ -3198,6 +3383,22 @@ class Ui_MainWindow(object):
         self.comboBox_CondIVANvoCliente = QtWidgets.QComboBox(self.widget_2)
         self.comboBox_CondIVANvoCliente.setGeometry(QtCore.QRect(190, 500, 291, 30))
         self.comboBox_CondIVANvoCliente.setMinimumSize(QtCore.QSize(0, 30))
+        self.comboBox_CondIVANvoCliente.setStyleSheet("\n"
+"QComboBox{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QComboBox:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QComboBox:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"")
         self.comboBox_CondIVANvoCliente.setObjectName("comboBox_CondIVANvoCliente")
         self.comboBox_CondIVANvoCliente.addItem("")
         self.comboBox_CondIVANvoCliente.addItem("")
@@ -3213,6 +3414,35 @@ class Ui_MainWindow(object):
         self.widget_3.setFont(font)
         self.widget_3.setStyleSheet("QWidget{\n"
 "background-color:#ffffff;\n"
+"}\n"
+"\n"
+"QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
+"}\n"
+"\n"
+"QLineEdit:hover{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(44, 182, 125)\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(127, 90, 240)\n"
+"}\n"
+"\n"
+"QComboBox:{\n"
+"border-radius:10px;\n"
+"border:2px solid rgb(114, 117, 126)\n"
 "}")
         self.widget_3.setObjectName("widget_3")
         self.lineEdit_razonsocialNvoProveedor = QtWidgets.QLineEdit(self.widget_3)
@@ -3888,11 +4118,14 @@ class Ui_MainWindow(object):
         self.bt_AgregarArticuloNvaFactura.setFont(font)
         self.bt_AgregarArticuloNvaFactura.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_AgregarArticuloNvaFactura.setObjectName("bt_AgregarArticuloNvaFactura")
         self.tableWidgetDetalleNvaFactura = QtWidgets.QTableWidget(self.pgFactura)
         self.tableWidgetDetalleNvaFactura.setGeometry(QtCore.QRect(25, 570, 1051, 331))
@@ -4097,11 +4330,14 @@ class Ui_MainWindow(object):
         self.bt_Facturar.setFont(font)
         self.bt_Facturar.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_Facturar.setObjectName("bt_Facturar")
         self.bt_CancelarFactura = QtWidgets.QPushButton(self.pgFactura)
         self.bt_CancelarFactura.setGeometry(QtCore.QRect(1380, 779, 131, 41))
@@ -4114,11 +4350,14 @@ class Ui_MainWindow(object):
         self.bt_CancelarFactura.setFont(font)
         self.bt_CancelarFactura.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_CancelarFactura.setObjectName("bt_CancelarFactura")
         self.label_98 = QtWidgets.QLabel(self.pgFactura)
         self.label_98.setGeometry(QtCore.QRect(1280, 570, 31, 41))
@@ -4853,11 +5092,14 @@ class Ui_MainWindow(object):
         self.bt_CancelarCobro.setFont(font)
         self.bt_CancelarCobro.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_CancelarCobro.setObjectName("bt_CancelarCobro")
         self.bt_Cobrar = QtWidgets.QPushButton(self.pgCobrarFactPendiente)
         self.bt_Cobrar.setGeometry(QtCore.QRect(1370, 480, 131, 71))
@@ -4870,11 +5112,14 @@ class Ui_MainWindow(object):
         self.bt_Cobrar.setFont(font)
         self.bt_Cobrar.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_Cobrar.setObjectName("bt_Cobrar")
         self.stackedWidget.addWidget(self.pgCobrarFactPendiente)
         self.pgCaja = QtWidgets.QWidget()
@@ -5237,11 +5482,14 @@ class Ui_MainWindow(object):
         self.bt_CancelarNvoCobro.setFont(font)
         self.bt_CancelarNvoCobro.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.bt_CancelarNvoCobro.setObjectName("bt_CancelarNvoCobro")
         self.bt_NvoCobro = QtWidgets.QPushButton(self.groupBox_17)
         self.bt_NvoCobro.setGeometry(QtCore.QRect(1070, 90, 131, 41))
@@ -5254,11 +5502,13 @@ class Ui_MainWindow(object):
         self.bt_NvoCobro.setFont(font)
         self.bt_NvoCobro.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
 "background-color:#39ffa3;\n"
-"}")
+"}\n"
+"")
         self.bt_NvoCobro.setObjectName("bt_NvoCobro")
         self.groupBox_16 = QtWidgets.QGroupBox(self.pgCaja)
         self.groupBox_16.setGeometry(QtCore.QRect(860, 400, 831, 431))
@@ -5476,7 +5726,6 @@ class Ui_MainWindow(object):
         self.comboBox_TpoPagoNvoCobro_2.setFont(font)
         self.comboBox_TpoPagoNvoCobro_2.setObjectName("comboBox_TpoPagoNvoCobro_2")
         self.comboBox_TpoPagoNvoCobro_2.addItem("")
-        self.comboBox_TpoPagoNvoCobro_2.addItem("")
         self.label_280 = QtWidgets.QLabel(self.groupBox_18)
         self.label_280.setGeometry(QtCore.QRect(340, 40, 141, 30))
         self.label_280.setMinimumSize(QtCore.QSize(0, 30))
@@ -5621,6 +5870,7 @@ class Ui_MainWindow(object):
         self.bt_CancelarNvoCobro_2.setFont(font)
         self.bt_CancelarNvoCobro_2.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -5638,6 +5888,7 @@ class Ui_MainWindow(object):
         self.bt_NvoCobro_2.setFont(font)
         self.bt_NvoCobro_2.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -5898,9 +6149,9 @@ class Ui_MainWindow(object):
         self.tablaClientes_3.setHorizontalHeaderItem(13, item)
         item = QtWidgets.QTableWidgetItem()
         self.tablaClientes_3.setHorizontalHeaderItem(14, item)
-        self.lineEdit_BuscarArticulo_7 = QtWidgets.QLineEdit(self.pgCtaCte)
-        self.lineEdit_BuscarArticulo_7.setGeometry(QtCore.QRect(22, 50, 361, 30))
-        self.lineEdit_BuscarArticulo_7.setMinimumSize(QtCore.QSize(0, 30))
+        self.lineEdit_BuscarClienteCtaCte = QtWidgets.QLineEdit(self.pgCtaCte)
+        self.lineEdit_BuscarClienteCtaCte.setGeometry(QtCore.QRect(22, 50, 361, 30))
+        self.lineEdit_BuscarClienteCtaCte.setMinimumSize(QtCore.QSize(0, 30))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -5929,11 +6180,11 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.lineEdit_BuscarArticulo_7.setPalette(palette)
-        self.lineEdit_BuscarArticulo_7.setStyleSheet("QLineEdit{\n"
+        self.lineEdit_BuscarClienteCtaCte.setPalette(palette)
+        self.lineEdit_BuscarClienteCtaCte.setStyleSheet("QLineEdit{\n"
 "background-color:#ffffff;\n"
 "}")
-        self.lineEdit_BuscarArticulo_7.setObjectName("lineEdit_BuscarArticulo_7")
+        self.lineEdit_BuscarClienteCtaCte.setObjectName("lineEdit_BuscarClienteCtaCte")
         self.bt_BuscarCliente_3 = QtWidgets.QPushButton(self.pgCtaCte)
         self.bt_BuscarCliente_3.setGeometry(QtCore.QRect(390, 50, 93, 30))
         self.bt_BuscarCliente_3.setMinimumSize(QtCore.QSize(0, 30))
@@ -5945,6 +6196,7 @@ class Ui_MainWindow(object):
         self.bt_BuscarCliente_3.setFont(font)
         self.bt_BuscarCliente_3.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -5953,13 +6205,165 @@ class Ui_MainWindow(object):
         self.bt_BuscarCliente_3.setObjectName("bt_BuscarCliente_3")
         self.groupBox_20 = QtWidgets.QGroupBox(self.pgCtaCte)
         self.groupBox_20.setGeometry(QtCore.QRect(1329, 19, 351, 591))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.groupBox_20.setFont(font)
         self.groupBox_20.setStyleSheet("QGroupBox{\n"
 "background-color:#b3b3b3;\n"
 "margin: 3px;\n"
 "border-radius: 5px;\n"
 "}")
-        self.groupBox_20.setTitle("")
         self.groupBox_20.setObjectName("groupBox_20")
+        self.lineEdit_VolumenCompras = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_VolumenCompras.setEnabled(True)
+        self.lineEdit_VolumenCompras.setGeometry(QtCore.QRect(170, 60, 151, 30))
+        self.lineEdit_VolumenCompras.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_VolumenCompras.setFont(font)
+        self.lineEdit_VolumenCompras.setReadOnly(True)
+        self.lineEdit_VolumenCompras.setObjectName("lineEdit_VolumenCompras")
+        self.label_290 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_290.setGeometry(QtCore.QRect(20, 60, 151, 30))
+        self.label_290.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_290.setFont(font)
+        self.label_290.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_290.setObjectName("label_290")
+        self.lineEdit_SaldoPendienteCtaCte = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_SaldoPendienteCtaCte.setEnabled(True)
+        self.lineEdit_SaldoPendienteCtaCte.setGeometry(QtCore.QRect(170, 110, 151, 30))
+        self.lineEdit_SaldoPendienteCtaCte.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_SaldoPendienteCtaCte.setFont(font)
+        self.lineEdit_SaldoPendienteCtaCte.setReadOnly(True)
+        self.lineEdit_SaldoPendienteCtaCte.setObjectName("lineEdit_SaldoPendienteCtaCte")
+        self.label_291 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_291.setGeometry(QtCore.QRect(20, 110, 151, 30))
+        self.label_291.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_291.setFont(font)
+        self.label_291.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_291.setObjectName("label_291")
+        self.lineEdit_CobradoCtaCte = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_CobradoCtaCte.setEnabled(True)
+        self.lineEdit_CobradoCtaCte.setGeometry(QtCore.QRect(170, 160, 151, 30))
+        self.lineEdit_CobradoCtaCte.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_CobradoCtaCte.setFont(font)
+        self.lineEdit_CobradoCtaCte.setReadOnly(True)
+        self.lineEdit_CobradoCtaCte.setObjectName("lineEdit_CobradoCtaCte")
+        self.label_292 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_292.setGeometry(QtCore.QRect(20, 160, 151, 30))
+        self.label_292.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_292.setFont(font)
+        self.label_292.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_292.setObjectName("label_292")
+        self.lineEdit_CantidadComprasCtaCte = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_CantidadComprasCtaCte.setEnabled(True)
+        self.lineEdit_CantidadComprasCtaCte.setGeometry(QtCore.QRect(170, 210, 151, 30))
+        self.lineEdit_CantidadComprasCtaCte.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_CantidadComprasCtaCte.setFont(font)
+        self.lineEdit_CantidadComprasCtaCte.setReadOnly(True)
+        self.lineEdit_CantidadComprasCtaCte.setObjectName("lineEdit_CantidadComprasCtaCte")
+        self.label_293 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_293.setGeometry(QtCore.QRect(20, 210, 151, 30))
+        self.label_293.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_293.setFont(font)
+        self.label_293.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_293.setObjectName("label_293")
+        self.lineEdit_UltCompraCtaCte = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_UltCompraCtaCte.setEnabled(True)
+        self.lineEdit_UltCompraCtaCte.setGeometry(QtCore.QRect(170, 260, 151, 30))
+        self.lineEdit_UltCompraCtaCte.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_UltCompraCtaCte.setFont(font)
+        self.lineEdit_UltCompraCtaCte.setReadOnly(True)
+        self.lineEdit_UltCompraCtaCte.setObjectName("lineEdit_UltCompraCtaCte")
+        self.label_294 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_294.setGeometry(QtCore.QRect(20, 260, 151, 30))
+        self.label_294.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_294.setFont(font)
+        self.label_294.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_294.setObjectName("label_294")
+        self.lineEdit_UltPagoCtaCte = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_UltPagoCtaCte.setEnabled(True)
+        self.lineEdit_UltPagoCtaCte.setGeometry(QtCore.QRect(170, 310, 151, 30))
+        self.lineEdit_UltPagoCtaCte.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_UltPagoCtaCte.setFont(font)
+        self.lineEdit_UltPagoCtaCte.setReadOnly(True)
+        self.lineEdit_UltPagoCtaCte.setObjectName("lineEdit_UltPagoCtaCte")
+        self.label_295 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_295.setGeometry(QtCore.QRect(20, 310, 151, 30))
+        self.label_295.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_295.setFont(font)
+        self.label_295.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_295.setObjectName("label_295")
+        self.lineEdit_MontoAutorizado = QtWidgets.QLineEdit(self.groupBox_20)
+        self.lineEdit_MontoAutorizado.setEnabled(True)
+        self.lineEdit_MontoAutorizado.setGeometry(QtCore.QRect(170, 360, 151, 30))
+        self.lineEdit_MontoAutorizado.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.lineEdit_MontoAutorizado.setFont(font)
+        self.lineEdit_MontoAutorizado.setReadOnly(True)
+        self.lineEdit_MontoAutorizado.setObjectName("lineEdit_MontoAutorizado")
+        self.label_296 = QtWidgets.QLabel(self.groupBox_20)
+        self.label_296.setGeometry(QtCore.QRect(20, 360, 151, 30))
+        self.label_296.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(8)
+        self.label_296.setFont(font)
+        self.label_296.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_296.setObjectName("label_296")
         self.stackedWidget.addWidget(self.pgCtaCte)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -6137,7 +6541,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(10)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -6778,7 +7182,6 @@ class Ui_MainWindow(object):
         self.groupBox_18.setTitle(_translate("MainWindow", "NUEVO INGRESO"))
         self.label_278.setText(_translate("MainWindow", "FECHA"))
         self.comboBox_TpoPagoNvoCobro_2.setItemText(0, _translate("MainWindow", "COBRO"))
-        self.comboBox_TpoPagoNvoCobro_2.setItemText(1, _translate("MainWindow", "PAGO"))
         self.label_280.setText(_translate("MainWindow", "TIPO"))
         self.comboBox_FormaPagoNvoCobro_2.setItemText(0, _translate("MainWindow", "CONTADO"))
         self.comboBox_FormaPagoNvoCobro_2.setItemText(1, _translate("MainWindow", "TRANSFERENCIA"))
@@ -6864,6 +7267,14 @@ class Ui_MainWindow(object):
         item = self.tablaClientes_3.horizontalHeaderItem(14)
         item.setText(_translate("MainWindow", "COND/IVA"))
         self.bt_BuscarCliente_3.setText(_translate("MainWindow", "BUSCAR"))
+        self.groupBox_20.setTitle(_translate("MainWindow", "RESUMEN CUENTA CORRIENTE"))
+        self.label_290.setText(_translate("MainWindow", "VOLUMEN COMPRAS"))
+        self.label_291.setText(_translate("MainWindow", " SALDO PENDIENTE"))
+        self.label_292.setText(_translate("MainWindow", " COBRADO"))
+        self.label_293.setText(_translate("MainWindow", " CANT. COMPRAS"))
+        self.label_294.setText(_translate("MainWindow", " ULT. COMPRA"))
+        self.label_295.setText(_translate("MainWindow", "ULT. PAGO"))
+        self.label_296.setText(_translate("MainWindow", "MONTO AUTORIZADO"))
         self.label_111.setText(_translate("MainWindow", "FACTURACION"))
         self.label_112.setText(_translate("MainWindow", "ARTICULOS"))
         self.label_113.setText(_translate("MainWindow", "CLIENTES"))

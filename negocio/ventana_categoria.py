@@ -45,8 +45,14 @@ class Ui_ventana_Categorias(object):
         self.listView_categorias.setObjectName("listView_categorias")
         self.bt_SeleccionarCategoria = QtWidgets.QPushButton(ventana_Categorias)
         self.bt_SeleccionarCategoria.setGeometry(QtCore.QRect(330, 60, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_SeleccionarCategoria.setFont(font)
         self.bt_SeleccionarCategoria.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -55,8 +61,14 @@ class Ui_ventana_Categorias(object):
         self.bt_SeleccionarCategoria.setObjectName("bt_SeleccionarCategoria")
         self.bt_AgregarCategoria = QtWidgets.QPushButton(ventana_Categorias)
         self.bt_AgregarCategoria.setGeometry(QtCore.QRect(330, 110, 93, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_AgregarCategoria.setFont(font)
         self.bt_AgregarCategoria.setStyleSheet("QPushButton{\n"
 "background-color:#2caeff;\n"
+"border-radius:10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"

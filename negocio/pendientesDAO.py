@@ -43,7 +43,7 @@ class PendientesDAO:
     @classmethod
     def buscar_pendiente_cliente(cls, cliente):
         with CursorDelPool() as cursor:
-            cursor.execute(cls._BUSCA_PENDIENTE_CLIENTE, cliente)
+            cursor.execute(cls._BUSCA_PENDIENTE_CLIENTE, (cliente,))
             registros = cursor.fetchall()
             pendientes = []
             for registro in registros:
