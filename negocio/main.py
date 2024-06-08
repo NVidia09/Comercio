@@ -2133,6 +2133,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         log.debug(facturas)
 
     def seleccionar_detalle_factura_cliente(self):
+
         row = self.tablaFacturasCliente.currentRow()
         serie = int(self.tablaFacturasCliente.item(row, 0).text())
         codfactura = self.tablaFacturasCliente.item(row, 1).text()
@@ -2157,6 +2158,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         log.debug(detalles)
 
     def cobrar_factura_cliente(self):
+        #self.lineEdit_ImporteCobrarFactura.clear()
         if not self.tablaFacturasCliente.selectedItems():
             QMessageBox.information(self, "Seleccione una Factura",
                                     "Debe seleccionar una Factura para poder continuar", )
@@ -2172,6 +2174,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
 
+        query_pendientes = "SELECT * FROM pendientes WHERE codfactura = %s"
+        valor2 = (codfactura,)
+        with CursorDelPool() as cursor:
+            cursor.execute(query_pendientes, valor2)
+            registros = cursor.fetchall()
+            pendientes = []
+            for registro in registros:
+                pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10])
+                pendientes.append(pendiente)
+                # self.lineEdit_clienteCobrarFactura.setText(pendientes[0].nombre)
+                # self.lineEdit_codclienteCobrarFactura.setText(pendientes[0].codcliente)
+                # self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
+                # self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
+                # self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
+                ##########################################################################################################
+                self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
+                # self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+        ##########################################################################################################
+        # return pendientes
 
         self.stackedWidget.setCurrentIndex(8)
 
@@ -2275,6 +2299,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         log.debug(detalles)
 
     def cobrar_factura_cliente_facturacion(self):
+        self.lineEdit_ImporteCobrarFactura.clear()
         row = self.tableWidget_facturasImpagas.currentRow()
         serie = int(self.tableWidget_facturasImpagas.item(row, 0).text())
         codfactura = self.tableWidget_facturasImpagas.item(row, 1).text()
@@ -2301,13 +2326,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 #self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
                 #self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
                 #self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
+##########################################################################################################
                 self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
                 #self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+##########################################################################################################
             #return pendientes
 
         self.stackedWidget.setCurrentIndex(8)
+
 
         # Obtener la fecha y hora actual
         now = datetime.now()
@@ -2352,8 +2380,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_serieNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 0).text())
         self.lineEdit_numeroNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 1).text())
         self.lineEdit_fechaNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 3).text())
-        #self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+#####################################################################################################
 
+        self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+######################################################################################################
         cliente = self.tablaCobrarFacturasCliente.item(0, 4).text()
         with CursorDelPool() as cursor:
             # query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
@@ -2438,8 +2468,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def on_combobox_changed(self):
         row = self.tableWidget_facturasImpagas.currentRow()
         codfactura = self.tableWidget_facturasImpagas.item(row, 1).text()
+
         query_pendientes = "SELECT * FROM pendientes WHERE codfactura = %s"
         valor2 = (codfactura,)
+        saldo_pendiente = 0
+        importe_pagar = 0
         with CursorDelPool() as cursor:
             cursor.execute(query_pendientes, valor2)
             registros = cursor.fetchall()
@@ -2453,17 +2486,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
                 # self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
                 # self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
-                self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
-                self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+    ####################################################################################################
+                saldo_pendientes = self.tablaCobrarFacturasCliente.item(0, 9).text()
+                #self.lineEdit_SaldoCobrarFactura.setText(str(float(saldo_pendientes)
+                importe_pagar = float(saldo_pendientes) - float(pendientes[0].pagos)
+                self.lineEdit_ImporteCobrarFactura.setText(str(importe_pagar))
+                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
                 # self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+    ####################################################################################################
             # return pendientes
         if not self.lineEdit_PagosCobrarFactura.text() == 0.0 or self.lineEdit_PagosCobrarFactura.text() == '':
             if self.comboBox_TpoPagoCobrarFactura.currentText() == 'TOTAL':
-                #saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
+                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(self.lineEdit_PagosCobrarFactura.text())
+                saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
 
-                self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
-
+                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
                 #self.lineEdit_ImporteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
                 #self.lineEdit_ImporteCobrarFactura.setText("{:.2f}".format(saldo1))
                 self.lineEdit_ImporteCobrarFactura.setReadOnly(True)
@@ -2497,7 +2536,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 pagos_text = self.lineEdit_PagosCobrarFactura.text()
                 pagos = float(pagos_text) if pagos_text else 0.0
                 #resto = float("{:.2f}".format(float(self.lineEdit_SaldoCobrarFactura.text()) - pagos))
-                self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(
+                    self.lineEdit_PagosCobrarFactura.text())
+                self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
+                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_SaldoCobrarFactura.setReadOnly(True)
 
     ########################################################################
@@ -3088,6 +3130,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         nombre = self.tablaClientes_3.item(row, 2).text()
         volumen_compras = 0
         cant_compras = 0
+        total_fact = 0
         fecha_ultCompra = ""
         facturas = FacturaDAO.seleccionar_factura_cliente(codcliente, nombre)
         self.tablaFacturasCliente_3.setRowCount(len(facturas))
@@ -3138,7 +3181,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             suma_pagos = sum(pendiente.pagos for pendiente in pendientes)
             self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
         #resto_pagar= suma_saldos_pendientes - suma_pagos
+    ##############################################################################################
+    ##############################################################################################
+
         resto_pagar = volumen_compras - suma_pagos
+
         self.lineEdit_ImporteNvoCobro_2.setText(str(resto_pagar))
         self.lineEdit_SaldoPendienteCtaCte.setText(str(resto_pagar))
         # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
@@ -3156,13 +3203,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             QMessageBox.information(self, "La Factura no se puede cobrar ",
                                     "La factura ya ha sido cancelada previamente, no se encuentra pendiente de pago", )
             return
+        else:
+            facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
 
-        facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
-
-        #pendientes = FacturaDAO.seleccionar_detalle_factura(codfactura)
-
-        #self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
-        self.lineEdit_ConceptoNvoCobro_2.setText('Cobro de Factura Nro. ' + str(facturas[0].serie) + "-" + str(facturas[0].codfactura))
+            if facturas:  # Check if facturas is not empty
+                self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
+                self.lineEdit_ConceptoNvoCobro_2.setText(
+                    'Cobro de Factura Nro. ' + str(facturas[0].serie) + "-" + str(facturas[0].codfactura))
+            else:
+                # Handle the case where facturas is empty
+                # For example, you might want to clear the line edits or show an error message
+                self.lineEdit_ImporteNvoCobro_2.clear()
+                self.lineEdit_ConceptoNvoCobro_2.clear()
 
 
     def cobrar_factura_pendiente_ctacte(self):
