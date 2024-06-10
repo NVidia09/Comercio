@@ -118,6 +118,28 @@ class ProveedorDAO:
             log.error(f'Error al importar proveedores desde Excel: {e}')
             sys.exit(1)
 
+    @classmethod
+    def actualizar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+            # df = pd.read_excel('proveedores.xlsx')
+            df = pd.read_excel(ruta_archivo)
+            proveedores = []
+            for index, row in df.iterrows():
+                proveedor = Proveedor(row['codproveedor'], row['razonsocial'], row['cuit'], row['domicilio'],
+                                      row['ciudad'], row['provincia'], row['pais'], row['telefono'], row['web'],
+                                      row['email'], row['cuenta'], row['password'], row['observaciones'])
+                proveedores.append(proveedor)
+
+            # Insertar cada proveedor en la base de datos
+            for proveedor in proveedores:
+                cls.actualizar(proveedor)
+
+            return proveedores
+
+        except Exception as e:
+            log.error(f'Error al importar proveedores desde Excel: {e}')
+            sys.exit(1)
 
 
 

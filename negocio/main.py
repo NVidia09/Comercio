@@ -3425,10 +3425,38 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Importar los proveedores
-            ProveedorDAO.importar_desde_excel(ruta_archivo)
+            # ProveedorDAO.importar_desde_excel(ruta_archivo)
+            #
+            # # Mostrar un mensaje de éxito
+            # QMessageBox.information(self, "Proveedores Importados", "Los proveedores han sido importados correctamente", )
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Question)
+            msgBox.setText("¿Desea subir nuevos proveedores o actualizar los existentes desde Excel?")
+            msgBox.setWindowTitle("Importar proveedores desde Excel")
+            msgBox.setStandardButtons(QMessageBox.Cancel)
+            buttonUpload = msgBox.addButton('Subir nuevos', QMessageBox.ActionRole)
+            buttonUpdate = msgBox.addButton('Actualizar existentes', QMessageBox.ActionRole)
 
-            # Mostrar un mensaje de éxito
-            QMessageBox.information(self, "Proveedores Importados", "Los proveedores han sido importados correctamente", )
+            msgBox.exec_()
+
+            if msgBox.clickedButton() == buttonUpload:
+                # Obtener la ruta del archivo seleccionado
+                ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar proveedores", "",
+                                                                        "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                # Verificar si el usuario seleccionó un archivo
+                if ruta_archivo:
+                    # Importar los articulos
+                    ProveedorDAO.importar_desde_excel(ruta_archivo)
+                    # Mostrar un mensaje de éxito
+                    QMessageBox.information(self, "Proveedores Importados",
+                                            "Los proveedores han sido importados correctamente", )
+            elif msgBox.clickedButton() == buttonUpdate:
+                # Aquí debe llamar al método de actualización de ProveedorDAO
+                # Asegúrese de tener la ruta del archivo y los datos necesarios para la actualización
+                ProveedorDAO.actualizar_desde_excel(ruta_archivo)
+                # Mostrar un mensaje de éxito
+                QMessageBox.information(self, "Proveedores Actualizados",
+                                        "Los proveedores han sido actualizados correctamente", )
 
     def importar_clientes(self):
         # Obtener la ruta del archivo seleccionado
@@ -3438,10 +3466,38 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Importar los proveedores
-            ClienteDAO.importar_desde_excel(ruta_archivo)
+            # ClienteDAO.importar_desde_excel(ruta_archivo)
+            #
+            # # Mostrar un mensaje de éxito
+            # QMessageBox.information(self, "Clientes Importados", "Los clientes han sido importados correctamente", )
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Question)
+            msgBox.setText("¿Desea subir nuevos clientes o actualizar los existentes desde Excel?")
+            msgBox.setWindowTitle("Importar clientes desde Excel")
+            msgBox.setStandardButtons(QMessageBox.Cancel)
+            buttonUpload = msgBox.addButton('Subir nuevos', QMessageBox.ActionRole)
+            buttonUpdate = msgBox.addButton('Actualizar existentes', QMessageBox.ActionRole)
 
-            # Mostrar un mensaje de éxito
-            QMessageBox.information(self, "Clientes Importados", "Los clientes han sido importados correctamente", )
+            msgBox.exec_()
+
+            if msgBox.clickedButton() == buttonUpload:
+                # Obtener la ruta del archivo seleccionado
+                ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar Clientes", "",
+                                                                        "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                # Verificar si el usuario seleccionó un archivo
+                if ruta_archivo:
+                    # Importar los articulos
+                    ClienteDAO.importar_desde_excel(ruta_archivo)
+                    # Mostrar un mensaje de éxito
+                    QMessageBox.information(self, "Clientes Importados",
+                                            "Los clientes han sido importados correctamente", )
+            elif msgBox.clickedButton() == buttonUpdate:
+                # Aquí debe llamar al método de actualización de ClienteDAO
+                # Asegúrese de tener la ruta del archivo y los datos necesarios para la actualización
+                ClienteDAO.actualizar_desde_excel(ruta_archivo)
+                # Mostrar un mensaje de éxito
+                QMessageBox.information(self, "Clientes Actualizados",
+                                        "Los clientes han sido actualizados correctamente", )
 
     def importar_articulos(self):
         # Obtener la ruta del archivo seleccionado
@@ -3449,13 +3505,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
         # Verificar si el usuario seleccionó un archivo
-        if ruta_archivo:
-            # Importar los proveedores
-            ArticuloDAO.importar_desde_excel(ruta_archivo)
+        # if ruta_archivo:
+        #     # Importar los articulos
+        #     ArticuloDAO.importar_desde_excel(ruta_archivo)
+        #
+        #     # Mostrar un mensaje de éxito
+        #     QMessageBox.information(self, "Artículos Importados", "Los artículos han sido importados correctamente", )
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Question)
+        msgBox.setText("¿Desea subir nuevos productos o actualizar los existentes desde Excel?")
+        msgBox.setWindowTitle("Importar productos desde Excel")
+        msgBox.setStandardButtons(QMessageBox.Cancel)
+        buttonUpload = msgBox.addButton('Subir nuevos', QMessageBox.ActionRole)
+        buttonUpdate = msgBox.addButton('Actualizar existentes', QMessageBox.ActionRole)
 
+        msgBox.exec_()
+
+        if msgBox.clickedButton() == buttonUpload:
+            # Obtener la ruta del archivo seleccionado
+            ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar Articulos", "",
+                                                                    "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+            # Verificar si el usuario seleccionó un archivo
+            if ruta_archivo:
+                # Importar los articulos
+                ArticuloDAO.importar_desde_excel(ruta_archivo)
+                # Mostrar un mensaje de éxito
+                QMessageBox.information(self, "Artículos Importados",
+                                        "Los artículos han sido importados correctamente", )
+        elif msgBox.clickedButton() == buttonUpdate:
+            # Aquí debe llamar al método de actualización de ArticuloDAO
+            # Asegúrese de tener la ruta del archivo y los datos necesarios para la actualización
+            ArticuloDAO.actualizar_desde_excel(ruta_archivo)
             # Mostrar un mensaje de éxito
-            QMessageBox.information(self, "Artículos Importados", "Los artículos han sido importados correctamente", )
-
+            QMessageBox.information(self, "Artículos Actualizados",
+                                    "Los artículos han sido actualizados correctamente", )
 
 
 if __name__ == '__main__':

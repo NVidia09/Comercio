@@ -290,3 +290,28 @@ class ArticuloDAO:
         except Exception as e:
             log.error(f'Error al importar artículos desde Excel: {e}')
             sys.exit(1)
+
+    @classmethod
+    def actualizar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+
+            df = pd.read_excel(ruta_archivo)
+            articulos = []
+            for index, row in df.iterrows():
+                articulo = Articulo(row['codigo'], row['nombre'], row['modelo'], row['marca'],
+                                    row['categoria'], row['sku'], row['color'], row['caracteristica'],
+                                    row['precio_costo'],
+                                    row['precio_venta'], row['iva'], row['proveedor'], row['tamaño'], row['ancho'],
+                                    row['largo'], row['profundidad'], row['peso'], row['peso_envalado'], row['stock'],
+                                    row['margen_ganancia'], row['stock_minimo'], row['cod_barras'])
+                articulos.append(articulo)
+
+            # Insertar cada proveedor en la base de datos
+            for articulo in articulos:
+                cls.actualizar(articulo)
+
+            return articulos
+        except Exception as e:
+            log.error(f'Error al importar artículos desde Excel: {e}')
+            sys.exit(1)

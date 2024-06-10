@@ -120,3 +120,27 @@ class ClienteDAO:
             log.error(f'Error al importar clientes desde Excel: {e}')
             sys.exit(1)
 
+    @classmethod
+    def actualizar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+
+            df = pd.read_excel(ruta_archivo)
+            clientes = []
+            for index, row in df.iterrows():
+                cliente = Cliente(row['codigo'], row['nombre'], row['apellido'], row['dni'],
+                                  row['empresa'], row['cuit'], row['telefono'], row['email'], row['direccion'],
+                                  row['numero'], row['localidad'], row['provincia'], row['pais'], row['observaciones'],
+                                  row['condiva'])
+                clientes.append(cliente)
+
+            # Insertar cada proveedor en la base de datos
+            for cliente in clientes:
+                cls.actualizar(cliente)
+
+            return clientes
+
+        except Exception as e:
+            log.error(f'Error al importar clientes desde Excel: {e}')
+            sys.exit(1)
+
