@@ -1,3 +1,5 @@
+from PyQt5.uic.properties import QtWidgets
+
 from conexion_db import Conexion
 from cursor_del_pool import CursorDelPool
 from logger_base import log
@@ -8,7 +10,8 @@ from negocio.cliente import Cliente
 
 class ClienteDAO:
 
-    _SELECCIONAR = "SELECT * FROM clientes ORDER BY codigo DESC"
+    _SELECCIONAR = "SELECT * FROM clientes ORDER BY nombre, apellido ASC"
+    _ULTIMO_CODIGO_USADO = "SELECT * FROM clientes ORDER BY codigo DESC FETCH FIRST 1 ROWS ONLY"
     _INSERTAR = "INSERT INTO clientes(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     _ACTUALIZAR = 'UPDATE clientes SET nombre=%s, apellido=%s, dni=%s, empresa=%s, cuit=%s, telefono=%s, email=%s, direccion=%s, numero=%s, localidad=%s, provincia=%s, pais=%s, observaciones=%s, condiva=%s WHERE codigo = %s'
     _ELIMINAR = "DELETE FROM clientes WHERE codigo = %s"
@@ -24,6 +27,19 @@ class ClienteDAO:
             clientes = []
             for registro in registros:
                 cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10], registro[11], registro[12], registro[13], registro[14])
+                clientes.append(cliente)
+            return clientes
+
+    @classmethod
+    def ultimo_codigo_usado(cls):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._ULTIMO_CODIGO_USADO)
+            registros = cursor.fetchall()
+            clientes = []
+            for registro in registros:
+                cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14])
                 clientes.append(cliente)
             return clientes
 
@@ -80,4 +96,27 @@ class ClienteDAO:
             cursor.execute(cls._ELIMINAR, valores)
             log.debug(f'Cliente eliminado: {cliente}')
             return cursor.rowcount
+
+    @classmethod
+    def importar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+
+            df = pd.read_excel(ruta_archivo)
+            clientes = []
+            for index, row in df.iterrows():
+                cliente = Cliente(row['codigo'], row['nombre'], row['apellido'], row['dni'],
+                                      row['empresa'], row['cuit'], row['telefono'], row['email'], row['direccion'],
+                                      row['numero'], row['localidad'], row['provincia'], row['pais'], row['observaciones'], row['condiva'])
+                clientes.append(cliente)
+
+            # Insertar cada proveedor en la base de datos
+            for cliente in clientes:
+                cls.insertar(cliente)
+
+            return clientes
+
+        except Exception as e:
+            log.error(f'Error al importar clientes desde Excel: {e}')
+            sys.exit(1)
 

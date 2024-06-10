@@ -1,8 +1,16 @@
+import jpype
+import json2html
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QDateEdit
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
+from reportlab.pdfgen import canvas
+
+import json
+import openpyxl
+
+
 
 
 from conexion_db import Conexion
@@ -89,6 +97,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_BuscarArticulo.textChanged.connect(self.buscar_articulo)
         self.bt_ModificarArticulo.clicked.connect(self.modificar_articulo)
         self.bt_EliminarArticulo.clicked.connect(self.eliminar_articulo)
+        self.bt_importar_articulos.clicked.connect(self.importar_articulos)
         # self.Bt_Actualizar.clicked.connect(self.mostrar_actualizar_persona)
         # self.Bt_Eliminar.clicked.connect(self.mostrar_eliminar_persona)
         self.bt_Minimizar.clicked.connect(self.showMinimized)
@@ -110,12 +119,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_EliminarCliente.clicked.connect(self.eliminar_cliente)
         self.bt_NuevoCliente.clicked.connect(self.mostrar_insertar_cliente)
         self.bt_BuscarCliente.clicked.connect(self.buscar_cliente)
+        self.bt_importar_clientes.clicked.connect(self.importar_clientes)
         #empiezan los botones de los proveedores
         self.lineEdit_BuscarArticulo_3.textChanged.connect(self.buscar_proveedor)
         self.bt_ModificarProveedor.clicked.connect(self.modificar_proveedor)
         self.bt_NuevoProveedor.clicked.connect(self.mostrar_insertar_proveedor)
         self.bt_EliminarProveedor.clicked.connect(self.eliminar_proveedor)
         self.bt_BuscarProveedor.clicked.connect(self.buscar_proveedor)
+        self.bt_importar_proveedores.clicked.connect(self.importar_proveedores)
 
         #acciones botones selecciona/agregar nueva categoría
         self.bt_CategoriaNvoArticulo.clicked.connect(self.seleccionar_categoria)
@@ -253,12 +264,49 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.setItem(i, 20, QtWidgets.QTableWidgetItem(str(articulo._stock_minimo)))
             self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
             log.debug(articulo)
+
+    #######################################################################################################
+            # Convertir los artículos a un formato que se pueda serializar a JSON
+            articulos_json = [articulo.__dict__ for articulo in articulos]
+
+            # Guardar los artículos en un archivo JSON
+            with open('articulos.json', 'w') as f:
+                json.dump(articulos_json, f)
+
+            # Crear un nuevo documento PDF
+
+            # options = {
+            #     'page-size': 'A4',
+            #     'margin-top': '0.75in',
+            #     'margin-right': '0.75in',
+            #     'margin-bottom': '0.75in',
+            #     'margin-left': '0.75in',
+            #     'encoding': "UTF-8",
+            #     'custom-header': [
+            #         ('Accept-Encoding', 'gzip')
+            #     ],
+            #     'cookie': [
+            #         ('cookie-empty-value', '""'),
+            #         ('cookie-name1', 'cookie-value1'),
+            #         ('cookie-name2', 'cookie-value2'),
+            #     ],
+            #     'no-outline': None
+            # }
+            # config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+            #
+            # pdfkit.from_file('articulos.html', 'articulos.pdf', options=options, configuration=config)
+
+    ###########################################################################################
+
+        ultimo_articulo = ArticuloDAO.ultimo_codigo_usado()
+        cod = ultimo_articulo[0].codigo
+        self.lineEdit_codigoNvoArticulo_2.setText(str(int(cod) + 10))
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
-        last_row = self.tabla_Articulos.rowCount() - 1
-        last_codigo = self.tabla_Articulos.item(last_row, 0)
+        #last_row = self.tabla_Articulos.rowCount() - 1
+        #last_codigo = self.tabla_Articulos.item(last_row, 0)
         self.tabla_Articulos.resizeColumnsToContents()
         self.tabla_Articulos.resizeRowsToContents()
-        self.lineEdit_codigoNvoArticulo_2.setText(str(int(last_codigo.text()) + 10))
+        #self.lineEdit_codigoNvoArticulo_2.setText(str(int(last_codigo.text()) + 10))
         self.lineEdit_codigoNvoArticulo_2.setDisabled(True)
 
         query_art_minimos = "SELECT * FROM articulos WHERE stock <= stock_minimo"
@@ -299,12 +347,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaClientes.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente.observaciones))
             self.tablaClientes.setItem(i, 14, QtWidgets.QTableWidgetItem(cliente.condiva))
             log.debug(cliente)
+
+        clientes_json = [cliente.__dict__ for cliente in clientes]
+
+        # Guardar los artículos en un archivo JSON
+        with open('clientes.json', 'w') as f:
+            json.dump(clientes_json, f)
+
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
-        last_row_cliente = self.tablaClientes.rowCount() - 1
-        last_codigo_cliente = self.tablaClientes.item(last_row_cliente, 0)
+        ultimo_cliente = ClienteDAO.ultimo_codigo_usado()
+        cod = ultimo_cliente[0].codigo
+        self.lineEdit_codigoNvoCliente.setText(str(int(cod) + 10))
+        #last_row_cliente = self.tablaClientes.rowCount() - 1
+        #last_codigo_cliente = self.tablaClientes.item(last_row_cliente, 0)
         self.tablaClientes.resizeColumnsToContents()
         self.tablaClientes.resizeRowsToContents()
-        self.lineEdit_codigoNvoCliente.setText(str(int(last_codigo_cliente.text()) + 10))
+        #self.lineEdit_codigoNvoCliente.setText(str(int(last_codigo_cliente.text()) + 10))
         self.lineEdit_codigoNvoCliente.setDisabled(True)
 
     def listar_proveedores(self):
@@ -326,13 +384,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaProveedores.setItem(i, 11, QtWidgets.QTableWidgetItem(proveedor.password))
             self.tablaProveedores.setItem(i, 12, QtWidgets.QTableWidgetItem(proveedor.observaciones))
             log.debug(proveedor)
+
+        proveedores_json = [proveedor.__dict__ for proveedor in proveedores]
+
+        # Guardar los artículos en un archivo JSON
+        with open('proveedor.json', 'w') as f:
+            json.dump(proveedores_json, f)
+
+
         # Setea el código del nuevo proveedor en 10 unidades más que el último proveedor ingresado
-        last_row_proveedor = self.tablaProveedores.rowCount() - 1
-        last_codigo_proveedor = self.tablaProveedores.item(last_row_proveedor, 0)
+        ultimo_proveedor = ProveedorDAO.ultimo_codigo_usado()
+        cod = ultimo_proveedor[0].codproveedor
+        self.lineEdit_codigoNvoProveedor.setText(str(int(cod) + 10))
+        # last_row_proveedor = self.tablaProveedores.rowCount() - 1
+        # last_codigo_proveedor = self.tablaProveedores.item(last_row_proveedor, 0)
         self.tablaProveedores.resizeColumnsToContents()
         self.tablaProveedores.resizeRowsToContents()
         ########CAMBIAR EL LINEEDIT DE CODIGO DE PROVEEDOR
-        self.lineEdit_codigoNvoProveedor.setText(str(int(last_codigo_proveedor.text()) + 10))
+        # self.lineEdit_codigoNvoProveedor.setText(str(int(last_codigo_proveedor.text()) + 10))
         self.lineEdit_codigoNvoProveedor.setDisabled(True)
 
 
@@ -1539,8 +1608,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget_ultimasFacturas.setItem(i, 9, QtWidgets.QTableWidgetItem(str(factura.total)))
             self.tableWidget_ultimasFacturas.setItem(i, 10, QtWidgets.QTableWidgetItem(str(factura.formapago)))
 
-
-
         self.tableWidget_ultimasFacturas.resizeColumnsToContents()
         self.tableWidget_ultimasFacturas.resizeRowsToContents()
         self.buscar_fact_pendiente()
@@ -1988,6 +2055,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Insertar la factura en la base de datos
         facturas_insertadas = FacturaDAO.insertar(factura)
         log.debug(f'Facturas insertadas: {facturas_insertadas}')
+    ###########################################################################################
+        facturas_json = factura.__dict__
+
+        # Guardar las facturas en un archivo JSON
+        with open('facturas.json', 'w') as f:
+            json.dump(facturas_json, f)
+    ###########################################################################################
 
 # Obtener los detalles de la factura
 
@@ -2103,8 +2177,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget_facturasImpagas.setItem(i, 8, QtWidgets.QTableWidgetItem(str(pendiente.formapago)))
             self.tableWidget_facturasImpagas.resizeColumnsToContents()
             self.tableWidget_facturaspendientesentrega.resizeRowsToContents()
-        return
 
+        # ######################################################################
+        # pendientes_json = [registro.__dict__ for registro in pendientes]
+        #
+        # # Guardar los artículos en un archivo JSON
+        # with open('pendientes.json', 'w') as f:
+        #     json.dump(pendientes_json, f)
+        # #####################################################################
+        return
+    ######################################################################
+
+    #####################################################################
     def seleccionar_factura_cliente(self):
         self.tablaArticulosFacturaCliente.clearContents()
         row = self.tablaClientes.currentRow()
@@ -2330,12 +2414,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
+                total = float(pendientes[0].saldo)
+                pagos = float(pendientes[0].pagos)
+                saldo = total - pagos
                 #self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+                self.self.lineEdit_ImporteCobrarFactura.setText(str(saldo))
 ##########################################################################################################
             #return pendientes
 
         self.stackedWidget.setCurrentIndex(8)
-
 
         # Obtener la fecha y hora actual
         now = datetime.now()
@@ -2436,7 +2523,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             cursor.execute(query_cobro, valores)
             self.stackedWidget.setCurrentIndex(1)
             #return
-        ###################################################################
+    ###################################################################
+        pendientes_json = query_cobro.__dict__
+
+        # Guardar los artículos en un archivo JSON
+        with open('pendientes.json', 'w') as f:
+            json.dump(pendientes_json, f)
+    #######################################################################
         #
         #   CARGAMOS EL REGISTRO DEL PAGO EN LA TABLA CAJA
         ###################################################################
@@ -2455,7 +2548,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with CursorDelPool() as cursor:
             cursor.execute(query_caja, valores)
         QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
+    #####################################################################
 
+
+################################################################################
+        self.generar_recibo()
+################################################################################
 
 
 
@@ -2498,8 +2596,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # return pendientes
         if not self.lineEdit_PagosCobrarFactura.text() == 0.0 or self.lineEdit_PagosCobrarFactura.text() == '':
             if self.comboBox_TpoPagoCobrarFactura.currentText() == 'TOTAL':
-                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(self.lineEdit_PagosCobrarFactura.text())
-                saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
+                #saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(self.lineEdit_PagosCobrarFactura.text())
+                pagos_cobrar_factura_text = self.lineEdit_PagosCobrarFactura.text()
+                pagos_cobrar_factura = float(pagos_cobrar_factura_text) if pagos_cobrar_factura_text else 0.0
+                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - pagos_cobrar_factura
+                #saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
 
                 #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
@@ -2536,8 +2637,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 pagos_text = self.lineEdit_PagosCobrarFactura.text()
                 pagos = float(pagos_text) if pagos_text else 0.0
                 #resto = float("{:.2f}".format(float(self.lineEdit_SaldoCobrarFactura.text()) - pagos))
-                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(
-                    self.lineEdit_PagosCobrarFactura.text())
+                #saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(
+                pagos_cobrar_factura_text = self.lineEdit_PagosCobrarFactura.text()
+                pagos_cobrar_factura = float(pagos_cobrar_factura_text) if pagos_cobrar_factura_text else 0.0
+                saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - pagos_cobrar_factura
+                self.lineEdit_PagosCobrarFactura.text()
                 self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
                 #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_SaldoCobrarFactura.setReadOnly(True)
@@ -2570,6 +2674,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget_ultimosCobros.resizeRowsToContents()
             log.debug(registros)
 
+        cobros_json = [registro.__dict__ for registro in registros]
+
+        # Guardar los artículos en un archivo JSON
+        with open('caja.json', 'w') as f:
+            json.dump(cobros_json, f)
+
         registros = CajaDAO.seleccionar_pago()
         self.tableWidget_ultimosCobros_2.setRowCount(len(registros))
         for i, detalle in enumerate(registros):
@@ -2584,6 +2694,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget_ultimosCobros_2.resizeColumnsToContents()
             self.tableWidget_ultimosCobros_2.resizeRowsToContents()
             log.debug(registros)
+
+        pagos_json = [registro.__dict__ for registro in registros]
+
+        # Guardar los artículos en un archivo JSON
+        with open('caja.json', 'w') as f:
+            json.dump(pagos_json, f)
 
 
         # Establecer el texto del QLineEdit
@@ -3262,6 +3378,84 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_ConceptoNvoCobro_2.setText('')
         self.lineEdit_ImporteNvoCobro_2.setText('')
         self.lineEdit_ConceptoNvoCobro.setText('')
+
+    def generar_recibo(self):
+        # Obtener los datos necesarios
+        nombre_cliente = self.lineEdit_clienteCobrarFactura.text()
+        cantidad_pagada = self.lineEdit_ImporteCobrarFactura.text()
+        fecha_pago = datetime.now().strftime('%d/%m/%Y, %H:%M:%S')
+        numero_factura = self.lineEdit_serieNvaFactura_2.text() + "-" + self.lineEdit_numeroNvaFactura_2.text()
+
+        # Formatear los datos en un formato de recibo
+        recibo = f"""
+        -------------------------------------------------------------
+        Recibo de Pago
+        -------------------------------------------------------------
+        Fecha: {fecha_pago}
+        Nombre del Cliente: {nombre_cliente}
+        Número de Factura: {numero_factura}
+        Cantidad Pagada: $ {cantidad_pagada}
+        -----------------------------------------------------------
+        Gracias por su pago!
+        """
+
+        # Crear un objeto de canvas y especificar el nombre del archivo PDF
+        # Format the date and time to be used in a filename
+        fecha_pago_filename = datetime.now().strftime('%d_%m_%Y_%H-%M-%S')
+
+        # Use the formatted date and time in the filename
+        c = canvas.Canvas(f"recibo{numero_factura}_{fecha_pago_filename}.pdf")
+
+        # Dibujar el texto en el PDF
+        c.drawString(100, 750, recibo)
+
+        # Guardar el PDF
+        c.save()
+
+        # Mostrar, imprimir o guardar el recibo
+        print(recibo)  # Esto es solo un ejemplo, puedes optar por mostrarlo en la interfaz de usuario o guardarlo en un archivo
+
+
+
+    def importar_proveedores(self):
+        # Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar Proveedores", "",
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        # Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Importar los proveedores
+            ProveedorDAO.importar_desde_excel(ruta_archivo)
+
+            # Mostrar un mensaje de éxito
+            QMessageBox.information(self, "Proveedores Importados", "Los proveedores han sido importados correctamente", )
+
+    def importar_clientes(self):
+        # Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar Clientes", "",
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        # Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Importar los proveedores
+            ClienteDAO.importar_desde_excel(ruta_archivo)
+
+            # Mostrar un mensaje de éxito
+            QMessageBox.information(self, "Clientes Importados", "Los clientes han sido importados correctamente", )
+
+    def importar_articulos(self):
+        # Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Importar Articulos", "",
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        # Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Importar los proveedores
+            ArticuloDAO.importar_desde_excel(ruta_archivo)
+
+            # Mostrar un mensaje de éxito
+            QMessageBox.information(self, "Artículos Importados", "Los artículos han sido importados correctamente", )
+
 
 
 if __name__ == '__main__':

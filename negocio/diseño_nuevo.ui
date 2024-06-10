@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>10</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -2883,6 +2883,34 @@ background-color:#ffffff
              </size>
             </property>
            </widget>
+           <widget class="QPushButton" name="bt_importar_articulos">
+            <property name="geometry">
+             <rect>
+              <x>910</x>
+              <y>0</y>
+              <width>41</width>
+              <height>51</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+background-color:#ffffff
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>45</width>
+              <height>45</height>
+             </size>
+            </property>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -3759,6 +3787,34 @@ background-color:#39ffa3;
            <string>ELIMINAR</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="bt_importar_clientes">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>0</y>
+            <width>41</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+background-color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>45</width>
+            <height>45</height>
+           </size>
+          </property>
+         </widget>
         </widget>
         <widget class="QGroupBox" name="groupBox_6">
          <property name="geometry">
@@ -4298,6 +4354,34 @@ background-color:#39ffa3;
            <string>ELIMINAR</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="bt_importar_proveedores">
+          <property name="geometry">
+           <rect>
+            <x>920</x>
+            <y>0</y>
+            <width>41</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+background-color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>45</width>
+            <height>45</height>
+           </size>
+          </property>
+         </widget>
         </widget>
         <widget class="QLabel" name="label_articulosProveedor">
          <property name="geometry">
@@ -4799,7 +4883,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_nombreNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>150</y>
             <width>291</width>
             <height>30</height>
@@ -4821,7 +4905,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>150</y>
             <width>71</width>
             <height>30</height>
@@ -4835,6 +4919,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -4845,7 +4930,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_2">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>200</y>
             <width>71</width>
             <height>30</height>
@@ -4859,6 +4944,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -4869,7 +4955,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_modeloNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>200</y>
             <width>291</width>
             <height>30</height>
@@ -4891,7 +4977,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_3">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>250</y>
             <width>71</width>
             <height>30</height>
@@ -4905,6 +4991,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -4915,7 +5002,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_marcaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>250</y>
             <width>291</width>
             <height>30</height>
@@ -4934,7 +5021,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_skuNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>350</y>
             <width>291</width>
             <height>30</height>
@@ -4956,7 +5043,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_4">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>400</y>
             <width>71</width>
             <height>30</height>
@@ -4970,6 +5057,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -4980,7 +5068,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_5">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>300</y>
             <width>91</width>
             <height>30</height>
@@ -4994,6 +5082,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5004,7 +5093,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_6">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>350</y>
             <width>71</width>
             <height>30</height>
@@ -5018,6 +5107,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5028,7 +5118,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_colorNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>400</y>
             <width>291</width>
             <height>30</height>
@@ -5050,7 +5140,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_categoriaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>300</y>
             <width>291</width>
             <height>30</height>
@@ -5069,7 +5159,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_7">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>350</y>
             <width>71</width>
             <height>30</height>
@@ -5083,6 +5173,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5093,7 +5184,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_8">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>250</y>
             <width>101</width>
             <height>30</height>
@@ -5107,6 +5198,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5117,7 +5209,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_anchoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>350</y>
             <width>291</width>
             <height>30</height>
@@ -5139,7 +5231,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_9">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>200</y>
             <width>71</width>
             <height>30</height>
@@ -5153,6 +5245,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5163,7 +5256,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_10">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>400</y>
             <width>71</width>
             <height>30</height>
@@ -5177,6 +5270,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5187,7 +5281,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_largoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>400</y>
             <width>291</width>
             <height>30</height>
@@ -5209,7 +5303,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_tamanoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>300</y>
             <width>291</width>
             <height>30</height>
@@ -5231,7 +5325,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_proveedorNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>250</y>
             <width>291</width>
             <height>30</height>
@@ -5250,7 +5344,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_12">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>300</y>
             <width>71</width>
             <height>30</height>
@@ -5264,6 +5358,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5274,7 +5369,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_ivaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>200</y>
             <width>291</width>
             <height>30</height>
@@ -5296,7 +5391,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_profundidadNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>450</y>
             <width>291</width>
             <height>30</height>
@@ -5318,9 +5413,9 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_13">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>500</y>
-            <width>111</width>
+            <width>131</width>
             <height>30</height>
            </rect>
           </property>
@@ -5332,6 +5427,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5342,7 +5438,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_preciocostoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>500</y>
             <width>291</width>
             <height>30</height>
@@ -5364,9 +5460,9 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_14">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>450</y>
-            <width>101</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>
@@ -5378,6 +5474,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5388,9 +5485,9 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_15">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>550</y>
-            <width>101</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>
@@ -5402,6 +5499,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5412,7 +5510,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_16">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>500</y>
             <width>71</width>
             <height>30</height>
@@ -5426,6 +5524,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5436,7 +5535,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_precioventaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>550</y>
             <width>291</width>
             <height>30</height>
@@ -5458,7 +5557,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_pesoenvaladoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>550</y>
             <width>291</width>
             <height>30</height>
@@ -5480,7 +5579,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_caracteristicaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>450</y>
             <width>291</width>
             <height>30</height>
@@ -5499,7 +5598,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_pesoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>500</y>
             <width>291</width>
             <height>30</height>
@@ -5521,9 +5620,9 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_17">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>550</y>
-            <width>121</width>
+            <width>141</width>
             <height>30</height>
            </rect>
           </property>
@@ -5535,6 +5634,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5545,9 +5645,9 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_18">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>450</y>
-            <width>111</width>
+            <width>141</width>
             <height>30</height>
            </rect>
           </property>
@@ -5559,6 +5659,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5569,10 +5670,10 @@ border:2px solid rgb(114, 117, 126)
          <widget class="Line" name="line">
           <property name="geometry">
            <rect>
-            <x>580</x>
+            <x>600</x>
             <y>100</y>
             <width>20</width>
-            <height>471</height>
+            <height>521</height>
            </rect>
           </property>
           <property name="orientation">
@@ -5582,7 +5683,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_19">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>100</y>
             <width>101</width>
             <height>30</height>
@@ -5596,6 +5697,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -5606,7 +5708,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_stockNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>100</y>
             <width>291</width>
             <height>30</height>
@@ -5628,7 +5730,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_11">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>160</y>
             <width>21</width>
             <height>20</height>
@@ -5654,7 +5756,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_20">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>210</y>
             <width>21</width>
             <height>20</height>
@@ -5680,7 +5782,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_22">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>510</y>
             <width>21</width>
             <height>20</height>
@@ -5706,7 +5808,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_23">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>560</y>
             <width>21</width>
             <height>20</height>
@@ -5732,7 +5834,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLabel" name="label_24">
           <property name="geometry">
            <rect>
-            <x>1120</x>
+            <x>1160</x>
             <y>110</y>
             <width>21</width>
             <height>20</height>
@@ -5758,7 +5860,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_CategoriaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>300</y>
             <width>30</width>
             <height>30</height>
@@ -5793,7 +5895,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_ProveedorNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>1120</x>
+            <x>1160</x>
             <y>240</y>
             <width>30</width>
             <height>30</height>
@@ -5828,7 +5930,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_MarcaNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>510</x>
             <y>250</y>
             <width>30</width>
             <height>30</height>
@@ -5863,7 +5965,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_guardarNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>1048</x>
+            <x>1088</x>
             <y>670</y>
             <width>60</width>
             <height>61</height>
@@ -5904,7 +6006,7 @@ border:5px;
          <widget class="QPushButton" name="bt_CancelarNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>930</x>
+            <x>970</x>
             <y>670</y>
             <width>60</width>
             <height>61</height>
@@ -5958,7 +6060,7 @@ border:5px;
          <widget class="QLabel" name="label_21">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>100</y>
             <width>71</width>
             <height>30</height>
@@ -5972,11 +6074,12 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Codigo:</string>
+           <string>Código:</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_codigoNvoArticulo_2">
@@ -5985,7 +6088,7 @@ border:5px;
           </property>
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>100</y>
             <width>291</width>
             <height>30</height>
@@ -6022,9 +6125,9 @@ border:5px;
          <widget class="QLabel" name="label_36">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>30</x>
             <y>600</y>
-            <width>131</width>
+            <width>161</width>
             <height>30</height>
            </rect>
           </property>
@@ -6036,6 +6139,7 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6046,7 +6150,7 @@ border:5px;
          <widget class="QLineEdit" name="lineEdit_margenNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>190</x>
+            <x>210</x>
             <y>600</y>
             <width>291</width>
             <height>30</height>
@@ -6068,7 +6172,7 @@ border:5px;
          <widget class="QLineEdit" name="lineEdit_stockMinimoNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>150</y>
             <width>291</width>
             <height>30</height>
@@ -6090,9 +6194,9 @@ border:5px;
          <widget class="QLabel" name="label_288">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>150</y>
-            <width>101</width>
+            <width>131</width>
             <height>30</height>
            </rect>
           </property>
@@ -6104,6 +6208,7 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6114,7 +6219,7 @@ border:5px;
          <widget class="QLineEdit" name="lineEdit_codBarrasNvoArticulo">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>860</x>
             <y>600</y>
             <width>291</width>
             <height>30</height>
@@ -6127,7 +6232,7 @@ border:5px;
            </size>
           </property>
           <property name="text">
-           <string/>
+           <string>0</string>
           </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>
@@ -6136,9 +6241,9 @@ border:5px;
          <widget class="QLabel" name="label_289">
           <property name="geometry">
            <rect>
-            <x>680</x>
+            <x>700</x>
             <y>600</y>
-            <width>121</width>
+            <width>131</width>
             <height>30</height>
            </rect>
           </property>
@@ -6150,6 +6255,7 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6265,6 +6371,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -6277,7 +6389,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>50</x>
             <y>150</y>
-            <width>71</width>
+            <width>91</width>
             <height>30</height>
            </rect>
           </property>
@@ -6289,6 +6401,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6301,7 +6414,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>50</x>
             <y>200</y>
-            <width>71</width>
+            <width>91</width>
             <height>30</height>
            </rect>
           </property>
@@ -6313,6 +6426,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6334,6 +6448,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6359,6 +6479,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6380,6 +6501,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6403,6 +6530,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -6415,7 +6548,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>50</x>
             <y>400</y>
-            <width>71</width>
+            <width>91</width>
             <height>30</height>
            </rect>
           </property>
@@ -6427,6 +6560,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6451,6 +6585,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6463,7 +6598,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>50</x>
             <y>350</y>
-            <width>91</width>
+            <width>111</width>
             <height>30</height>
            </rect>
           </property>
@@ -6475,6 +6610,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6497,6 +6633,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -6518,6 +6660,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6543,6 +6691,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6567,6 +6716,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6577,7 +6727,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_paisNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>300</y>
             <width>291</width>
             <height>30</height>
@@ -6588,6 +6738,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6601,7 +6757,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>680</x>
             <y>150</y>
-            <width>91</width>
+            <width>131</width>
             <height>30</height>
            </rect>
           </property>
@@ -6613,6 +6769,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6625,7 +6782,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>680</x>
             <y>350</y>
-            <width>121</width>
+            <width>141</width>
             <height>30</height>
            </rect>
           </property>
@@ -6637,6 +6794,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6647,7 +6805,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_obsercacionesNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>350</y>
             <width>291</width>
             <height>131</height>
@@ -6659,8 +6817,17 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>
@@ -6669,7 +6836,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_provinciaNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>250</y>
             <width>291</width>
             <height>30</height>
@@ -6681,6 +6848,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -6691,7 +6864,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_localidadNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>200</y>
             <width>291</width>
             <height>30</height>
@@ -6702,6 +6875,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6715,7 +6894,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>680</x>
             <y>250</y>
-            <width>71</width>
+            <width>101</width>
             <height>30</height>
            </rect>
           </property>
@@ -6727,6 +6906,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6737,7 +6917,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_numerolNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>150</y>
             <width>291</width>
             <height>30</height>
@@ -6748,6 +6928,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6770,6 +6956,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6795,6 +6987,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6832,6 +7025,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -6842,7 +7036,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_direccionNvoCliente">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>100</y>
             <width>291</width>
             <height>30</height>
@@ -6853,6 +7047,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -6968,7 +7168,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_guardarNvoCliente">
           <property name="geometry">
            <rect>
-            <x>1048</x>
+            <x>1080</x>
             <y>570</y>
             <width>60</width>
             <height>61</height>
@@ -7009,7 +7209,7 @@ border:5px;
          <widget class="QPushButton" name="bt_CancelarNvoCliente">
           <property name="geometry">
            <rect>
-            <x>930</x>
+            <x>962</x>
             <y>570</y>
             <width>60</width>
             <height>61</height>
@@ -7077,6 +7277,7 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7101,6 +7302,12 @@ border:5px;
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7141,6 +7348,7 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7162,6 +7370,12 @@ border:5px;
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="styleSheet">
            <string notr="true">
@@ -7268,6 +7482,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -7292,6 +7512,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7316,6 +7537,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7338,6 +7560,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -7350,7 +7578,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>50</x>
             <y>250</y>
-            <width>71</width>
+            <width>91</width>
             <height>30</height>
            </rect>
           </property>
@@ -7362,6 +7590,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7384,6 +7613,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -7405,6 +7640,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7430,6 +7671,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7454,6 +7696,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7478,6 +7721,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7499,6 +7743,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7522,6 +7772,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -7534,7 +7790,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>680</x>
             <y>300</y>
-            <width>81</width>
+            <width>111</width>
             <height>30</height>
            </rect>
           </property>
@@ -7546,6 +7802,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7570,6 +7827,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7580,7 +7838,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_passwordNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>300</y>
             <width>291</width>
             <height>30</height>
@@ -7591,6 +7849,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7616,6 +7880,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7628,7 +7893,7 @@ border:2px solid rgb(114, 117, 126)
            <rect>
             <x>680</x>
             <y>350</y>
-            <width>121</width>
+            <width>141</width>
             <height>30</height>
            </rect>
           </property>
@@ -7640,6 +7905,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7650,7 +7916,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_obsercacionesNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>350</y>
             <width>291</width>
             <height>131</height>
@@ -7662,8 +7928,17 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>
@@ -7672,7 +7947,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_cuentaNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>250</y>
             <width>291</width>
             <height>30</height>
@@ -7684,6 +7959,12 @@ border:2px solid rgb(114, 117, 126)
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>-</string>
           </property>
@@ -7694,7 +7975,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_emailNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>200</y>
             <width>291</width>
             <height>30</height>
@@ -7705,6 +7986,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7730,6 +8017,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7740,7 +8028,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_weblNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>150</y>
             <width>291</width>
             <height>30</height>
@@ -7751,6 +8039,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7789,6 +8083,7 @@ border:2px solid rgb(114, 117, 126)
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
@@ -7799,7 +8094,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QLineEdit" name="lineEdit_telefonoNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>820</x>
+            <x>852</x>
             <y>100</y>
             <width>291</width>
             <height>30</height>
@@ -7810,6 +8105,12 @@ border:2px solid rgb(114, 117, 126)
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -7925,7 +8226,7 @@ border:2px solid rgb(114, 117, 126)
          <widget class="QPushButton" name="bt_guardarNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>1048</x>
+            <x>1080</x>
             <y>570</y>
             <width>60</width>
             <height>61</height>
@@ -7966,7 +8267,7 @@ border:5px;
          <widget class="QPushButton" name="bt_CancelarNvoProveedor">
           <property name="geometry">
            <rect>
-            <x>930</x>
+            <x>962</x>
             <y>570</y>
             <width>60</width>
             <height>61</height>
@@ -8034,11 +8335,12 @@ border:5px;
           </property>
           <property name="font">
            <font>
+            <family>Goldman</family>
             <pointsize>10</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Codigo:</string>
+           <string>Código:</string>
           </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_codigoNvoProveedor">
@@ -8058,6 +8360,12 @@ border:5px;
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Gill Sans MT</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>-</string>
@@ -8208,6 +8516,14 @@ color:#ffffff
            <height>20</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string>1</string>
          </property>
@@ -8232,6 +8548,14 @@ color:#ffffff
            <width>0</width>
            <height>20</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -8300,6 +8624,12 @@ color:#ffffff
            <height>20</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
         </widget>
         <widget class="QLineEdit" name="lineEdit_cuitNvaFactura">
          <property name="geometry">
@@ -8315,6 +8645,12 @@ color:#ffffff
            <width>0</width>
            <height>20</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -8359,6 +8695,12 @@ color:#ffffff
            <width>0</width>
            <height>20</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -8624,6 +8966,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -8645,6 +8993,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -8703,6 +9057,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -8755,6 +9115,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -8809,6 +9175,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -8861,6 +9233,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>-</string>
@@ -8949,6 +9327,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -8970,6 +9354,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -9614,6 +10004,12 @@ QTableView QHeaderView::section:horizontal {
            <height>20</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -9683,261 +10079,6 @@ QTableView QHeaderView::section:horizontal {
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_92">
-         <property name="geometry">
-          <rect>
-           <x>1160</x>
-           <y>590</y>
-           <width>121</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Goldman</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>SubTotal:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_93">
-         <property name="geometry">
-          <rect>
-           <x>1160</x>
-           <y>650</y>
-           <width>121</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Goldman</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>IVA:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_94">
-         <property name="geometry">
-          <rect>
-           <x>1160</x>
-           <y>710</y>
-           <width>121</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Goldman</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>TOTAL:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_total_Nva_factura">
-         <property name="geometry">
-          <rect>
-           <x>1320</x>
-           <y>690</y>
-           <width>241</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Orbitron</family>
-           <pointsize>19</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>0,00</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_iva_factura">
-         <property name="geometry">
-          <rect>
-           <x>1320</x>
-           <y>630</y>
-           <width>261</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Orbitron</family>
-           <pointsize>19</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>0,00</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_subtotal_factura">
-         <property name="geometry">
-          <rect>
-           <x>1320</x>
-           <y>570</y>
-           <width>261</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Orbitron</family>
-           <pointsize>19</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>0,00</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_Facturar">
-         <property name="geometry">
-          <rect>
-           <x>1210</x>
-           <y>779</y>
-           <width>131</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Orbitron SemiBold</family>
-           <pointsize>11</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-background-color:#2caeff;
-border-radius:10px;
-}
-
-QPushButton:hover{
-background-color:#39ffa3;
-}
-
-</string>
-         </property>
-         <property name="text">
-          <string>FACTURAR</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="bt_CancelarFactura">
-         <property name="geometry">
-          <rect>
-           <x>1380</x>
-           <y>779</y>
-           <width>131</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Orbitron SemiBold</family>
-           <pointsize>11</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{
-background-color:#2caeff;
-border-radius:10px;
-}
-
-QPushButton:hover{
-background-color:#39ffa3;
-}
-
-</string>
-         </property>
-         <property name="text">
-          <string>CANCELAR</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_98">
-         <property name="geometry">
-          <rect>
-           <x>1280</x>
-           <y>570</y>
-           <width>31</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>$</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_99">
-         <property name="geometry">
-          <rect>
-           <x>1280</x>
-           <y>630</y>
-           <width>31</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>$</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_100">
-         <property name="geometry">
-          <rect>
-           <x>1280</x>
-           <y>690</y>
-           <width>31</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>$</string>
          </property>
         </widget>
         <widget class="QComboBox" name="comboBox_FormaPagoFact">
@@ -10163,6 +10304,309 @@ color:#ffffff
           </size>
          </property>
         </widget>
+        <widget class="QGroupBox" name="groupBox_23">
+         <property name="geometry">
+          <rect>
+           <x>1140</x>
+           <y>590</y>
+           <width>481</width>
+           <height>291</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+background-color: #FFF2F1FC;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QPushButton" name="bt_CancelarFactura">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>230</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron SemiBold</family>
+            <pointsize>11</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>CANCELAR</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_93">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>101</y>
+            <width>121</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>IVA:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_92">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>41</y>
+            <width>121</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>SubTotal:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_94">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>161</y>
+            <width>121</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>TOTAL:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_99">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>81</y>
+            <width>31</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>$</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_total_Nva_factura">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>141</y>
+            <width>271</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>19</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+color:#aaff00;
+background-color:#000000
+}</string>
+          </property>
+          <property name="text">
+           <string>0,00</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_iva_factura">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>81</y>
+            <width>271</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>19</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+color:#ffffff;
+background-color:#000000
+}</string>
+          </property>
+          <property name="text">
+           <string>0,00</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bt_Facturar">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>230</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron SemiBold</family>
+            <pointsize>11</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>FACTURAR</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_100">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>141</y>
+            <width>31</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>$</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_subtotal_factura">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>21</y>
+            <width>271</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>19</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+color:#ffffff;
+background-color:#000000
+}</string>
+          </property>
+          <property name="text">
+           <string>0,00</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_98">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>21</y>
+            <width>31</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>$</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
        <widget class="QWidget" name="pgCobrarFactPendiente">
         <widget class="QLineEdit" name="lineEdit_clienteCobrarFactura">
@@ -10179,6 +10623,15 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -10232,6 +10685,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -10317,6 +10776,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -10338,6 +10803,15 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -10423,6 +10897,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>-</string>
          </property>
@@ -10479,6 +10959,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -10532,6 +11018,12 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -10553,6 +11045,15 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Gill Sans MT</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="readOnly">
           <bool>true</bool>
@@ -10603,6 +11104,14 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -10657,6 +11166,14 @@ color:#ffffff
            <height>30</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
         </widget>
         <widget class="QLineEdit" name="lineEdit_serieNvaFactura_2">
          <property name="geometry">
@@ -10672,6 +11189,14 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
          </property>
          <property name="text">
           <string>1</string>
@@ -11117,7 +11642,7 @@ border-radius: 5px;
            <rect>
             <x>20</x>
             <y>40</y>
-            <width>141</width>
+            <width>111</width>
             <height>30</height>
            </rect>
           </property>
@@ -11149,9 +11674,9 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>130</x>
             <y>40</y>
-            <width>151</width>
+            <width>181</width>
             <height>30</height>
            </rect>
           </property>
@@ -11160,6 +11685,12 @@ color:#ffffff
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>8</pointsize>
+           </font>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -11535,6 +12066,12 @@ color:#ffffff
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -11587,6 +12124,12 @@ color:#ffffff
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="readOnly">
            <bool>false</bool>
@@ -11641,6 +12184,12 @@ color:#ffffff
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>10</pointsize>
+          </font>
          </property>
          <property name="text">
           <string/>
@@ -12018,7 +12567,7 @@ border-radius: 5px;
            <rect>
             <x>20</x>
             <y>40</y>
-            <width>141</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>
@@ -12050,9 +12599,9 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>140</x>
             <y>40</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -12061,6 +12610,12 @@ color:#ffffff
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>7</pointsize>
+           </font>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -12431,6 +12986,15 @@ color:#ffffff
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="readOnly">
            <bool>false</bool>
           </property>
@@ -12441,9 +13005,9 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>140</x>
             <y>100</y>
-            <width>471</width>
+            <width>491</width>
             <height>30</height>
            </rect>
           </property>
@@ -12452,6 +13016,12 @@ color:#ffffff
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="readOnly">
            <bool>false</bool>
@@ -12462,7 +13032,7 @@ color:#ffffff
            <rect>
             <x>20</x>
             <y>100</y>
-            <width>141</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>
@@ -12901,6 +13471,12 @@ color:#ffffff
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -13265,6 +13841,12 @@ color:#ffffff
             <height>30</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="readOnly">
            <bool>false</bool>
           </property>
@@ -13286,6 +13868,12 @@ color:#ffffff
             <width>0</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="readOnly">
            <bool>false</bool>
@@ -13959,7 +14547,7 @@ border-radius: 5px;
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>60</y>
             <width>151</width>
             <height>30</height>
@@ -13973,7 +14561,8 @@ border-radius: 5px;
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -13983,9 +14572,9 @@ border-radius: 5px;
          <widget class="QLabel" name="label_290">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>60</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -13998,7 +14587,7 @@ border-radius: 5px;
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14017,7 +14606,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>110</y>
             <width>151</width>
             <height>30</height>
@@ -14031,7 +14620,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14041,9 +14631,9 @@ color:#ffffff
          <widget class="QLabel" name="label_291">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>110</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14056,7 +14646,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14068,6 +14658,9 @@ color:#ffffff
           <property name="text">
            <string> SALDO PENDIENTE</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_CobradoCtaCte">
           <property name="enabled">
@@ -14075,7 +14668,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>160</y>
             <width>151</width>
             <height>30</height>
@@ -14089,7 +14682,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14099,9 +14693,9 @@ color:#ffffff
          <widget class="QLabel" name="label_292">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>160</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14114,7 +14708,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14126,6 +14720,9 @@ color:#ffffff
           <property name="text">
            <string> COBRADO</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_CantidadComprasCtaCte">
           <property name="enabled">
@@ -14133,7 +14730,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>210</y>
             <width>151</width>
             <height>30</height>
@@ -14147,7 +14744,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14157,9 +14755,9 @@ color:#ffffff
          <widget class="QLabel" name="label_293">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>210</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14172,7 +14770,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14184,6 +14782,9 @@ color:#ffffff
           <property name="text">
            <string> CANT. COMPRAS</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_UltCompraCtaCte">
           <property name="enabled">
@@ -14191,7 +14792,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>260</y>
             <width>151</width>
             <height>30</height>
@@ -14205,7 +14806,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14215,9 +14817,9 @@ color:#ffffff
          <widget class="QLabel" name="label_294">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>260</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14230,7 +14832,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14242,6 +14844,9 @@ color:#ffffff
           <property name="text">
            <string> ULT. COMPRA</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_UltPagoCtaCte">
           <property name="enabled">
@@ -14249,7 +14854,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>310</y>
             <width>151</width>
             <height>30</height>
@@ -14263,7 +14868,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14273,9 +14879,9 @@ color:#ffffff
          <widget class="QLabel" name="label_295">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>310</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14288,7 +14894,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -14300,6 +14906,9 @@ color:#ffffff
           <property name="text">
            <string>ULT. PAGO</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
          <widget class="QLineEdit" name="lineEdit_MontoAutorizado">
           <property name="enabled">
@@ -14307,7 +14916,7 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>180</x>
             <y>360</y>
             <width>151</width>
             <height>30</height>
@@ -14321,7 +14930,8 @@ color:#ffffff
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <family>Orbitron</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -14331,9 +14941,9 @@ color:#ffffff
          <widget class="QLabel" name="label_296">
           <property name="geometry">
            <rect>
-            <x>20</x>
+            <x>10</x>
             <y>360</y>
-            <width>151</width>
+            <width>171</width>
             <height>30</height>
            </rect>
           </property>
@@ -14346,7 +14956,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Goldman</family>
-            <pointsize>8</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">

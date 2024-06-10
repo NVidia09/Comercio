@@ -1,3 +1,5 @@
+import psycopg2
+
 from conexion_db import Conexion
 from cursor_del_pool import CursorDelPool
 from logger_base import log
@@ -9,8 +11,9 @@ from negocio.articulo import Articulo
 class ArticuloDAO:
 
 
-    _SELECCIONAR = "SELECT * FROM articulos ORDER BY codigo ASC"
+    _SELECCIONAR = "SELECT * FROM articulos ORDER BY nombre, categoria ASC"
     _SELECCIONAR_ORDENADO = "SELECT * FROM articulos ORDER BY nombre, categoria ASC"
+    _ULTIMO_CODIGO_USADO = "SELECT * FROM articulos ORDER BY codigo DESC FETCH FIRST 1 ROWS ONLY"
     _INSERTAR = "INSERT INTO articulos(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     _ACTUALIZAR = 'UPDATE articulos SET nombre=%s, modelo=%s, marca=%s, categoria=%s, sku=%s, color=%s, caracteristica=%s, precio_costo=%s, precio_venta=%s, iva=%s, proveedor=%s, tamaño=%s, ancho=%s, largo=%s, profundidad=%s, peso=%s, peso_envalado=%s, stock=%s, margen_ganancia=%s, stock_minimo=%s, cod_barras=%s WHERE codigo = %s'
     _ELIMINAR = "DELETE FROM articulos WHERE codigo = %s"
@@ -35,6 +38,20 @@ class ArticuloDAO:
                 articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                   registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
                                   registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
+                articulos.append(articulo)
+            return articulos
+
+    @classmethod
+    def ultimo_codigo_usado(cls):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._ULTIMO_CODIGO_USADO)
+            registros = cursor.fetchall()
+            articulos = []
+            for registro in registros:
+                articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                    registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                    registro[12], registro[13], registro[14], registro[15], registro[16], registro[17],
+                                    registro[18], registro[19], registro[20], registro[21])
                 articulos.append(articulo)
             return articulos
 
@@ -251,3 +268,25 @@ class ArticuloDAO:
                 return registro[0]
             else:
                 return None
+
+    @classmethod
+    def importar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+
+            df = pd.read_excel(ruta_archivo)
+            articulos = []
+            for index, row in df.iterrows():
+                articulo = Articulo(row['codigo'], row['nombre'], row['modelo'], row['marca'],
+                                      row['categoria'], row['sku'], row['color'], row['caracteristica'], row['precio_costo'],
+                                      row['precio_venta'], row['iva'], row['proveedor'], row['tamaño'], row['ancho'], row['largo'], row['profundidad'], row['peso'], row['peso_envalado'], row['stock'], row['margen_ganancia'], row['stock_minimo'], row['cod_barras'])
+                articulos.append(articulo)
+
+            # Insertar cada proveedor en la base de datos
+            for articulo in articulos:
+                cls.insertar(articulo)
+
+            return articulos
+        except Exception as e:
+            log.error(f'Error al importar artículos desde Excel: {e}')
+            sys.exit(1)

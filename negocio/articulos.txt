@@ -413,3 +413,27 @@ Articulo:
             Stock mínimo: 2
             Código de barras: 1110987654321
         
+Articulo: 
+            Código: 253500
+            Nombre: AURICULAR CORSAIR X23
+            Modelo: X23
+            Marca: CORSAIR
+            Categoría: AURICULARES
+            SKU: XZC231233
+            Color: NEGRO
+            Característica: BLUETOOTH
+            Precio de costo: 26470
+            Precio de venta: 29600
+            IVA: 10.5
+            Proveedor: AIR-COMPUTERS
+            Tamaño: nan
+            Ancho: nan
+            Largo: nan
+            Profundidad: nan
+            Peso: nan
+            Peso envalado: nan
+            Stock: 15
+            Margen de ganancia: 25
+            Stock mínimo: 5
+            Código de barras: 45555555555
+        

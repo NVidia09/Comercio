@@ -8,7 +8,8 @@ from negocio.proveedor import Proveedor
 
 class ProveedorDAO:
 
-    _SELECCIONAR = "SELECT * FROM proveedores"
+    _SELECCIONAR = "SELECT * FROM proveedores ORDER BY razonSocial ASC"
+    _ULTIMO_CODIGO_USADO = "SELECT * FROM proveedores ORDER BY codproveedor DESC FETCH FIRST 1 ROWS ONLY"
     _INSERTAR = "INSERT INTO proveedores(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     _ACTUALIZAR = 'UPDATE proveedores SET razonsocial=%s, cuit=%s, domicilio=%s, ciudad=%s, provincia=%s, pais=%s, telefono=%s, web=%s, email=%s, cuenta=%s, password=%s, observaciones=%s WHERE codproveedor = %s'
     _ELIMINAR = "DELETE FROM proveedores WHERE codproveedor = %s"
@@ -25,6 +26,19 @@ class ProveedorDAO:
             proveedores = []
             for registro in registros:
                 proveedor = Proveedor(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10], registro[11], registro[12])
+                proveedores.append(proveedor)
+            return proveedores
+
+    @classmethod
+    def ultimo_codigo_usado(cls):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._ULTIMO_CODIGO_USADO)
+            registros = cursor.fetchall()
+            proveedores = []
+            for registro in registros:
+                proveedor = Proveedor(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                      registro[12])
                 proveedores.append(proveedor)
             return proveedores
 
@@ -82,6 +96,28 @@ class ProveedorDAO:
             registros = cursor.fetchall()
             proveedores = [registro[0] for registro in registros]
             return proveedores
+
+    @classmethod
+    def importar_desde_excel(cls, ruta_archivo):
+        try:
+            import pandas as pd
+            #df = pd.read_excel('proveedores.xlsx')
+            df = pd.read_excel(ruta_archivo)
+            proveedores = []
+            for index, row in df.iterrows():
+                proveedor = Proveedor(row['codproveedor'], row['razonsocial'], row['cuit'], row['domicilio'], row['ciudad'], row['provincia'], row['pais'], row['telefono'], row['web'], row['email'], row['cuenta'], row['password'], row['observaciones'])
+                proveedores.append(proveedor)
+
+            # Insertar cada proveedor en la base de datos
+            for proveedor in proveedores:
+                cls.insertar(proveedor)
+
+            return proveedores
+
+        except Exception as e:
+            log.error(f'Error al importar proveedores desde Excel: {e}')
+            sys.exit(1)
+
 
 
 
