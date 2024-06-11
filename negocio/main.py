@@ -2418,7 +2418,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 pagos = float(pendientes[0].pagos)
                 saldo = total - pagos
                 #self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
-                self.self.lineEdit_ImporteCobrarFactura.setText(str(saldo))
+                #self.lineEdit_ImporteCobrarFactura.setText(str(saldo))
 ##########################################################################################################
             #return pendientes
 
@@ -2523,12 +2523,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             cursor.execute(query_cobro, valores)
             self.stackedWidget.setCurrentIndex(1)
             #return
-    ###################################################################
-        pendientes_json = query_cobro.__dict__
 
-        # Guardar los artículos en un archivo JSON
-        with open('pendientes.json', 'w') as f:
-            json.dump(pendientes_json, f)
     #######################################################################
         #
         #   CARGAMOS EL REGISTRO DEL PAGO EN LA TABLA CAJA
@@ -3241,6 +3236,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def seleccionar_factura_cliente_ctacte(self):
         #self.tablaClientes_3.clearContents()
+        self.lineEdit_CobradoCtaCte.setText('')
         row = self.tablaClientes_3.currentRow()
         codcliente = int(self.tablaClientes_3.item(row, 0).text())
         nombre = self.tablaClientes_3.item(row, 2).text()
@@ -3248,6 +3244,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cant_compras = 0
         total_fact = 0
         fecha_ultCompra = ""
+
+
         facturas = FacturaDAO.seleccionar_factura_cliente(codcliente, nombre)
         self.tablaFacturasCliente_3.setRowCount(len(facturas))
         for i, factura in enumerate(facturas):
@@ -3321,9 +3319,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return
         else:
             facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
-
+            #pendientes = PendientesDAO.buscar_pendiente_ctacte(self, serie, codfactura, codcliente)
+            pendientes_dao = PendientesDAO()
+            pendientes = pendientes_dao.buscar_pendiente_ctacte(serie, codfactura, codcliente)
             if facturas:  # Check if facturas is not empty
-                self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
+
+                saldo_ctacte = round(pendientes[0].saldo,2)
+                self.lineEdit_ImporteNvoCobro_2.setText("{:.2f}".format(saldo_ctacte))
+                #self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
                 self.lineEdit_ConceptoNvoCobro_2.setText(
                     'Cobro de Factura Nro. ' + str(facturas[0].serie) + "-" + str(facturas[0].codfactura))
             else:
@@ -3348,7 +3351,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with CursorDelPool() as cursor:
             cursor.execute(query_modificar_factura, valor)
         QMessageBox.information(self, "Factura Cobrada", "La factura ha sido cobrada correctamente", )
-        pagos = importe
+        pendientes_dao = PendientesDAO()
+        pendientes = pendientes_dao.buscar_pendiente_ctacte(serie, codfactura, codcliente)
+        pagos = pendientes[0].pagos + importe
         saldo = 0
         query_cobro = "UPDATE pendientes SET estado = %s, importe = %s, pagos = %s, saldo = %s, fechacancelada = %s WHERE codfactura = %s"
         valores = (estado, importe, pagos, saldo, fechacancelada, codfactura)

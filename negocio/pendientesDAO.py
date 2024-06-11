@@ -16,6 +16,7 @@ class PendientesDAO:
     _BUSCA_PENDIENTE = "SELECT * FROM pendientes WHERE codpendiente = %s"
     _BUSCA_PENDIENTE_CLIENTE = "SELECT * FROM pendientes WHERE codcliente = %s ORDER BY codpendiente ASC"
     _BUSCA_PENDIENTE_SALDO = "SELECT * FROM pendientes WHERE saldo > 0 ORDER BY codpendiente ASC"
+    _BUSCA_PENDIENTE_CTACTE = "SELECT * FROM pendientes WHERE serie = %s AND codfactura = %s AND codcliente = %s"
 
     @classmethod
     def seleccionar(cls):
@@ -59,6 +60,17 @@ class PendientesDAO:
             pendientes = []
             for registro in registros:
                 pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
+                pendientes.append(pendiente)
+            return pendientes
+
+    def buscar_pendiente_ctacte(cls, serie, codfactura, codcliente):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._BUSCA_PENDIENTE_CTACTE, (serie, codfactura, codcliente))
+            registros = cursor.fetchall()
+            pendientes = []
+            for registro in registros:
+                pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10])
                 pendientes.append(pendiente)
             return pendientes
 
