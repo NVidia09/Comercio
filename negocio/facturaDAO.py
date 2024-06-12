@@ -1,3 +1,5 @@
+import pandas as pd
+
 from conexion_db import Conexion
 from cursor_del_pool import CursorDelPool
 from logger_base import log
@@ -113,5 +115,65 @@ class FacturaDAO:
                 facturas.append(factura)
             return facturas
 
+    @classmethod
+    def exportar_facturas(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR)
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                facturas.append(factura)
+
+        data = {
+            'serie': [factura.serie for factura in facturas],
+            'codfactura': [factura.codfactura for factura in facturas],
+            'fecha': [factura.fecha for factura in facturas],
+            'codcliente': [factura.codcliente for factura in facturas],
+            'cliente': [factura.cliente for factura in facturas],
+            'estado': [factura.estado for factura in facturas],
+            'subtotal': [factura.subtotal for factura in facturas],
+            'iva': [factura.iva for factura in facturas],
+            'total': [factura.total for factura in facturas],
+            'formapago': [factura.formapago for factura in facturas],
+            'tipo': [factura.tipo for factura in facturas],
+            'entrega': [factura.entrega for factura in facturas]
+        }
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Pendientes", merge_cells=True, index=False)
+
+    @classmethod
+    def exportar_facturas_entrega(cls, campo1, ruta_archivo):
+        with CursorDelPool() as cursor:
+            # cursor.execute(cls._BUSCA_FACT_PENDIENTE, pendiente)
+            query = f"SELECT * FROM facturas WHERE entrega LIKE %s  ORDER BY codfactura DESC"
+            cursor.execute(query, (f'%{campo1}%',))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                facturas.append(factura)
+        data = {
+            'serie': [factura.serie for factura in facturas],
+            'codfactura': [factura.codfactura for factura in facturas],
+            'fecha': [factura.fecha for factura in facturas],
+            'codcliente': [factura.codcliente for factura in facturas],
+            'cliente': [factura.cliente for factura in facturas],
+            'estado': [factura.estado for factura in facturas],
+            'subtotal': [factura.subtotal for factura in facturas],
+            'iva': [factura.iva for factura in facturas],
+            'total': [factura.total for factura in facturas],
+            'formapago': [factura.formapago for factura in facturas],
+            'tipo': [factura.tipo for factura in facturas],
+            'entrega': [factura.entrega for factura in facturas]
+        }
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Entrega_Pendiente", merge_cells=True, index=False)
 
 

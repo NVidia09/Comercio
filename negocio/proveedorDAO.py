@@ -1,3 +1,5 @@
+import pandas as pd
+
 from cursor_del_pool import CursorDelPool
 from logger_base import log
 import sys
@@ -140,6 +142,40 @@ class ProveedorDAO:
         except Exception as e:
             log.error(f'Error al importar proveedores desde Excel: {e}')
             sys.exit(1)
+
+    @classmethod
+    def exportar_proveedores(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR)
+            registros = cursor.fetchall()
+            proveedores = []
+            for registro in registros:
+                proveedor = Proveedor(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                      registro[12])
+                proveedores.append(proveedor)
+
+        data = {
+            'codproveedor': [proveedor.codproveedor for proveedor in proveedores],
+            'razonsocial': [proveedor.razonsocial for proveedor in proveedores],
+            'cuit': [proveedor.cuit for proveedor in proveedores],
+            'domicilio': [proveedor.domicilio for proveedor in proveedores],
+            'ciudad': [proveedor.ciudad for proveedor in proveedores],
+            'provincia': [proveedor.provincia for proveedor in proveedores],
+            'pais': [proveedor.pais for proveedor in proveedores],
+            'telefono': [proveedor.telefono for proveedor in proveedores],
+            'web': [proveedor.web for proveedor in proveedores],
+            'email': [proveedor.email for proveedor in proveedores],
+            'cuenta': [proveedor.cuenta for proveedor in proveedores],
+            'password': [proveedor.password for proveedor in proveedores],
+            'observaciones': [proveedor.observaciones for proveedor in proveedores]
+        }
+        # Convertir el diccionario en un DataFrame de pandas
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Proveedores", merge_cells=True, index=False)
+
 
 
 

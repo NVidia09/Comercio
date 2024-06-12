@@ -98,6 +98,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_ModificarArticulo.clicked.connect(self.modificar_articulo)
         self.bt_EliminarArticulo.clicked.connect(self.eliminar_articulo)
         self.bt_importar_articulos.clicked.connect(self.importar_articulos)
+        self.bt_descargar_articulos.clicked.connect(self.descargar_articulos)
         # self.Bt_Actualizar.clicked.connect(self.mostrar_actualizar_persona)
         # self.Bt_Eliminar.clicked.connect(self.mostrar_eliminar_persona)
         self.bt_Minimizar.clicked.connect(self.showMinimized)
@@ -120,6 +121,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_NuevoCliente.clicked.connect(self.mostrar_insertar_cliente)
         self.bt_BuscarCliente.clicked.connect(self.buscar_cliente)
         self.bt_importar_clientes.clicked.connect(self.importar_clientes)
+        self.bt_descargar_clientes.clicked.connect(self.descargar_clientes)
         #empiezan los botones de los proveedores
         self.lineEdit_BuscarArticulo_3.textChanged.connect(self.buscar_proveedor)
         self.bt_ModificarProveedor.clicked.connect(self.modificar_proveedor)
@@ -127,6 +129,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_EliminarProveedor.clicked.connect(self.eliminar_proveedor)
         self.bt_BuscarProveedor.clicked.connect(self.buscar_proveedor)
         self.bt_importar_proveedores.clicked.connect(self.importar_proveedores)
+        self.bt_descargar_proveedores.clicked.connect(self.descargar_proveedores)
 
         #acciones botones selecciona/agregar nueva categoría
         self.bt_CategoriaNvoArticulo.clicked.connect(self.seleccionar_categoria)
@@ -177,6 +180,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ################################################################
         self.bt_Facturar.clicked.connect(self.guardar_factura)
         self.bt_CancelarFactura.clicked.connect(self.cancelar_factura)
+        self.bt_descargar_ultimas_facturas.clicked.connect(self.descargar_facturas)
+        self.bt_descargar_pendientes_entrega.clicked.connect(self.descargar_facturas_pendientes_entrega)
 
         ################################################################
         #
@@ -198,6 +203,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget_facturasImpagas.cellDoubleClicked.connect(self.cobrar_factura_cliente_facturacion)
         self.bt_Cobrar.clicked.connect(self.cobrar_factura_cliente_pendiente)
         self.comboBox_TpoPagoCobrarFactura.currentTextChanged.connect(self.on_combobox_changed)
+        self.bt_descargar_pendientes_cobro.clicked.connect(self.descargar_pendientes)
 
         ###############################################################
         #
@@ -208,6 +214,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.comboBox_FormaPagoNvoCobro.currentTextChanged.connect(self.combo_formapago_change)
         self.bt_NvoCobro.clicked.connect(self.nuevo_cobro)
         self.bt_CancelarNvoCobro.clicked.connect(self.cancelar_nuevo_cobro)
+        self.bt_descargar_ultimos_cobros.clicked.connect(self.descargar_ultimos_cobros)
+        self.bt_descargar_ultimos_pagos.clicked.connect(self.descargar_ultimos_pagos)
 
         ###############################################################
         #
@@ -1684,7 +1692,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if facturas:
                 self.lineEdit_numeroNvaFactura.setText(str(facturas[0].codfactura + 1))
             else:
-                self.lineEdit_numeroNvaFactura.setText("1")  # or handle the error as you see fit
+                self.lineEdit_numeroNvaFactura.setText("00000001")  # or handle the error as you see fit
             return facturas
 
 
@@ -3544,6 +3552,112 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Mostrar un mensaje de éxito
             QMessageBox.information(self, "Artículos Actualizados",
                                     "Los artículos han sido actualizados correctamente", )
+
+    def descargar_articulos(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Articulos", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar los articulos
+            ArticuloDAO.exportar_articulos(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Artículos Descargados", "Los artículos han sido descargados correctamente", )
+
+    def descargar_clientes(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Clientes", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar los clientes
+            ClienteDAO.exportar_clientes(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Clientes Descargados", "Los clientes han sido descargados correctamente", )
+
+    def descargar_proveedores(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Proveedores", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar los proveedores
+            ProveedorDAO.exportar_proveedores(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Proveedores Descargados", "Los proveedores han sido descargados correctamente", )
+
+    def descargar_ultimos_cobros(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Ultimos Cobros Realizados", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar los últimos cobros
+            CajaDAO.exportar_cobros(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Últimos Cobros Descargados", "Los últimos cobros han sido descargados correctamente", )
+
+    def descargar_ultimos_pagos(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Ultimos Pagos Realizados", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar los últimos pagos
+            CajaDAO.exportar_pagos(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Últimos Pagos Descargados", "Los últimos pagos han sido descargados correctamente", )
+
+    def descargar_pendientes(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas Pendientes Pago", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar facturas pendientes pago
+            PendientesDAO.exportar_pendientes(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Facturas Pendientes", "Los facturas pendientes han sido descargadas correctamente", )
+
+    def descargar_facturas(self):
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar facturas
+            FacturaDAO.exportar_facturas(ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Facturas Descargadas", "Las facturas han sido descargadas correctamente", )
+
+    def descargar_facturas_pendientes_entrega(self, campo1):
+        campo1 = 'ENVIO'
+        #Obtener la ruta del archivo seleccionado
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas Pendientes de Entrega", "",
+                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+
+        #Verificar si el usuario seleccionó un archivo
+        if ruta_archivo:
+            # Descargar facturas pendientes entrega
+            FacturaDAO.exportar_facturas_entrega(campo1, ruta_archivo)
+
+        # Mostrar un mensaje de éxito
+        QMessageBox.information(self, "Facturas Pendientes Entrega Descargadas", "Las facturas sin entregar han sido descargadas correctamente", )
+
 
 
 if __name__ == '__main__':

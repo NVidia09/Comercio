@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1907</width>
+    <width>1896</width>
     <height>979</height>
    </rect>
   </property>
@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -1578,6 +1578,75 @@ QTableView QHeaderView::section:horizontal {
           </column>
          </widget>
         </widget>
+        <widget class="QPushButton" name="bt_descargar_ultimas_facturas">
+         <property name="geometry">
+          <rect>
+           <x>270</x>
+           <y>440</y>
+           <width>41</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bt_descargar_pendientes_cobro">
+         <property name="geometry">
+          <rect>
+           <x>1280</x>
+           <y>2</y>
+           <width>41</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bt_descargar_pendientes_entrega">
+         <property name="geometry">
+          <rect>
+           <x>1460</x>
+           <y>260</y>
+           <width>41</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="pgArticulos">
         <property name="styleSheet">
@@ -1825,7 +1894,7 @@ background-color:#ffffff;
            <widget class="QPushButton" name="bt_NuevoArticulo">
             <property name="geometry">
              <rect>
-              <x>600</x>
+              <x>550</x>
               <y>10</y>
               <width>93</width>
               <height>30</height>
@@ -1861,7 +1930,7 @@ background-color:#39ffa3;
            <widget class="QPushButton" name="bt_ModificarArticulo">
             <property name="geometry">
              <rect>
-              <x>700</x>
+              <x>650</x>
               <y>10</y>
               <width>93</width>
               <height>30</height>
@@ -1897,7 +1966,7 @@ background-color:#39ffa3;
            <widget class="QPushButton" name="bt_EliminarArticulo">
             <property name="geometry">
              <rect>
-              <x>800</x>
+              <x>750</x>
               <y>10</y>
               <width>93</width>
               <height>30</height>
@@ -2860,7 +2929,7 @@ border-radius: 5px;
              <rect>
               <x>480</x>
               <y>5</y>
-              <width>81</width>
+              <width>71</width>
               <height>41</height>
              </rect>
             </property>
@@ -2886,7 +2955,7 @@ background-color:#ffffff
            <widget class="QPushButton" name="bt_importar_articulos">
             <property name="geometry">
              <rect>
-              <x>910</x>
+              <x>860</x>
               <y>0</y>
               <width>41</width>
               <height>51</height>
@@ -2908,6 +2977,29 @@ background-color:#ffffff
              <size>
               <width>45</width>
               <height>45</height>
+             </size>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="bt_descargar_articulos">
+            <property name="geometry">
+             <rect>
+              <x>910</x>
+              <y>0</y>
+              <width>51</width>
+              <height>51</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>85</width>
+              <height>85</height>
              </size>
             </property>
            </widget>
@@ -3815,6 +3907,29 @@ background-color:#ffffff
            </size>
           </property>
          </widget>
+         <widget class="QPushButton" name="bt_descargar_clientes">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>0</y>
+            <width>51</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>85</width>
+            <height>85</height>
+           </size>
+          </property>
+         </widget>
         </widget>
         <widget class="QGroupBox" name="groupBox_6">
          <property name="geometry">
@@ -4379,6 +4494,29 @@ background-color:#ffffff
            <size>
             <width>45</width>
             <height>45</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bt_descargar_proveedores">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>0</y>
+            <width>51</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>85</width>
+            <height>85</height>
            </size>
           </property>
          </widget>
@@ -13393,6 +13531,52 @@ QTableView QHeaderView::section:horizontal {
           <string>ULTIMOS PAGOS INGRESADOS</string>
          </property>
         </widget>
+        <widget class="QPushButton" name="bt_descargar_ultimos_cobros">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>360</y>
+           <width>41</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bt_descargar_ultimos_pagos">
+         <property name="geometry">
+          <rect>
+           <x>1230</x>
+           <y>360</y>
+           <width>41</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="pgCtaCte">
         <widget class="QGroupBox" name="groupBox_18">
@@ -13427,7 +13611,7 @@ border-radius: 5px;
            <rect>
             <x>20</x>
             <y>40</y>
-            <width>141</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>
@@ -13459,9 +13643,9 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>140</x>
             <y>40</y>
-            <width>151</width>
+            <width>181</width>
             <height>30</height>
            </rect>
           </property>
@@ -13474,7 +13658,7 @@ color:#ffffff
           <property name="font">
            <font>
             <family>Orbitron</family>
-            <pointsize>9</pointsize>
+            <pointsize>8</pointsize>
            </font>
           </property>
           <property name="readOnly">
@@ -13857,9 +14041,9 @@ color:#ffffff
           </property>
           <property name="geometry">
            <rect>
-            <x>160</x>
+            <x>140</x>
             <y>100</y>
-            <width>471</width>
+            <width>491</width>
             <height>30</height>
            </rect>
           </property>
@@ -13884,7 +14068,7 @@ color:#ffffff
            <rect>
             <x>20</x>
             <y>100</y>
-            <width>141</width>
+            <width>121</width>
             <height>30</height>
            </rect>
           </property>

@@ -1,5 +1,7 @@
 from cgi import log
 
+import pandas as pd
+
 from negocio import caja
 from negocio.caja import Caja
 from negocio.cursor_del_pool import CursorDelPool
@@ -77,3 +79,53 @@ class CajaDAO:
             cursor.execute(cls._ELIMINAR, valores)
             log.debug(f'Registro eliminado: {registro}')
             return cursor.rowcount
+
+    @classmethod
+    def exportar_cobros(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR_COBRO)
+            registros = cursor.fetchall()
+            cajas = []
+            for registro in registros:
+                caja = Caja(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6],
+                            registro[7])
+                cajas.append(caja)
+        data = {
+            'id': [caja.id for caja in cajas],
+            'fecha': [caja.fecha for caja in cajas],
+            'tipo': [caja.tipo for caja in cajas],
+            'concepto': [caja.concepto for caja in cajas],
+            'formapago': [caja.formapago for caja in cajas],
+            'tarjeta': [caja.tarjeta for caja in cajas],
+            'banco': [caja.banco for caja in cajas],
+            'total': [caja.total for caja in cajas]
+        }
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Cobros", merge_cells=True, index=False)
+
+    @classmethod
+    def exportar_pagos(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR_PAGO)
+            registros = cursor.fetchall()
+            cajas = []
+            for registro in registros:
+                caja = Caja(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6],
+                            registro[7])
+                cajas.append(caja)
+        data = {
+            'id': [caja.id for caja in cajas],
+            'fecha': [caja.fecha for caja in cajas],
+            'tipo': [caja.tipo for caja in cajas],
+            'concepto': [caja.concepto for caja in cajas],
+            'formapago': [caja.formapago for caja in cajas],
+            'tarjeta': [caja.tarjeta for caja in cajas],
+            'banco': [caja.banco for caja in cajas],
+            'total': [caja.total for caja in cajas]
+        }
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Pagos", merge_cells=True, index=False)

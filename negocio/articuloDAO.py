@@ -6,6 +6,7 @@ from logger_base import log
 import sys
 
 from negocio.articulo import Articulo
+import pandas as pd
 
 
 class ArticuloDAO:
@@ -315,3 +316,50 @@ class ArticuloDAO:
         except Exception as e:
             log.error(f'Error al importar artículos desde Excel: {e}')
             sys.exit(1)
+
+
+    @classmethod
+    def exportar_articulos(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR)
+            registros = cursor.fetchall()
+            articulos = []
+            for registro in registros:
+                articulo = Articulo(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14], registro[15], registro[16], registro[17], registro[18], registro[19], registro[20], registro[21])
+                articulos.append(articulo)
+
+        # df_articulos = pd.DataFrame(articulos, columns=['codigo', 'nombre', 'modelo', 'marca', 'categoria', 'sku', 'color', 'caracteristica', 'precio_costo', 'precio_venta', 'iva', 'proveedor', 'tamaño', 'ancho', 'largo', 'profundidad', 'peso', 'peso_envalado', 'stock', 'margen_ganancia', 'stock_minimo', 'cod_barras'])
+        # #df_articulos = pd.DataFrame(articulos)
+        # df_articulos.to_excel('articulos.xlsx', header=True, index=True)
+        # Crear un diccionario con los datos de los artículos
+        data = {
+            'codigo': [articulo.codigo for articulo in articulos],
+            'nombre': [articulo.nombre for articulo in articulos],
+            'modelo': [articulo.modelo for articulo in articulos],
+            'marca': [articulo.marca for articulo in articulos],
+            'categoria': [articulo.categoria for articulo in articulos],
+            'sku': [articulo.sku for articulo in articulos],
+            'color': [articulo.color for articulo in articulos],
+            'caracteristica': [articulo.caracteristica for articulo in articulos],
+            'precio_costo': [articulo.precio_costo for articulo in articulos],
+            'precio_venta': [articulo.precio_venta for articulo in articulos],
+            'iva': [articulo.iva for articulo in articulos],
+            'proveedor': [articulo.proveedor for articulo in articulos],
+            'tamaño': [articulo.tamaño for articulo in articulos],
+            'ancho': [articulo.ancho for articulo in articulos],
+            'largo': [articulo.largo for articulo in articulos],
+            'profundidad': [articulo.profundidad for articulo in articulos],
+            'peso': [articulo.peso for articulo in articulos],
+            'peso_envalado': [articulo.peso_envalado for articulo in articulos],
+            'stock': [articulo.stock for articulo in articulos],
+            'margen_ganancia': [articulo.margen_ganancia for articulo in articulos],
+            'stock_minimo': [articulo.stock_minimo for articulo in articulos],
+            'cod_barras': [articulo.cod_barras for articulo in articulos],
+        }
+        # Convertir el diccionario en un DataFrame de pandas
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Articulo", merge_cells=True, index=False)

@@ -1,3 +1,4 @@
+import pandas as pd
 from PyQt5.uic.properties import QtWidgets
 
 from conexion_db import Conexion
@@ -143,4 +144,40 @@ class ClienteDAO:
         except Exception as e:
             log.error(f'Error al importar clientes desde Excel: {e}')
             sys.exit(1)
+
+    @classmethod
+    def exportar_clientes(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._SELECCIONAR)
+            registros = cursor.fetchall()
+            clientes = []
+            for registro in registros:
+                cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14])
+                clientes.append(cliente)
+
+        data = {
+            'codigo': [cliente.codigo for cliente in clientes],
+            'nombre': [cliente.nombre for cliente in clientes],
+            'apellido': [cliente.apellido for cliente in clientes],
+            'dni': [cliente.dni for cliente in clientes],
+            'empresa': [cliente.empresa for cliente in clientes],
+            'cuit': [cliente.cuit for cliente in clientes],
+            'telefono': [cliente.telefono for cliente in clientes],
+            'email': [cliente.email for cliente in clientes],
+            'direccion': [cliente.direccion for cliente in clientes],
+            'numero': [cliente.numero for cliente in clientes],
+            'localidad': [cliente.localidad for cliente in clientes],
+            'provincia': [cliente.provincia for cliente in clientes],
+            'pais': [cliente.pais for cliente in clientes],
+            'observaciones': [cliente.observaciones for cliente in clientes],
+            'condiva': [cliente.condiva for cliente in clientes]
+
+        }
+        # Convertir el diccionario en un DataFrame de pandas
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Clientes", merge_cells=True, index=False)
 

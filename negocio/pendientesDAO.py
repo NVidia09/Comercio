@@ -1,3 +1,5 @@
+import pandas as pd
+
 from conexion_db import Conexion
 from cursor_del_pool import CursorDelPool
 from logger_base import log
@@ -99,5 +101,35 @@ class PendientesDAO:
             cursor.execute(cls._ELIMINAR, valores)
             log.debug(f'Datos de Pendiente eliminados: {pendiente}')
             return cursor.rowcount
+
+    @classmethod
+    def exportar_pendientes(cls, ruta_archivo):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._BUSCA_PENDIENTE_SALDO, )
+            registros = cursor.fetchall()
+            pendientes = []
+            for registro in registros:
+                pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                      registro[6], registro[7], registro[8], registro[9], registro[10])
+                pendientes.append(pendiente)
+
+        data = {
+            'codpendiente': [pendiente.codpendiente for pendiente in pendientes],
+            'serie': [pendiente.serie for pendiente in pendientes],
+            'codfactura': [pendiente.codfactura for pendiente in pendientes],
+            'estado': [pendiente.estado for pendiente in pendientes],
+            'fecha': [pendiente.fecha for pendiente in pendientes],
+            'codcliente': [pendiente.codcliente for pendiente in pendientes],
+            'nombre': [pendiente.nombre for pendiente in pendientes],
+            'importe': [pendiente.importe for pendiente in pendientes],
+            'pagos': [pendiente.pagos for pendiente in pendientes],
+            'saldo': [pendiente.saldo for pendiente in pendientes],
+            'fechacancelada': [pendiente.fechacancelada for pendiente in pendientes]
+        }
+        df = pd.DataFrame(data)
+
+        # Guardar el DataFrame en un archivo Excel
+        df.to_excel(ruta_archivo, sheet_name="Pendientes", merge_cells=True, index=False)
+
 
 
