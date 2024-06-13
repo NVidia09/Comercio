@@ -3349,8 +3349,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if item is not None:  # Check if the item is not None (i.e., the cell is not empty)
             if item.text() == 'COBRADA':
                 #suma_pagos = 0
-                    suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
-                    self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
+                suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
+                self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
             else:
                 self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
         #resto_pagar= suma_saldos_pendientes - suma_pagos
