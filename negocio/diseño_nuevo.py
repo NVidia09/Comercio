@@ -3955,7 +3955,7 @@ class Ui_MainWindow(object):
         self.label_55.setFont(font)
         self.label_55.setObjectName("label_55")
         self.lineEdit_serieNvaFactura = QtWidgets.QLineEdit(self.pgFactura)
-        self.lineEdit_serieNvaFactura.setGeometry(QtCore.QRect(1460, 120, 51, 22))
+        self.lineEdit_serieNvaFactura.setGeometry(QtCore.QRect(1460, 120, 61, 22))
         self.lineEdit_serieNvaFactura.setMinimumSize(QtCore.QSize(0, 20))
         font = QtGui.QFont()
         font.setFamily("Orbitron")
@@ -3967,7 +3967,7 @@ class Ui_MainWindow(object):
         self.lineEdit_serieNvaFactura.setReadOnly(True)
         self.lineEdit_serieNvaFactura.setObjectName("lineEdit_serieNvaFactura")
         self.lineEdit_numeroNvaFactura = QtWidgets.QLineEdit(self.pgFactura)
-        self.lineEdit_numeroNvaFactura.setGeometry(QtCore.QRect(1520, 120, 121, 22))
+        self.lineEdit_numeroNvaFactura.setGeometry(QtCore.QRect(1530, 120, 111, 22))
         self.lineEdit_numeroNvaFactura.setMinimumSize(QtCore.QSize(0, 20))
         font = QtGui.QFont()
         font.setFamily("Orbitron")
@@ -3979,7 +3979,7 @@ class Ui_MainWindow(object):
         self.lineEdit_numeroNvaFactura.setReadOnly(True)
         self.lineEdit_numeroNvaFactura.setObjectName("lineEdit_numeroNvaFactura")
         self.label_62 = QtWidgets.QLabel(self.pgFactura)
-        self.label_62.setGeometry(QtCore.QRect(1510, 120, 16, 16))
+        self.label_62.setGeometry(QtCore.QRect(1520, 120, 16, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -6974,7 +6974,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(7)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

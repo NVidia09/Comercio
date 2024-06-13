@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>7</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -8644,7 +8644,7 @@ color:#ffffff
           <rect>
            <x>1460</x>
            <y>120</y>
-           <width>51</width>
+           <width>61</width>
            <height>22</height>
           </rect>
          </property>
@@ -8675,9 +8675,9 @@ color:#ffffff
         <widget class="QLineEdit" name="lineEdit_numeroNvaFactura">
          <property name="geometry">
           <rect>
-           <x>1520</x>
+           <x>1530</x>
            <y>120</y>
-           <width>121</width>
+           <width>111</width>
            <height>22</height>
           </rect>
          </property>
@@ -8705,7 +8705,7 @@ color:#ffffff
         <widget class="QLabel" name="label_62">
          <property name="geometry">
           <rect>
-           <x>1510</x>
+           <x>1520</x>
            <y>120</y>
            <width>16</width>
            <height>16</height>

@@ -156,7 +156,7 @@ class Ui_ventana_Datos_Empresa(object):
 "}")
         self.bt_grabar_datos_empresa.setObjectName("bt_grabar_datos_empresa")
         self.bt_cancelar_datos_empresa = QtWidgets.QPushButton(ventana_Datos_Empresa)
-        self.bt_cancelar_datos_empresa.setGeometry(QtCore.QRect(250, 470, 93, 30))
+        self.bt_cancelar_datos_empresa.setGeometry(QtCore.QRect(240, 470, 93, 30))
         self.bt_cancelar_datos_empresa.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("Orbitron SemiBold")
@@ -183,6 +183,52 @@ class Ui_ventana_Datos_Empresa(object):
         self.lineEdit_categoria_empresa = QtWidgets.QLineEdit(ventana_Datos_Empresa)
         self.lineEdit_categoria_empresa.setGeometry(QtCore.QRect(180, 190, 261, 22))
         self.lineEdit_categoria_empresa.setObjectName("lineEdit_categoria_empresa")
+        self.bt_modificar_datos_empresa = QtWidgets.QPushButton(ventana_Datos_Empresa)
+        self.bt_modificar_datos_empresa.setGeometry(QtCore.QRect(20, 470, 93, 30))
+        self.bt_modificar_datos_empresa.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_modificar_datos_empresa.setFont(font)
+        self.bt_modificar_datos_empresa.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}")
+        self.bt_modificar_datos_empresa.setObjectName("bt_modificar_datos_empresa")
+        self.bt_eliminar_datos_empresa_2 = QtWidgets.QPushButton(ventana_Datos_Empresa)
+        self.bt_eliminar_datos_empresa_2.setGeometry(QtCore.QRect(350, 470, 93, 30))
+        self.bt_eliminar_datos_empresa_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_eliminar_datos_empresa_2.setFont(font)
+        self.bt_eliminar_datos_empresa_2.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}")
+        self.bt_eliminar_datos_empresa_2.setObjectName("bt_eliminar_datos_empresa_2")
+        self.bt_cambiar_datos_empresa = QtWidgets.QPushButton(ventana_Datos_Empresa)
+        self.bt_cambiar_datos_empresa.setGeometry(QtCore.QRect(400, 13, 30, 30))
+        self.bt_cambiar_datos_empresa.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_cambiar_datos_empresa.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_cambiar_datos_empresa.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("elipsis.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_cambiar_datos_empresa.setIcon(icon)
+        self.bt_cambiar_datos_empresa.setIconSize(QtCore.QSize(38, 38))
+        self.bt_cambiar_datos_empresa.setObjectName("bt_cambiar_datos_empresa")
 
         self.retranslateUi(ventana_Datos_Empresa)
         QtCore.QMetaObject.connectSlotsByName(ventana_Datos_Empresa)
@@ -203,6 +249,8 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_grabar_datos_empresa.setText(_translate("ventana_Datos_Empresa", "GRABAR"))
         self.bt_cancelar_datos_empresa.setText(_translate("ventana_Datos_Empresa", "CANCELAR"))
         self.label_10.setText(_translate("ventana_Datos_Empresa", "Categoría:"))
+        self.bt_modificar_datos_empresa.setText(_translate("ventana_Datos_Empresa", "MODIFICAR"))
+        self.bt_eliminar_datos_empresa_2.setText(_translate("ventana_Datos_Empresa", "ELIMINAR"))
 
 
 if __name__ == "__main__":

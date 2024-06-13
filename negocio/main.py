@@ -139,6 +139,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_ProveedorNvoArticulo.clicked.connect(self.seleccionar_proveedor)
 
         self.ui_ventana_empresa.bt_cancelar_datos_empresa.clicked.connect(self.Ui_ventana_Datos_Empresa.close)
+        self.ui_ventana_empresa.bt_modificar_datos_empresa.clicked.connect(self.modificar_datos_empresa)
+        self.ui_ventana_empresa.bt_cambiar_datos_empresa.clicked.connect(self.cambiar_datos_empresa)
+        self.ui_ventana_empresa.bt_eliminar_datos_empresa_2.clicked.connect(self.eliminar_datos_empresa)
+
 
 
         ##################################################################
@@ -1661,14 +1665,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #       LLENAR LOS DATOS DE LA FACTURA CON LOS DATOS DE LA EMPRESA DE LA BD#####3
         #
         ###########################################
-        empresa = EmpresaDAO.seleccionar()[0]
-        self.label_71.setText(empresa.razonsocial)
-        self.label_68.setText(empresa.nombrefantasia)
-        self.lineEdit_cuitNvaFactura.setText(str(empresa.cuit))
-        self.label_91.setText(empresa.categoria)
-        self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
-        self.lineEdit_inicioActNvaFactura_2.setText(empresa.inicioactividades)
-
+        empresa = EmpresaDAO.seleccionar()
+        if empresa:
+            empresa = empresa[0]
+            self.label_71.setText(empresa.razonsocial)
+            self.label_68.setText(empresa.nombrefantasia)
+            self.lineEdit_cuitNvaFactura.setText(str(empresa.cuit))
+            self.label_91.setText(empresa.categoria)
+            self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
+            self.lineEdit_inicioActNvaFactura_2.setText(empresa.inicioactividades)
+        else:
+            # Handle the case when there are no empresas
+            print("Primero debe cargar los datos de su empresa en Módulo Empresa para poder continuar.")
+            return
         domicilio = empresa.domicilio
         localidad = empresa.localidad
         provincia = empresa.provincia
@@ -1677,7 +1686,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
         self.label_72.setText(direccion_completa_empresa)
 
-        self.lineEdit_serieNvaFactura.setText("1")
+        self.lineEdit_serieNvaFactura.setText("1".zfill(5))
 
         query_NroFactura = "SELECT DISTINCT ON (codfactura) * FROM facturas ORDER BY codfactura DESC"
 
@@ -1690,9 +1699,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                   registro[6], registro[7], registro[8], registro[9], registro[10])
                 facturas.append(factura)
             if facturas:
-                self.lineEdit_numeroNvaFactura.setText(str(facturas[0].codfactura + 1))
+                self.lineEdit_numeroNvaFactura.setText(str(facturas[0].codfactura + 1).zfill(8))
             else:
-                self.lineEdit_numeroNvaFactura.setText("00000001")  # or handle the error as you see fit
+                self.lineEdit_numeroNvaFactura.setText("1".zfill(8))  # or handle the error as you see fit
             return facturas
 
 
@@ -1941,6 +1950,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_90.setText('A')
         elif self.lineEdit_IvaclienteNvaFactura.text() == 'CONSUMIDOR FINAL' and self.label_91.text() == 'RESPONSABLE INSCRIPTO':
             self.label_90.setText('B')
+        elif self.lineEdit_IvaclienteNvaFactura.text() == 'MONOTRIBUTO' and self.label_91.text() == 'RESPONSABLE INSCRIPTO':
+            self.label_90.setText('B')
         else:
             self.label_91.text() == 'MONOTRIBUTO'
             self.label_90.setText('C')
@@ -1986,16 +1997,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui_ventana_empresa.lineEdit_provincia_empresa.setText(query_vacia[0].provincia)
             self.ui_ventana_empresa.lineEdit_pais_empresa.setText(query_vacia[0].pais)
 
-        self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(True)
-        self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(True)
+            self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(True)
+        else:
+            self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(False)
 
 
         self.Ui_ventana_Datos_Empresa.bt = QtWidgets.QPushButton(self)
@@ -2008,6 +2030,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def ingresar_datos_empresa(self):
         query_vacia = EmpresaDAO.seleccionar_vacia()
         if query_vacia == []:
+            self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(False)
+            self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(False)
+
             razonsocial = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
             nombrefantasia = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
             cuit = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
@@ -2044,14 +2077,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def guardar_factura(self):
         # Obtener los datos de la factura
-        codfactura = self.lineEdit_numeroNvaFactura.text()
+        codfactura = str(self.lineEdit_numeroNvaFactura.text().zfill(8))
         codcliente = self.lineEdit_codclienteNvaFactura.text()
         cliente = self.lineEdit_clienteNvaFactura.text()
         fecha = self.lineEdit_fechaNvaFactura.text()
         subtotal = self.label_subtotal_factura.text()
         iva = self.label_iva_factura.text()
         total = self.label_total_Nva_factura.text()
-        serie = self.lineEdit_serieNvaFactura.text()
+        serie = self.lineEdit_serieNvaFactura.text().zfill(5)
         estado = self.comboBox_EstadoFactura.currentText()
         formapago = self.comboBox_FormaPagoFact.currentText()
         tipo = self.label_90.text()
@@ -2100,7 +2133,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_ingresar_msg2.setText('Factura ingresada correctamente')
         QMessageBox.information(self, "Factura Ingresada",
                                 "La factura ha sido ingresada correctamente", )
-
+        if self.comboBox_EstadoFactura.currentText() == 'COBRADA':
+            tipo = 'COBRO'
+            concepto = 'COBRO DE FACTURA N° ' + serie + '-' + codfactura
+            tarjeta = '-'
+            banco = '-'
+            query_caja = "INSERT INTO caja (fecha, tipo, concepto, formapago, tarjeta, banco, total) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+            valores = (fecha, tipo, concepto, formapago, tarjeta, banco, total)
+            with CursorDelPool() as cursor:
+                cursor.execute(query_caja, valores)
+            QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
 
 
 
@@ -2115,19 +2157,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         while self.tableWidgetDetalleNvaFactura.rowCount() > 0:
             self.tableWidgetDetalleNvaFactura.removeRow(0)
 
+        if self.comboBox_EstadoFactura.currentText() == 'COBRADA':
+            self.stackedWidget.setCurrentIndex(1)
+        else:
+            codpendiente = 10
+            nombre = cliente
+            importe = total
+            pagos = 0
+            saldo = total
+            fechacancelada = "0"
+            pendiente = Pendiente(codpendiente, serie, codfactura, estado, fecha, codcliente, nombre,  importe, pagos, saldo, fechacancelada)
 
-        codpendiente = 10
-        nombre = cliente
-        importe = total
-        pagos = 0
-        saldo = total
-        fechacancelada = "0"
-
-        pendiente = Pendiente(codpendiente, serie, codfactura, estado, fecha, codcliente, nombre,  importe, pagos, saldo, fechacancelada)
-
-        # Insertar la factura en la base de datos
-        pendientes_insertadas = PendientesDAO.insertar(pendiente)
-        log.debug(f'Facturas insertadas: {pendientes_insertadas}')
+            # Insertar la factura en la base de datos
+            pendientes_insertadas = PendientesDAO.insertar(pendiente)
+            log.debug(f'Facturas insertadas: {pendientes_insertadas}')
 
 
         # Cerrar la ventana
@@ -3299,14 +3342,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
             else:
+
                 self.lineEdit_SaldoPendienteCtaCte.setText('0')
             suma_pagos = sum(pendiente.pagos for pendiente in pendientes)
-            self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
+        item = self.tablaFacturasCliente_3.item(row, 6)
+        if item is not None:  # Check if the item is not None (i.e., the cell is not empty)
+            if item.text() == 'COBRADA':
+                #suma_pagos = 0
+                    suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
+                    self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
+            else:
+                self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
         #resto_pagar= suma_saldos_pendientes - suma_pagos
     ##############################################################################################
     ##############################################################################################
 
-        resto_pagar = volumen_compras - suma_pagos
+        resto_pagar = volumen_compras - float(suma_pagos)
 
         self.lineEdit_ImporteNvoCobro_2.setText(str(resto_pagar))
         self.lineEdit_SaldoPendienteCtaCte.setText(str(resto_pagar))
@@ -3345,6 +3396,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def cobrar_factura_pendiente_ctacte(self):
+        if not self.tablaFacturasCliente_3.selectedItems():
+            QMessageBox.information(self, "Seleccionar Factura a Cobrar",
+                                    "Tiene que seleccionar una Factura para poder continuar", )
+            return
+        if self.lineEdit_ImporteNvoCobro_2.text() == '' or self.lineEdit_ImporteNvoCobro_2.text() == '0' or self.lineEdit_ImporteNvoCobro_2.text() == '0.0':
+            QMessageBox.information(self, "La Factura no se puede cobrar",
+                                    "El cliente no tiene saldo pendiente por cobrar o ya ha sido cancelado")
+            return
+
         importe = float(self.lineEdit_ImporteNvoCobro_2.text())
         estado = ''
         fechacancelada = self.lineEdit_fechaCobrarFactura_5.text()
@@ -3657,6 +3717,46 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Mostrar un mensaje de éxito
         QMessageBox.information(self, "Facturas Pendientes Entrega Descargadas", "Las facturas sin entregar han sido descargadas correctamente", )
+
+
+    def cambiar_datos_empresa(self):
+        self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_cuit_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_categoria_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_iibb_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_domicilio_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_localidad_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(False)
+        self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(False)
+
+    def modificar_datos_empresa(self):
+        razonsocial = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
+        nombrefantasia = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
+        cuit = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
+        categoria = self.ui_ventana_empresa.lineEdit_categoria_empresa.text()
+        iibb = int(self.ui_ventana_empresa.lineEdit_iibb_empresa.text())
+        inicioactividades = self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.text()
+        domicilio = self.ui_ventana_empresa.lineEdit_domicilio_empresa.text()
+        localidad = self.ui_ventana_empresa.lineEdit_localidad_empresa.text()
+        provincia = self.ui_ventana_empresa.lineEdit_provincia_empresa.text()
+        pais = self.ui_ventana_empresa.lineEdit_pais_empresa.text()
+        direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
+        empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad,
+                          provincia, pais)
+        empresas_insertadas = EmpresaDAO.actualizar(empresa)
+        log.debug(f'Empresa actualizada: {empresas_insertadas}')
+        self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
+        QMessageBox.information(self, "Empresa Actualizada", "Los datos de la empresa han sido actualizados correctamente", )
+
+        self.Ui_ventana_Datos_Empresa.close()
+
+    def eliminar_datos_empresa(self):
+        empresa = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
+        EmpresaDAO.eliminar(empresa)
+        QMessageBox.information(self, "Datos Eliminados",
+                                "Los datos de la empresa han sido eliminados correctamente", )
 
 
 

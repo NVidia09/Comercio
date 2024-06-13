@@ -1,1 +1,1 @@
-{"_serie": "1", "_codfactura": "00000001", "_fecha": "12/06/2024, 02:02:37", "_codcliente": "20030", "_cliente": "ALEXIS GUTIERREZ", "_estado": "PENDIENTE", "_subtotal": "26470.0", "_iva": "2779.35", "_total": "29249.35", "_formapago": "CONTADO", "_tipo": "B", "_entrega": "RETIRA"}
+{"_serie": "00001", "_codfactura": "00000001", "_fecha": "13/06/2024, 03:19:38", "_codcliente": "20030", "_cliente": "ALEXIS GUTIERREZ", "_estado": "COBRADA", "_subtotal": "25000.0", "_iva": "2500.0", "_total": "27500.0", "_formapago": "CONTADO", "_tipo": "B", "_entrega": "RETIRA"}

@@ -52,11 +52,11 @@ class EmpresaDAO:
             return cursor.rowcount
 
     @classmethod
-    def eliminar(cls, empresa):
+    def eliminar(cls, razonsocial):
         with CursorDelPool() as cursor:
-            valores = (empresa.razonsocial,)
+            valores = (razonsocial,)
             cursor.execute(cls._ELIMINAR, valores)
-            log.debug(f'Datos de Empresa eliminados: {empresa}')
+            log.debug(f'Datos de Empresa eliminados: {razonsocial}')
             return cursor.rowcount
 
     @classmethod
