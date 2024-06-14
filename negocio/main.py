@@ -536,20 +536,59 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_BuscarArticuloNvaFactura1.clear()
         self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
+########################################################################################################
+        # nueva_lista = []
+        # for i in articulos:
+        #     precio_costo_str = i.precio_costo.replace('$', '').replace(',', '')
+        #     importe_iva = (float(precio_costo_str) * float(i.iva)) / 100
+        #     precio_unitario = float(precio_costo_str) + importe_iva
+        #     nueva_lista.append(
+        #         [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
+        #
+        # Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+        # self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+        # self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+        # self.verificarExistencias()
+        # self.actualizar_subtotal_factura()
+#######################################################################################################
+        # Obtén el código del artículo seleccionado
+        codigo_articulo_seleccionado = articulos[0].codigo
 
-        nueva_lista = []
-        for i in articulos:
-            precio_costo_str = i.precio_costo.replace('$', '').replace(',', '')
-            importe_iva = (float(precio_costo_str) * float(i.iva)) / 100
-            precio_unitario = float(precio_costo_str) + importe_iva
-            nueva_lista.append(
-                [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
 
-        Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
-        self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
-        self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
-        self.verificarExistencias()
-        self.actualizar_subtotal_factura()
+        # Variable para verificar si el artículo ya está en la tabla
+        articulo_ya_en_tabla = False
+
+        # Itera sobre cada fila
+        for row in range(num_rows):
+            # Obtén el código del artículo en la fila actual (asumiendo que es la columna 0)
+            codigo_articulo_en_tabla = self.tableWidgetDetalleNvaFactura.item(row, 0).text()
+
+            # Si el código del artículo seleccionado coincide con el código del artículo en la fila actual
+            if int(codigo_articulo_seleccionado) == int(codigo_articulo_en_tabla):
+                # Incrementa la cantidad del artículo en la fila actual (asumiendo que la cantidad es la columna 2)
+                cantidad_actual = int(self.tableWidgetDetalleNvaFactura.item(row, 2).text())
+                self.tableWidgetDetalleNvaFactura.setItem(row, 2, QtWidgets.QTableWidgetItem(str(cantidad_actual + 1)))
+
+                # Marca que el artículo ya está en la tabla
+                articulo_ya_en_tabla = True
+                break
+
+        # Si el artículo no está en la tabla, agrega una nueva fila
+        if not articulo_ya_en_tabla:
+            nueva_lista = []
+            for i in articulos:
+                precio_costo_str = i.precio_costo.replace('$', '').replace(',', '')
+                importe_iva = (float(precio_costo_str) * float(i.iva)) / 100
+                precio_unitario = float(precio_costo_str) + importe_iva
+                nueva_lista.append(
+                 [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
+            Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+            self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+            self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+            self.verificarExistencias()
+            self.actualizar_subtotal_factura()
 
 
     def buscar_articulo(self):
@@ -1793,27 +1832,54 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Obtén el número de filas en la tabla
         num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
         total = 0
+################################################################################################
+        # nueva_lista = []
+        # for i in lista:
+        #     nueva_lista.append([i[0], i[1], "1", i[5], i[7], importe_iva, precio_unitario, precio_unitario])
+        #     #self.label_subtotal_factura.setText(str(round(precio_unitario, 2)))
+        # print(nueva_lista)
+        # Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+        # self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+        # self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+        # self.verificarExistencias()
+        # self.actualizar_subtotal_factura()
+##################################################################################################
+        # Obtén el código del artículo seleccionado
+        codigo_articulo_seleccionado = lista[0][0]
+
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
+
+        # Variable para verificar si el artículo ya está en la tabla
+        articulo_ya_en_tabla = False
+
         # Itera sobre cada fila
-        # for row in range(num_rows):
-        #     # Obtén el valor de la columna "cantidad" (asumiendo que es la columna 0)
-        #     cantidad = float(self.tableWidgetDetalleNvaFactura.item(row, 2).text())
-        #
-        #     # Multiplica la cantidad por el precio unitario
-        #     total = cantidad * precio_unitario
-        #
-        #     # Si quieres actualizar un campo en la tabla con el total, puedes hacerlo aquí
-        #     # Por ejemplo, si el total debe ir en la columna 5, puedes hacer:
-        #     #self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(str(total)))
-        nueva_lista = []
-        for i in lista:
-            nueva_lista.append([i[0], i[1], "1", i[5], i[7], importe_iva, precio_unitario, precio_unitario])
-            #self.label_subtotal_factura.setText(str(round(precio_unitario, 2)))
-        print(nueva_lista)
-        Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+        for row in range(num_rows):
+            # Obtén el código del artículo en la fila actual (asumiendo que es la columna 0)
+            codigo_articulo_en_tabla = self.tableWidgetDetalleNvaFactura.item(row, 0).text()
+
+            # Si el código del artículo seleccionado coincide con el código del artículo en la fila actual
+            if codigo_articulo_seleccionado == codigo_articulo_en_tabla:
+                # Incrementa la cantidad del artículo en la fila actual (asumiendo que la cantidad es la columna 2)
+                cantidad_actual = int(self.tableWidgetDetalleNvaFactura.item(row, 2).text())
+                self.tableWidgetDetalleNvaFactura.setItem(row, 2, QtWidgets.QTableWidgetItem(str(cantidad_actual + 1)))
+
+                # Marca que el artículo ya está en la tabla
+                articulo_ya_en_tabla = True
+                break
+
+        # Si el artículo no está en la tabla, agrega una nueva fila
+        if not articulo_ya_en_tabla:
+            nueva_lista = []
+            for i in lista:
+                nueva_lista.append([i[0], i[1], "1", i[5], i[7], importe_iva, precio_unitario, precio_unitario])
+            Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
+
         self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
         self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
         self.verificarExistencias()
         self.actualizar_subtotal_factura()
+
 
 
     def verificarExistencias(self):
@@ -3346,13 +3412,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEdit_SaldoPendienteCtaCte.setText('0')
             suma_pagos = sum(pendiente.pagos for pendiente in pendientes)
         item = self.tablaFacturasCliente_3.item(row, 6)
-        if item is not None:  # Check if the item is not None (i.e., the cell is not empty)
-            if item.text() == 'COBRADA':
+        print(item)
+        # if item is not None:  # Check if the item is not None (i.e., the cell is not empty)
+        #     if item == 'COBRADA':
                 #suma_pagos = 0
-                    suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
-                    self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
-            else:
-                self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
+        #         suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
+        #         self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
+        # else:
+        #
+        #     self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(suma_pagos))
+        if suma_saldos_pendientes == 0:
+            self.lineEdit_CobradoCtaCte.setText(str(float(volumen_compras)))
+            self.lineEdit_SaldoPendienteCtaCte.setText('0')
+            suma_pagos = volumen_compras
+        else:
+            self.lineEdit_CobradoCtaCte.setText(str(float(suma_pagos)))
         #resto_pagar= suma_saldos_pendientes - suma_pagos
     ##############################################################################################
     ##############################################################################################
