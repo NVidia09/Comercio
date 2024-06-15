@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_ventana_Datos_Empresa(object):
     def setupUi(self, ventana_Datos_Empresa):
         ventana_Datos_Empresa.setObjectName("ventana_Datos_Empresa")
-        ventana_Datos_Empresa.resize(453, 510)
-        ventana_Datos_Empresa.setMinimumSize(QtCore.QSize(453, 510))
-        ventana_Datos_Empresa.setMaximumSize(QtCore.QSize(453, 510))
+        ventana_Datos_Empresa.resize(750, 510)
+        ventana_Datos_Empresa.setMinimumSize(QtCore.QSize(750, 510))
+        ventana_Datos_Empresa.setMaximumSize(QtCore.QSize(750, 510))
         ventana_Datos_Empresa.setStyleSheet("QLineEdit{\n"
 "border-radius:10px;\n"
 "border:2px solid rgb(114, 117, 126)\n"
@@ -229,6 +229,50 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_cambiar_datos_empresa.setIcon(icon)
         self.bt_cambiar_datos_empresa.setIconSize(QtCore.QSize(38, 38))
         self.bt_cambiar_datos_empresa.setObjectName("bt_cambiar_datos_empresa")
+        self.bt_subir_foto_empresa = QtWidgets.QPushButton(ventana_Datos_Empresa)
+        self.bt_subir_foto_empresa.setGeometry(QtCore.QRect(570, 315, 101, 28))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_subir_foto_empresa.setFont(font)
+        self.bt_subir_foto_empresa.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}")
+        self.bt_subir_foto_empresa.setObjectName("bt_subir_foto_empresa")
+        self.label_11 = QtWidgets.QLabel(ventana_Datos_Empresa)
+        self.label_11.setGeometry(QtCore.QRect(510, 100, 200, 200))
+        self.label_11.setMinimumSize(QtCore.QSize(200, 200))
+        self.label_11.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_11.setText("")
+        self.label_11.setPixmap(QtGui.QPixmap("no-disponible.png"))
+        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_11.setObjectName("label_11")
+        self.line = QtWidgets.QFrame(ventana_Datos_Empresa)
+        self.line.setGeometry(QtCore.QRect(510, 290, 201, 20))
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.line_2 = QtWidgets.QFrame(ventana_Datos_Empresa)
+        self.line_2.setGeometry(QtCore.QRect(510, 90, 201, 20))
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.line_3 = QtWidgets.QFrame(ventana_Datos_Empresa)
+        self.line_3.setGeometry(QtCore.QRect(500, 100, 20, 201))
+        self.line_3.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.line_4 = QtWidgets.QFrame(ventana_Datos_Empresa)
+        self.line_4.setGeometry(QtCore.QRect(700, 100, 20, 201))
+        self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_4.setObjectName("line_4")
 
         self.retranslateUi(ventana_Datos_Empresa)
         QtCore.QMetaObject.connectSlotsByName(ventana_Datos_Empresa)
@@ -251,6 +295,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.label_10.setText(_translate("ventana_Datos_Empresa", "Categoría:"))
         self.bt_modificar_datos_empresa.setText(_translate("ventana_Datos_Empresa", "MODIFICAR"))
         self.bt_eliminar_datos_empresa_2.setText(_translate("ventana_Datos_Empresa", "ELIMINAR"))
+        self.bt_subir_foto_empresa.setText(_translate("ventana_Datos_Empresa", "SUBIR LOGO"))
 
 
 if __name__ == "__main__":

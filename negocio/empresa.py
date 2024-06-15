@@ -15,6 +15,7 @@ class Empresa:
         self._pais = pais
         self._sucursales = sucursales
 
+
     def __str__(self):
         return f'''
             Razon Social: {self._razonsocial}
@@ -28,7 +29,7 @@ class Empresa:
             Provincia: {self._provincia}
             País: {self._pais}
             Sucursales: {self._sucursales}
-            
+                        
         '''
 
     @property
@@ -119,6 +120,9 @@ class Empresa:
     @sucursales.setter
     def sucursales(self, sucursales):
         self._sucursales = sucursales
+
+
+
 
 
 

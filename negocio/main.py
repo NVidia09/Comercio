@@ -1,11 +1,16 @@
+import base64
+import os
+import shutil
+
 import jpype
 import json2html
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtGui import QIntValidator, QPixmap, QImage, QIcon
 from PyQt5.QtWidgets import QMessageBox, QLineEdit, QDateEdit
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
 from reportlab.pdfgen import canvas
+from PyQt5.QtCore import QByteArray, QBuffer, QIODevice
 
 import json
 import openpyxl
@@ -74,9 +79,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_agregar_cliente_Fact = Ui_ventana_agregar_cliente_factura()
         self.ui_agregar_cliente_Fact.setupUi(self.dialogo_agregar_cliente_factura)
 
-        self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
-        self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
-        self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
+        # self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
+        # self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
+        # self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
 
         self.dateEdit_fechavencimientoFactura.setDate(datetime.now())
         self.setWindowFlag(Qt.FramelessWindowHint)
@@ -142,6 +147,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_empresa.bt_modificar_datos_empresa.clicked.connect(self.modificar_datos_empresa)
         self.ui_ventana_empresa.bt_cambiar_datos_empresa.clicked.connect(self.cambiar_datos_empresa)
         self.ui_ventana_empresa.bt_eliminar_datos_empresa_2.clicked.connect(self.eliminar_datos_empresa)
+        self.ui_ventana_empresa.bt_subir_foto_empresa.clicked.connect(self.subir_foto_empresa)
+        #self.factura_logo = QtWidgets.QLabel(self)
 
 
 
@@ -1713,6 +1720,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_91.setText(empresa.categoria)
             self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
             self.lineEdit_inicioActNvaFactura_2.setText(empresa.inicioactividades)
+
         else:
             # Handle the case when there are no empresas
             print("Primero debe cargar los datos de su empresa en Módulo Empresa para poder continuar.")
@@ -1724,6 +1732,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
         #self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
         self.label_72.setText(direccion_completa_empresa)
+        ############################################################################################
+        # CARGAMOS EL LOGO DE LA EMPRESA EN LA NUEVA FACTURA
+        # Crear un QPixmap con la ruta de la imagen
+        # self.factura_logo.clear()
+        # Crear un QPixmap con la ruta de la imagen
+        logo_pixmap = QPixmap('logo.png')
+
+        # Establecer el tamaño del QLabel
+        self.factura_logo.setFixedSize(100, 100)
+
+        # Escalar el QPixmap al tamaño deseado
+        logo_pixmap = logo_pixmap.scaled(self.factura_logo.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+
+        # Establecer el QPixmap en la QLabel
+        self.factura_logo.setPixmap(logo_pixmap)
+
+        # Mover la QLabel a la posición deseada
+        self.factura_logo.move(70, 60)
+
+
+        ###############################################################################
 
         self.lineEdit_serieNvaFactura.setText("1".zfill(5))
 
@@ -2042,8 +2071,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
         # self.ui_ventana_empresa = Ui_ventana_Datos_Empresa()
         # self.ui_ventana_empresa.setupUi(self.Ui_ventana_Datos_Empresa)
-        self.Ui_ventana_Datos_Empresa.setMaximumSize(453, 500)  # Ancho máximo 800, altura máxima 600
-        self.Ui_ventana_Datos_Empresa.setMinimumSize(453, 540)  # Ancho mínimo 400, altura mínima 300
+        self.Ui_ventana_Datos_Empresa.setMaximumSize(750, 510)  # Ancho máximo 800, altura máxima 600
+        self.Ui_ventana_Datos_Empresa.setMinimumSize(750, 510)  # Ancho mínimo 400, altura mínima 300
 
         query_vacia = EmpresaDAO.seleccionar_vacia()
         if not query_vacia == []:
@@ -2062,6 +2091,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui_ventana_empresa.lineEdit_localidad_empresa.setText(query_vacia[0].localidad)
             self.ui_ventana_empresa.lineEdit_provincia_empresa.setText(query_vacia[0].provincia)
             self.ui_ventana_empresa.lineEdit_pais_empresa.setText(query_vacia[0].pais)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap = QPixmap('logo.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap = logo_pixmap.scaled(self.ui_ventana_empresa.label_11.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.ui_ventana_empresa.label_11.setPixmap(logo_pixmap)
 
             self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(True)
             self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.setReadOnly(True)
@@ -2118,7 +2156,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             provincia = self.ui_ventana_empresa.lineEdit_provincia_empresa.text()
             pais = self.ui_ventana_empresa.lineEdit_pais_empresa.text()
             direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
-            empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais)
+            sucursales = 1
+
+
+
+
+            empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais, sucursales)
             empresas_insertadas = EmpresaDAO.insertar(empresa)
             log.debug(f'Empresas insertadas: {empresas_insertadas}')
             self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
@@ -3806,6 +3849,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(False)
 
     def modificar_datos_empresa(self):
+        global bArray
         razonsocial = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
         nombrefantasia = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
         cuit = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
@@ -3817,10 +3861,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         provincia = self.ui_ventana_empresa.lineEdit_provincia_empresa.text()
         pais = self.ui_ventana_empresa.lineEdit_pais_empresa.text()
         direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
-        empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad,
-                          provincia, pais)
-        empresas_insertadas = EmpresaDAO.actualizar(empresa)
-        log.debug(f'Empresa actualizada: {empresas_insertadas}')
+        sucursales = 1  # Add this line if you don't have a field for sucursales in your UI
+
+        #empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad,
+        #                  provincia, pais, bArray)
+        #empresas_insertadas = EmpresaDAO.actualizar(empresa)
+        query_actualizar = 'UPDATE empresa SET nombrefantasia=%s, cuit=%s, categoria=%s, iibb=%s, inicioactividades=%s, domicilio=%s, localidad=%s, provincia=%s, pais=%s, sucursales=%s WHERE razonsocial = %s'
+        valores = (nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais, sucursales, razonsocial)  # Use logo_bytes instead of bArray
+        with CursorDelPool() as cursor:
+            cursor.execute(query_actualizar, valores)
+        #log.debug(f'Empresa actualizada: {empresas_insertadas}')
         self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
         QMessageBox.information(self, "Empresa Actualizada", "Los datos de la empresa han sido actualizados correctamente", )
 
@@ -3832,7 +3882,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Datos Eliminados",
                                 "Los datos de la empresa han sido eliminados correctamente", )
 
+    def subir_foto_empresa(self):
+        # Obtener la ruta de la imagen seleccionada
+        ruta_imagen, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Subir Foto Empresa", "",
+                                                               "Archivos de Imagen (*.jpg *.png *.jpeg)")
 
+        # Verificar si el usuario seleccionó una imagen
+        if ruta_imagen:
+            # Subir la imagen
+            #EmpresaDAO.subir_foto(ruta_imagen)
+            pixmapImagen = QPixmap(ruta_imagen).scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            self.ui_ventana_empresa.label_11.setPixmap(pixmapImagen)
+
+            # Obtener la ruta del directorio del negocio
+            ruta_directorio_negocio = os.getcwd()
+
+            # Crear la ruta completa del nuevo archivo de imagen
+            # os.path.basename(ruta_imagen) devuelve el nombre del archivo de la ruta de la imagen
+            #ruta_nueva_imagen = os.path.join(ruta_directorio_negocio, os.path.basename(ruta_imagen))
+            # Crear la ruta completa del nuevo archivo de imagen
+            ruta_nueva_imagen = os.path.join(ruta_directorio_negocio, 'logo.png')
+
+            # Copiar la imagen a la carpeta del programa
+            shutil.copy(ruta_imagen, ruta_nueva_imagen)
+            # Mostrar un mensaje de éxito
+            QMessageBox.information(self, "Imagen Subida", "La imagen ha sido subida correctamente", )
 
 if __name__ == '__main__':
 

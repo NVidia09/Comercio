@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QByteArray, QIODevice, QBuffer
+
 from conexion_db import Conexion
 from cursor_del_pool import CursorDelPool
 from logger_base import log
@@ -46,7 +48,9 @@ class EmpresaDAO:
     @classmethod
     def actualizar(cls, empresa):
         with CursorDelPool() as cursor:
-            valores = (empresa.nombrefantasia, empresa.cuit, empresa.categoria, empresa.iibb, empresa.inicioactividades, empresa.domicilio, empresa.localidad, empresa.provincia, empresa.pais, empresa.sucursales, empresa.razonsocial)
+            valores = (empresa.nombrefantasia, empresa.cuit, empresa.categoria, empresa.iibb, empresa.inicioactividades,
+                       empresa.domicilio, empresa.localidad, empresa.provincia, empresa.pais, empresa.sucursales,
+                       empresa.razonsocial)
             cursor.execute(cls._ACTUALIZAR, valores)
             log.debug(f'Cliente actualizado: {empresa}')
             return cursor.rowcount
