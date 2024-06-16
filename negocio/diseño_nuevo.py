@@ -155,14 +155,14 @@ class Ui_MainWindow(object):
         self.pushButton_3.setIcon(icon7)
         self.pushButton_3.setIconSize(QtCore.QSize(100, 100))
         self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton_4.setGeometry(QtCore.QRect(550, 40, 131, 121))
-        self.pushButton_4.setText("")
+        self.bt_Presupuestos = QtWidgets.QPushButton(self.groupBox)
+        self.bt_Presupuestos.setGeometry(QtCore.QRect(550, 40, 131, 121))
+        self.bt_Presupuestos.setText("")
         icon8 = QtGui.QIcon()
         icon8.addPixmap(QtGui.QPixmap("factura (2).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_4.setIcon(icon8)
-        self.pushButton_4.setIconSize(QtCore.QSize(100, 100))
-        self.pushButton_4.setObjectName("pushButton_4")
+        self.bt_Presupuestos.setIcon(icon8)
+        self.bt_Presupuestos.setIconSize(QtCore.QSize(100, 100))
+        self.bt_Presupuestos.setObjectName("bt_Presupuestos")
         self.label_96 = QtWidgets.QLabel(self.groupBox)
         self.label_96.setGeometry(QtCore.QRect(40, 170, 131, 30))
         self.label_96.setMinimumSize(QtCore.QSize(0, 30))
@@ -6801,6 +6801,1674 @@ class Ui_MainWindow(object):
 "}")
         self.label_296.setObjectName("label_296")
         self.stackedWidget.addWidget(self.pgCtaCte)
+        self.pgPresupuestos = QtWidgets.QWidget()
+        self.pgPresupuestos.setObjectName("pgPresupuestos")
+        self.label_332 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_332.setGeometry(QtCore.QRect(980, 440, 111, 30))
+        self.label_332.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_332.setFont(font)
+        self.label_332.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_332.setObjectName("label_332")
+        self.groupBox_25 = QtWidgets.QGroupBox(self.pgPresupuestos)
+        self.groupBox_25.setGeometry(QtCore.QRect(1140, 620, 481, 261))
+        self.groupBox_25.setStyleSheet("QGroupBox{\n"
+"background-color: #FFF2F1FC;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"}")
+        self.groupBox_25.setTitle("")
+        self.groupBox_25.setObjectName("groupBox_25")
+        self.bt_CancelarFactura_4 = QtWidgets.QPushButton(self.groupBox_25)
+        self.bt_CancelarFactura_4.setGeometry(QtCore.QRect(320, 200, 131, 41))
+        self.bt_CancelarFactura_4.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_CancelarFactura_4.setFont(font)
+        self.bt_CancelarFactura_4.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_CancelarFactura_4.setObjectName("bt_CancelarFactura_4")
+        self.label_333 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_333.setGeometry(QtCore.QRect(20, 101, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_333.setFont(font)
+        self.label_333.setObjectName("label_333")
+        self.label_334 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_334.setGeometry(QtCore.QRect(20, 41, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_334.setFont(font)
+        self.label_334.setObjectName("label_334")
+        self.label_335 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_335.setGeometry(QtCore.QRect(20, 161, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_335.setFont(font)
+        self.label_335.setObjectName("label_335")
+        self.label_336 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_336.setGeometry(QtCore.QRect(140, 81, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_336.setFont(font)
+        self.label_336.setObjectName("label_336")
+        self.label_total_Nva_factura_4 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_total_Nva_factura_4.setGeometry(QtCore.QRect(180, 141, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_total_Nva_factura_4.setFont(font)
+        self.label_total_Nva_factura_4.setStyleSheet("QLabel{\n"
+"color:#aaff00;\n"
+"background-color:#000000\n"
+"}")
+        self.label_total_Nva_factura_4.setTextFormat(QtCore.Qt.AutoText)
+        self.label_total_Nva_factura_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_total_Nva_factura_4.setObjectName("label_total_Nva_factura_4")
+        self.label_iva_factura_4 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_iva_factura_4.setGeometry(QtCore.QRect(180, 81, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_iva_factura_4.setFont(font)
+        self.label_iva_factura_4.setStyleSheet("QLabel{\n"
+"color:#ffffff;\n"
+"background-color:#000000\n"
+"}")
+        self.label_iva_factura_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_iva_factura_4.setObjectName("label_iva_factura_4")
+        self.bt_Facturar_presupuesto_2 = QtWidgets.QPushButton(self.groupBox_25)
+        self.bt_Facturar_presupuesto_2.setGeometry(QtCore.QRect(150, 200, 131, 41))
+        self.bt_Facturar_presupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_Facturar_presupuesto_2.setFont(font)
+        self.bt_Facturar_presupuesto_2.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_Facturar_presupuesto_2.setObjectName("bt_Facturar_presupuesto_2")
+        self.label_337 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_337.setGeometry(QtCore.QRect(140, 141, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_337.setFont(font)
+        self.label_337.setObjectName("label_337")
+        self.label_subtotal_factura_4 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_subtotal_factura_4.setGeometry(QtCore.QRect(180, 21, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_subtotal_factura_4.setFont(font)
+        self.label_subtotal_factura_4.setStyleSheet("QLabel{\n"
+"color:#ffffff;\n"
+"background-color:#000000\n"
+"}")
+        self.label_subtotal_factura_4.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_subtotal_factura_4.setObjectName("label_subtotal_factura_4")
+        self.label_338 = QtWidgets.QLabel(self.groupBox_25)
+        self.label_338.setGeometry(QtCore.QRect(140, 21, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_338.setFont(font)
+        self.label_338.setObjectName("label_338")
+        self.lineEdit_telclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_telclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_telclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(1090, 480, 151, 30))
+        self.lineEdit_telclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_telclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_telclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_telclienteNvoPresupuesto_2.setObjectName("lineEdit_telclienteNvoPresupuesto_2")
+        self.label_339 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_339.setGeometry(QtCore.QRect(1310, 220, 381, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_339.setFont(font)
+        self.label_339.setObjectName("label_339")
+        self.label_340 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_340.setGeometry(QtCore.QRect(1400, 260, 71, 20))
+        self.label_340.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_340.setFont(font)
+        self.label_340.setObjectName("label_340")
+        self.lineEdit_fechaNvaFactura_6 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_fechaNvaFactura_6.setGeometry(QtCore.QRect(1500, 290, 181, 22))
+        self.lineEdit_fechaNvaFactura_6.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_fechaNvaFactura_6.setFont(font)
+        self.lineEdit_fechaNvaFactura_6.setObjectName("lineEdit_fechaNvaFactura_6")
+        self.label_341 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_341.setGeometry(QtCore.QRect(840, 540, 81, 20))
+        self.label_341.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_341.setFont(font)
+        self.label_341.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_341.setObjectName("label_341")
+        self.label_342 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_342.setGeometry(QtCore.QRect(610, 440, 141, 30))
+        self.label_342.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_342.setFont(font)
+        self.label_342.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_342.setObjectName("label_342")
+        self.comboBox_FormaPagoFact_4 = QtWidgets.QComboBox(self.pgPresupuestos)
+        self.comboBox_FormaPagoFact_4.setGeometry(QtCore.QRect(1230, 540, 141, 22))
+        self.comboBox_FormaPagoFact_4.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_FormaPagoFact_4.setObjectName("comboBox_FormaPagoFact_4")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.comboBox_FormaPagoFact_4.addItem("")
+        self.lineEdit_IvaclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(1440, 480, 211, 30))
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setObjectName("lineEdit_IvaclienteNvoPresupuesto_2")
+        self.lineEdit_IIBBNvaFactura_4 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_IIBBNvaFactura_4.setGeometry(QtCore.QRect(1550, 350, 131, 22))
+        self.lineEdit_IIBBNvaFactura_4.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_IIBBNvaFactura_4.setFont(font)
+        self.lineEdit_IIBBNvaFactura_4.setReadOnly(True)
+        self.lineEdit_IIBBNvaFactura_4.setObjectName("lineEdit_IIBBNvaFactura_4")
+        self.label_343 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_343.setGeometry(QtCore.QRect(1330, 440, 111, 30))
+        self.label_343.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_343.setFont(font)
+        self.label_343.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_343.setObjectName("label_343")
+        self.label_344 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_344.setGeometry(QtCore.QRect(1400, 290, 55, 20))
+        self.label_344.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_344.setFont(font)
+        self.label_344.setObjectName("label_344")
+        self.bt_seleccionarestadoNvaFactura_5 = QtWidgets.QPushButton(self.pgPresupuestos)
+        self.bt_seleccionarestadoNvaFactura_5.setGeometry(QtCore.QRect(1060, 535, 30, 30))
+        self.bt_seleccionarestadoNvaFactura_5.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionarestadoNvaFactura_5.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionarestadoNvaFactura_5.setText("")
+        self.bt_seleccionarestadoNvaFactura_5.setIcon(icon15)
+        self.bt_seleccionarestadoNvaFactura_5.setIconSize(QtCore.QSize(38, 38))
+        self.bt_seleccionarestadoNvaFactura_5.setObjectName("bt_seleccionarestadoNvaFactura_5")
+        self.lineEdit_numeroNvaFactura_6 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_numeroNvaFactura_6.setGeometry(QtCore.QRect(1570, 260, 111, 22))
+        self.lineEdit_numeroNvaFactura_6.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit_numeroNvaFactura_6.setFont(font)
+        self.lineEdit_numeroNvaFactura_6.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lineEdit_numeroNvaFactura_6.setReadOnly(True)
+        self.lineEdit_numeroNvaFactura_6.setObjectName("lineEdit_numeroNvaFactura_6")
+        self.label_345 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_345.setGeometry(QtCore.QRect(980, 480, 111, 30))
+        self.label_345.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_345.setFont(font)
+        self.label_345.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_345.setObjectName("label_345")
+        self.lineEdit_emailclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_emailclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_emailclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(1440, 440, 211, 30))
+        self.lineEdit_emailclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_emailclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_emailclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_emailclienteNvoPresupuesto_2.setObjectName("lineEdit_emailclienteNvoPresupuesto_2")
+        self.label_346 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_346.setGeometry(QtCore.QRect(250, 540, 121, 20))
+        self.label_346.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_346.setFont(font)
+        self.label_346.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_346.setObjectName("label_346")
+        self.comboBox_EstadoFactura_4 = QtWidgets.QComboBox(self.pgPresupuestos)
+        self.comboBox_EstadoFactura_4.setGeometry(QtCore.QRect(920, 540, 141, 22))
+        self.comboBox_EstadoFactura_4.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_EstadoFactura_4.setObjectName("comboBox_EstadoFactura_4")
+        self.comboBox_EstadoFactura_4.addItem("")
+        self.comboBox_EstadoFactura_4.addItem("")
+        self.lineEdit_cuitclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(750, 480, 151, 30))
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_cuitclienteNvoPresupuesto_2.setObjectName("lineEdit_cuitclienteNvoPresupuesto_2")
+        self.lineEdit_domclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_domclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_domclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(120, 480, 461, 30))
+        self.lineEdit_domclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_domclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_domclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_domclienteNvoPresupuesto_2.setObjectName("lineEdit_domclienteNvoPresupuesto_2")
+        self.label_347 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_347.setGeometry(QtCore.QRect(20, 540, 81, 20))
+        self.label_347.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_347.setFont(font)
+        self.label_347.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_347.setObjectName("label_347")
+        self.label_348 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_348.setGeometry(QtCore.QRect(1560, 260, 16, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_348.setFont(font)
+        self.label_348.setObjectName("label_348")
+        self.lineEdit_inicioActNvaFactura_5 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_inicioActNvaFactura_5.setGeometry(QtCore.QRect(1550, 380, 131, 22))
+        self.lineEdit_inicioActNvaFactura_5.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_inicioActNvaFactura_5.setFont(font)
+        self.lineEdit_inicioActNvaFactura_5.setReadOnly(True)
+        self.lineEdit_inicioActNvaFactura_5.setObjectName("lineEdit_inicioActNvaFactura_5")
+        self.label_349 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_349.setGeometry(QtCore.QRect(20, 480, 101, 30))
+        self.label_349.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_349.setFont(font)
+        self.label_349.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_349.setObjectName("label_349")
+        self.comboBox_Retira_4 = QtWidgets.QComboBox(self.pgPresupuestos)
+        self.comboBox_Retira_4.setGeometry(QtCore.QRect(1510, 540, 141, 22))
+        self.comboBox_Retira_4.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_Retira_4.setObjectName("comboBox_Retira_4")
+        self.comboBox_Retira_4.addItem("")
+        self.comboBox_Retira_4.addItem("")
+        self.label_350 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_350.setGeometry(QtCore.QRect(370, 540, 120, 30))
+        self.label_350.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_350.setFont(font)
+        self.label_350.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_350.setObjectName("label_350")
+        self.label_351 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_351.setGeometry(QtCore.QRect(100, 540, 120, 30))
+        self.label_351.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_351.setFont(font)
+        self.label_351.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_351.setObjectName("label_351")
+        self.label_352 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_352.setGeometry(QtCore.QRect(610, 480, 141, 30))
+        self.label_352.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_352.setFont(font)
+        self.label_352.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_352.setObjectName("label_352")
+        self.label_353 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_353.setGeometry(QtCore.QRect(1120, 540, 111, 20))
+        self.label_353.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_353.setFont(font)
+        self.label_353.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_353.setObjectName("label_353")
+        self.label_354 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_354.setGeometry(QtCore.QRect(1400, 320, 55, 20))
+        self.label_354.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_354.setFont(font)
+        self.label_354.setObjectName("label_354")
+        self.tableWidgetDetalleNvaFactura_4 = QtWidgets.QTableWidget(self.pgPresupuestos)
+        self.tableWidgetDetalleNvaFactura_4.setGeometry(QtCore.QRect(25, 620, 1051, 291))
+        self.tableWidgetDetalleNvaFactura_4.setStyleSheet("QTableView{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"}\n"
+"\n"
+"QTableView QTableCornerButton::section {\n"
+"       border-top-left-radius: 5px;\n"
+"    border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"QTableView QHeaderView::section::last:horizontal{\n"
+"    border-top-right-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"QTableView QHeaderView::section::first:horizontal {\n"
+"    border-top-left-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTableView ::section{\n"
+"    padding: 2px 5px ;\n"
+"    color: #D9D9D9 ;\n"
+"      qproperty-alignment: AlignCenter;\n"
+"    border: 1px solid grey;\n"
+"    background-color:#1f232a;\n"
+"    height: 35;\n"
+"}\n"
+"\n"
+"\n"
+" QTableView QHeaderView::section:vertical {\n"
+" border: 0.5px solid #6c6c6c;\n"
+"    padding: 1px;\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 10px; /* Tamaño de la letra */\n"
+"  padding: 1px;\n"
+"color: #FFEFEEFA;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/*\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"/*\n"
+"QTableView::item:selected:!focus {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"QHeaderView { \n"
+"qproperty-defaultAlignment: AlignCenter; \n"
+"}\n"
+"\n"
+"    /* centrar titulos y dar padding */\n"
+"QTableView QHeaderView::section:horizontal {\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 14px; /* Tamaño de la letra */\n"
+" /* padding: 2px 5px ;\n"
+"  margin: 2px;*/\n"
+"   text-align: center;\n"
+"    padding: 2px;\n"
+"  color: #FFEFEEFA;\n"
+" border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26;\n"
+"}\n"
+"")
+        self.tableWidgetDetalleNvaFactura_4.setObjectName("tableWidgetDetalleNvaFactura_4")
+        self.tableWidgetDetalleNvaFactura_4.setColumnCount(7)
+        self.tableWidgetDetalleNvaFactura_4.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_4.setHorizontalHeaderItem(6, item)
+        self.tableWidgetDetalleNvaFactura_4.horizontalHeader().setStretchLastSection(False)
+        self.label_355 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_355.setGeometry(QtCore.QRect(1400, 380, 141, 20))
+        self.label_355.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_355.setFont(font)
+        self.label_355.setObjectName("label_355")
+        self.dateEdit_fechavencimientoFactura_4 = QtWidgets.QDateEdit(self.pgPresupuestos)
+        self.dateEdit_fechavencimientoFactura_4.setGeometry(QtCore.QRect(690, 540, 121, 20))
+        self.dateEdit_fechavencimientoFactura_4.setMinimumSize(QtCore.QSize(0, 20))
+        self.dateEdit_fechavencimientoFactura_4.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.dateEdit_fechavencimientoFactura_4.setMinimumDate(QtCore.QDate(2024, 5, 25))
+        self.dateEdit_fechavencimientoFactura_4.setCalendarPopup(True)
+        self.dateEdit_fechavencimientoFactura_4.setTimeSpec(QtCore.Qt.LocalTime)
+        self.dateEdit_fechavencimientoFactura_4.setDate(QtCore.QDate(2024, 5, 25))
+        self.dateEdit_fechavencimientoFactura_4.setObjectName("dateEdit_fechavencimientoFactura_4")
+        self.label_356 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_356.setGeometry(QtCore.QRect(30, 590, 301, 31))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_356.setFont(font)
+        self.label_356.setObjectName("label_356")
+        self.lineEdit_serieNvaFactura_6 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_serieNvaFactura_6.setGeometry(QtCore.QRect(1500, 260, 61, 22))
+        self.lineEdit_serieNvaFactura_6.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit_serieNvaFactura_6.setFont(font)
+        self.lineEdit_serieNvaFactura_6.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lineEdit_serieNvaFactura_6.setReadOnly(True)
+        self.lineEdit_serieNvaFactura_6.setObjectName("lineEdit_serieNvaFactura_6")
+        self.bt_formaPagoNvaFactura_4 = QtWidgets.QPushButton(self.pgPresupuestos)
+        self.bt_formaPagoNvaFactura_4.setGeometry(QtCore.QRect(1370, 535, 30, 30))
+        self.bt_formaPagoNvaFactura_4.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_formaPagoNvaFactura_4.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_formaPagoNvaFactura_4.setText("")
+        self.bt_formaPagoNvaFactura_4.setIcon(icon15)
+        self.bt_formaPagoNvaFactura_4.setIconSize(QtCore.QSize(38, 38))
+        self.bt_formaPagoNvaFactura_4.setObjectName("bt_formaPagoNvaFactura_4")
+        self.label_357 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_357.setGeometry(QtCore.QRect(1400, 350, 101, 20))
+        self.label_357.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_357.setFont(font)
+        self.label_357.setObjectName("label_357")
+        self.label_358 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_358.setGeometry(QtCore.QRect(1330, 480, 111, 30))
+        self.label_358.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_358.setFont(font)
+        self.label_358.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_358.setObjectName("label_358")
+        self.lineEdit_dniclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_dniclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_dniclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(1090, 440, 151, 30))
+        self.lineEdit_dniclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_dniclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_dniclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_dniclienteNvoPresupuesto_2.setObjectName("lineEdit_dniclienteNvoPresupuesto_2")
+        self.lineEdit_clienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_clienteNvoPresupuesto_2.setGeometry(QtCore.QRect(120, 440, 381, 30))
+        self.lineEdit_clienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_clienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_clienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_clienteNvoPresupuesto_2.setObjectName("lineEdit_clienteNvoPresupuesto_2")
+        self.lineEdit_codclienteNvoPresupuesto_2 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_codclienteNvoPresupuesto_2.setEnabled(True)
+        self.lineEdit_codclienteNvoPresupuesto_2.setGeometry(QtCore.QRect(750, 440, 151, 30))
+        self.lineEdit_codclienteNvoPresupuesto_2.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_codclienteNvoPresupuesto_2.setFont(font)
+        self.lineEdit_codclienteNvoPresupuesto_2.setReadOnly(True)
+        self.lineEdit_codclienteNvoPresupuesto_2.setObjectName("lineEdit_codclienteNvoPresupuesto_2")
+        self.label_359 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_359.setGeometry(QtCore.QRect(1430, 540, 81, 20))
+        self.label_359.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_359.setFont(font)
+        self.label_359.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_359.setObjectName("label_359")
+        self.label_360 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_360.setGeometry(QtCore.QRect(20, 440, 101, 30))
+        self.label_360.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_360.setFont(font)
+        self.label_360.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_360.setObjectName("label_360")
+        self.lineEdit_cuitNvaFactura_4 = QtWidgets.QLineEdit(self.pgPresupuestos)
+        self.lineEdit_cuitNvaFactura_4.setGeometry(QtCore.QRect(1500, 320, 181, 22))
+        self.lineEdit_cuitNvaFactura_4.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_cuitNvaFactura_4.setFont(font)
+        self.lineEdit_cuitNvaFactura_4.setReadOnly(True)
+        self.lineEdit_cuitNvaFactura_4.setObjectName("lineEdit_cuitNvaFactura_4")
+        self.label_361 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_361.setGeometry(QtCore.QRect(530, 540, 161, 20))
+        self.label_361.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_361.setFont(font)
+        self.label_361.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_361.setObjectName("label_361")
+        self.line_13 = QtWidgets.QFrame(self.pgPresupuestos)
+        self.line_13.setGeometry(QtCore.QRect(10, 570, 1671, 20))
+        self.line_13.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_13.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_13.setObjectName("line_13")
+        self.line_14 = QtWidgets.QFrame(self.pgPresupuestos)
+        self.line_14.setGeometry(QtCore.QRect(10, 410, 1671, 20))
+        self.line_14.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_14.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_14.setObjectName("line_14")
+        self.label_362 = QtWidgets.QLabel(self.pgPresupuestos)
+        self.label_362.setGeometry(QtCore.QRect(15, 10, 301, 31))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_362.setFont(font)
+        self.label_362.setObjectName("label_362")
+        self.tableWidgetPresupuestos = QtWidgets.QTableWidget(self.pgPresupuestos)
+        self.tableWidgetPresupuestos.setGeometry(QtCore.QRect(10, 40, 1051, 351))
+        self.tableWidgetPresupuestos.setStyleSheet("QTableView{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"}\n"
+"\n"
+"QTableView QTableCornerButton::section {\n"
+"       border-top-left-radius: 5px;\n"
+"    border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"QTableView QHeaderView::section::last:horizontal{\n"
+"    border-top-right-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"QTableView QHeaderView::section::first:horizontal {\n"
+"    border-top-left-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTableView ::section{\n"
+"    padding: 2px 5px ;\n"
+"    color: #D9D9D9 ;\n"
+"      qproperty-alignment: AlignCenter;\n"
+"    border: 1px solid grey;\n"
+"    background-color:#1f232a;\n"
+"    height: 35;\n"
+"}\n"
+"\n"
+"\n"
+" QTableView QHeaderView::section:vertical {\n"
+" border: 0.5px solid #6c6c6c;\n"
+"    padding: 1px;\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 10px; /* Tamaño de la letra */\n"
+"  padding: 1px;\n"
+"color: #FFEFEEFA;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/*\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"/*\n"
+"QTableView::item:selected:!focus {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"QHeaderView { \n"
+"qproperty-defaultAlignment: AlignCenter; \n"
+"}\n"
+"\n"
+"    /* centrar titulos y dar padding */\n"
+"QTableView QHeaderView::section:horizontal {\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 14px; /* Tamaño de la letra */\n"
+" /* padding: 2px 5px ;\n"
+"  margin: 2px;*/\n"
+"   text-align: center;\n"
+"    padding: 2px;\n"
+"  color: #FFEFEEFA;\n"
+" border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26;\n"
+"}\n"
+"")
+        self.tableWidgetPresupuestos.setObjectName("tableWidgetPresupuestos")
+        self.tableWidgetPresupuestos.setColumnCount(8)
+        self.tableWidgetPresupuestos.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetPresupuestos.setHorizontalHeaderItem(7, item)
+        self.tableWidgetPresupuestos.horizontalHeader().setStretchLastSection(False)
+        self.groupBox_26 = QtWidgets.QGroupBox(self.pgPresupuestos)
+        self.groupBox_26.setGeometry(QtCore.QRect(1100, 70, 471, 121))
+        self.groupBox_26.setStyleSheet("QGroupBox{\n"
+"background-color: #FFF2F1FC;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"}")
+        self.groupBox_26.setTitle("")
+        self.groupBox_26.setObjectName("groupBox_26")
+        self.bt_Eliminar_Presupuesto = QtWidgets.QPushButton(self.groupBox_26)
+        self.bt_Eliminar_Presupuesto.setGeometry(QtCore.QRect(320, 40, 131, 41))
+        self.bt_Eliminar_Presupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_Eliminar_Presupuesto.setFont(font)
+        self.bt_Eliminar_Presupuesto.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_Eliminar_Presupuesto.setObjectName("bt_Eliminar_Presupuesto")
+        self.bt_Nuevo_presupuesto_3 = QtWidgets.QPushButton(self.groupBox_26)
+        self.bt_Nuevo_presupuesto_3.setGeometry(QtCore.QRect(20, 40, 131, 41))
+        self.bt_Nuevo_presupuesto_3.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_Nuevo_presupuesto_3.setFont(font)
+        self.bt_Nuevo_presupuesto_3.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_Nuevo_presupuesto_3.setObjectName("bt_Nuevo_presupuesto_3")
+        self.bt_Nuevo_presupuesto_4 = QtWidgets.QPushButton(self.groupBox_26)
+        self.bt_Nuevo_presupuesto_4.setGeometry(QtCore.QRect(170, 40, 131, 41))
+        self.bt_Nuevo_presupuesto_4.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_Nuevo_presupuesto_4.setFont(font)
+        self.bt_Nuevo_presupuesto_4.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_Nuevo_presupuesto_4.setObjectName("bt_Nuevo_presupuesto_4")
+        self.stackedWidget.addWidget(self.pgPresupuestos)
+        self.pgNuevoPresupuesto = QtWidgets.QWidget()
+        self.pgNuevoPresupuesto.setObjectName("pgNuevoPresupuesto")
+        self.lineEdit_dniclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_dniclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_dniclienteNvoPresupuesto.setGeometry(QtCore.QRect(1090, 290, 151, 30))
+        self.lineEdit_dniclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_dniclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_dniclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_dniclienteNvoPresupuesto.setObjectName("lineEdit_dniclienteNvoPresupuesto")
+        self.lineEdit_telclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_telclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_telclienteNvoPresupuesto.setGeometry(QtCore.QRect(1090, 330, 151, 30))
+        self.lineEdit_telclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_telclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_telclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_telclienteNvoPresupuesto.setObjectName("lineEdit_telclienteNvoPresupuesto")
+        self.label_297 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_297.setGeometry(QtCore.QRect(150, 190, 511, 16))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_297.setFont(font)
+        self.label_297.setObjectName("label_297")
+        self.label_298 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_298.setGeometry(QtCore.QRect(250, 390, 121, 20))
+        self.label_298.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_298.setFont(font)
+        self.label_298.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_298.setObjectName("label_298")
+        self.bt_seleccionaClienteNvaFactura_3 = QtWidgets.QPushButton(self.pgNuevoPresupuesto)
+        self.bt_seleccionaClienteNvaFactura_3.setGeometry(QtCore.QRect(500, 290, 30, 30))
+        self.bt_seleccionaClienteNvaFactura_3.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionaClienteNvaFactura_3.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionaClienteNvaFactura_3.setText("")
+        self.bt_seleccionaClienteNvaFactura_3.setIcon(icon15)
+        self.bt_seleccionaClienteNvaFactura_3.setIconSize(QtCore.QSize(38, 38))
+        self.bt_seleccionaClienteNvaFactura_3.setObjectName("bt_seleccionaClienteNvaFactura_3")
+        self.label_299 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_299.setGeometry(QtCore.QRect(610, 330, 141, 30))
+        self.label_299.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_299.setFont(font)
+        self.label_299.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_299.setObjectName("label_299")
+        self.label_300 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_300.setGeometry(QtCore.QRect(1330, 290, 111, 30))
+        self.label_300.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_300.setFont(font)
+        self.label_300.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_300.setObjectName("label_300")
+        self.bt_LectorBarras_3 = QtWidgets.QPushButton(self.pgNuevoPresupuesto)
+        self.bt_LectorBarras_3.setGeometry(QtCore.QRect(490, 443, 81, 41))
+        self.bt_LectorBarras_3.setText("")
+        self.bt_LectorBarras_3.setIcon(icon11)
+        self.bt_LectorBarras_3.setIconSize(QtCore.QSize(40, 40))
+        self.bt_LectorBarras_3.setObjectName("bt_LectorBarras_3")
+        self.label_301 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_301.setGeometry(QtCore.QRect(980, 290, 111, 30))
+        self.label_301.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_301.setFont(font)
+        self.label_301.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_301.setObjectName("label_301")
+        self.label_302 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_302.setGeometry(QtCore.QRect(30, 500, 301, 31))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_302.setFont(font)
+        self.label_302.setObjectName("label_302")
+        self.tableWidgetDetalleNvaFactura_3 = QtWidgets.QTableWidget(self.pgNuevoPresupuesto)
+        self.tableWidgetDetalleNvaFactura_3.setGeometry(QtCore.QRect(25, 540, 1051, 331))
+        self.tableWidgetDetalleNvaFactura_3.setStyleSheet("QTableView{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"}\n"
+"\n"
+"QTableView QTableCornerButton::section {\n"
+"       border-top-left-radius: 5px;\n"
+"    border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"QTableView QHeaderView::section::last:horizontal{\n"
+"    border-top-right-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"QTableView QHeaderView::section::first:horizontal {\n"
+"    border-top-left-radius: 5px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+" QTableView ::section{\n"
+"    padding: 2px 5px ;\n"
+"    color: #D9D9D9 ;\n"
+"      qproperty-alignment: AlignCenter;\n"
+"    border: 1px solid grey;\n"
+"    background-color:#1f232a;\n"
+"    height: 35;\n"
+"}\n"
+"\n"
+"\n"
+" QTableView QHeaderView::section:vertical {\n"
+" border: 0.5px solid #6c6c6c;\n"
+"    padding: 1px;\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 10px; /* Tamaño de la letra */\n"
+"  padding: 1px;\n"
+"color: #FFEFEEFA;\n"
+" background-color: #BF060C26; \n"
+"}\n"
+"\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/*\n"
+"QTableView::item:selected {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"/*\n"
+"QTableView::item:selected:!focus {\n"
+"    background-color:#FF1EB0ED;\n"
+"    color: white;\n"
+"}\n"
+"*/\n"
+"\n"
+"QHeaderView { \n"
+"qproperty-defaultAlignment: AlignCenter; \n"
+"}\n"
+"\n"
+"    /* centrar titulos y dar padding */\n"
+"QTableView QHeaderView::section:horizontal {\n"
+"  font-weight: bold; /* Poner en negrita */\n"
+"  font-size: 14px; /* Tamaño de la letra */\n"
+" /* padding: 2px 5px ;\n"
+"  margin: 2px;*/\n"
+"   text-align: center;\n"
+"    padding: 2px;\n"
+"  color: #FFEFEEFA;\n"
+" border: 0.5px solid #6c6c6c;\n"
+" background-color: #BF060C26;\n"
+"}\n"
+"")
+        self.tableWidgetDetalleNvaFactura_3.setObjectName("tableWidgetDetalleNvaFactura_3")
+        self.tableWidgetDetalleNvaFactura_3.setColumnCount(8)
+        self.tableWidgetDetalleNvaFactura_3.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetDetalleNvaFactura_3.setHorizontalHeaderItem(7, item)
+        self.tableWidgetDetalleNvaFactura_3.horizontalHeader().setStretchLastSection(False)
+        self.lineEdit_codclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_codclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_codclienteNvoPresupuesto.setGeometry(QtCore.QRect(750, 290, 151, 30))
+        self.lineEdit_codclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_codclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_codclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_codclienteNvoPresupuesto.setObjectName("lineEdit_codclienteNvoPresupuesto")
+        self.label_303 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_303.setGeometry(QtCore.QRect(1330, 330, 111, 30))
+        self.label_303.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_303.setFont(font)
+        self.label_303.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_303.setObjectName("label_303")
+        self.label_304 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_304.setGeometry(QtCore.QRect(150, 230, 581, 16))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_304.setFont(font)
+        self.label_304.setObjectName("label_304")
+        self.bt_seleccionarestadoNvaFactura_4 = QtWidgets.QPushButton(self.pgNuevoPresupuesto)
+        self.bt_seleccionarestadoNvaFactura_4.setGeometry(QtCore.QRect(1060, 385, 30, 30))
+        self.bt_seleccionarestadoNvaFactura_4.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionarestadoNvaFactura_4.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_seleccionarestadoNvaFactura_4.setText("")
+        self.bt_seleccionarestadoNvaFactura_4.setIcon(icon15)
+        self.bt_seleccionarestadoNvaFactura_4.setIconSize(QtCore.QSize(38, 38))
+        self.bt_seleccionarestadoNvaFactura_4.setObjectName("bt_seleccionarestadoNvaFactura_4")
+        self.factura_logo_2 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.factura_logo_2.setGeometry(QtCore.QRect(90, 0, 150, 150))
+        self.factura_logo_2.setMinimumSize(QtCore.QSize(150, 150))
+        self.factura_logo_2.setMaximumSize(QtCore.QSize(150, 150))
+        self.factura_logo_2.setText("")
+        self.factura_logo_2.setPixmap(QtGui.QPixmap("no-disponible.png"))
+        self.factura_logo_2.setScaledContents(True)
+        self.factura_logo_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.factura_logo_2.setObjectName("factura_logo_2")
+        self.label_305 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_305.setGeometry(QtCore.QRect(840, 390, 81, 20))
+        self.label_305.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_305.setFont(font)
+        self.label_305.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_305.setObjectName("label_305")
+        self.label_306 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_306.setGeometry(QtCore.QRect(1120, 390, 111, 20))
+        self.label_306.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_306.setFont(font)
+        self.label_306.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_306.setObjectName("label_306")
+        self.label_307 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_307.setGeometry(QtCore.QRect(980, 330, 111, 30))
+        self.label_307.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_307.setFont(font)
+        self.label_307.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_307.setObjectName("label_307")
+        self.label_308 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_308.setGeometry(QtCore.QRect(20, 150, 461, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_308.setFont(font)
+        self.label_308.setObjectName("label_308")
+        self.label_309 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_309.setGeometry(QtCore.QRect(370, 390, 120, 30))
+        self.label_309.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_309.setFont(font)
+        self.label_309.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_309.setObjectName("label_309")
+        self.dateEdit_fechavencimientoFactura_3 = QtWidgets.QDateEdit(self.pgNuevoPresupuesto)
+        self.dateEdit_fechavencimientoFactura_3.setGeometry(QtCore.QRect(690, 390, 121, 20))
+        self.dateEdit_fechavencimientoFactura_3.setMinimumSize(QtCore.QSize(0, 20))
+        self.dateEdit_fechavencimientoFactura_3.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.dateEdit_fechavencimientoFactura_3.setMinimumDate(QtCore.QDate(2024, 5, 25))
+        self.dateEdit_fechavencimientoFactura_3.setCalendarPopup(True)
+        self.dateEdit_fechavencimientoFactura_3.setTimeSpec(QtCore.Qt.LocalTime)
+        self.dateEdit_fechavencimientoFactura_3.setDate(QtCore.QDate(2024, 5, 25))
+        self.dateEdit_fechavencimientoFactura_3.setObjectName("dateEdit_fechavencimientoFactura_3")
+        self.lineEdit_IvaclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_IvaclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_IvaclienteNvoPresupuesto.setGeometry(QtCore.QRect(1440, 330, 211, 30))
+        self.lineEdit_IvaclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_IvaclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_IvaclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_IvaclienteNvoPresupuesto.setObjectName("lineEdit_IvaclienteNvoPresupuesto")
+        self.comboBox_Retira_3 = QtWidgets.QComboBox(self.pgNuevoPresupuesto)
+        self.comboBox_Retira_3.setGeometry(QtCore.QRect(1510, 390, 141, 22))
+        self.comboBox_Retira_3.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_Retira_3.setObjectName("comboBox_Retira_3")
+        self.comboBox_Retira_3.addItem("")
+        self.comboBox_Retira_3.addItem("")
+        self.label_310 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_310.setGeometry(QtCore.QRect(20, 230, 101, 20))
+        self.label_310.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_310.setFont(font)
+        self.label_310.setObjectName("label_310")
+        self.label_311 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_311.setGeometry(QtCore.QRect(20, 330, 101, 30))
+        self.label_311.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_311.setFont(font)
+        self.label_311.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_311.setObjectName("label_311")
+        self.comboBox_FormaPagoFact_3 = QtWidgets.QComboBox(self.pgNuevoPresupuesto)
+        self.comboBox_FormaPagoFact_3.setGeometry(QtCore.QRect(1230, 390, 141, 22))
+        self.comboBox_FormaPagoFact_3.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_FormaPagoFact_3.setObjectName("comboBox_FormaPagoFact_3")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.comboBox_FormaPagoFact_3.addItem("")
+        self.bt_formaPagoNvaFactura_3 = QtWidgets.QPushButton(self.pgNuevoPresupuesto)
+        self.bt_formaPagoNvaFactura_3.setGeometry(QtCore.QRect(1370, 385, 30, 30))
+        self.bt_formaPagoNvaFactura_3.setMinimumSize(QtCore.QSize(30, 30))
+        self.bt_formaPagoNvaFactura_3.setMaximumSize(QtCore.QSize(30, 30))
+        self.bt_formaPagoNvaFactura_3.setText("")
+        self.bt_formaPagoNvaFactura_3.setIcon(icon15)
+        self.bt_formaPagoNvaFactura_3.setIconSize(QtCore.QSize(38, 38))
+        self.bt_formaPagoNvaFactura_3.setObjectName("bt_formaPagoNvaFactura_3")
+        self.lineEdit_clienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_clienteNvoPresupuesto.setGeometry(QtCore.QRect(120, 290, 381, 30))
+        self.lineEdit_clienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_clienteNvoPresupuesto.setFont(font)
+        self.lineEdit_clienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_clienteNvoPresupuesto.setObjectName("lineEdit_clienteNvoPresupuesto")
+        self.lineEdit_domclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_domclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_domclienteNvoPresupuesto.setGeometry(QtCore.QRect(120, 330, 461, 30))
+        self.lineEdit_domclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_domclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_domclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_domclienteNvoPresupuesto.setObjectName("lineEdit_domclienteNvoPresupuesto")
+        self.label_312 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_312.setGeometry(QtCore.QRect(20, 290, 101, 30))
+        self.label_312.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_312.setFont(font)
+        self.label_312.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_312.setObjectName("label_312")
+        self.label_313 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_313.setGeometry(QtCore.QRect(20, 190, 111, 20))
+        self.label_313.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_313.setFont(font)
+        self.label_313.setObjectName("label_313")
+        self.lineEdit_BuscarArticuloNvaFactura1_3 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setGeometry(QtCore.QRect(22, 450, 361, 30))
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setMinimumSize(QtCore.QSize(0, 30))
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setPalette(palette)
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setStyleSheet("QLineEdit{\n"
+"background-color:#ffffff;\n"
+"}")
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setClearButtonEnabled(True)
+        self.lineEdit_BuscarArticuloNvaFactura1_3.setObjectName("lineEdit_BuscarArticuloNvaFactura1_3")
+        self.lineEdit_cuitclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_cuitclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_cuitclienteNvoPresupuesto.setGeometry(QtCore.QRect(750, 330, 151, 30))
+        self.lineEdit_cuitclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_cuitclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_cuitclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_cuitclienteNvoPresupuesto.setObjectName("lineEdit_cuitclienteNvoPresupuesto")
+        self.label_314 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_314.setGeometry(QtCore.QRect(100, 390, 120, 30))
+        self.label_314.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.label_314.setFont(font)
+        self.label_314.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.label_314.setObjectName("label_314")
+        self.bt_AgregarArticuloNvaFactura_3 = QtWidgets.QPushButton(self.pgNuevoPresupuesto)
+        self.bt_AgregarArticuloNvaFactura_3.setGeometry(QtCore.QRect(390, 450, 93, 30))
+        self.bt_AgregarArticuloNvaFactura_3.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_AgregarArticuloNvaFactura_3.setFont(font)
+        self.bt_AgregarArticuloNvaFactura_3.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_AgregarArticuloNvaFactura_3.setObjectName("bt_AgregarArticuloNvaFactura_3")
+        self.label_315 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_315.setGeometry(QtCore.QRect(20, 390, 81, 20))
+        self.label_315.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_315.setFont(font)
+        self.label_315.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_315.setObjectName("label_315")
+        self.comboBox_EstadoFactura_3 = QtWidgets.QComboBox(self.pgNuevoPresupuesto)
+        self.comboBox_EstadoFactura_3.setGeometry(QtCore.QRect(920, 390, 141, 22))
+        self.comboBox_EstadoFactura_3.setMinimumSize(QtCore.QSize(0, 20))
+        self.comboBox_EstadoFactura_3.setObjectName("comboBox_EstadoFactura_3")
+        self.comboBox_EstadoFactura_3.addItem("")
+        self.comboBox_EstadoFactura_3.addItem("")
+        self.label_316 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_316.setGeometry(QtCore.QRect(530, 390, 161, 20))
+        self.label_316.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_316.setFont(font)
+        self.label_316.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_316.setObjectName("label_316")
+        self.label_317 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_317.setGeometry(QtCore.QRect(1430, 390, 81, 20))
+        self.label_317.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_317.setFont(font)
+        self.label_317.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_317.setObjectName("label_317")
+        self.label_318 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_318.setGeometry(QtCore.QRect(610, 290, 141, 30))
+        self.label_318.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_318.setFont(font)
+        self.label_318.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_318.setObjectName("label_318")
+        self.lineEdit_emailclienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_emailclienteNvoPresupuesto.setEnabled(True)
+        self.lineEdit_emailclienteNvoPresupuesto.setGeometry(QtCore.QRect(1440, 290, 211, 30))
+        self.lineEdit_emailclienteNvoPresupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_emailclienteNvoPresupuesto.setFont(font)
+        self.lineEdit_emailclienteNvoPresupuesto.setReadOnly(True)
+        self.lineEdit_emailclienteNvoPresupuesto.setObjectName("lineEdit_emailclienteNvoPresupuesto")
+        self.groupBox_24 = QtWidgets.QGroupBox(self.pgNuevoPresupuesto)
+        self.groupBox_24.setGeometry(QtCore.QRect(1140, 560, 481, 291))
+        self.groupBox_24.setStyleSheet("QGroupBox{\n"
+"background-color: #FFF2F1FC;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"}")
+        self.groupBox_24.setTitle("")
+        self.groupBox_24.setObjectName("groupBox_24")
+        self.bt_CancelarFactura_3 = QtWidgets.QPushButton(self.groupBox_24)
+        self.bt_CancelarFactura_3.setGeometry(QtCore.QRect(320, 230, 131, 41))
+        self.bt_CancelarFactura_3.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_CancelarFactura_3.setFont(font)
+        self.bt_CancelarFactura_3.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_CancelarFactura_3.setObjectName("bt_CancelarFactura_3")
+        self.label_319 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_319.setGeometry(QtCore.QRect(20, 101, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_319.setFont(font)
+        self.label_319.setObjectName("label_319")
+        self.label_320 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_320.setGeometry(QtCore.QRect(20, 41, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_320.setFont(font)
+        self.label_320.setObjectName("label_320")
+        self.label_321 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_321.setGeometry(QtCore.QRect(20, 161, 121, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(12)
+        self.label_321.setFont(font)
+        self.label_321.setObjectName("label_321")
+        self.label_322 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_322.setGeometry(QtCore.QRect(140, 81, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_322.setFont(font)
+        self.label_322.setObjectName("label_322")
+        self.label_total_Nva_factura_3 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_total_Nva_factura_3.setGeometry(QtCore.QRect(180, 141, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_total_Nva_factura_3.setFont(font)
+        self.label_total_Nva_factura_3.setStyleSheet("QLabel{\n"
+"color:#aaff00;\n"
+"background-color:#000000\n"
+"}")
+        self.label_total_Nva_factura_3.setTextFormat(QtCore.Qt.AutoText)
+        self.label_total_Nva_factura_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_total_Nva_factura_3.setObjectName("label_total_Nva_factura_3")
+        self.label_iva_factura_3 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_iva_factura_3.setGeometry(QtCore.QRect(180, 81, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_iva_factura_3.setFont(font)
+        self.label_iva_factura_3.setStyleSheet("QLabel{\n"
+"color:#ffffff;\n"
+"background-color:#000000\n"
+"}")
+        self.label_iva_factura_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_iva_factura_3.setObjectName("label_iva_factura_3")
+        self.bt_Grabar_presupuesto = QtWidgets.QPushButton(self.groupBox_24)
+        self.bt_Grabar_presupuesto.setGeometry(QtCore.QRect(150, 230, 131, 41))
+        self.bt_Grabar_presupuesto.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron SemiBold")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_Grabar_presupuesto.setFont(font)
+        self.bt_Grabar_presupuesto.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}\n"
+"\n"
+"")
+        self.bt_Grabar_presupuesto.setObjectName("bt_Grabar_presupuesto")
+        self.label_323 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_323.setGeometry(QtCore.QRect(140, 141, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_323.setFont(font)
+        self.label_323.setObjectName("label_323")
+        self.label_subtotal_factura_3 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_subtotal_factura_3.setGeometry(QtCore.QRect(180, 21, 271, 51))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(19)
+        self.label_subtotal_factura_3.setFont(font)
+        self.label_subtotal_factura_3.setStyleSheet("QLabel{\n"
+"color:#ffffff;\n"
+"background-color:#000000\n"
+"}")
+        self.label_subtotal_factura_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_subtotal_factura_3.setObjectName("label_subtotal_factura_3")
+        self.label_324 = QtWidgets.QLabel(self.groupBox_24)
+        self.label_324.setGeometry(QtCore.QRect(140, 21, 31, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_324.setFont(font)
+        self.label_324.setObjectName("label_324")
+        self.label_66 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_66.setGeometry(QtCore.QRect(650, 85, 441, 41))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(18)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_66.setFont(font)
+        self.label_66.setStyleSheet("QLabel{\n"
+"color:#4c82ff\n"
+"}")
+        self.label_66.setObjectName("label_66")
+        self.lineEdit_numeroNvaFactura_5 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_numeroNvaFactura_5.setGeometry(QtCore.QRect(1570, 60, 111, 22))
+        self.lineEdit_numeroNvaFactura_5.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit_numeroNvaFactura_5.setFont(font)
+        self.lineEdit_numeroNvaFactura_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lineEdit_numeroNvaFactura_5.setReadOnly(True)
+        self.lineEdit_numeroNvaFactura_5.setObjectName("lineEdit_numeroNvaFactura_5")
+        self.lineEdit_IIBBNvaFactura_3 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_IIBBNvaFactura_3.setGeometry(QtCore.QRect(1550, 150, 131, 22))
+        self.lineEdit_IIBBNvaFactura_3.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_IIBBNvaFactura_3.setFont(font)
+        self.lineEdit_IIBBNvaFactura_3.setReadOnly(True)
+        self.lineEdit_IIBBNvaFactura_3.setObjectName("lineEdit_IIBBNvaFactura_3")
+        self.label_325 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_325.setGeometry(QtCore.QRect(1400, 150, 101, 20))
+        self.label_325.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_325.setFont(font)
+        self.label_325.setObjectName("label_325")
+        self.lineEdit_inicioActNvaFactura_4 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_inicioActNvaFactura_4.setGeometry(QtCore.QRect(1550, 180, 131, 22))
+        self.lineEdit_inicioActNvaFactura_4.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_inicioActNvaFactura_4.setFont(font)
+        self.lineEdit_inicioActNvaFactura_4.setReadOnly(True)
+        self.lineEdit_inicioActNvaFactura_4.setObjectName("lineEdit_inicioActNvaFactura_4")
+        self.lineEdit_cuitNvaFactura_3 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_cuitNvaFactura_3.setGeometry(QtCore.QRect(1500, 120, 181, 22))
+        self.lineEdit_cuitNvaFactura_3.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_cuitNvaFactura_3.setFont(font)
+        self.lineEdit_cuitNvaFactura_3.setReadOnly(True)
+        self.lineEdit_cuitNvaFactura_3.setObjectName("lineEdit_cuitNvaFactura_3")
+        self.label_326 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_326.setGeometry(QtCore.QRect(1400, 60, 71, 20))
+        self.label_326.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_326.setFont(font)
+        self.label_326.setObjectName("label_326")
+        self.lineEdit_fechaNvaFactura_5 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_fechaNvaFactura_5.setGeometry(QtCore.QRect(1500, 90, 181, 22))
+        self.lineEdit_fechaNvaFactura_5.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Gill Sans MT")
+        font.setPointSize(9)
+        self.lineEdit_fechaNvaFactura_5.setFont(font)
+        self.lineEdit_fechaNvaFactura_5.setObjectName("lineEdit_fechaNvaFactura_5")
+        self.lineEdit_serieNvaFactura_5 = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
+        self.lineEdit_serieNvaFactura_5.setGeometry(QtCore.QRect(1500, 60, 61, 22))
+        self.lineEdit_serieNvaFactura_5.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lineEdit_serieNvaFactura_5.setFont(font)
+        self.lineEdit_serieNvaFactura_5.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.lineEdit_serieNvaFactura_5.setReadOnly(True)
+        self.lineEdit_serieNvaFactura_5.setObjectName("lineEdit_serieNvaFactura_5")
+        self.label_327 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_327.setGeometry(QtCore.QRect(1400, 90, 55, 20))
+        self.label_327.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_327.setFont(font)
+        self.label_327.setObjectName("label_327")
+        self.label_328 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_328.setGeometry(QtCore.QRect(1400, 120, 55, 20))
+        self.label_328.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_328.setFont(font)
+        self.label_328.setObjectName("label_328")
+        self.label_329 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_329.setGeometry(QtCore.QRect(1560, 60, 16, 16))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_329.setFont(font)
+        self.label_329.setObjectName("label_329")
+        self.label_330 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_330.setGeometry(QtCore.QRect(1400, 180, 141, 20))
+        self.label_330.setMinimumSize(QtCore.QSize(0, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_330.setFont(font)
+        self.label_330.setObjectName("label_330")
+        self.label_331 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
+        self.label_331.setGeometry(QtCore.QRect(1310, 20, 381, 16))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_331.setFont(font)
+        self.label_331.setObjectName("label_331")
+        self.stackedWidget.addWidget(self.pgNuevoPresupuesto)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 50, 161, 921))
@@ -6977,7 +8645,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(7)
+        self.stackedWidget.setCurrentIndex(11)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -7712,6 +9380,159 @@ class Ui_MainWindow(object):
         self.label_294.setText(_translate("MainWindow", " ULT. COMPRA"))
         self.label_295.setText(_translate("MainWindow", "ULT. PAGO"))
         self.label_296.setText(_translate("MainWindow", "MONTO AUTORIZADO"))
+        self.label_332.setText(_translate("MainWindow", "DNI"))
+        self.bt_CancelarFactura_4.setText(_translate("MainWindow", "CANCELAR"))
+        self.label_333.setText(_translate("MainWindow", "IVA:"))
+        self.label_334.setText(_translate("MainWindow", "SubTotal:"))
+        self.label_335.setText(_translate("MainWindow", "TOTAL:"))
+        self.label_336.setText(_translate("MainWindow", "$"))
+        self.label_total_Nva_factura_4.setText(_translate("MainWindow", "0,00"))
+        self.label_iva_factura_4.setText(_translate("MainWindow", "0,00"))
+        self.bt_Facturar_presupuesto_2.setText(_translate("MainWindow", "FACTURAR"))
+        self.label_337.setText(_translate("MainWindow", "$"))
+        self.label_subtotal_factura_4.setText(_translate("MainWindow", "0,00"))
+        self.label_338.setText(_translate("MainWindow", "$"))
+        self.label_339.setText(_translate("MainWindow", "PRESUPUESTO DE VENTA"))
+        self.label_340.setText(_translate("MainWindow", "Número:"))
+        self.label_341.setText(_translate("MainWindow", "Estado:"))
+        self.label_342.setText(_translate("MainWindow", "COD. CLIENTE"))
+        self.comboBox_FormaPagoFact_4.setItemText(0, _translate("MainWindow", "CONTADO"))
+        self.comboBox_FormaPagoFact_4.setItemText(1, _translate("MainWindow", "TRANSFERENCIA"))
+        self.comboBox_FormaPagoFact_4.setItemText(2, _translate("MainWindow", "T. DEBITO"))
+        self.comboBox_FormaPagoFact_4.setItemText(3, _translate("MainWindow", "T. CREDITO"))
+        self.comboBox_FormaPagoFact_4.setItemText(4, _translate("MainWindow", "MERCADO PAGO"))
+        self.comboBox_FormaPagoFact_4.setItemText(5, _translate("MainWindow", "CTA. CORRIENTE"))
+        self.comboBox_FormaPagoFact_4.setItemText(6, _translate("MainWindow", "CHEQUE"))
+        self.lineEdit_IvaclienteNvoPresupuesto_2.setText(_translate("MainWindow", "-"))
+        self.label_343.setText(_translate("MainWindow", "EMAIL"))
+        self.label_344.setText(_translate("MainWindow", "Fecha:"))
+        self.label_345.setText(_translate("MainWindow", "TELEFONO"))
+        self.label_346.setText(_translate("MainWindow", "Prov. Destino:"))
+        self.comboBox_EstadoFactura_4.setItemText(0, _translate("MainWindow", "COBRADA"))
+        self.comboBox_EstadoFactura_4.setItemText(1, _translate("MainWindow", "PENDIENTE"))
+        self.label_347.setText(_translate("MainWindow", "Moneda:"))
+        self.label_348.setText(_translate("MainWindow", "-"))
+        self.label_349.setText(_translate("MainWindow", "DOMICILIO"))
+        self.comboBox_Retira_4.setItemText(0, _translate("MainWindow", "RETIRA"))
+        self.comboBox_Retira_4.setItemText(1, _translate("MainWindow", "ENVIO"))
+        self.label_350.setText(_translate("MainWindow", "Pesos Argentinos"))
+        self.label_351.setText(_translate("MainWindow", "Pesos Argentinos"))
+        self.label_352.setText(_translate("MainWindow", "CUIT/CUIL"))
+        self.label_353.setText(_translate("MainWindow", "Forma Pago:"))
+        self.label_354.setText(_translate("MainWindow", "CUIT:"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "CODPRESUPUESTO"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "CODARTICULO"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "DESCRIPCION"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "CANTIDAD"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "PRECIO_UNITARIO"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "SUBTOTAL"))
+        item = self.tableWidgetDetalleNvaFactura_4.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "IMPORTE_IVA"))
+        self.label_355.setText(_translate("MainWindow", "Inic. Actividades:"))
+        self.label_356.setText(_translate("MainWindow", "Detalle Presupuesto"))
+        self.lineEdit_serieNvaFactura_6.setText(_translate("MainWindow", "1"))
+        self.label_357.setText(_translate("MainWindow", "Ing. Brutos:"))
+        self.label_358.setText(_translate("MainWindow", "COND. IVA"))
+        self.label_359.setText(_translate("MainWindow", "Entrega:"))
+        self.label_360.setText(_translate("MainWindow", "CLIENTE"))
+        self.label_361.setText(_translate("MainWindow", "Fecha Vencimiento:"))
+        self.label_362.setText(_translate("MainWindow", "Presupuestos"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "CODPRESUPUESTO"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "FECHA"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "CODCLIENTE"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "CLIENTE"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "SUBTOTAL"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "IVA"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "TOTAL"))
+        item = self.tableWidgetPresupuestos.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "FECHA_VTO"))
+        self.bt_Eliminar_Presupuesto.setText(_translate("MainWindow", "ELIMINAR"))
+        self.bt_Nuevo_presupuesto_3.setText(_translate("MainWindow", "NUEVO"))
+        self.bt_Nuevo_presupuesto_4.setText(_translate("MainWindow", "MODIFICAR"))
+        self.label_297.setText(_translate("MainWindow", "Razón Social Comercio"))
+        self.label_298.setText(_translate("MainWindow", "Prov. Destino:"))
+        self.label_299.setText(_translate("MainWindow", "CUIT/CUIL"))
+        self.label_300.setText(_translate("MainWindow", "EMAIL"))
+        self.label_301.setText(_translate("MainWindow", "DNI"))
+        self.label_302.setText(_translate("MainWindow", "Detalle Presupuesto"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "CODARTICULO"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "DESCRIPCION"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "CANTIDAD"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "PRECIO s/IVA"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Alícuota IVA"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "IVA"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "PRECIO UNITARIO"))
+        item = self.tableWidgetDetalleNvaFactura_3.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "SUBTOTAL"))
+        self.label_303.setText(_translate("MainWindow", "COND. IVA"))
+        self.label_304.setText(_translate("MainWindow", "Domicilio comercio"))
+        self.label_305.setText(_translate("MainWindow", "Estado:"))
+        self.label_306.setText(_translate("MainWindow", "Forma Pago:"))
+        self.label_307.setText(_translate("MainWindow", "TELEFONO"))
+        self.label_308.setText(_translate("MainWindow", "NOMBRE FANTASIA COMERCIO"))
+        self.label_309.setText(_translate("MainWindow", "Pesos Argentinos"))
+        self.lineEdit_IvaclienteNvoPresupuesto.setText(_translate("MainWindow", "-"))
+        self.comboBox_Retira_3.setItemText(0, _translate("MainWindow", "RETIRA"))
+        self.comboBox_Retira_3.setItemText(1, _translate("MainWindow", "ENVIO"))
+        self.label_310.setText(_translate("MainWindow", "Domicilio:"))
+        self.label_311.setText(_translate("MainWindow", "DOMICILIO"))
+        self.comboBox_FormaPagoFact_3.setItemText(0, _translate("MainWindow", "CONTADO"))
+        self.comboBox_FormaPagoFact_3.setItemText(1, _translate("MainWindow", "TRANSFERENCIA"))
+        self.comboBox_FormaPagoFact_3.setItemText(2, _translate("MainWindow", "T. DEBITO"))
+        self.comboBox_FormaPagoFact_3.setItemText(3, _translate("MainWindow", "T. CREDITO"))
+        self.comboBox_FormaPagoFact_3.setItemText(4, _translate("MainWindow", "MERCADO PAGO"))
+        self.comboBox_FormaPagoFact_3.setItemText(5, _translate("MainWindow", "CTA. CORRIENTE"))
+        self.comboBox_FormaPagoFact_3.setItemText(6, _translate("MainWindow", "CHEQUE"))
+        self.label_312.setText(_translate("MainWindow", "CLIENTE"))
+        self.label_313.setText(_translate("MainWindow", "Razón Social:"))
+        self.label_314.setText(_translate("MainWindow", "Pesos Argentinos"))
+        self.bt_AgregarArticuloNvaFactura_3.setText(_translate("MainWindow", "AGREGAR"))
+        self.label_315.setText(_translate("MainWindow", "Moneda:"))
+        self.comboBox_EstadoFactura_3.setItemText(0, _translate("MainWindow", "COBRADA"))
+        self.comboBox_EstadoFactura_3.setItemText(1, _translate("MainWindow", "PENDIENTE"))
+        self.label_316.setText(_translate("MainWindow", "Fecha Vencimiento:"))
+        self.label_317.setText(_translate("MainWindow", "Entrega:"))
+        self.label_318.setText(_translate("MainWindow", "COD. CLIENTE"))
+        self.bt_CancelarFactura_3.setText(_translate("MainWindow", "CANCELAR"))
+        self.label_319.setText(_translate("MainWindow", "IVA:"))
+        self.label_320.setText(_translate("MainWindow", "SubTotal:"))
+        self.label_321.setText(_translate("MainWindow", "TOTAL:"))
+        self.label_322.setText(_translate("MainWindow", "$"))
+        self.label_total_Nva_factura_3.setText(_translate("MainWindow", "0,00"))
+        self.label_iva_factura_3.setText(_translate("MainWindow", "0,00"))
+        self.bt_Grabar_presupuesto.setText(_translate("MainWindow", "GRABAR"))
+        self.label_323.setText(_translate("MainWindow", "$"))
+        self.label_subtotal_factura_3.setText(_translate("MainWindow", "0,00"))
+        self.label_324.setText(_translate("MainWindow", "$"))
+        self.label_66.setText(_translate("MainWindow", "NUEVO PRESUPUESTO"))
+        self.label_325.setText(_translate("MainWindow", "Ing. Brutos:"))
+        self.label_326.setText(_translate("MainWindow", "Número:"))
+        self.lineEdit_serieNvaFactura_5.setText(_translate("MainWindow", "1"))
+        self.label_327.setText(_translate("MainWindow", "Fecha:"))
+        self.label_328.setText(_translate("MainWindow", "CUIT:"))
+        self.label_329.setText(_translate("MainWindow", "-"))
+        self.label_330.setText(_translate("MainWindow", "Inic. Actividades:"))
+        self.label_331.setText(_translate("MainWindow", "PRESUPUESTO DE VENTA"))
         self.label_111.setText(_translate("MainWindow", "FACTURACION"))
         self.label_112.setText(_translate("MainWindow", "ARTICULOS"))
         self.label_113.setText(_translate("MainWindow", "CLIENTES"))

@@ -32,6 +32,19 @@ class ClienteDAO:
             return clientes
 
     @classmethod
+    def busca_cliente(cls, cliente_buscar):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._BUSCA_CLIENTE, (cliente_buscar,))
+            registros = cursor.fetchall()
+            clientes = []
+            for registro in registros:
+                cliente = Cliente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11],
+                                  registro[12], registro[13], registro[14])
+                clientes.append(cliente)
+            return clientes
+
+    @classmethod
     def ultimo_codigo_usado(cls):
         with CursorDelPool() as cursor:
             cursor.execute(cls._ULTIMO_CODIGO_USADO)
