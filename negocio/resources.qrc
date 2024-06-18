@@ -1,0 +1,45 @@
+<RCC>
+  <qresource prefix="/Icons">
+    <file>352a38b67caa5fc6cf2169f3b7bb281b.jpg</file>
+    <file>agregar-usuario.png</file>
+    <file>articulos-de-compra.png</file>
+    <file>articulos-pagados.png</file>
+    <file>basura.png</file>
+    <file>borrar (1).png</file>
+    <file>borrar.png</file>
+    <file>cerrar (1).png</file>
+    <file>cerrar.png</file>
+    <file>controlar.png</file>
+    <file>elipsis.png</file>
+    <file>empresa.png</file>
+    <file>escaner-de-codigo-de-barras.png</file>
+    <file>factura (2).png</file>
+    <file>factura.png</file>
+    <file>favicon.png</file>
+    <file>las-compras-en-linea.png</file>
+    <file>logo.png</file>
+    <file>logo_empresa.png</file>
+    <file>maximizar.png</file>
+    <file>menu.png</file>
+    <file>minimizar.png</file>
+    <file>no-disponible.png</file>
+    <file>nueva_factura.png</file>
+    <file>periodico.png</file>
+    <file>proveedor.png</file>
+    <file>reportes_facturas.png</file>
+    <file>salario (1).png</file>
+    <file>salario.png</file>
+    <file>salida.png</file>
+    <file>salvar (1).png</file>
+    <file>salvar.png</file>
+    <file>warzone-caldera.jpg</file>
+    <file>xlsx.png</file>
+    <file>xlsx_download.jpg</file>
+    <file>352a38b67caa5fc6cf2169f3b7bb281b.jpg</file>
+    <file>agregar-usuario.png</file>
+    <file>articulos-de-compra.png</file>
+    <file>articulos-pagados.png</file>
+    <file>basura.png</file>
+    <file>borrar (1).png</file>
+  </qresource>
+</RCC>

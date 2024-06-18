@@ -1,58 +1,48 @@
-import base64
 import os
 import shutil
 
-import jpype
-import json2html
 from PyQt5.QtCore import Qt, QDate
-from PyQt5.QtGui import QIntValidator, QPixmap, QImage, QIcon
-from PyQt5.QtWidgets import QMessageBox, QLineEdit, QDateEdit
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
 from reportlab.pdfgen import canvas
-from PyQt5.QtCore import QByteArray, QBuffer, QIODevice
 
 import json
-import openpyxl
 
-
-
-
-from conexion_db import Conexion
-from cursor_del_pool import CursorDelPool
-from clienteDAO import ClienteDAO
-from articuloDAO import ArticuloDAO
-from logger_base import log
+from Conexion.cursor_del_pool import CursorDelPool
+from Conexion.clienteDAO import ClienteDAO
+from Conexion.articuloDAO import ArticuloDAO
+from Conexion.logger_base import log
 from PyQt5 import QtWidgets
 import sys
-from diseño_nuevo import Ui_MainWindow  # Importa el diseño convertido
-from negocio import cliente, cajaDAO, articulo
-from negocio.EmpresaDAO import EmpresaDAO
-from negocio.articulo import Articulo
-from negocio.cajaDAO import CajaDAO
-from negocio.cliente import Cliente
-from negocio.detalleFactura import detalleFactura
-from negocio.detalleFacturaDAO import detalleFacturaDAO
-from negocio.detallePresupuesto import detallePresupuesto
-from negocio.detallePresupuestoDAO import detallePresupuestoDAO
-from negocio.empresa import Empresa
-from negocio.factura import Factura
-from negocio.facturaDAO import FacturaDAO
-from negocio.funciones import Funciones
-from negocio.pendientes import Pendiente
-from negocio.pendientesDAO import PendientesDAO
-from negocio.presupuesto import Presupuesto
-from negocio.presupuestoDAO import PresupuestoDAO
-from negocio.proveedor import Proveedor
-from negocio.proveedorDAO import ProveedorDAO
-from negocio.ventana_agregar_articulo import Ui_ventana_agregar_articulo
-from negocio.ventana_agregar_cliente_factura import Ui_ventana_agregar_cliente_factura
-from negocio.ventana_datos_empresa import Ui_ventana_Datos_Empresa
-from negocio.ventana_marca import Ui_ventana_Marca
-from negocio.ventana_nueva_categoria import Ui_ventana_nueva_categoria
-from negocio.ventana_nueva_marca import Ui_ventana_nueva_marca
-from negocio.ventana_proveedor import Ui_ventana_proveedores
-from ventana_categoria import Ui_ventana_Categorias
+from Interfaz.diseño_nuevo import Ui_MainWindow  # Importa el diseño convertido
+from Conexion.EmpresaDAO import EmpresaDAO
+from Conexion.articulo import Articulo
+from Conexion.cajaDAO import CajaDAO
+from Conexion.cliente import Cliente
+from Conexion.detalleFactura import detalleFactura
+from Conexion.detalleFacturaDAO import detalleFacturaDAO
+from Conexion.detallePresupuesto import detallePresupuesto
+from Conexion.detallePresupuestoDAO import detallePresupuestoDAO
+from Conexion.empresa import Empresa
+from Conexion.factura import Factura
+from Conexion.facturaDAO import FacturaDAO
+from Conexion.funciones import Funciones
+from Conexion.pendientes import Pendiente
+from Conexion.pendientesDAO import PendientesDAO
+from Conexion.presupuesto import Presupuesto
+from Conexion.presupuestoDAO import PresupuestoDAO
+from Conexion.proveedor import Proveedor
+from Conexion.proveedorDAO import ProveedorDAO
+from Interfaz.ventana_agregar_articulo import Ui_ventana_agregar_articulo
+from Interfaz.ventana_agregar_cliente_factura import Ui_ventana_agregar_cliente_factura
+from Interfaz.ventana_datos_empresa import Ui_ventana_Datos_Empresa
+from Interfaz.ventana_marca import Ui_ventana_Marca
+from Interfaz.ventana_nueva_categoria import Ui_ventana_nueva_categoria
+from Interfaz.ventana_nueva_marca import Ui_ventana_nueva_marca
+from Interfaz.ventana_proveedor import Ui_ventana_proveedores
+from Interfaz.ventana_categoria import Ui_ventana_Categorias
 import locale
 from datetime import datetime
 
@@ -181,6 +171,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
         self.ui_ventana_agr_articulo.setupUi(self.dialogo_agregar_Art_Factura)
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(lambda:self.agregar_articulo_nueva_factura2())
+        self.bt_Eliminar_Articulo_Detalle.clicked.connect(self.eliminar_articulo_detalle)
 
         #################################################################
         #
@@ -269,6 +260,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Nuevo_presupuesto_3.clicked.connect(self.modulo_presupuestos_nuevo)
         self.tableWidgetPresupuestos.cellClicked.connect(self.seleccionar_presupuesto)
         self.bt_Eliminar_Presupuesto.clicked.connect(self.eliminar_presupuesto)
+        self.bt_Eliminar_Articulo_Detalle_Presupuesto.clicked.connect(self.eliminar_articulo_detalle_presupuesto)
+        #self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
 
 
 
@@ -1714,6 +1707,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def nueva_factura(self):
         self.stackedWidget.setCurrentIndex(7)
+        num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
+        for i in range(num_rows):
+            self.tableWidgetDetalleNvaFactura.removeRow(0)
+        self.lineEdit_clienteNvaFactura.clear()
+        self.lineEdit_domclienteNvaFactura.clear()
+        self.lineEdit_codclienteNvaFactura.clear()
+        self.lineEdit_cuitclienteNvaFactura.clear()
+        self.lineEdit_dniclienteNvaFactura_2.clear()
+        self.lineEdit_telclienteNvaFactura.clear()
+        self.lineEdit_emailclienteNvaFactura.clear()
+        self.tableWidgetDetalleNvaFactura.clearContents()
+        self.label_subtotal_factura.clear()
+        self.label_iva_factura.clear()
+        self.label_total_Nva_factura.clear()
         self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
 
@@ -1757,7 +1764,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Crear un QPixmap con la ruta de la imagen
         # self.factura_logo.clear()
         # Crear un QPixmap con la ruta de la imagen
-        logo_pixmap = QPixmap('logo.png')
+        logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
 
         # Establecer el tamaño del QLabel
         self.factura_logo.setFixedSize(100, 100)
@@ -2113,7 +2120,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui_ventana_empresa.lineEdit_pais_empresa.setText(query_vacia[0].pais)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap = QPixmap('logo.png')
+            logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap = logo_pixmap.scaled(self.ui_ventana_empresa.label_11.size(), Qt.KeepAspectRatio)
@@ -3977,7 +3984,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Crear un QPixmap con la ruta de la imagen
         # self.factura_logo.clear()
         # Crear un QPixmap con la ruta de la imagen
-        logo_pixmap = QPixmap('logo.png')
+        logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
 
         # Establecer el tamaño del QLabel
         self.factura_logo_2.setFixedSize(100, 100)
@@ -4525,15 +4532,164 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         detallePresupuestoDAO.eliminar(codpresupuesto)
                     else:
                         print(f"Skipping detalle because codpresupuesto is None: {detalle}")
-            PresupuestoDAO.eliminar(codpresupuesto)
-            self.tableWidgetPresupuestos.removeRow(row)
-            self.tableWidgetDetalleNvaFactura_4.clearContents()
-            while self.tableWidgetDetalleNvaFactura_4.rowCount() > 0:
-                self.tableWidgetDetalleNvaFactura_4.removeRow(0)
-                self.label_ingresar_msg2.setText('Presupuesto eliminado correctamente')
-            QMessageBox.information(self, "Presupuesto Eliminado",
+            reply = QMessageBox.question(self, 'Eliminar Presupuesto',
+                                         "¿Estás seguro de que quieres eliminar el presupuesto?",
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if reply == QMessageBox.Yes:
+                PresupuestoDAO.eliminar(codpresupuesto)
+                self.tableWidgetPresupuestos.removeRow(row)
+                self.tableWidgetDetalleNvaFactura_4.clearContents()
+                while self.tableWidgetDetalleNvaFactura_4.rowCount() > 0:
+                    self.tableWidgetDetalleNvaFactura_4.removeRow(0)
+                    self.label_ingresar_msg2.setText('Presupuesto eliminado correctamente')
+                QMessageBox.information(self, "Presupuesto Eliminado",
                                     "El presupuesto ha sido eliminado correctamente", )
+                return
+
+        self.lineEdit_clienteNvoPresupuesto.clear()
+        self.lineEdit_domclienteNvoPresupuesto.clear()
+        self.lineEdit_codclienteNvoPresupuesto.clear()
+        self.lineEdit_cuitclienteNvoPresupuesto.clear()
+        self.lineEdit_dniclienteNvoPresupuesto.clear()
+        self.lineEdit_telclienteNvoPresupuesto.clear()
+        self.lineEdit_emailclienteNvoPresupuesto.clear()
+        self.label_subtotal_factura_4.setText('0.00')
+        self.label_iva_factura_4.setText('0.00')
+        self.label_total_Nva_factura_4.setText('0.00')
+
+    def eliminar_articulo_detalle(self):
+        # Obtén la fila seleccionada
+        row = self.tableWidgetDetalleNvaFactura.currentRow()
+
+        # Si no hay ninguna fila seleccionada, row será -1
+        if row == -1:
+            QMessageBox.information(self, "Eliminar artículo", "Por favor, selecciona un artículo para eliminar.")
             return
+
+        # Muestra un cuadro de diálogo de confirmación
+        reply = QMessageBox.question(self, 'Eliminar artículo',
+                                     "¿Estás seguro de que quieres eliminar este artículo de la factura?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            # Elimina la fila de la tabla
+            self.tableWidgetDetalleNvaFactura.removeRow(row)
+            self.verificarExistencias()
+            self.actualizar_subtotal_factura()
+
+    def eliminar_articulo_detalle_presupuesto(self):
+        # Obtén la fila seleccionada
+        row = self.tableWidgetDetalleNvaFactura_3.currentRow()
+
+        # Si no hay ninguna fila seleccionada, row será -1
+        if row == -1:
+            QMessageBox.information(self, "Eliminar artículo", "Por favor, selecciona un artículo para eliminar.")
+            return
+
+        # Muestra un cuadro de diálogo de confirmación
+        reply = QMessageBox.question(self, 'Eliminar artículo',
+                                     "¿Estás seguro de que quieres eliminar este artículo del presupuesto?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            # Elimina la fila de la tabla
+            self.tableWidgetDetalleNvaFactura_3.removeRow(row)
+            self.verificarExistencias_presupuesto()
+            self.actualizar_subtotal_presupuesto()
+            #self.actualizar_subtotal_presu()
+
+    def verificarExistencias_presupuesto(self):
+        tabla = self.tableWidgetDetalleNvaFactura_3
+        lista = Funciones.fx_leer_seleccion_tabla(tabla)[0]
+        for i in lista:
+            codarticulo = i[0]
+            cantidad = i[2]
+            stock = ArticuloDAO.verificar_existencias(codarticulo)
+            if cantidad > stock:
+                QMessageBox.warning(self, "Stock Insuficiente",
+                                    "El stock del artículo seleccionado es insuficiente", )
+                return
+            else:
+                pass
+
+
+    def actualizar_subtotal_presupuesto(self):
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura_3.rowCount()
+
+        # Inicializa el total
+        sub_total_factura = 0.0
+        sub_total_iva = 0.0
+        total_factura = 0.0
+
+        # Itera sobre cada fila
+        for row in range(num_rows):
+            # Obtén el valor de la columna subtotal (asumiendo que es la columna 7)
+            item_factura = self.tableWidgetDetalleNvaFactura_3.item(row, 7)
+            item_iva = self.tableWidgetDetalleNvaFactura_3.item(row, 5)
+
+
+            if item_factura is not None:
+                subtotal_factura_str = item_factura.text()
+                sub_total_factura += float(subtotal_factura_str)
+
+            if item_iva is not None:
+                sub_total_iva_str = item_iva.text()
+                sub_total_iva += float(sub_total_iva_str)
+
+        # Actualiza label_subtotal_factura con el total
+        self.label_subtotal_factura_3.setText(str(round(sub_total_factura - sub_total_iva, 2)))
+        self.label_iva_factura_3.setText(str(round(sub_total_iva, 2)))
+        self.label_total_Nva_factura_3.setText(str(float(round(sub_total_factura, 2))))
+
+    def actualizar_subtotal_psto(self, row, column):
+        # Verifica si la celda cambiada es de la columna "cantidad" (asumiendo que es la columna 2)
+        if column == 2:
+            # Obtiene el valor de la celda "cantidad"
+            cantidad_item = self.tableWidgetDetalleNvaFactura_3.item(row, column)
+            if cantidad_item is not None:
+                cantidad = float(cantidad_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+
+            ###########################################################
+            codigoarticulo = self.tableWidgetDetalleNvaFactura_3.item(row, 0)
+            cantidad_item = self.tableWidgetDetalleNvaFactura_3.item(row, 2)
+            if cantidad_item is not None:
+                cantidad = int(cantidad_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+
+            stock = ArticuloDAO.verificar_existencias(codigoarticulo)
+            if cantidad > stock:
+                QMessageBox.warning(self, "Stock Insuficiente",
+                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(cantidad, stock))
+                return
+            ####################################################################
+
+
+
+            # Obtiene el valor de la celda "precio unitario" (asumiendo que es la columna 6)
+            precio_unitario_item = self.tableWidgetDetalleNvaFactura_3.item(row, 6)
+            iva_item = self.tableWidgetDetalleNvaFactura_3.item(row, 5)
+            if precio_unitario_item is not None:
+                precio_unitario = float(precio_unitario_item.text())
+            else:
+                return  # No item in the specified cell, so we return early
+            if iva_item is not None:
+                iva = float(iva_item.text())
+            else:
+                return
+
+            # Calcula el subtotal
+            subtotal = cantidad * precio_unitario
+            importe_iva_item = cantidad * iva
+
+            # Actualiza la celda "subtotal" (asumiendo que es la columna 7)
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal,2)))))
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 5, QtWidgets.QTableWidgetItem(str((round(importe_iva_item,2)))))
+
+            self.actualizar_subtotal_presupuesto()
 
 
 if __name__ == '__main__':
