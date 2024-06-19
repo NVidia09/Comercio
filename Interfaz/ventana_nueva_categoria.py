@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ventana_nueva_categoria.ui'
+# Form implementation generated from reading ui file 'Interfaz/ventana_nueva_categoria.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Ui_ventana_nueva_categoria()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ventana_categoria.ui'
+# Form implementation generated from reading ui file 'Interfaz/ventana_categoria.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #

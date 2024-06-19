@@ -44,8 +44,8 @@ background-color:#000000;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>las-compras-en-linea.png</normaloff>las-compras-en-linea.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/las-compras-en-linea.png</normaloff>:/icons/Icons/las-compras-en-linea.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -95,8 +95,8 @@ background-color:#ffffff;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>borrar (1).png</normaloff>borrar (1).png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/borrar (1).png</normaloff>:/icons/Icons/borrar (1).png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -127,8 +127,8 @@ background-color:#ffffff;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>minimizar.png</normaloff>minimizar.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/minimizar.png</normaloff>:/icons/Icons/minimizar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -159,8 +159,8 @@ background-color:#ffffff;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>maximizar.png</normaloff>maximizar.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/maximizar.png</normaloff>:/icons/Icons/maximizar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -191,8 +191,8 @@ background-color:#ffffff;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>salida.png</normaloff>salida.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/salida.png</normaloff>:/icons/Icons/salida.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>11</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -261,8 +261,8 @@ border-radius: 5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>nueva_factura.png</normaloff>nueva_factura.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/nueva_factura.png</normaloff>:/icons/Icons/nueva_factura.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -284,8 +284,8 @@ border-radius: 5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>factura.png</normaloff>factura.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/factura.png</normaloff>:/icons/Icons/factura.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -307,8 +307,8 @@ border-radius: 5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>reportes_facturas.png</normaloff>reportes_facturas.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/reportes_facturas.png</normaloff>:/icons/Icons/reportes_facturas.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -330,8 +330,8 @@ border-radius: 5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>factura (2).png</normaloff>factura (2).png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/factura (2).png</normaloff>:/icons/Icons/factura (2).png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1591,8 +1591,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1614,8 +1614,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1637,8 +1637,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -2942,8 +2942,8 @@ background-color:#ffffff
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>escaner-de-codigo-de-barras.png</normaloff>escaner-de-codigo-de-barras.png</iconset>
+             <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+              <normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -2970,8 +2970,8 @@ background-color:#ffffff
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+             <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+              <normaloff>:/icons/Icons/xlsx.png</normaloff>:/icons/Icons/xlsx.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -2993,8 +2993,8 @@ background-color:#ffffff
              <string/>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+             <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+              <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -3897,8 +3897,8 @@ background-color:#ffffff
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/xlsx.png</normaloff>:/icons/Icons/xlsx.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -3920,8 +3920,8 @@ background-color:#ffffff
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -3961,8 +3961,8 @@ background-color:#46858b;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salario (1).png</normaloff>salario (1).png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salario (1).png</normaloff>:/icons/Icons/salario (1).png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -3984,8 +3984,8 @@ background-color:#46858b;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salario.png</normaloff>salario.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salario.png</normaloff>:/icons/Icons/salario.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4103,8 +4103,8 @@ color:#ffffff
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salario.png</normaloff>salario.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/articulos-pagados.png</normaloff>:/icons/Icons/articulos-pagados.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4487,8 +4487,8 @@ background-color:#ffffff
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>xlsx.png</normaloff>xlsx.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/xlsx.png</normaloff>:/icons/Icons/xlsx.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4510,8 +4510,8 @@ background-color:#ffffff
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -6020,8 +6020,8 @@ border:2px solid rgb(114, 117, 126)
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -6055,8 +6055,8 @@ border:2px solid rgb(114, 117, 126)
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -6090,8 +6090,8 @@ border:2px solid rgb(114, 117, 126)
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -6131,8 +6131,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar.png</normaloff>salvar.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar.png</normaloff>:/icons/Icons/salvar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -6172,8 +6172,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar (1).png</normaloff>salvar (1).png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar (1).png</normaloff>:/icons/Icons/salvar (1).png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -7334,8 +7334,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar.png</normaloff>salvar.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar.png</normaloff>:/icons/Icons/salvar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -7375,8 +7375,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar (1).png</normaloff>salvar (1).png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar (1).png</normaloff>:/icons/Icons/salvar (1).png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -8392,8 +8392,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar.png</normaloff>salvar.png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar.png</normaloff>:/icons/Icons/salvar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -8433,8 +8433,8 @@ border:5px;
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>salvar (1).png</normaloff>salvar (1).png</iconset>
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/salvar (1).png</normaloff>:/icons/Icons/salvar (1).png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -9182,8 +9182,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -9765,8 +9765,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -10341,8 +10341,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -10447,8 +10447,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>escaner-de-codigo-de-barras.png</normaloff>escaner-de-codigo-de-barras.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -10773,8 +10773,8 @@ background-color:#000000
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>basura.png</normaloff>basura.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/basura.png</normaloff>:/icons/Icons/basura.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -13582,8 +13582,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -13605,8 +13605,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>xlsx_download.jpg</normaloff>xlsx_download.jpg</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/xlsx_download.jpg</normaloff>:/icons/Icons/xlsx_download.jpg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -15874,8 +15874,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -16638,8 +16638,8 @@ QTableView QHeaderView::section:horizontal {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -17442,8 +17442,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>escaner-de-codigo-de-barras.png</normaloff>escaner-de-codigo-de-barras.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</normaloff>:/icons/Icons/escaner-de-codigo-de-barras.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -19331,8 +19331,8 @@ color:#4c82ff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>basura.png</normaloff>basura.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/basura.png</normaloff>:/icons/Icons/basura.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -19375,8 +19375,8 @@ color:#4c82ff
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>articulos-de-compra.png</normaloff>articulos-de-compra.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/logo.png</normaloff>:/icons/Icons/logo.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19421,8 +19421,8 @@ color:#000000
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>periodico.png</normaloff>periodico.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/periodico.png</normaloff>:/icons/Icons/periodico.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19467,8 +19467,8 @@ color:#000000
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>agregar-usuario.png</normaloff>agregar-usuario.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/agregar-usuario.png</normaloff>:/icons/Icons/agregar-usuario.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19513,8 +19513,8 @@ color:#000000
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>proveedor.png</normaloff>proveedor.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/proveedor.png</normaloff>:/icons/Icons/proveedor.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19559,8 +19559,8 @@ color:#000000
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>articulos-pagados.png</normaloff>articulos-pagados.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/articulos-pagados.png</normaloff>:/icons/Icons/articulos-pagados.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19605,8 +19605,8 @@ color:#000000
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>empresa.png</normaloff>empresa.png</iconset>
+        <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+         <normaloff>:/icons/Icons/empresa.png</normaloff>:/icons/Icons/empresa.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -19663,7 +19663,7 @@ color:#000000
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

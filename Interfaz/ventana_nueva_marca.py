@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ventana_nueva_marca.ui'
+# Form implementation generated from reading ui file 'Interfaz/ventana_nueva_marca.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_ventana_nueva_marca (object):
+class Ui_ventana_nueva_marca(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(421, 174)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Ui_ventana_nueva_marca()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

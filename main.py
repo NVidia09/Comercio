@@ -46,12 +46,20 @@ from Interfaz.ventana_categoria import Ui_ventana_Categorias
 import locale
 from datetime import datetime
 
+import resources_rc
+
 # Establecer la localización en español (España)
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 item = 0
 categoria_seleccionada = ""
 
+try:
+    from ctypes import windll  # Only exists on Windows.
+    myappid = "Gestion.Empresas.Comercio.v1.0"
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+except ImportError:
+    pass
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -302,7 +310,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             articulos_json = [articulo.__dict__ for articulo in articulos]
 
             # Guardar los artículos en un archivo JSON
-            with open('articulos.json', 'w') as f:
+            with open('negocio/articulos.json', 'w') as f:
                 json.dump(articulos_json, f)
 
             # Crear un nuevo documento PDF
@@ -383,7 +391,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         clientes_json = [cliente.__dict__ for cliente in clientes]
 
         # Guardar los artículos en un archivo JSON
-        with open('clientes.json', 'w') as f:
+        with open('negocio/clientes.json', 'w') as f:
             json.dump(clientes_json, f)
 
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
@@ -420,7 +428,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         proveedores_json = [proveedor.__dict__ for proveedor in proveedores]
 
         # Guardar los artículos en un archivo JSON
-        with open('proveedor.json', 'w') as f:
+        with open('negocio/proveedor.json', 'w') as f:
             json.dump(proveedores_json, f)
 
 
@@ -1764,7 +1772,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Crear un QPixmap con la ruta de la imagen
         # self.factura_logo.clear()
         # Crear un QPixmap con la ruta de la imagen
-        logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
+        logo_pixmap = QPixmap('Interfaz/Icons/logo.png')
 
         # Establecer el tamaño del QLabel
         self.factura_logo.setFixedSize(100, 100)
@@ -2120,7 +2128,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui_ventana_empresa.lineEdit_pais_empresa.setText(query_vacia[0].pais)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
+            logo_pixmap = QPixmap('Interfaz/Icons/logo.png')
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap = logo_pixmap.scaled(self.ui_ventana_empresa.label_11.size(), Qt.KeepAspectRatio)
@@ -2236,7 +2244,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         facturas_json = factura.__dict__
 
         # Guardar las facturas en un archivo JSON
-        with open('facturas.json', 'w') as f:
+        with open('negocio/facturas.json', 'w') as f:
             json.dump(facturas_json, f)
     ###########################################################################################
 
@@ -2859,7 +2867,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cobros_json = [registro.__dict__ for registro in registros]
 
         # Guardar los artículos en un archivo JSON
-        with open('caja.json', 'w') as f:
+        with open('negocio/caja.json', 'w') as f:
             json.dump(cobros_json, f)
 
         registros = CajaDAO.seleccionar_pago()
@@ -2880,7 +2888,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         pagos_json = [registro.__dict__ for registro in registros]
 
         # Guardar los artículos en un archivo JSON
-        with open('caja.json', 'w') as f:
+        with open('negocio/caja.json', 'w') as f:
             json.dump(pagos_json, f)
 
 
@@ -3984,7 +3992,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Crear un QPixmap con la ruta de la imagen
         # self.factura_logo.clear()
         # Crear un QPixmap con la ruta de la imagen
-        logo_pixmap = QPixmap('../Interfaz/Icons/logo.png')
+        logo_pixmap = QPixmap('Interfaz/Icons/logo.png')
 
         # Establecer el tamaño del QLabel
         self.factura_logo_2.setFixedSize(100, 100)
@@ -4394,7 +4402,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         presupuesto_json = presupuesto.__dict__
 
         # Guardar las facturas en un archivo JSON
-        with open('presupuestos.json', 'w') as f:
+        with open('negocio/presupuestos.json', 'w') as f:
             json.dump(presupuesto_json, f)
         ###########################################################################################
 

@@ -1,45 +1,39 @@
 <RCC>
-  <qresource prefix="Interfaz/Icons">
-    <file>352a38b67caa5fc6cf2169f3b7bb281b.jpg</file>
-    <file>agregar-usuario.png</file>
-    <file>articulos-de-compra.png</file>
-    <file>articulos-pagados.png</file>
-    <file>basura.png</file>
-    <file>borrar (1).png</file>
-    <file>borrar.png</file>
-    <file>cerrar (1).png</file>
-    <file>cerrar.png</file>
-    <file>controlar.png</file>
-    <file>elipsis.png</file>
-    <file>empresa.png</file>
-    <file>escaner-de-codigo-de-barras.png</file>
-    <file>factura (2).png</file>
-    <file>factura.png</file>
-    <file>favicon.png</file>
-    <file>las-compras-en-linea.png</file>
-    <file>logo.png</file>
-    <file>logo_empresa.png</file>
-    <file>maximizar.png</file>
-    <file>menu.png</file>
-    <file>minimizar.png</file>
-    <file>no-disponible.png</file>
-    <file>nueva_factura.png</file>
-    <file>periodico.png</file>
-    <file>proveedor.png</file>
-    <file>reportes_facturas.png</file>
-    <file>salario (1).png</file>
-    <file>salario.png</file>
-    <file>salida.png</file>
-    <file>salvar (1).png</file>
-    <file>salvar.png</file>
-    <file>warzone-caldera.jpg</file>
-    <file>xlsx.png</file>
-    <file>xlsx_download.jpg</file>
-    <file>352a38b67caa5fc6cf2169f3b7bb281b.jpg</file>
-    <file>agregar-usuario.png</file>
-    <file>articulos-de-compra.png</file>
-    <file>articulos-pagados.png</file>
-    <file>basura.png</file>
-    <file>borrar (1).png</file>
+  <qresource prefix="icons">
+    <file>Icons/agregar-usuario.png</file>
+    <file>Icons/articulos-de-compra.png</file>
+    <file>Icons/articulos-pagados.png</file>
+    <file>Icons/basura.png</file>
+    <file>Icons/borrar (1).png</file>
+    <file>Icons/borrar.png</file>
+    <file>Icons/cerrar (1).png</file>
+    <file>Icons/cerrar.png</file>
+    <file>Icons/company.ico</file>
+    <file>Icons/controlar.png</file>
+    <file>Icons/elipsis.png</file>
+    <file>Icons/empresa.png</file>
+    <file>Icons/escaner-de-codigo-de-barras.png</file>
+    <file>Icons/factura (2).png</file>
+    <file>Icons/factura.png</file>
+    <file>Icons/favicon.png</file>
+    <file>Icons/las-compras-en-linea.png</file>
+    <file>Icons/logo.png</file>
+    <file>Icons/logo_empresa.png</file>
+    <file>Icons/maximizar.png</file>
+    <file>Icons/menu.png</file>
+    <file>Icons/minimizar.png</file>
+    <file>Icons/no-disponible.png</file>
+    <file>Icons/nueva_factura.png</file>
+    <file>Icons/periodico.png</file>
+    <file>Icons/proveedor.png</file>
+    <file>Icons/reportes_facturas.png</file>
+    <file>Icons/salario (1).png</file>
+    <file>Icons/salario.png</file>
+    <file>Icons/salida.png</file>
+    <file>Icons/salvar (1).png</file>
+    <file>Icons/salvar.png</file>
+    <file>Icons/warzone-caldera.jpg</file>
+    <file>Icons/xlsx.png</file>
+    <file>Icons/xlsx_download.jpg</file>
   </qresource>
 </RCC>

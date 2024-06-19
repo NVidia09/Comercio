@@ -1,38 +1,42 @@
-block_cipher = None
-
-a = Analysis(['C:/Cursos/Python/Cursos/Comercio/Comercio/negocio/main.py'],  # Replace with the correct path
-             pathex=['.'],
-             binaries=[],
+a = Analysis(
+    ['main.py'],
+    pathex=[],
+    binaries=[],
              datas=[
-                 ('C:/Cursos/Python/Cursos/Comercio/Comercio/interfaz/*', 'interfaz'),
-                 ('C:/Cursos/Python/Cursos/Comercio/Comercio/Negocio/*', 'resources_rc'),
+                 ('Conexion', 'Conexion'),
+                 ('Interfaz', 'Interfaz'),
+                 ('negocio', 'negocio'),
+                 ('.venv', '.venv'),
+                 ('resources_rc.py', 'resources_rc.py'),
              ],
-             hiddenimports=[],
-             hookspath=[],
-             runtime_hooks=[],
-             excludes=[],
-             win_no_prefer_redirects=False,
-             win_private_assemblies=False,
-             cipher=block_cipher,
-             noarchive=False)
+    hiddenimports=[],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    noarchive=False)
 
-pyz = PYZ(a.pure, a.zipped_data,
-             cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data)
 
-exe = EXE(pyz,
-          a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
-          [],
-          name='Gestion2.0',
-          debug=False,
-          bootloader_ignore_signals=False,
-          strip=False,
-          upx=True,
-          upx_exclude=[],
-          runtime_tmpdir=None,
-          console=False)
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='Gestion2.0',
+    icon='Interfaz/Icons/company.ico',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console=False,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+
+)
 
 coll = COLLECT(exe,
                a.binaries,
