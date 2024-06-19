@@ -546,8 +546,8 @@ background-color:#39ffa3;
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+    <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+     <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -611,7 +611,7 @@ background-color:#39ffa3;
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>no-disponible.png</pixmap>
+    <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/no-disponible.png</pixmap>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -670,6 +670,8 @@ background-color:#39ffa3;
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -310,31 +310,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             articulos_json = [articulo.__dict__ for articulo in articulos]
 
             # Guardar los artículos en un archivo JSON
-            with open('negocio/articulos.json', 'w') as f:
+            with open('articulos.json', 'w') as f:
                 json.dump(articulos_json, f)
 
-            # Crear un nuevo documento PDF
-
-            # options = {
-            #     'page-size': 'A4',
-            #     'margin-top': '0.75in',
-            #     'margin-right': '0.75in',
-            #     'margin-bottom': '0.75in',
-            #     'margin-left': '0.75in',
-            #     'encoding': "UTF-8",
-            #     'custom-header': [
-            #         ('Accept-Encoding', 'gzip')
-            #     ],
-            #     'cookie': [
-            #         ('cookie-empty-value', '""'),
-            #         ('cookie-name1', 'cookie-value1'),
-            #         ('cookie-name2', 'cookie-value2'),
-            #     ],
-            #     'no-outline': None
-            # }
-            # config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-            #
-            # pdfkit.from_file('articulos.html', 'articulos.pdf', options=options, configuration=config)
 
     ###########################################################################################
 
@@ -391,7 +369,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         clientes_json = [cliente.__dict__ for cliente in clientes]
 
         # Guardar los artículos en un archivo JSON
-        with open('negocio/clientes.json', 'w') as f:
+        with open('clientes.json', 'w') as f:
             json.dump(clientes_json, f)
 
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
@@ -428,7 +406,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         proveedores_json = [proveedor.__dict__ for proveedor in proveedores]
 
         # Guardar los artículos en un archivo JSON
-        with open('negocio/proveedor.json', 'w') as f:
+        with open('proveedor.json', 'w') as f:
             json.dump(proveedores_json, f)
 
 
@@ -2867,7 +2845,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cobros_json = [registro.__dict__ for registro in registros]
 
         # Guardar los artículos en un archivo JSON
-        with open('negocio/caja.json', 'w') as f:
+        with open('caja.json', 'w') as f:
             json.dump(cobros_json, f)
 
         registros = CajaDAO.seleccionar_pago()
@@ -2888,7 +2866,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         pagos_json = [registro.__dict__ for registro in registros]
 
         # Guardar los artículos en un archivo JSON
-        with open('negocio/caja.json', 'w') as f:
+        with open('caja.json', 'w') as f:
             json.dump(pagos_json, f)
 
 

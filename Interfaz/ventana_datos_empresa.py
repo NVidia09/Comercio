@@ -225,7 +225,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_cambiar_datos_empresa.setMaximumSize(QtCore.QSize(30, 30))
         self.bt_cambiar_datos_empresa.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Interfaz\\elipsis.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/Icons/elipsis.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bt_cambiar_datos_empresa.setIcon(icon)
         self.bt_cambiar_datos_empresa.setIconSize(QtCore.QSize(38, 38))
         self.bt_cambiar_datos_empresa.setObjectName("bt_cambiar_datos_empresa")
@@ -250,7 +250,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.label_11.setMinimumSize(QtCore.QSize(200, 200))
         self.label_11.setMaximumSize(QtCore.QSize(200, 200))
         self.label_11.setText("")
-        self.label_11.setPixmap(QtGui.QPixmap("Interfaz\\no-disponible.png"))
+        self.label_11.setPixmap(QtGui.QPixmap(":/icons/Icons/no-disponible.png"))
         self.label_11.setAlignment(QtCore.Qt.AlignCenter)
         self.label_11.setObjectName("label_11")
         self.line = QtWidgets.QFrame(ventana_Datos_Empresa)
@@ -296,6 +296,7 @@ class Ui_ventana_Datos_Empresa(object):
         self.bt_modificar_datos_empresa.setText(_translate("ventana_Datos_Empresa", "MODIFICAR"))
         self.bt_eliminar_datos_empresa_2.setText(_translate("ventana_Datos_Empresa", "ELIMINAR"))
         self.bt_subir_foto_empresa.setText(_translate("ventana_Datos_Empresa", "SUBIR LOGO"))
+import resources_rc
 
 
 if __name__ == "__main__":
