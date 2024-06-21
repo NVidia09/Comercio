@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
 from reportlab.pdfgen import canvas
+from jinja2 import Environment, FileSystemLoader
 
 import json
 
@@ -2254,16 +2255,35 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 cursor.execute(query_stock, valores)
 
 
-
         log.debug(f'Detalles insertados: {detalle}')
+####################################################################################################################################
+    #                          RECOPILAR LOS DATOS PARA LA FACTURA ELECTRONICA
+####################################################################################################################################
+
+        tipo= self.label_90.text()
+        fantasia_empresa = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
+        razon_social = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
+        categoria_iva = self.label_91.text()
+        cuit_empresa = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
+        iibb_empresa = self.ui_ventana_empresa.lineEdit_iibb_empresa.text()
+        inicio_actividades = self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.text()
+        domicilio_empresa = self.label_72.text()
+        cliente = self.lineEdit_clienteNvaFactura.text()
+        cuit_cliente = self.lineEdit_cuitclienteNvaFactura.text()
+        domicilio_cliente = self.lineEdit_domclienteNvaFactura.text()
+        condicion_iva = self.lineEdit_IvaclienteNvaFactura.text()
+        condicion_vta = self.comboBox_FormaPagoFact.currentText()
+
+
+
 #############################################################################################################################################################
         if tipo == 'A':
-            self.facturaA(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
+            self.facturaA(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
             #self.generar_factura_afip(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
         elif tipo == 'B':
-            self.facturaB(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
+            self.facturaB(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
         else:
-            self.facturaC(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
+            self.facturaC(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
 ##############################################################################################################################################################
 
         self.label_ingresar_msg2.setText('Factura ingresada correctamente')
@@ -4815,7 +4835,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Mostramos la url del archivo creado
         print(res["file"])
 
-    def facturaA(self, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva):
+    def facturaA(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
 
         # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
@@ -4933,10 +4953,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+        cae = res["CAE"]
+        venc_cae = res["CAEFchVto"]
+        # Cargar la plantilla
+        env = Environment(loader=FileSystemLoader('.'))
+        template = env.get_template('bill.html')
+
+        # Llenar la plantilla con los datos de la factura
+        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha, nombre_fantasia=fantasia_empresa, razonsocial=razon_social, domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa, iibb=iibb_empresa, inicioactividades=inicio_actividades, cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente, formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
+
+        # Guardar el resultado en un nuevo archivo HTML
+        with open('factura.html', 'w') as f:
+            f.write(factura_html)
+
+
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
-        html = open("./bill.html").read()
+        #html = open("./bill.html").read()
+        html = open("./factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -4961,7 +4996,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(res["file"])
 
 
-    def facturaB(self, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva):
+    def facturaB(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
 
         # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
@@ -5079,10 +5114,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+        cae = res["CAE"]
+        venc_cae = res["CAEFchVto"]
+        # Cargar la plantilla
+        env = Environment(loader=FileSystemLoader('.'))
+        template = env.get_template('bill.html')
+
+        # Llenar la plantilla con los datos de la factura
+        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha,
+                                       nombre_fantasia=fantasia_empresa, razonsocial=razon_social,
+                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa,
+                                       iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                       cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva,
+                                       direccion=domicilio_cliente,
+                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
+
+        # Guardar el resultado en un nuevo archivo HTML
+        with open('factura.html', 'w') as f:
+            f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
-        html = open("./bill.html").read()
+        # html = open("./bill.html").read()
+        html = open("./factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5106,7 +5160,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Mostramos la url del archivo creado
         print(res["file"])
 
-    def facturaC(self, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva):
+    def facturaC(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
 
         # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
@@ -5217,10 +5271,29 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+        cae = res["CAE"]
+        venc_cae = res["CAEFchVto"]
+        # Cargar la plantilla
+        env = Environment(loader=FileSystemLoader('.'))
+        template = env.get_template('bill.html')
+
+        # Llenar la plantilla con los datos de la factura
+        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha,
+                                       nombre_fantasia=fantasia_empresa, razonsocial=razon_social,
+                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa,
+                                       iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                       cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva,
+                                       direccion=domicilio_cliente,
+                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
+
+        # Guardar el resultado en un nuevo archivo HTML
+        with open('factura.html', 'w') as f:
+            f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
-        html = open("./bill.html").read()
+        # html = open("./bill.html").read()
+        html = open("./factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
