@@ -58,6 +58,7 @@ categoria_seleccionada = ""
 
 try:
     from ctypes import windll  # Only exists on Windows.
+
     myappid = "Gestion.Empresas.Comercio.v1.0"
     windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 except ImportError:
@@ -94,7 +95,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Clientes.clicked.connect(self.listar_clientes)
         self.bt_Proveedores.clicked.connect(self.listar_proveedores)
         self.bt_Empresa.clicked.connect(self.listar_empresa)
-        #self.bt_grabar_datos_empresa.clicked.connect(self.grabar_datos_empresa)
+        # self.bt_grabar_datos_empresa.clicked.connect(self.grabar_datos_empresa)
 
         self.bt_Facturacion.clicked.connect(self.modulo_facturacion)
         self.bt_nuevaFactura.clicked.connect(self.nueva_factura)
@@ -102,7 +103,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.bt_NuevoArticulo.clicked.connect(self.mostrar_insertar_articulo)
         self.bt_CancelarNvoArticulo.clicked.connect(self.borrar_campos_nuevo_articulo)
-        #self.bt_BuscarArticulo.clicked.connect(self.buscar_articulo)
+        # self.bt_BuscarArticulo.clicked.connect(self.buscar_articulo)
         self.lineEdit_BuscarArticulo.textChanged.connect(self.buscar_articulo)
         self.bt_ModificarArticulo.clicked.connect(self.modificar_articulo)
         self.bt_EliminarArticulo.clicked.connect(self.eliminar_articulo)
@@ -115,15 +116,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Maximizar.clicked.connect(self.showMaximized)
         self.bt_Restaurar.clicked.connect(self.showNormal)
         self.label_capturaSeleccion.hide()
-        #obtener "id" al hacer click en un la tabla Articulos
+        # obtener "id" al hacer click en un la tabla Articulos
         self.tabla_Articulos.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
         self.tabla_Articulos.itemSelectionChanged.connect(self.on_selec_change)
-        #obtener "id" al hacer click en un la tabla Clientes
+        # obtener "id" al hacer click en un la tabla Clientes
         self.tablaClientes.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
         self.tablaClientes.itemSelectionChanged.connect(self.on_selec_change_cliente)
-        #llamar método para filtrar articulos
+        # llamar método para filtrar articulos
         self.bt_FiltrarArticulo.clicked.connect(self.filtrar_articulo)
-        #empiezan los botones de los clientes
+        # empiezan los botones de los clientes
         self.lineEdit_BuscarArticulo_2.textChanged.connect(self.buscar_cliente)
         self.bt_ModificarCliente.clicked.connect(self.modificar_cliente)
         self.bt_EliminarCliente.clicked.connect(self.eliminar_cliente)
@@ -131,7 +132,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_BuscarCliente.clicked.connect(self.buscar_cliente)
         self.bt_importar_clientes.clicked.connect(self.importar_clientes)
         self.bt_descargar_clientes.clicked.connect(self.descargar_clientes)
-        #empiezan los botones de los proveedores
+        # empiezan los botones de los proveedores
         self.lineEdit_BuscarArticulo_3.textChanged.connect(self.buscar_proveedor)
         self.bt_ModificarProveedor.clicked.connect(self.modificar_proveedor)
         self.bt_NuevoProveedor.clicked.connect(self.mostrar_insertar_proveedor)
@@ -140,11 +141,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_importar_proveedores.clicked.connect(self.importar_proveedores)
         self.bt_descargar_proveedores.clicked.connect(self.descargar_proveedores)
 
-        #acciones botones selecciona/agregar nueva categoría
+        # acciones botones selecciona/agregar nueva categoría
         self.bt_CategoriaNvoArticulo.clicked.connect(self.seleccionar_categoria)
-        #acciones botones selecciona/agregar nueva marca
+        # acciones botones selecciona/agregar nueva marca
         self.bt_MarcaNvoArticulo.clicked.connect(self.seleccionar_marca)
-        #acciones botones selecciona/agregar nuevo proveedor
+        # acciones botones selecciona/agregar nuevo proveedor
         self.bt_ProveedorNvoArticulo.clicked.connect(self.seleccionar_proveedor)
 
         self.ui_ventana_empresa.bt_cancelar_datos_empresa.clicked.connect(self.Ui_ventana_Datos_Empresa.close)
@@ -152,9 +153,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_empresa.bt_cambiar_datos_empresa.clicked.connect(self.cambiar_datos_empresa)
         self.ui_ventana_empresa.bt_eliminar_datos_empresa_2.clicked.connect(self.eliminar_datos_empresa)
         self.ui_ventana_empresa.bt_subir_foto_empresa.clicked.connect(self.subir_foto_empresa)
-        #self.factura_logo = QtWidgets.QLabel(self)
-
-
+        # self.factura_logo = QtWidgets.QLabel(self)
 
         ##################################################################
         ##
@@ -163,10 +162,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##################################################################
 
         self.bt_seleccionaClienteNvaFactura.clicked.connect(self.seleccionar_cliente_nueva_factura)
-        self.ui_agregar_cliente_Fact.lineEdit_BuscarItemArticuloNvaFactura.textChanged.connect(self.buscar_cliente_nueva_factura)
-        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
-        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click_presupuesto)
-
+        self.ui_agregar_cliente_Fact.lineEdit_BuscarItemArticuloNvaFactura.textChanged.connect(
+            self.buscar_cliente_nueva_factura)
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(
+            self.agregar_cliente_click)
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(
+            self.agregar_cliente_click_presupuesto)
 
         #################################################################
         #
@@ -174,13 +175,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #
         #################################################################
 
-        #self.lineEdit_BuscarArticuloNvaFactura1.textChanged.connect(self.buscar_articulo_nueva_factura_lector)
+        # self.lineEdit_BuscarArticuloNvaFactura1.textChanged.connect(self.buscar_articulo_nueva_factura_lector)
         self.lineEdit_BuscarArticuloNvaFactura1.returnPressed.connect(self.buscar_articulo_nueva_factura_lector)
         self.bt_AgregarArticuloNvaFactura.clicked.connect(self.agregar_articulo_nueva_factura)
         self.dialogo_agregar_Art_Factura = QtWidgets.QDialog()
         self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
         self.ui_ventana_agr_articulo.setupUi(self.dialogo_agregar_Art_Factura)
-        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(lambda:self.agregar_articulo_nueva_factura2())
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(
+            lambda: self.agregar_articulo_nueva_factura2())
         self.bt_Eliminar_Articulo_Detalle.clicked.connect(self.eliminar_articulo_detalle)
 
         #################################################################
@@ -205,9 +207,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #           SELECCIONAR FACTURA POR CLIENTE
         #
         ################################################################
-        #self.tablaClientes.itemSelectionChanged.connect(self.seleccionar_factura_cliente)
+        # self.tablaClientes.itemSelectionChanged.connect(self.seleccionar_factura_cliente)
         self.tablaClientes.cellClicked.connect(self.seleccionar_factura_cliente)
-        #self.tablaFacturasCliente.itemSelectionChanged.connect(self.seleccionar_detalle_factura_cliente)
+        # self.tablaFacturasCliente.itemSelectionChanged.connect(self.seleccionar_detalle_factura_cliente)
         self.tablaFacturasCliente.cellClicked.connect(self.seleccionar_detalle_factura_cliente)
 
         ###############################################################
@@ -261,9 +263,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ##############################################################
         self.bt_Presupuestos.clicked.connect(self.modulo_presupuestos)
         self.bt_seleccionaClienteNvaFactura_3.clicked.connect(self.seleccionar_cliente_nuevo_presupuesto)
-        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
+        self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(
+            self.agregar_cliente_click)
         self.bt_AgregarArticuloNvaFactura_3.clicked.connect(self.agregar_articulo_nuevo_presupuesto)
-        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(lambda: self.agregar_articulo_nuevo_presupuesto2())
+        self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.doubleClicked.connect(
+            lambda: self.agregar_articulo_nuevo_presupuesto2())
         self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presu)
         self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
         self.bt_Grabar_presupuesto.clicked.connect(self.guardar_presupuesto)
@@ -271,10 +275,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidgetPresupuestos.cellClicked.connect(self.seleccionar_presupuesto)
         self.bt_Eliminar_Presupuesto.clicked.connect(self.eliminar_presupuesto)
         self.bt_Eliminar_Articulo_Detalle_Presupuesto.clicked.connect(self.eliminar_articulo_detalle_presupuesto)
-        #self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
-
-
-
+        # self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
 
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
@@ -307,7 +308,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.setItem(i, 21, QtWidgets.QTableWidgetItem(str(articulo._cod_barras)))
             log.debug(articulo)
 
-    #######################################################################################################
+            #######################################################################################################
             # Convertir los artículos a un formato que se pueda serializar a JSON
             articulos_json = [articulo.__dict__ for articulo in articulos]
 
@@ -315,18 +316,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             with open('articulos.json', 'w') as f:
                 json.dump(articulos_json, f)
 
-
-    ###########################################################################################
+        ###########################################################################################
 
         ultimo_articulo = ArticuloDAO.ultimo_codigo_usado()
         cod = ultimo_articulo[0].codigo
         self.lineEdit_codigoNvoArticulo_2.setText(str(int(cod) + 10))
         # Setea el código del nuevo artículo en 10 unidades más que el último artículo ingresado
-        #last_row = self.tabla_Articulos.rowCount() - 1
-        #last_codigo = self.tabla_Articulos.item(last_row, 0)
+        # last_row = self.tabla_Articulos.rowCount() - 1
+        # last_codigo = self.tabla_Articulos.item(last_row, 0)
         self.tabla_Articulos.resizeColumnsToContents()
         self.tabla_Articulos.resizeRowsToContents()
-        #self.lineEdit_codigoNvoArticulo_2.setText(str(int(last_codigo.text()) + 10))
+        # self.lineEdit_codigoNvoArticulo_2.setText(str(int(last_codigo.text()) + 10))
         self.lineEdit_codigoNvoArticulo_2.setDisabled(True)
 
         query_art_minimos = "SELECT * FROM articulos WHERE stock <= stock_minimo"
@@ -343,8 +343,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.tableWidget_StockMinimo.setItem(i, 5, QtWidgets.QTableWidgetItem(str(registro[20])))
                 self.tableWidget_StockMinimo.resizeColumnsToContents()
                 self.tableWidget_StockMinimo.resizeRowsToContents()
-
-
 
     def listar_clientes(self):
         clientes = ClienteDAO.seleccionar()
@@ -378,11 +376,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ultimo_cliente = ClienteDAO.ultimo_codigo_usado()
         cod = ultimo_cliente[0].codigo
         self.lineEdit_codigoNvoCliente.setText(str(int(cod) + 10))
-        #last_row_cliente = self.tablaClientes.rowCount() - 1
-        #last_codigo_cliente = self.tablaClientes.item(last_row_cliente, 0)
+        # last_row_cliente = self.tablaClientes.rowCount() - 1
+        # last_codigo_cliente = self.tablaClientes.item(last_row_cliente, 0)
         self.tablaClientes.resizeColumnsToContents()
         self.tablaClientes.resizeRowsToContents()
-        #self.lineEdit_codigoNvoCliente.setText(str(int(last_codigo_cliente.text()) + 10))
+        # self.lineEdit_codigoNvoCliente.setText(str(int(last_codigo_cliente.text()) + 10))
         self.lineEdit_codigoNvoCliente.setDisabled(True)
 
     def listar_proveedores(self):
@@ -411,7 +409,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with open('proveedor.json', 'w') as f:
             json.dump(proveedores_json, f)
 
-
         # Setea el código del nuevo proveedor en 10 unidades más que el último proveedor ingresado
         ultimo_proveedor = ProveedorDAO.ultimo_codigo_usado()
         cod = ultimo_proveedor[0].codproveedor
@@ -423,7 +420,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ########CAMBIAR EL LINEEDIT DE CODIGO DE PROVEEDOR
         # self.lineEdit_codigoNvoProveedor.setText(str(int(last_codigo_proveedor.text()) + 10))
         self.lineEdit_codigoNvoProveedor.setDisabled(True)
-
 
     ###########################################################################################################
     ###########################################################################################################
@@ -460,12 +456,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         margen_ganancia = self.lineEdit_margenNvoArticulo.text()
         stock_minimo = self.lineEdit_stockMinimoNvoArticulo.text()
         cod_barras = self.lineEdit_codBarrasNvoArticulo.text()
-        articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras)
+        articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo,
+                            precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock,
+                            margen_ganancia, stock_minimo, cod_barras)
         articulos_insertados = ArticuloDAO.insertar(articulo)
         log.debug(f'Articulos insertados: {articulos_insertados}')
-        #self.label_ingresar_msg2.setText('Articulo ingresado correctamente')
+        # self.label_ingresar_msg2.setText('Articulo ingresado correctamente')
         QMessageBox.information(self, "Artículo Ingresado",
-                                "El artículo ha sido ingresado correctamente",)
+                                "El artículo ha sido ingresado correctamente", )
         self.listar_articulos()
         ##### BORRA LOS LINEEDIT DESPUES DE INGRESAR EL ARTICULO
         self.borrar_campos_nuevo_articulo()
@@ -520,11 +518,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_codBarrasNvoArticulo.clear()
         self.label_ingresar_msg2.clear()
 
-###########################################################################################################
-#
-#                                 Empieza FACTURAS
+    ###########################################################################################################
+    #
+    #                                 Empieza FACTURAS
 
-###########################################################################################################
+    ###########################################################################################################
 
     def limpiar_busquedas(self):
         self.lineEdit_BuscarArticulo.clear()
@@ -540,11 +538,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         campo1 = 'cod_barras'
         valor = str(self.lineEdit_BuscarArticuloNvaFactura1.text())
         articulos = ArticuloDAO.buscar_articulo_lector(campo1, valor)
-        #self.lineEdit_BuscarArticuloNvaFactura1.returnPressed.connect(self.limpiar_busquedas_lector)
+        # self.lineEdit_BuscarArticuloNvaFactura1.returnPressed.connect(self.limpiar_busquedas_lector)
         self.lineEdit_BuscarArticuloNvaFactura1.clear()
         self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
-########################################################################################################
+        ########################################################################################################
         # nueva_lista = []
         # for i in articulos:
         #     precio_costo_str = i.precio_costo.replace('$', '').replace(',', '')
@@ -558,7 +556,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
         # self.verificarExistencias()
         # self.actualizar_subtotal_factura()
-#######################################################################################################
+        #######################################################################################################
         # Obtén el código del artículo seleccionado
         codigo_articulo_seleccionado = articulos[0].codigo
 
@@ -591,13 +589,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 importe_iva = (float(precio_costo_str) * float(i.iva)) / 100
                 precio_unitario = float(precio_costo_str) + importe_iva
                 nueva_lista.append(
-                 [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
+                    [i.codigo, i.nombre, "1", i.precio_costo, i.iva, importe_iva, precio_unitario, precio_unitario])
             Funciones.fx_cargarTablaX(nueva_lista, self.tableWidgetDetalleNvaFactura, limpiaTabla=False)
             self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
             self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
             self.verificarExistencias()
             self.actualizar_subtotal_factura()
-
 
     def buscar_articulo(self):
         campo1 = 'nombre'
@@ -606,7 +603,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         valor = str(self.lineEdit_BuscarArticulo.text())
         articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor)
         ##########################################ELIMINE LA LINEA QUE LIMPIA EL CAMPO DE BUSQUEDA AL DAR ENTER C/LECTOR
-        #self.lineEdit_BuscarArticulo.returnPressed.connect(self.limpiar_busquedas)
+        # self.lineEdit_BuscarArticulo.returnPressed.connect(self.limpiar_busquedas)
         #################################################################################
         self.tabla_Articulos.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
@@ -636,18 +633,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabla_Articulos.resizeRowsToContents()
             log.debug(articulo)
 
-
     def on_selec_change(self):
         row = self.tabla_Articulos.currentRow()
         item = self.tabla_Articulos.item(row, 0)
         if item is not None:
             self.label_capturaSeleccion.setText(item.text())
             print(f'Fila seleccionada: {item.text()}')
+
     def modificar_articulo(self):
-        #valor_codigo = self.label_capturaSeleccion.text()
-        #codigo = self.tabla_Articulos.item(int(valor_codigo), 0).text()
-        #row = int(valor_codigo)
-        row= self.tabla_Articulos.currentRow()
+        # valor_codigo = self.label_capturaSeleccion.text()
+        # codigo = self.tabla_Articulos.item(int(valor_codigo), 0).text()
+        # row = int(valor_codigo)
+        row = self.tabla_Articulos.currentRow()
         codigo = int(self.tabla_Articulos.item(row, 0).text())
         nombre = str(self.tabla_Articulos.item(row, 1).text())
         modelo = str(self.tabla_Articulos.item(row, 2).text())
@@ -659,13 +656,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         precio_costo_str = self.tabla_Articulos.item(row, 8).text()
         precio_costo_str = precio_costo_str.replace('$', '').replace(',', '')
         precio_costo = float(precio_costo_str)
-        #precio_costo = float(self.tabla_Articulos.item(row, 8).text())
+        # precio_costo = float(self.tabla_Articulos.item(row, 8).text())
         precio_venta_str = self.tabla_Articulos.item(row, 9).text()
         precio_venta_str = precio_venta_str.replace('$', '').replace(',', '')
         precio_venta = float(precio_venta_str)
-        #precio_venta = float(self.tabla_Articulos.item(row, 9).text())
-        #iva_str = self.tabla_Articulos.item(row, 10).text
-        #iva = float(iva_str) if iva_str != 'None' else 0.0
+        # precio_venta = float(self.tabla_Articulos.item(row, 9).text())
+        # iva_str = self.tabla_Articulos.item(row, 10).text
+        # iva = float(iva_str) if iva_str != 'None' else 0.0
         iva = float(self.tabla_Articulos.item(row, 10).text())
         proveedor = str(self.tabla_Articulos.item(row, 11).text())
         tamaño = float(self.tabla_Articulos.item(row, 12).text())
@@ -682,7 +679,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if button == QMessageBox.Yes:
             print("SI!")
-            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo, precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado, stock, margen_ganancia, stock_minimo, cod_barras)
+            articulo = Articulo(codigo, nombre, modelo, marca, categoria, sku, color, caracteristica, precio_costo,
+                                precio_venta, iva, proveedor, tamaño, ancho, largo, profundidad, peso, peso_envalado,
+                                stock, margen_ganancia, stock_minimo, cod_barras)
             articulos_actualizados = ArticuloDAO.actualizar(articulo)
             log.debug(f'Articulos actualizados: {articulos_actualizados}')
             self.label_ingresar_msg2.setText('Articulo actualizado correctamente')
@@ -869,7 +868,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         margen_ganancia = self.tabla_Articulos.item(row, 19).text()
         stock_minimo = self.tabla_Articulos.item(row, 20).text()
         cod_barras = self.tabla_Articulos.item(row, 21).text()
-        button = QMessageBox.question(self, "Eliminar Artículo", "Está seguro que desea eliminar el artículo?",)
+        button = QMessageBox.question(self, "Eliminar Artículo", "Está seguro que desea eliminar el artículo?", )
 
         if button == QMessageBox.Yes:
             print("SI!")
@@ -886,7 +885,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listar_articulos()
         return
 
-
     ###########################################################################################################
     ###########################################################################################################
     #
@@ -895,13 +893,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     ###########################################################################################################
     ###########################################################################################################
 
-
     def on_selec_change_cliente(self):
         row = self.tablaClientes.currentRow()
         item = self.tablaClientes.item(row, 0)
         if item is not None:
             self.label_capturaSeleccion.setText(item.text())
             print(f'Fila seleccionada: {item.text()}')
+
     def modificar_cliente(self):
         row = self.tablaClientes.currentRow()
         codigo = int(self.tablaClientes.item(row, 0).text())
@@ -917,7 +915,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         localidad = str(self.tablaClientes.item(row, 10).text())
         provincia = str(self.tablaClientes.item(row, 11).text())
         pais = str(self.tablaClientes.item(row, 12).text())
-        #observaciones = str(self.tablaClientes.item(row, 13).text())
+        # observaciones = str(self.tablaClientes.item(row, 13).text())
         item = self.tablaClientes.item(row, 13)
         condiva = self.tablaClientes.item(row, 14).text()
         if item is not None:
@@ -1014,7 +1012,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if button == QMessageBox.Yes:
             print("SI!")
-            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero,
+                              localidad, provincia, pais, observaciones, condiva)
             clientes_actualizados = ClienteDAO.actualizar(cliente)
             log.debug(f'Clientes actualizados: {clientes_actualizados}')
             self.label_ingresar_msg2.setText('Cliente actualizado correctamente')
@@ -1044,7 +1043,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         localidad = self.tablaClientes.item(row, 10).text()
         provincia = self.tablaClientes.item(row, 11).text()
         pais = self.tablaClientes.item(row, 12).text()
-        #observaciones = self.tablaClientes.item(row, 13).text()
+        # observaciones = self.tablaClientes.item(row, 13).text()
         item = self.tablaClientes.item(row, 13)
         condiva = self.tablaClientes.item(row, 14).text()
         if item is not None:
@@ -1056,7 +1055,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if button == QMessageBox.Yes:
             print("SI!")
-            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+            cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero,
+                              localidad, provincia, pais, observaciones, condiva)
             clientes_eliminados = ClienteDAO.eliminar(cliente)
             log.debug(f'Clientes eliminados: {clientes_eliminados}')
             # self.label_ingresar_msg2.setText('Cliente eliminado correctamente')
@@ -1067,11 +1067,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listar_clientes()
         return
 
-
     def mostrar_insertar_cliente(self):
         self.stackedWidget.setCurrentIndex(5)
         self.bt_guardarNvoCliente.clicked.connect(self.insertar_cliente)
-
 
     def insertar_cliente(self):
         codigo = self.lineEdit_codigoNvoCliente.text()
@@ -1089,7 +1087,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         pais = self.lineEdit_paisNvoCliente.text()
         observaciones = self.lineEdit_obsercacionesNvoCliente.text()
         condiva = self.comboBox_CondIVANvoCliente.currentText()
-        #item = self.lineEdit_obsercacionesNvoCliente.text()
+        # item = self.lineEdit_obsercacionesNvoCliente.text()
         # if item is not None:
         #     observaciones = str(item.text())
         # else:
@@ -1136,9 +1134,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_telefonoNvoCliente.setFocus()
             return
 
-
-
-        cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad, provincia, pais, observaciones, condiva)
+        cliente = Cliente(codigo, nombre, apellido, dni, empresa, cuit, telefono, email, direccion, numero, localidad,
+                          provincia, pais, observaciones, condiva)
         clientes_insertados = ClienteDAO.insertar(cliente)
         log.debug(f'Clientes insertados: {clientes_insertados}')
         self.label_ingresar_msg2.setText('Cliente ingresado correctamente')
@@ -1174,8 +1171,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaClientes.resizeRowsToContents()
             log.debug(cliente)
 
-
-
     ##############################################################################################
     ##############################################################################################
     #
@@ -1200,7 +1195,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         email = str(self.tablaProveedores.item(row, 9).text())
         cuenta = str(self.tablaProveedores.item(row, 10).text())
         password = str(self.tablaProveedores.item(row, 11).text())
-        #observaciones = str(self.tablaProveedores.item(row, 12).text())
+        # observaciones = str(self.tablaProveedores.item(row, 12).text())
         item = self.tablaProveedores.item(row, 12)
         if item is not None:
             observaciones = str(item.text())
@@ -1254,7 +1249,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if button == QMessageBox.Yes:
             print("SI!")
-            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web,
+                                  email, cuenta, password, observaciones)
             proveedores_actualizados = ProveedorDAO.actualizar(proveedor)
             log.debug(f'Clientes actualizados: {proveedores_actualizados}')
             self.label_ingresar_msg2.setText('Proveedor actualizado correctamente')
@@ -1283,7 +1279,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cuenta = self.lineEdit_cuentaNvoProveedor.text()
         password = self.lineEdit_passwordNvoProveedor.text()
         observaciones = self.lineEdit_obsercacionesNvoProveedor.text()
-        #item = self.lineEdit_obsercacionesNvoCliente.text()
+        # item = self.lineEdit_obsercacionesNvoCliente.text()
         # if item is not None:
         #     observaciones = str(item.text())
         # else:
@@ -1328,7 +1324,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_telefonoNvoProveedor.setFocus()
             return
 
-        proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+        proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email,
+                              cuenta, password, observaciones)
         proveedores_insertados = ProveedorDAO.insertar(proveedor)
         log.debug(f'Clientes insertados: {proveedores_insertados}')
         self.label_ingresar_msg2.setText('Proveedor ingresado correctamente')
@@ -1356,17 +1353,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cuenta = self.tablaProveedores.item(row, 10).text()
         password = self.tablaProveedores.item(row, 11).text()
         observaciones = self.tablaProveedores.item(row, 12).text()
-        #item = self.tablaProveedores.item(row, 13)
-        #if item is not None:
+        # item = self.tablaProveedores.item(row, 13)
+        # if item is not None:
         #    observaciones = str(item.text())
-        #else:
+        # else:
         #    observaciones = None
 
         button = QMessageBox.question(self, "Eliminar Proveedor", "Está seguro que desea eliminar el proveedor?", )
 
         if button == QMessageBox.Yes:
             print("SI!")
-            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web, email, cuenta, password, observaciones)
+            proveedor = Proveedor(codproveedor, razonsocial, cuit, domicilio, ciudad, provincia, pais, telefono, web,
+                                  email, cuenta, password, observaciones)
             proveedores_eliminados = ProveedorDAO.eliminar(proveedor)
             log.debug(f'Proveedores eliminados: {proveedores_eliminados}')
             # self.label_ingresar_msg2.setText('Proveedor eliminado correctamente')
@@ -1402,8 +1400,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaProveedores.resizeColumnsToContents()
             self.tablaProveedores.resizeRowsToContents()
 
-
-
     ##############################################################################################
     #
     #                   SELECCIONAR CATEGORIA NUEVO ARTICULO
@@ -1415,7 +1411,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui = Ui_ventana_Categorias()
         self.ui.setupUi(self.dialogo_categoria)
 
-        #Obtener las categorias de la base de datos
+        # Obtener las categorias de la base de datos
         categorias = ArticuloDAO.seleccionar_categorias()
 
         # Crear un modelo para la lista
@@ -1426,13 +1422,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             item = QtGui.QStandardItem(categoria)
             model.appendRow(item)
 
-
         # Asignar el modelo a la lista
         self.ui.listView_categorias.setModel(model)
         self.ui.bt_SeleccionarCategoria.clicked.connect(self.seleccionada_categoria)
         self.ui.bt_AgregarCategoria.clicked.connect(self.mostrar_agregar_categoria)
         self.dialogo_categoria.exec_()
-
 
     def seleccionada_categoria(self):
         index = self.ui.listView_categorias.currentIndex()
@@ -1449,7 +1443,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.setupUi(self.dialogo_categoria)
         self.ui.bt_GuardarCategoria.clicked.connect(self.agregar_categoria)
         self.dialogo_categoria.exec_()
-
 
     def agregar_categoria(self):
         categoria = self.ui.lineEdit_nuevoCodCategoria_2.text()
@@ -1510,7 +1503,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         log.debug(f'Categorias insertadas: {marcas}')
         self.label_ingresar_msg2.setText('Marca ingresada correctamente')
         QMessageBox.information(self, "Marca Ingresada",
-                                    "La marca ha sido ingresada correctamente", )
+                                "La marca ha sido ingresada correctamente", )
         self.dialogo_marca.close()
         return
 
@@ -1547,7 +1540,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_proveedorNvoArticulo.setText(item)
         self.dialogo_proveedor.close()
 
-
     ##############################################################################################
     #
     #                   NUEVA FACTURA
@@ -1566,38 +1558,53 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setRowCount(len(clientes))
         for i, cliente in enumerate(clientes):
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(cliente.codigo)))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(cliente.nombre))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(cliente.apellido))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(cliente.dni))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(cliente.empresa))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(cliente.cuit))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(cliente.telefono))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(cliente.email))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(cliente.direccion))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(cliente.numero))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(cliente.localidad))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(cliente.provincia))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(cliente.pais))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente.observaciones))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(cliente.condiva))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(cliente.codigo)))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                cliente.nombre))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                cliente.apellido))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                cliente.dni))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                cliente.empresa))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(
+                cliente.cuit))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(
+                cliente.telefono))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                cliente.email))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                cliente.direccion))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                cliente.numero))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(
+                cliente.localidad))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(
+                cliente.provincia))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(
+                cliente.pais))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(
+                cliente.observaciones))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(
+                cliente.condiva))
 
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeColumnsToContents()
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeRowsToContents()
-        #self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
+        # self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
 
         # Crear un modelo para la lista
-        #model = QtGui.QStandardItemModel()
+        # model = QtGui.QStandardItemModel()
 
         # Añadir las categorías al modelo
-        #for cliente in clientes:
+        # for cliente in clientes:
         #    item = QtGui.QStandardItem(clientes)
         #    model.appendRow(item)
 
         # Asignar el modelo a la lista
-        #self.ui.listView_clientes.setModel(model)
-        #self.ui.tableWidgetAgregarClienteNvaFactura.setModel(model)
-        #self.ui.bt_SeleccionarCliente.clicked.connect(self.seleccionado_cliente)
+        # self.ui.listView_clientes.setModel(model)
+        # self.ui.tableWidgetAgregarClienteNvaFactura.setModel(model)
+        # self.ui.bt_SeleccionarCliente.clicked.connect(self.seleccionado_cliente)
         self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
         self.dialogo_agregar_cliente_factura.exec_()
@@ -1672,25 +1679,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.buscar_fact_pendiente()
         self.buscar_fact_cobrar()
 
-
     def seleccionar_factura(self):
         row = self.tableWidget_ultimasFacturas.currentRow()
         codfactura = int(self.tableWidget_ultimasFacturas.item(row, 1).text())
         detalles = detalleFacturaDAO.busca_detalle(codfactura)
         self.tableWidget_detalleultimasFacturas_2.setRowCount(len(detalles))
         for i, detalle in enumerate(detalles):
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 1, QtWidgets.QTableWidgetItem(detalle.descripcion))
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.importe)))
-             self.tableWidget_detalleultimasFacturas_2.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.iva)))
-             self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-             self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
-             log.debug(detalle)
-        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
-        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 0,
+                                                              QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 1, QtWidgets.QTableWidgetItem(detalle.descripcion))
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 3,
+                                                              QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+            self.tableWidget_detalleultimasFacturas_2.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.iva)))
+            self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+            self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+            log.debug(detalle)
+        # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
         log.debug(detalles)
 
     def nueva_factura(self):
@@ -1711,7 +1719,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_total_Nva_factura.clear()
         self.lineEdit_BuscarArticuloNvaFactura1.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1.setCursorPosition(0)
-
 
         # Obtener la fecha y hora actual
         now = datetime.now()
@@ -1745,7 +1752,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         provincia = empresa.provincia
         pais = empresa.pais
         direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
-        #self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
+        # self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
         self.label_72.setText(direccion_completa_empresa)
         ############################################################################################
         # CARGAMOS EL LOGO DE LA EMPRESA EN LA NUEVA FACTURA
@@ -1765,7 +1772,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Mover la QLabel a la posición deseada
         self.factura_logo.move(70, 60)
-
 
         ###############################################################################
 
@@ -1787,31 +1793,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEdit_numeroNvaFactura.setText("1".zfill(8))  # or handle the error as you see fit
             return facturas
 
-
-
     def agregar_articulo_nueva_factura(self):
 
         # self.dialogo_agregar_Art_Factura = QtWidgets.QDialog()
         # self.ui_ventana_agr_articulo = Ui_ventana_agregar_articulo()
         # self.ui_ventana_agr_articulo.setupUi(self.dialogo_agregar_Art_Factura)
-        #self.ui.lineEdit_BuscarArticuloNvaFactura3.textChanged.connect(self.buscar_articulo_nueva_factura)
-        #self.ui.bt_AgregarArticuloNvaFactura.clicked.connect(self.buscar_articulo_nueva_factura)
+        # self.ui.lineEdit_BuscarArticuloNvaFactura3.textChanged.connect(self.buscar_articulo_nueva_factura)
+        # self.ui.bt_AgregarArticuloNvaFactura.clicked.connect(self.buscar_articulo_nueva_factura)
         articulos = ArticuloDAO.seleccionar()
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                articulo._categoria))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5,
-                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                                                                                       QtWidgets.QTableWidgetItem(
+                                                                                           str(articulo._precio_costo)))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6,
-                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                                                                                       QtWidgets.QTableWidgetItem(
+                                                                                           str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                str(articulo._iva)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
@@ -1819,15 +1831,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                str(articulo._stock)))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
                 str(articulo._margen_ganancia)))
             log.debug(articulo)
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeColumnsToContents()
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeRowsToContents()
-        self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.textChanged.connect(self.buscar_articulo_nueva_factura)
+        self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.textChanged.connect(
+            self.buscar_articulo_nueva_factura)
         self.dialogo_agregar_Art_Factura.exec_()
-
 
     def buscar_articulo_nueva_factura(self):
         campo1 = 'nombre'
@@ -1839,31 +1852,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor1)
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                articulo._categoria))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(
+                str(articulo._precio_costo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(
+                str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                str(articulo._iva)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                str(articulo._margen_ganancia)))
             log.debug(articulo)
         return
 
-
-        #self.bt_guardarNvaFactura.clicked.connect(self.guardar_nueva_factura)
+        # self.bt_guardarNvaFactura.clicked.connect(self.guardar_nueva_factura)
 
     def agregar_articulo_nueva_factura2(self):
         tabla = self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura
@@ -1871,12 +1893,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(lista)
         print("metodo llamado")
         precio_costo_str = tabla.item(tabla.currentRow(), 5).text().replace('$', '').replace(',', '')
-        importe_iva = (float(precio_costo_str) * float(tabla.item(tabla.currentRow(), 7).text()))/100
+        importe_iva = (float(precio_costo_str) * float(tabla.item(tabla.currentRow(), 7).text())) / 100
         precio_unitario = float(precio_costo_str) + importe_iva
         # Obtén el número de filas en la tabla
         num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
         total = 0
-################################################################################################
+        ################################################################################################
         # nueva_lista = []
         # for i in lista:
         #     nueva_lista.append([i[0], i[1], "1", i[5], i[7], importe_iva, precio_unitario, precio_unitario])
@@ -1887,7 +1909,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
         # self.verificarExistencias()
         # self.actualizar_subtotal_factura()
-##################################################################################################
+        ##################################################################################################
         # Obtén el código del artículo seleccionado
         codigo_articulo_seleccionado = lista[0][0]
 
@@ -1924,8 +1946,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.verificarExistencias()
         self.actualizar_subtotal_factura()
 
-
-
     def verificarExistencias(self):
         tabla = self.tableWidgetDetalleNvaFactura
         lista = Funciones.fx_leer_seleccion_tabla(tabla)[0]
@@ -1939,7 +1959,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 return
             else:
                 pass
-
 
     def actualizar_subtotal_factura(self):
         # Obtén el número de filas en la tabla
@@ -1955,7 +1974,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Obtén el valor de la columna subtotal (asumiendo que es la columna 7)
             item_factura = self.tableWidgetDetalleNvaFactura.item(row, 7)
             item_iva = self.tableWidgetDetalleNvaFactura.item(row, 5)
-
 
             if item_factura is not None:
                 subtotal_factura_str = item_factura.text()
@@ -1991,11 +2009,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             stock = ArticuloDAO.verificar_existencias(codigoarticulo)
             if cantidad > stock:
                 QMessageBox.warning(self, "Stock Insuficiente",
-                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(cantidad, stock))
+                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(
+                                        cantidad, stock))
                 return
             ####################################################################
-
-
 
             # Obtiene el valor de la celda "precio unitario" (asumiendo que es la columna 6)
             precio_unitario_item = self.tableWidgetDetalleNvaFactura.item(row, 6)
@@ -2014,16 +2031,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             importe_iva_item = cantidad * iva
 
             # Actualiza la celda "subtotal" (asumiendo que es la columna 7)
-            self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal,2)))))
-            self.tableWidgetDetalleNvaFactura.setItem(row, 5, QtWidgets.QTableWidgetItem(str((round(importe_iva_item,2)))))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal, 2)))))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 5,
+                                                      QtWidgets.QTableWidgetItem(str((round(importe_iva_item, 2)))))
 
             self.actualizar_subtotal_factura()
 
     def agregar_cliente_click(self):
         row = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.currentRow()
-        #row = self.tableWidgetDetalleNvaFactura.currentRow()
-        #item1 = self.tableWidgetAgregarClienteNvaFactura.item(row, 0)
-        #if item1 is not None:
+        # row = self.tableWidgetDetalleNvaFactura.currentRow()
+        # item1 = self.tableWidgetAgregarClienteNvaFactura.item(row, 0)
+        # if item1 is not None:
 
         ### CONCATENAR VALORES DE NOMBRE Y APELLIDO JUNTOS
         nombre = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 1).text()
@@ -2031,8 +2049,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         nombre_completo = " ".join([nombre, apellido])
         self.lineEdit_clienteNvaFactura.setText(nombre_completo)
         ###########################################
-        #self.lineEdit_clienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 1).text())
-        #self.lineEdit_domclienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 8).text())
+        # self.lineEdit_clienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 1).text())
+        # self.lineEdit_domclienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 8).text())
 
         # concatenar los valores de direccion, numero, localidad, provincia en un solo lineedit
         direccion = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 8).text()
@@ -2042,19 +2060,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         pais = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 12).text()
         # Concatenar los valores con espacios entre ellos
         direccion_completa = " ".join([direccion, numero, localidad, provincia, pais])
-        #cond_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
+        # cond_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
 
         self.lineEdit_domclienteNvaFactura.setText(direccion_completa)
         ############################
-        self.lineEdit_codclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 0).text())
-        self.lineEdit_cuitclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 5).text())
-        self.lineEdit_dniclienteNvaFactura_2.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 3).text())
-        self.lineEdit_telclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 6).text())
-        self.lineEdit_emailclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 7).text())
-        #self.lineEdit_IvaclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14).text())
+        self.lineEdit_codclienteNvaFactura.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 0).text())
+        self.lineEdit_cuitclienteNvaFactura.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 5).text())
+        self.lineEdit_dniclienteNvaFactura_2.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 3).text())
+        self.lineEdit_telclienteNvaFactura.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 6).text())
+        self.lineEdit_emailclienteNvaFactura.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 7).text())
+        # self.lineEdit_IvaclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14).text())
         item_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14)
         if item_iva is not None:
-             self.lineEdit_IvaclienteNvaFactura.setText(item_iva.text())
+            self.lineEdit_IvaclienteNvaFactura.setText(item_iva.text())
 
         if self.lineEdit_IvaclienteNvaFactura.text() == 'RESPONSABLE INSCRIPTO' and self.label_91.text() == 'RESPONSABLE INSCRIPTO':
             self.label_90.setText('A')
@@ -2080,7 +2103,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_IvaclienteNvaFactura.setReadOnly(True)
 
         return
-        #self.lineEdit_clienteNvaFactura.setText = self.Ui_ventana_agregar_cliente_factura.tableWidgetAgregarClienteNvaFactura.item(row, 0).text()
+        # self.lineEdit_clienteNvaFactura.setText = self.Ui_ventana_agregar_cliente_factura.tableWidgetAgregarClienteNvaFactura.item(row, 0).text()
 
     def listar_empresa(self):
         # self.Ui_ventana_Datos_Empresa = QtWidgets.QDialog()
@@ -2138,7 +2161,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui_ventana_empresa.lineEdit_provincia_empresa.setReadOnly(False)
             self.ui_ventana_empresa.lineEdit_pais_empresa.setReadOnly(False)
 
-
         self.Ui_ventana_Datos_Empresa.bt = QtWidgets.QPushButton(self)
         self.ui_ventana_empresa.bt_grabar_datos_empresa.setObjectName("bt_grabar_datos_empresa")
         self.ui_ventana_empresa.bt_grabar_datos_empresa.clicked.connect(self.ingresar_datos_empresa)
@@ -2173,10 +2195,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
             sucursales = 1
 
-
-
-
-            empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais, sucursales)
+            empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio,
+                              localidad, provincia, pais, sucursales)
             empresas_insertadas = EmpresaDAO.insertar(empresa)
             log.debug(f'Empresas insertadas: {empresas_insertadas}')
             self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
@@ -2188,15 +2208,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             QMessageBox.information(self, "La Empresa ya ha sido Ingresada anteriormente",
                                     "La empresa ha sido ingresada anteriormente, no puede ingresarse los valores de una nueva, modifique los actuales", )
 
-
-
         # empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais)
         # empresas_insertadas = EmpresaDAO.insertar(empresa)
         # log.debug(f'Empresas insertadas: {empresas_insertadas}')
         # self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
         # QMessageBox.information(self, "Empresa Ingresada",
         #                         "La empresa ha sido ingresada correctamente", )
-        #self.Ui_ventana_Datos_Empresa.close()
+        # self.Ui_ventana_Datos_Empresa.close()
         return
 
     def guardar_factura(self):
@@ -2218,21 +2236,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         entrega = self.comboBox_Retira.currentText()
 
         # Crear un objeto Factura
-        factura = Factura(serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, tipo, entrega)
+        factura = Factura(serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, tipo,
+                          entrega)
 
         # Insertar la factura en la base de datos
         facturas_insertadas = FacturaDAO.insertar(factura)
         log.debug(f'Facturas insertadas: {facturas_insertadas}')
-    ###########################################################################################
+        ###########################################################################################
         facturas_json = factura.__dict__
 
         # Guardar las facturas en un archivo JSON
         with open('facturas.json', 'w') as f:
             json.dump(facturas_json, f)
-    ###########################################################################################
+        ###########################################################################################
 
-# Obtener los detalles de la factura
-
+        # Obtener los detalles de la factura
+        alicuota_iva = 0
+        # Obtén el número de filas en la tabla
         self.tableWidgetDetalleNvaFactura.rowCount()
         for row in range(self.tableWidgetDetalleNvaFactura.rowCount()):
             codarticulo = self.tableWidgetDetalleNvaFactura.item(row, 0).text()
@@ -2242,9 +2262,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             importe_iva = self.tableWidgetDetalleNvaFactura.item(row, 5).text()
             subtotal = self.tableWidgetDetalleNvaFactura.item(row, 7).text()
             alicuota_iva = float(self.tableWidgetDetalleNvaFactura.item(row, 4).text())
-            #precioventa = self.detallefactura.precioventa.replace('$', '').replace(',', '')
-            #valores = (detallefactura.serie, detallefactura.codfactura, detallefactura.codarticulo, detallefactura.descripcion, detallefactura.cantidad, float(precioventa), detallefactura.importe, detallefactura.iva)
-            detalle = detalleFactura(serie, codfactura, codarticulo, descripcion, cantidad, precio_unitario, subtotal, importe_iva, tipo)
+            # precioventa = self.detallefactura.precioventa.replace('$', '').replace(',', '')
+            # valores = (detallefactura.serie, detallefactura.codfactura, detallefactura.codarticulo, detallefactura.descripcion, detallefactura.cantidad, float(precioventa), detallefactura.importe, detallefactura.iva)
+            detalle = detalleFactura(serie, codfactura, codarticulo, descripcion, cantidad, precio_unitario, subtotal,
+                                     importe_iva, tipo)
             detalleFacturaDAO.insertar(detalle)
             #################################
             # DESCONTAR STOCK DE LOS ARTICULOS
@@ -2254,19 +2275,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             with CursorDelPool() as cursor:
                 cursor.execute(query_stock, valores)
 
-
         log.debug(f'Detalles insertados: {detalle}')
-####################################################################################################################################
-    #                          RECOPILAR LOS DATOS PARA LA FACTURA ELECTRONICA
-####################################################################################################################################
+        ####################################################################################################################################
+        #                          RECOPILAR LOS DATOS PARA LA FACTURA ELECTRONICA
+        ####################################################################################################################################
 
-        tipo= self.label_90.text()
-        fantasia_empresa = self.ui_ventana_empresa.lineEdit_nombre_fantasia_empresa.text()
-        razon_social = self.ui_ventana_empresa.lineEdit_razon_social_empresa.text()
+        tipo = self.label_90.text()
+        fantasia_empresa = self.label_68.text()
+        razon_social = self.label_71.text()
         categoria_iva = self.label_91.text()
-        cuit_empresa = self.ui_ventana_empresa.lineEdit_cuit_empresa.text()
-        iibb_empresa = self.ui_ventana_empresa.lineEdit_iibb_empresa.text()
-        inicio_actividades = self.ui_ventana_empresa.lineEdit_inicio_actividades_empresa.text()
+        cuit_empresa = self.lineEdit_cuitNvaFactura.text()
+        iibb_empresa = self.lineEdit_IIBBNvaFactura.text()
+        inicio_actividades = self.lineEdit_inicioActNvaFactura_2.text()
         domicilio_empresa = self.label_72.text()
         cliente = self.lineEdit_clienteNvaFactura.text()
         cuit_cliente = self.lineEdit_cuitclienteNvaFactura.text()
@@ -2274,17 +2294,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         condicion_iva = self.lineEdit_IvaclienteNvaFactura.text()
         condicion_vta = self.comboBox_FormaPagoFact.currentText()
 
+        detalles_factura = detalleFacturaDAO.busca_detalle_lista(codfactura)
+        print(detalles_factura)
+        # print(lista)
 
-
-#############################################################################################################################################################
+        #############################################################################################################################################################
         if tipo == 'A':
-            self.facturaA(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
-            #self.generar_factura_afip(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
+            self.facturaA(tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                          inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente,
+                          condicion_iva, domicilio_cliente, condicion_vta, estado, subtotalFact, iva, total, formapago,
+                          alicuota_iva, detalles_factura)
+            # self.generar_factura_afip(serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva)
         elif tipo == 'B':
-            self.facturaB(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
+            self.facturaB(tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                          inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente,
+                          condicion_iva, domicilio_cliente, condicion_vta, estado, subtotalFact, iva, total, formapago,
+                          alicuota_iva, detalles_factura)
         else:
-            self.facturaC(tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotalFact, ivaFactura, totalFact, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta)
-##############################################################################################################################################################
+            self.facturaC(tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                          inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente,
+                          condicion_iva, domicilio_cliente, condicion_vta, estado, subtotalFact, iva, total, formapago,
+                          alicuota_iva, detalles_factura)
+        ##############################################################################################################################################################
 
         self.label_ingresar_msg2.setText('Factura ingresada correctamente')
         QMessageBox.information(self, "Factura Ingresada",
@@ -2299,8 +2330,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             with CursorDelPool() as cursor:
                 cursor.execute(query_caja, valores)
             QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
-
-
 
         self.lineEdit_clienteNvaFactura.clear()
         self.lineEdit_domclienteNvaFactura.clear()
@@ -2322,17 +2351,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             pagos = 0
             saldo = total
             fechacancelada = "0"
-            pendiente = Pendiente(codpendiente, serie, codfactura, estado, fecha, codcliente, nombre,  importe, pagos, saldo, fechacancelada)
+            pendiente = Pendiente(codpendiente, serie, codfactura, estado, fecha, codcliente, nombre, importe, pagos,
+                                  saldo, fechacancelada)
 
             # Insertar la factura en la base de datos
             pendientes_insertadas = PendientesDAO.insertar(pendiente)
             log.debug(f'Facturas insertadas: {pendientes_insertadas}')
 
-
         # Cerrar la ventana
         self.stackedWidget.setCurrentIndex(1)
         return
-
 
     def cancelar_factura(self):
         num_rows = self.tableWidgetDetalleNvaFactura.rowCount()
@@ -2349,27 +2377,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         return
 
     def buscar_fact_pendiente(self):
-        campo= 'ENVIO'
+        campo = 'ENVIO'
         pendientes = FacturaDAO.buscar_factura_pendiente(campo)
         if pendientes not in []:
             self.tableWidget_facturaspendientesentrega.setRowCount(len(pendientes))
             for i, pendiente in enumerate(pendientes):
-                self.tableWidget_facturaspendientesentrega.setItem(i, 0, QtWidgets.QTableWidgetItem(str(pendiente.serie)))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 1, QtWidgets.QTableWidgetItem(str(pendiente.codfactura)))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 2, QtWidgets.QTableWidgetItem(str(pendiente.tipo)))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 3, QtWidgets.QTableWidgetItem(str(pendiente.fecha)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 0,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.serie)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                    str(pendiente.codfactura)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 2,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.tipo)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 3,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.fecha)))
                 self.tableWidget_facturaspendientesentrega.setItem(i, 4, QtWidgets.QTableWidgetItem(pendiente.estado))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 5, QtWidgets.QTableWidgetItem(str(pendiente.subtotal)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 5,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.subtotal)))
                 self.tableWidget_facturaspendientesentrega.setItem(i, 6, QtWidgets.QTableWidgetItem(str(pendiente.iva)))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 7, QtWidgets.QTableWidgetItem(str(pendiente.total)))
-                self.tableWidget_facturaspendientesentrega.setItem(i, 8, QtWidgets.QTableWidgetItem(str(pendiente.formapago)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 7,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.total)))
+                self.tableWidget_facturaspendientesentrega.setItem(i, 8,
+                                                                   QtWidgets.QTableWidgetItem(str(pendiente.formapago)))
                 self.tableWidget_facturaspendientesentrega.resizeColumnsToContents()
                 self.tableWidget_facturaspendientesentrega.resizeRowsToContents()
             return
 
     def buscar_fact_cobrar(self):
         campo1 = 'PENDIENTE'
-        #campo2 = 'CHEQUE'
+        # campo2 = 'CHEQUE'
         pendientes = FacturaDAO.buscar_factura_cobrar(campo1)
         self.tableWidget_facturasImpagas.setRowCount(len(pendientes))
         for i, pendiente in enumerate(pendientes):
@@ -2393,6 +2428,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #     json.dump(pendientes_json, f)
         # #####################################################################
         return
+
     ######################################################################
 
     #####################################################################
@@ -2418,9 +2454,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaFacturasCliente.resizeColumnsToContents()
             self.tablaFacturasCliente.resizeRowsToContents()
             log.debug(factura)
-        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
-        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
         log.debug(facturas)
 
     def seleccionar_detalle_factura_cliente(self):
@@ -2443,13 +2479,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaArticulosFacturaCliente.resizeColumnsToContents()
             self.tablaArticulosFacturaCliente.resizeRowsToContents()
             log.debug(detalles)
-        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
-        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
         log.debug(detalles)
 
     def cobrar_factura_cliente(self):
-        #self.lineEdit_ImporteCobrarFactura.clear()
+        # self.lineEdit_ImporteCobrarFactura.clear()
         if not self.tablaFacturasCliente.selectedItems():
             QMessageBox.information(self, "Seleccione una Factura",
                                     "Debe seleccionar una Factura para poder continuar", )
@@ -2517,9 +2553,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaCobrarFacturasCliente.resizeRowsToContents()
             log.debug(factura)
 
-        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
-        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
         log.debug(facturas)
 
         item = self.tablaCobrarFacturasCliente.item(0, 5)
@@ -2529,20 +2565,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Handle the case where the item does not exist
             # For example, you might want to clear the line edit or show an error message
             self.lineEdit_clienteCobrarFactura.clear()
-        #self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
+        # self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
         self.lineEdit_codclienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 4).text())
         self.lineEdit_serieNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 0).text())
         self.lineEdit_numeroNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 1).text())
         self.lineEdit_fechaNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 3).text())
         self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
 
-
-
         cliente = self.tablaCobrarFacturasCliente.item(0, 4).text()
         with CursorDelPool() as cursor:
-            #query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
+            # query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
             query = f"SELECT * FROM clientes WHERE codigo = {cliente} ORDER BY codigo ASC"
-            #cursor.execute(query, (f'%{cliente}%'))
+            # cursor.execute(query, (f'%{cliente}%'))
             cursor.execute(query, (cliente,))
             registros = cursor.fetchall()
             clientes = []
@@ -2558,12 +2592,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEdit_domclienteCobrarFactura.setText(clientes[0].direccion)
                 self.lineEdit_cuitclienteCobrarFactura.setText(clientes[0].cuit)
             return clientes
-
-
-
-
-
-
 
     def seleccionar_detalle_factura_cobrar_cliente(self):
         row = self.tablaCobrarFacturasCliente.currentRow()
@@ -2584,9 +2612,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaDetalleCobrarFacturaCliente.resizeColumnsToContents()
             self.tablaDetalleCobrarFacturaCliente.resizeRowsToContents()
             log.debug(detalles)
-        #Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
-        #self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
-        #self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
+        # Funciones.fx_cargarTablaX(detalles, self.tableWidget_detalleultimasFacturas_2, limpiaTabla=True)
+        # self.tableWidget_detalleultimasFacturas_2.resizeColumnsToContents()
+        # self.tableWidget_detalleultimasFacturas_2.resizeRowsToContents()
         log.debug(detalles)
 
     def cobrar_factura_cliente_facturacion(self):
@@ -2594,7 +2622,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         row = self.tableWidget_facturasImpagas.currentRow()
         serie = int(self.tableWidget_facturasImpagas.item(row, 0).text())
         codfactura = self.tableWidget_facturasImpagas.item(row, 1).text()
-        #codcliente = self.tableWidget_facturasImpagas.item(row, 4).text()
+        # codcliente = self.tableWidget_facturasImpagas.item(row, 4).text()
         if self.tableWidget_facturasImpagas.item(row, 4).text() != 'PENDIENTE':
             QMessageBox.information(self, "La Factura no se puede cobrar ",
                                     "La factura ya ha sido cancelada previamente, no está pendiente de pago", )
@@ -2612,22 +2640,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 pendiente = Pendiente(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                       registro[6], registro[7], registro[8], registro[9], registro[10])
                 pendientes.append(pendiente)
-                #self.lineEdit_clienteCobrarFactura.setText(pendientes[0].nombre)
-                #self.lineEdit_codclienteCobrarFactura.setText(pendientes[0].codcliente)
-                #self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
-                #self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
-                #self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
-##########################################################################################################
+                # self.lineEdit_clienteCobrarFactura.setText(pendientes[0].nombre)
+                # self.lineEdit_codclienteCobrarFactura.setText(pendientes[0].codcliente)
+                # self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
+                # self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
+                # self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
+                ##########################################################################################################
                 self.lineEdit_SaldoCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
                 total = float(pendientes[0].saldo)
                 pagos = float(pendientes[0].pagos)
                 saldo = total - pagos
-                #self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
-                #self.lineEdit_ImporteCobrarFactura.setText(str(saldo))
-##########################################################################################################
-            #return pendientes
+                # self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
+                # self.lineEdit_ImporteCobrarFactura.setText(str(saldo))
+        ##########################################################################################################
+        # return pendientes
 
         self.stackedWidget.setCurrentIndex(8)
 
@@ -2669,15 +2697,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Handle the case where the item does not exist
             # For example, you might want to clear the line edit or show an error message
             self.lineEdit_clienteCobrarFactura.clear()
-        #self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
+        # self.lineEdit_clienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 5).text())
         self.lineEdit_codclienteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 4).text())
         self.lineEdit_serieNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 0).text())
         self.lineEdit_numeroNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 1).text())
         self.lineEdit_fechaNvaFactura_2.setText(self.tablaCobrarFacturasCliente.item(0, 3).text())
-#####################################################################################################
+        #####################################################################################################
 
         self.lineEdit_SaldoCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
-######################################################################################################
+        ######################################################################################################
         cliente = self.tablaCobrarFacturasCliente.item(0, 4).text()
         with CursorDelPool() as cursor:
             # query = f"SELECT * FROM clientes WHERE codcliente = %s ORDER BY codigo ASC"
@@ -2729,9 +2757,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with CursorDelPool() as cursor:
             cursor.execute(query_cobro, valores)
             self.stackedWidget.setCurrentIndex(1)
-            #return
+            # return
 
-    #######################################################################
+        #######################################################################
         #
         #   CARGAMOS EL REGISTRO DEL PAGO EN LA TABLA CAJA
         ###################################################################
@@ -2750,20 +2778,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with CursorDelPool() as cursor:
             cursor.execute(query_caja, valores)
         QMessageBox.information(self, "Cobro Registrado", "El cobro ha sido registrado correctamente", )
-    #####################################################################
+        #####################################################################
 
-
-################################################################################
+        ################################################################################
         self.generar_recibo()
-################################################################################
 
-
-
-
-
-
-
-
+    ################################################################################
 
     def on_combobox_changed(self):
         row = self.tableWidget_facturasImpagas.currentRow()
@@ -2786,39 +2806,39 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # self.lineEdit_serieNvaFactura_2.setText(pendientes[0].serie)
                 # self.lineEdit_numeroNvaFactura_2.setText(pendientes[0].codfactura)
                 # self.lineEdit_fechaNvaFactura_2.setText(pendientes[0].fecha)
-    ####################################################################################################
+                ####################################################################################################
                 saldo_pendientes = self.tablaCobrarFacturasCliente.item(0, 9).text()
-                #self.lineEdit_SaldoCobrarFactura.setText(str(float(saldo_pendientes)
+                # self.lineEdit_SaldoCobrarFactura.setText(str(float(saldo_pendientes)
                 importe_pagar = float(saldo_pendientes) - float(pendientes[0].pagos)
                 self.lineEdit_ImporteCobrarFactura.setText(str(importe_pagar))
-                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                # self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_PagosCobrarFactura.setText(str(float(pendientes[0].pagos)))
                 # self.lineEdit_fechaCobrarFactura.setText(pendientes[0].fechacancelada)
-    ####################################################################################################
-            # return pendientes
+        ####################################################################################################
+        # return pendientes
         if not self.lineEdit_PagosCobrarFactura.text() == 0.0 or self.lineEdit_PagosCobrarFactura.text() == '':
             if self.comboBox_TpoPagoCobrarFactura.currentText() == 'TOTAL':
-                #saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(self.lineEdit_PagosCobrarFactura.text())
+                # saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(self.lineEdit_PagosCobrarFactura.text())
                 pagos_cobrar_factura_text = self.lineEdit_PagosCobrarFactura.text()
                 pagos_cobrar_factura = float(pagos_cobrar_factura_text) if pagos_cobrar_factura_text else 0.0
                 saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - pagos_cobrar_factura
-                #saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
+                # saldo1 = float(pendientes[0].saldo) - float(pendientes[0].pagos)
 
-                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                # self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
-                #self.lineEdit_ImporteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
-                #self.lineEdit_ImporteCobrarFactura.setText("{:.2f}".format(saldo1))
+                # self.lineEdit_ImporteCobrarFactura.setText(self.tablaCobrarFacturasCliente.item(0, 9).text())
+                # self.lineEdit_ImporteCobrarFactura.setText("{:.2f}".format(saldo1))
                 self.lineEdit_ImporteCobrarFactura.setReadOnly(True)
-                #self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
+                # self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
                 self.lineEdit_PagosCobrarFactura.setReadOnly(True)
             elif self.comboBox_TpoPagoCobrarFactura.currentText() == 'PARCIAL':
                 self.lineEdit_ImporteCobrarFactura.setText('')
                 self.lineEdit_ImporteCobrarFactura.setReadOnly(False)
-                #self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
+                # self.lineEdit_PagosCobrarFactura.setText(str(float(0)))
                 self.lineEdit_ImporteCobrarFactura.setFocus()  # Poner el foco en el lineEdit
                 if self.lineEdit_ImporteCobrarFactura.text() == '':
                     QMessageBox.information(self, "Importe Incorrecto",
-                                           "No se ha ingresado un importe. Por favor, ingrese un importe.")
+                                            "No se ha ingresado un importe. Por favor, ingrese un importe.")
                     self.lineEdit_ImporteCobrarFactura.setFocus()
 
                 else:
@@ -2838,14 +2858,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 pagos_text = self.lineEdit_PagosCobrarFactura.text()
                 pagos = float(pagos_text) if pagos_text else 0.0
-                #resto = float("{:.2f}".format(float(self.lineEdit_SaldoCobrarFactura.text()) - pagos))
-                #saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(
+                # resto = float("{:.2f}".format(float(self.lineEdit_SaldoCobrarFactura.text()) - pagos))
+                # saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - float(
                 pagos_cobrar_factura_text = self.lineEdit_PagosCobrarFactura.text()
                 pagos_cobrar_factura = float(pagos_cobrar_factura_text) if pagos_cobrar_factura_text else 0.0
                 saldo_pendiente = float(self.tablaCobrarFacturasCliente.item(0, 9).text()) - pagos_cobrar_factura
                 self.lineEdit_PagosCobrarFactura.text()
                 self.lineEdit_ImporteCobrarFactura.setText(str(saldo_pendiente))
-                #self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
+                # self.lineEdit_ImporteCobrarFactura.setText(str(float(pendientes[0].saldo)))
                 self.lineEdit_SaldoCobrarFactura.setReadOnly(True)
 
     ########################################################################
@@ -2903,11 +2923,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with open('caja.json', 'w') as f:
             json.dump(pagos_json, f)
 
-
         # Establecer el texto del QLineEdit
         self.lineEdit_fechaCobrarFactura_4.setText(now_str)
         self.lineEdit_fechaCobrarFactura_4.setReadOnly(True)
-
 
     def nuevo_cobro(self):
         fecha_cobro = self.lineEdit_fechaCobrarFactura_4.text()
@@ -2927,11 +2945,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_ConceptoNvoCobro.setText('')
         self.lineEdit_ImporteNvoCobro.setText('')
         self.lineEdit_ConceptoNvoCobro.setText('')
-
-
-
-
-
 
     def combo_formapago_change(self):
         if self.comboBox_FormaPagoNvoCobro.currentText() == 'CONTADO':
@@ -2978,7 +2991,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     #                       MODIFICAR VALORES DE ARTICULOS
     ########################################################################
 
-
     def modulo_stock_mod_precio(self):
         if self.comboBox_ModificarPrecio.currentText() == 'AUMENTAR %':
             if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
@@ -3008,7 +3020,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             elif self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
                 if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
@@ -3026,13 +3039,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         valor += 1
                         query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta * %s WHERE categoria = %s"
                         # Obtén la fila seleccionada
-                        #row = self.tabla_Articulos.currentRow()
+                        # row = self.tabla_Articulos.currentRow()
                         # Obtén el valor de la columna 0 para la fila seleccionada
                         categoria_seleccionada = self.lineEdit.text()
                         valor2 = (valor, categoria_seleccionada)
                         with CursorDelPool() as cursor:
                             cursor.execute(query_mod_valor, valor2)
-                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
 
 
             elif self.comboBox_ModificarPrecio_2.currentText() == 'TODOS':
@@ -3052,7 +3066,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta * %s"
                         with CursorDelPool() as cursor:
                             cursor.execute(query_mod_valor, (valor,))
-                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
 
         if self.comboBox_ModificarPrecio.currentText() == 'DISMINUIR %':
             if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
@@ -3080,7 +3095,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
                 if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
@@ -3094,8 +3110,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                 "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
                         self.lineEdit_ValorModificarPrecio.setFocus()
                     else:
-                        #valor = valor / 100
-                        #valor += 1
+                        # valor = valor / 100
+                        # valor += 1
                         query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta - ((precio_venta * %s) / 100) WHERE categoria = %s"
                         # Obtén la fila seleccionada
                         # row = self.tabla_Articulos.currentRow()
@@ -3123,7 +3139,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         query_mod_valor = "UPDATE articulos SET precio_venta = precio_venta - ((precio_venta * %s) / 100)"
                         with CursorDelPool() as cursor:
                             cursor.execute(query_mod_valor, (valor,))
-                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
 
         if self.comboBox_ModificarPrecio.currentText() == '+ VALOR FIJO':
             if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
@@ -3150,7 +3167,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
                 if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
@@ -3164,8 +3182,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                 "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
                         self.lineEdit_ValorModificarPrecio.setFocus()
                     else:
-                        #valor = valor / 100
-                        #valor += 1
+                        # valor = valor / 100
+                        # valor += 1
                         query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric + %s)::money WHERE categoria = %s"
                         # Obtén la fila seleccionada
                         # row = self.tabla_Articulos.currentRow()
@@ -3193,7 +3211,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric + %s)::money"
                         with CursorDelPool() as cursor:
                             cursor.execute(query_mod_valor, (valor,))
-                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
 
         if self.comboBox_ModificarPrecio.currentText() == '- VALOR FIJO':
             if self.comboBox_ModificarPrecio_2.currentText() == 'SOLO ARTICULO':
@@ -3220,7 +3239,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
                 if self.lineEdit_ValorModificarPrecio.text() == '' or self.lineEdit_ValorModificarPrecio.text() == 'Nuevo Valor':
@@ -3234,8 +3254,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                 "El valor ingresado es incorrecto. Por favor, ingrese un valor mayor a 0.")
                         self.lineEdit_ValorModificarPrecio.setFocus()
                     else:
-                        #valor = valor / 100
-                        #valor += 1
+                        # valor = valor / 100
+                        # valor += 1
                         query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric - %s)::money WHERE categoria = %s"
                         # Obtén la fila seleccionada
                         # row = self.tabla_Articulos.currentRow()
@@ -3262,8 +3282,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         query_mod_valor = "UPDATE articulos SET precio_venta = (precio_venta::numeric - %s)::money"
                         with CursorDelPool() as cursor:
                             cursor.execute(query_mod_valor, (valor,))
-                        QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
-
+                        QMessageBox.information(self, "Cambios Registrados",
+                                                "Los cambios han sido registrados correctamente", )
 
     def modulo_stock_mod_stock(self):
         if self.comboBox_ModificarStock.currentText() == 'AUMENTAR':
@@ -3291,7 +3311,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             else:
                 if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
@@ -3336,7 +3357,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             valor2 = (valor, self.tabla_Articulos.item(row, 0).text())
                             with CursorDelPool() as cursor:
                                 cursor.execute(query_mod_valor, valor2)
-                            QMessageBox.information(self, "Cambios Registrados", "Los cambios han sido registrados correctamente", )
+                            QMessageBox.information(self, "Cambios Registrados",
+                                                    "Los cambios han sido registrados correctamente", )
 
             else:
                 if self.lineEdit_ValorModificarStock.text() == '' or self.lineEdit_ValorModificarStock.text() == 'Nuevo Valor':
@@ -3356,7 +3378,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                         QMessageBox.information(self, "Cambios Registrados",
                                                 "Los cambios han sido registrados correctamente", )
 
-
     def combo_mod_precio_change(self):
         if self.comboBox_ModificarPrecio_2.currentText() == 'CATEGORIA':
 
@@ -3375,7 +3396,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui.bt_SeleccionarCategoria.clicked.connect(self.seleccionada_categoria)
             self.ui.bt_AgregarCategoria.clicked.connect(self.mostrar_agregar_categoria)
             self.dialogo_categoria.exec_()
-
 
     ###############################################################
     #
@@ -3412,7 +3432,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tablaClientes_3.resizeColumnsToContents()
         self.tablaClientes_3.resizeRowsToContents()
 
-
     def buscar_cliente_ctacte(self):
         campo1 = 'nombre'
         campo2 = 'apellido'
@@ -3440,9 +3459,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tablaClientes_3.resizeRowsToContents()
             log.debug(cliente)
 
-
     def seleccionar_factura_cliente_ctacte(self):
-        #self.tablaClientes_3.clearContents()
+        # self.tablaClientes_3.clearContents()
         self.lineEdit_CobradoCtaCte.setText('')
         row = self.tablaClientes_3.currentRow()
         codcliente = int(self.tablaClientes_3.item(row, 0).text())
@@ -3451,7 +3469,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cant_compras = 0
         total_fact = 0
         fecha_ultCompra = ""
-
 
         facturas = FacturaDAO.seleccionar_factura_cliente(codcliente, nombre)
         self.tablaFacturasCliente_3.setRowCount(len(facturas))
@@ -3492,7 +3509,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Suma los saldos pendientes
         for pendiente in pendientes:
-            if pendiente.estado =='PENDIENTE':
+            if pendiente.estado == 'PENDIENTE':
                 suma_saldos_pendientes = sum(pendiente.saldo for pendiente in pendientes)
                 self.lineEdit_SaldoPendienteCtaCte.setText("{:.2f}".format(suma_saldos_pendientes))
 
@@ -3505,7 +3522,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(item)
         # if item is not None:  # Check if the item is not None (i.e., the cell is not empty)
         #     if item == 'COBRADA':
-                #suma_pagos = 0
+        # suma_pagos = 0
         #         suma_pagos = self.tablaFacturasCliente_3.item(row, 9).text()
         #         self.lineEdit_CobradoCtaCte.setText("{:.2f}".format(float(suma_pagos)))
         # else:
@@ -3517,9 +3534,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             suma_pagos = volumen_compras
         else:
             self.lineEdit_CobradoCtaCte.setText(str(float(suma_pagos)))
-        #resto_pagar= suma_saldos_pendientes - suma_pagos
-    ##############################################################################################
-    ##############################################################################################
+        # resto_pagar= suma_saldos_pendientes - suma_pagos
+        ##############################################################################################
+        ##############################################################################################
 
         resto_pagar = volumen_compras - float(suma_pagos)
 
@@ -3542,14 +3559,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return
         else:
             facturas = FacturaDAO.cobrar_factura_cliente(serie, codfactura, codcliente)
-            #pendientes = PendientesDAO.buscar_pendiente_ctacte(self, serie, codfactura, codcliente)
+            # pendientes = PendientesDAO.buscar_pendiente_ctacte(self, serie, codfactura, codcliente)
             pendientes_dao = PendientesDAO()
             pendientes = pendientes_dao.buscar_pendiente_ctacte(serie, codfactura, codcliente)
             if facturas:  # Check if facturas is not empty
 
-                saldo_ctacte = round(pendientes[0].saldo,2)
+                saldo_ctacte = round(pendientes[0].saldo, 2)
                 self.lineEdit_ImporteNvoCobro_2.setText("{:.2f}".format(saldo_ctacte))
-                #self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
+                # self.lineEdit_ImporteNvoCobro_2.setText(str(facturas[0].total))
                 self.lineEdit_ConceptoNvoCobro_2.setText(
                     'Cobro de Factura Nro. ' + str(facturas[0].serie) + "-" + str(facturas[0].codfactura))
             else:
@@ -3557,7 +3574,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # For example, you might want to clear the line edits or show an error message
                 self.lineEdit_ImporteNvoCobro_2.clear()
                 self.lineEdit_ConceptoNvoCobro_2.clear()
-
 
     def cobrar_factura_pendiente_ctacte(self):
         if not self.tablaFacturasCliente_3.selectedItems():
@@ -3591,11 +3607,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         valores = (estado, importe, pagos, saldo, fechacancelada, codfactura)
         with CursorDelPool() as cursor:
             cursor.execute(query_cobro, valores)
-            #self.stackedWidget.setCurrentIndex(1)
+            # self.stackedWidget.setCurrentIndex(1)
             # return
         QMessageBox.information(self, "Cuenta Corriente Actualizada", "Se ha actualizado la cuenta del cliente", )
         self.nuevo_cobro_ctacte()
-
 
     def nuevo_cobro_ctacte(self):
         fecha_cobro = self.lineEdit_fechaCobrarFactura_5.text()
@@ -3650,9 +3665,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         c.save()
 
         # Mostrar, imprimir o guardar el recibo
-        print(recibo)  # Esto es solo un ejemplo, puedes optar por mostrarlo en la interfaz de usuario o guardarlo en un archivo
-
-
+        print(
+            recibo)  # Esto es solo un ejemplo, puedes optar por mostrarlo en la interfaz de usuario o guardarlo en un archivo
 
     def importar_proveedores(self):
         # Obtener la ruta del archivo seleccionado
@@ -3778,11 +3792,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                     "Los artículos han sido actualizados correctamente", )
 
     def descargar_articulos(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Articulos", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar los articulos
             ArticuloDAO.exportar_articulos(ruta_archivo)
@@ -3791,11 +3805,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Artículos Descargados", "Los artículos han sido descargados correctamente", )
 
     def descargar_clientes(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Clientes", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar los clientes
             ClienteDAO.exportar_clientes(ruta_archivo)
@@ -3804,11 +3818,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Clientes Descargados", "Los clientes han sido descargados correctamente", )
 
     def descargar_proveedores(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Proveedores", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar los proveedores
             ProveedorDAO.exportar_proveedores(ruta_archivo)
@@ -3817,50 +3831,53 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Proveedores Descargados", "Los proveedores han sido descargados correctamente", )
 
     def descargar_ultimos_cobros(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Ultimos Cobros Realizados", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar los últimos cobros
             CajaDAO.exportar_cobros(ruta_archivo)
 
         # Mostrar un mensaje de éxito
-        QMessageBox.information(self, "Últimos Cobros Descargados", "Los últimos cobros han sido descargados correctamente", )
+        QMessageBox.information(self, "Últimos Cobros Descargados",
+                                "Los últimos cobros han sido descargados correctamente", )
 
     def descargar_ultimos_pagos(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Ultimos Pagos Realizados", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar los últimos pagos
             CajaDAO.exportar_pagos(ruta_archivo)
 
         # Mostrar un mensaje de éxito
-        QMessageBox.information(self, "Últimos Pagos Descargados", "Los últimos pagos han sido descargados correctamente", )
+        QMessageBox.information(self, "Últimos Pagos Descargados",
+                                "Los últimos pagos han sido descargados correctamente", )
 
     def descargar_pendientes(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas Pendientes Pago", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar facturas pendientes pago
             PendientesDAO.exportar_pendientes(ruta_archivo)
 
         # Mostrar un mensaje de éxito
-        QMessageBox.information(self, "Facturas Pendientes", "Los facturas pendientes han sido descargadas correctamente", )
+        QMessageBox.information(self, "Facturas Pendientes",
+                                "Los facturas pendientes han sido descargadas correctamente", )
 
     def descargar_facturas(self):
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar facturas
             FacturaDAO.exportar_facturas(ruta_archivo)
@@ -3870,18 +3887,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def descargar_facturas_pendientes_entrega(self, campo1):
         campo1 = 'ENVIO'
-        #Obtener la ruta del archivo seleccionado
+        # Obtener la ruta del archivo seleccionado
         ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Descargar Facturas Pendientes de Entrega", "",
-                                                                 "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
+                                                                "Archivos XLSX (*.xlsx);;Todos los archivos (*)")
 
-        #Verificar si el usuario seleccionó un archivo
+        # Verificar si el usuario seleccionó un archivo
         if ruta_archivo:
             # Descargar facturas pendientes entrega
             FacturaDAO.exportar_facturas_entrega(campo1, ruta_archivo)
 
         # Mostrar un mensaje de éxito
-        QMessageBox.information(self, "Facturas Pendientes Entrega Descargadas", "Las facturas sin entregar han sido descargadas correctamente", )
-
+        QMessageBox.information(self, "Facturas Pendientes Entrega Descargadas",
+                                "Las facturas sin entregar han sido descargadas correctamente", )
 
     def cambiar_datos_empresa(self):
         self.ui_ventana_empresa.lineEdit_razon_social_empresa.setReadOnly(False)
@@ -3910,16 +3927,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
         sucursales = 1  # Add this line if you don't have a field for sucursales in your UI
 
-        #empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad,
+        # empresa = Empresa(razonsocial, nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad,
         #                  provincia, pais, bArray)
-        #empresas_insertadas = EmpresaDAO.actualizar(empresa)
+        # empresas_insertadas = EmpresaDAO.actualizar(empresa)
         query_actualizar = 'UPDATE empresa SET nombrefantasia=%s, cuit=%s, categoria=%s, iibb=%s, inicioactividades=%s, domicilio=%s, localidad=%s, provincia=%s, pais=%s, sucursales=%s WHERE razonsocial = %s'
-        valores = (nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais, sucursales, razonsocial)  # Use logo_bytes instead of bArray
+        valores = (
+        nombrefantasia, cuit, categoria, iibb, inicioactividades, domicilio, localidad, provincia, pais, sucursales,
+        razonsocial)  # Use logo_bytes instead of bArray
         with CursorDelPool() as cursor:
             cursor.execute(query_actualizar, valores)
-        #log.debug(f'Empresa actualizada: {empresas_insertadas}')
+        # log.debug(f'Empresa actualizada: {empresas_insertadas}')
         self.label_ingresar_msg2.setText('Empresa ingresada correctamente')
-        QMessageBox.information(self, "Empresa Actualizada", "Los datos de la empresa han sido actualizados correctamente", )
+        QMessageBox.information(self, "Empresa Actualizada",
+                                "Los datos de la empresa han sido actualizados correctamente", )
 
         self.Ui_ventana_Datos_Empresa.close()
 
@@ -3937,7 +3957,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Verificar si el usuario seleccionó una imagen
         if ruta_imagen:
             # Subir la imagen
-            #EmpresaDAO.subir_foto(ruta_imagen)
+            # EmpresaDAO.subir_foto(ruta_imagen)
             pixmapImagen = QPixmap(ruta_imagen).scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.ui_ventana_empresa.label_11.setPixmap(pixmapImagen)
 
@@ -3958,9 +3978,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Mostrar un mensaje de éxito
             QMessageBox.information(self, "Imagen Subida", "La imagen ha sido subida correctamente", )
 
-#############################################################################################
-#                 PRESUPUESTOS
-#############################################################################################
+    #############################################################################################
+    #                 PRESUPUESTOS
+    #############################################################################################
 
     def modulo_presupuestos_nuevo(self):
         self.stackedWidget.setCurrentIndex(12)
@@ -3987,8 +4007,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_297.setText(empresa.razonsocial)
             self.label_308.setText(empresa.nombrefantasia)
             self.lineEdit_cuitNvaFactura_3.setText(str(empresa.cuit))
-            #self.label_91.setText(empresa.categoria)
-            #self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
+            # self.label_91.setText(empresa.categoria)
+            # self.lineEdit_IIBBNvaFactura.setText(str(empresa.iibb))
             self.lineEdit_inicioActNvaFactura_4.setText(empresa.inicioactividades)
 
         else:
@@ -4033,7 +4053,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             presupuestos = []
             for registro in registros:
                 presupuesto = Presupuesto(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
-                                  registro[6], registro[7])
+                                          registro[6], registro[7])
                 presupuestos.append(presupuesto)
             if presupuestos:
                 self.lineEdit_numeroNvaFactura_5.setText(str(presupuestos[0].codpresupuesto + 1).zfill(8))
@@ -4050,26 +4070,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setRowCount(len(clientes))
         for i, cliente in enumerate(clientes):
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(cliente.codigo)))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(cliente.nombre))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(cliente.apellido))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(cliente.dni))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(cliente.empresa))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(cliente.cuit))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(cliente.telefono))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(cliente.email))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(cliente.direccion))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(cliente.numero))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(cliente.localidad))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(cliente.provincia))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(cliente.pais))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(cliente.observaciones))
-            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(cliente.condiva))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(cliente.codigo)))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                cliente.nombre))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                cliente.apellido))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                cliente.dni))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                cliente.empresa))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(
+                cliente.cuit))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(
+                cliente.telefono))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                cliente.email))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                cliente.direccion))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                cliente.numero))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 10, QtWidgets.QTableWidgetItem(
+                cliente.localidad))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(
+                cliente.provincia))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(
+                cliente.pais))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(
+                cliente.observaciones))
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(
+                cliente.condiva))
 
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeColumnsToContents()
             self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.resizeRowsToContents()
-        #self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
-
+        # self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(self.agregar_cliente_click)
 
         self.lineEdit_BuscarArticuloNvaFactura1_3.setFocus()
         self.lineEdit_BuscarArticuloNvaFactura1_3.setCursorPosition(0)
@@ -4125,19 +4159,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         articulos = ArticuloDAO.seleccionar()
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                articulo._categoria))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5,
-                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
+                                                                                       QtWidgets.QTableWidgetItem(
+                                                                                           str(articulo._precio_costo)))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6,
-                                                               QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
+                                                                                       QtWidgets.QTableWidgetItem(
+                                                                                           str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                str(articulo._iva)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
@@ -4145,15 +4187,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
             # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                str(articulo._stock)))
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
                 str(articulo._margen_ganancia)))
             log.debug(articulo)
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeColumnsToContents()
             self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.resizeRowsToContents()
-        self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.textChanged.connect(self.buscar_articulo_nueva_factura)
+        self.ui_ventana_agr_articulo.lineEdit_BuscarArticuloFacturaNueva.textChanged.connect(
+            self.buscar_articulo_nueva_factura)
         self.dialogo_agregar_Art_Factura.exec_()
-
 
     def buscar_articulo_nuevo_presupuesto(self):
         campo1 = 'nombre'
@@ -4165,26 +4208,36 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         articulos = ArticuloDAO.buscar_articulo_nombre(campo1, campo2, campo3, valor1)
         self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setRowCount(len(articulos))
         for i, articulo in enumerate(articulos):
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(str(articulo.codigo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(articulo.nombre))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(articulo._modelo))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(articulo._marca))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(articulo._categoria))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(str(articulo._precio_costo)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(str(articulo._precio_venta)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(str(articulo._iva)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
-            #self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(str(articulo._stock)))
-            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(str(articulo._margen_ganancia)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 0, QtWidgets.QTableWidgetItem(
+                str(articulo.codigo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 1, QtWidgets.QTableWidgetItem(
+                articulo.nombre))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 2, QtWidgets.QTableWidgetItem(
+                articulo._modelo))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 3, QtWidgets.QTableWidgetItem(
+                articulo._marca))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 4, QtWidgets.QTableWidgetItem(
+                articulo._categoria))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(articulo._sku))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(articulo._color))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(articulo._caracteristica))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 5, QtWidgets.QTableWidgetItem(
+                str(articulo._precio_costo)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 6, QtWidgets.QTableWidgetItem(
+                str(articulo._precio_venta)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 7, QtWidgets.QTableWidgetItem(
+                str(articulo._iva)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 11, QtWidgets.QTableWidgetItem(articulo._proveedor))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 12, QtWidgets.QTableWidgetItem(str(articulo._tamaño)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 13, QtWidgets.QTableWidgetItem(str(articulo._ancho)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 14, QtWidgets.QTableWidgetItem(str(articulo._largo)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 15, QtWidgets.QTableWidgetItem(str(articulo._profundidad)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 16, QtWidgets.QTableWidgetItem(str(articulo._peso)))
+            # self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 17, QtWidgets.QTableWidgetItem(str(articulo._peso_envalado)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 8, QtWidgets.QTableWidgetItem(
+                str(articulo._stock)))
+            self.ui_ventana_agr_articulo.tableWidget_SelecionarArticuloFactura.setItem(i, 9, QtWidgets.QTableWidgetItem(
+                str(articulo._margen_ganancia)))
             log.debug(articulo)
         return
 
@@ -4230,7 +4283,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # Incrementa la cantidad del artículo en la fila actual (asumiendo que la cantidad es la columna 2)
                 cantidad_actual = int(self.tableWidgetDetalleNvaFactura_3.item(row, 2).text())
                 self.tableWidgetDetalleNvaFactura_3.setItem(row, 2,
-                                                              QtWidgets.QTableWidgetItem(str(cantidad_actual + 1)))
+                                                            QtWidgets.QTableWidgetItem(str(cantidad_actual + 1)))
 
                 # Marca que el artículo ya está en la tabla
                 articulo_ya_en_tabla = True
@@ -4250,9 +4303,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def agregar_cliente_click_presupuesto(self):
         row = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.currentRow()
-        #row = self.tableWidgetDetalleNvaFactura.currentRow()
-        #item1 = self.tableWidgetAgregarClienteNvaFactura.item(row, 0)
-        #if item1 is not None:
+        # row = self.tableWidgetDetalleNvaFactura.currentRow()
+        # item1 = self.tableWidgetAgregarClienteNvaFactura.item(row, 0)
+        # if item1 is not None:
 
         ### CONCATENAR VALORES DE NOMBRE Y APELLIDO JUNTOS
         nombre = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 1).text()
@@ -4260,8 +4313,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         nombre_completo = " ".join([nombre, apellido])
         self.lineEdit_clienteNvoPresupuesto.setText(nombre_completo)
         ###########################################
-        #self.lineEdit_clienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 1).text())
-        #self.lineEdit_domclienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 8).text())
+        # self.lineEdit_clienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 1).text())
+        # self.lineEdit_domclienteNvaFactura.setText(self.ui.tableWidgetAgregarClienteNvaFactura.item(0, 8).text())
 
         # concatenar los valores de direccion, numero, localidad, provincia en un solo lineedit
         direccion = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 8).text()
@@ -4271,19 +4324,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         pais = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 12).text()
         # Concatenar los valores con espacios entre ellos
         direccion_completa = " ".join([direccion, numero, localidad, provincia, pais])
-        #cond_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
+        # cond_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 11).text()
 
         self.lineEdit_domclienteNvoPresupuesto.setText(direccion_completa)
         ############################
-        self.lineEdit_codclienteNvoPresupuesto.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 0).text())
-        self.lineEdit_cuitclienteNvoPresupuesto.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 5).text())
-        self.lineEdit_dniclienteNvoPresupuesto.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 3).text())
-        self.lineEdit_telclienteNvoPresupuesto.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 6).text())
-        self.lineEdit_emailclienteNvoPresupuesto.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 7).text())
-        #self.lineEdit_IvaclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14).text())
+        self.lineEdit_codclienteNvoPresupuesto.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 0).text())
+        self.lineEdit_cuitclienteNvoPresupuesto.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 5).text())
+        self.lineEdit_dniclienteNvoPresupuesto.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 3).text())
+        self.lineEdit_telclienteNvoPresupuesto.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 6).text())
+        self.lineEdit_emailclienteNvoPresupuesto.setText(
+            self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 7).text())
+        # self.lineEdit_IvaclienteNvaFactura.setText(self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14).text())
         item_iva = self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.item(row, 14)
         if item_iva is not None:
-             self.lineEdit_IvaclienteNvoPresupuesto.setText(item_iva.text())
+            self.lineEdit_IvaclienteNvoPresupuesto.setText(item_iva.text())
 
         self.dialogo_agregar_cliente_factura.close()
 
@@ -4299,8 +4357,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_IvaclienteNvoPresupuesto.setReadOnly(True)
 
         return
-        #self.lineEdit_clienteNvaFactura.setText = self.Ui_ventana_agregar_cliente_factura.tableWidgetAgregarClienteNvaFactura.item(row, 0).text()
-
+        # self.lineEdit_clienteNvaFactura.setText = self.Ui_ventana_agregar_cliente_factura.tableWidgetAgregarClienteNvaFactura.item(row, 0).text()
 
     def verificarExistencias_Presupuesto(self):
         tabla = self.tableWidgetDetalleNvaFactura_3
@@ -4316,7 +4373,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 pass
 
-
     def actualizar_subtotal_presupuesto(self):
         # Obtén el número de filas en la tabla
         num_rows = self.tableWidgetDetalleNvaFactura_3.rowCount()
@@ -4331,7 +4387,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Obtén el valor de la columna subtotal (asumiendo que es la columna 7)
             item_factura = self.tableWidgetDetalleNvaFactura_3.item(row, 7)
             item_iva = self.tableWidgetDetalleNvaFactura_3.item(row, 5)
-
 
             if item_factura is not None:
                 subtotal_factura_str = item_factura.text()
@@ -4367,11 +4422,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             stock = ArticuloDAO.verificar_existencias(codigoarticulo)
             if cantidad > stock:
                 QMessageBox.warning(self, "Stock Insuficiente",
-                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(cantidad, stock))
+                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(
+                                        cantidad, stock))
                 return
             ####################################################################
-
-
 
             # Obtiene el valor de la celda "precio unitario" (asumiendo que es la columna 6)
             precio_unitario_item = self.tableWidgetDetalleNvaFactura_3.item(row, 6)
@@ -4390,8 +4444,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             importe_iva_item = cantidad * iva
 
             # Actualiza la celda "subtotal" (asumiendo que es la columna 7)
-            self.tableWidgetDetalleNvaFactura_3.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal,2)))))
-            self.tableWidgetDetalleNvaFactura_3.setItem(row, 5, QtWidgets.QTableWidgetItem(str((round(importe_iva_item,2)))))
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal, 2)))))
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 5,
+                                                        QtWidgets.QTableWidgetItem(str((round(importe_iva_item, 2)))))
 
             self.actualizar_subtotal_presupuesto()
 
@@ -4408,7 +4463,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fecha_vto = self.dateEdit_fechavencimientoFactura_3.date().toString('dd/MM/yyyy')
 
         # Crear un objeto Factura
-        presupuesto = Presupuesto(codpresupuesto, fecha, codcliente, cliente, subtotal, iva, total, formapago, fecha_vto)
+        presupuesto = Presupuesto(codpresupuesto, fecha, codcliente, cliente, subtotal, iva, total, formapago,
+                                  fecha_vto)
 
         # Insertar la factura en la base de datos
         presupuesto_insertado = PresupuestoDAO.insertar(presupuesto)
@@ -4434,7 +4490,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # precioventa = self.detallefactura.precioventa.replace('$', '').replace(',', '')
             # valores = (detallefactura.serie, detallefactura.codfactura, detallefactura.codarticulo, detallefactura.descripcion, detallefactura.cantidad, float(precioventa), detallefactura.importe, detallefactura.iva)
             detalle = detallePresupuesto(codpresupuesto, codarticulo, descripcion, cantidad, precio_unitario, subtotal,
-                                     importe_iva)
+                                         importe_iva)
             detallePresupuestoDAO.insertar(detalle)
             #################################
             # DESCONTAR STOCK DE LOS ARTICULOS
@@ -4450,7 +4506,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Presupuesto Ingresado",
                                 "El presupuesto ha sido ingresado correctamente", )
 
-
         self.lineEdit_clienteNvoPresupuesto.clear()
         self.lineEdit_domclienteNvoPresupuesto.clear()
         self.lineEdit_codclienteNvoPresupuesto.clear()
@@ -4462,7 +4517,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         while self.tableWidgetDetalleNvaFactura_3.rowCount() > 0:
             self.tableWidgetDetalleNvaFactura_3.removeRow(0)
 
-                # Cerrar la ventana
+            # Cerrar la ventana
         self.stackedWidget.setCurrentIndex(1)
         return
 
@@ -4473,7 +4528,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidgetPresupuestos.setRowCount(len(presupuestos))
             for i, presupuesto in enumerate(presupuestos):
                 self.tableWidgetPresupuestos.setItem(i, 0, QtWidgets.QTableWidgetItem(str(presupuesto.codpresupuesto)))
-                self.tableWidgetPresupuestos.setItem(i, 1, QtWidgets.QTableWidgetItem(presupuesto.fecha.strftime('%Y-%m-%d')))
+                self.tableWidgetPresupuestos.setItem(i, 1,
+                                                     QtWidgets.QTableWidgetItem(presupuesto.fecha.strftime('%Y-%m-%d')))
                 self.tableWidgetPresupuestos.setItem(i, 2, QtWidgets.QTableWidgetItem(str(presupuesto.codcliente)))
                 self.tableWidgetPresupuestos.setItem(i, 3, QtWidgets.QTableWidgetItem(presupuesto.cliente))
                 self.tableWidgetPresupuestos.setItem(i, 4, QtWidgets.QTableWidgetItem(str(presupuesto.subtotal)))
@@ -4509,7 +4565,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.dateEdit_fechavencimientoFactura_4.setDate(presupuesto.fecha_vto)
             else:
                 self.dateEdit_fechavencimientoFactura_4.setDate(QDate.currentDate())
-
 
         codpresupuesto = self.tableWidgetPresupuestos.item(row, 0).text()
 
@@ -4566,7 +4621,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.tableWidgetDetalleNvaFactura_4.removeRow(0)
                     self.label_ingresar_msg2.setText('Presupuesto eliminado correctamente')
                 QMessageBox.information(self, "Presupuesto Eliminado",
-                                    "El presupuesto ha sido eliminado correctamente", )
+                                        "El presupuesto ha sido eliminado correctamente", )
                 return
 
         self.lineEdit_clienteNvoPresupuesto.clear()
@@ -4619,7 +4674,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidgetDetalleNvaFactura_3.removeRow(row)
             self.verificarExistencias_presupuesto()
             self.actualizar_subtotal_presupuesto()
-            #self.actualizar_subtotal_presu()
+            # self.actualizar_subtotal_presu()
 
     def verificarExistencias_presupuesto(self):
         tabla = self.tableWidgetDetalleNvaFactura_3
@@ -4635,7 +4690,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 pass
 
-
     def actualizar_subtotal_presupuesto(self):
         # Obtén el número de filas en la tabla
         num_rows = self.tableWidgetDetalleNvaFactura_3.rowCount()
@@ -4650,7 +4704,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Obtén el valor de la columna subtotal (asumiendo que es la columna 7)
             item_factura = self.tableWidgetDetalleNvaFactura_3.item(row, 7)
             item_iva = self.tableWidgetDetalleNvaFactura_3.item(row, 5)
-
 
             if item_factura is not None:
                 subtotal_factura_str = item_factura.text()
@@ -4686,11 +4739,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             stock = ArticuloDAO.verificar_existencias(codigoarticulo)
             if cantidad > stock:
                 QMessageBox.warning(self, "Stock Insuficiente",
-                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(cantidad, stock))
+                                    "El stock del artículo seleccionado es insuficiente, ha seleccionado '{}' y el stock actual es '{}'".format(
+                                        cantidad, stock))
                 return
             ####################################################################
-
-
 
             # Obtiene el valor de la celda "precio unitario" (asumiendo que es la columna 6)
             precio_unitario_item = self.tableWidgetDetalleNvaFactura_3.item(row, 6)
@@ -4709,22 +4761,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             importe_iva_item = cantidad * iva
 
             # Actualiza la celda "subtotal" (asumiendo que es la columna 7)
-            self.tableWidgetDetalleNvaFactura_3.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal,2)))))
-            self.tableWidgetDetalleNvaFactura_3.setItem(row, 5, QtWidgets.QTableWidgetItem(str((round(importe_iva_item,2)))))
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 7, QtWidgets.QTableWidgetItem(str((round(subtotal, 2)))))
+            self.tableWidgetDetalleNvaFactura_3.setItem(row, 5,
+                                                        QtWidgets.QTableWidgetItem(str((round(importe_iva_item, 2)))))
 
             self.actualizar_subtotal_presupuesto()
 
-############################################################################################
+    ############################################################################################
     #
     #                    FACTURA ELECTRONICA
     #
-############################################################################################
+    ############################################################################################
 
+    def generar_factura_afip(self, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total,
+                             formapago, alicuota_iva):
 
-
-    def generar_factura_afip(self, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva):
-
-        #afip = Afip({"CUIT": 20409378472})
+        # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
             "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
             "CUIT": 20409378472  # Replace with your CUIT
@@ -4743,7 +4795,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Devolver respuesta completa del web service
         return_full_response = False
 
-        #calcular alicuota IVA
+        # calcular alicuota IVA
         if alicuota_iva == 21.0:
             id_iva = 5
             porcentaje_iva = 0.21
@@ -4760,14 +4812,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "Concepto": 1,  # Concepto del Comprobante: (1)Productos, (2)Servicios, (3)Productos y Servicios
             "DocTipo": 96,  # Tipo de documento del comprador (99 consumidor final, ver tipos disponibles)
             "DocNro": 30024794,  # Número de documento del comprador (0 consumidor final)
-            "CbteDesde": next_voucher,  # Número de comprobante o numero del primer comprobante en caso de ser mas de uno
-            "CbteHasta": next_voucher,  # Número de comprobante o numero del último comprobante en caso de ser mas de uno
+            "CbteDesde": next_voucher,
+            # Número de comprobante o numero del primer comprobante en caso de ser mas de uno
+            "CbteHasta": next_voucher,
+            # Número de comprobante o numero del último comprobante en caso de ser mas de uno
             "CbteFch": 20240621,  # (Opcional) Fecha del comprobante (yyyymmdd) o fecha actual si es nulo
-            "ImpTotal": round(float(subtotal),2) + round(float(subtotal) * porcentaje_iva ,2),  # Importe total del comprobante
+            "ImpTotal": round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2),
+            # Importe total del comprobante
             "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(subtotal),2),  # Importe neto gravado
+            "ImpNeto": round(float(subtotal), 2),  # Importe neto gravado
             "ImpOpEx": 0,  # Importe exento de IVA
-            "ImpIVA": round(float(subtotal) * porcentaje_iva ,2) ,  # Importe total de IVA
+            "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA
             "ImpTrib": 0,  # Importe total de tributos
             "MonId": "PES",
             # Tipo de moneda usada en el comprobante (ver tipos disponibles)("PES" para pesos argentinos)
@@ -4775,15 +4830,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "Iva": [  # (Opcional) Alícuotas asociadas al comprobante
                 {
                     "Id": id_iva,  # Id del tipo de IVA (5 para 21%)(ver tipos disponibles)
-                    "BaseImp": round(float(subtotal),2),  # Taxable base
-                    "Importe": round(float(subtotal) * porcentaje_iva ,2)  # Importe
+                    "BaseImp": round(float(subtotal), 2),  # Taxable base
+                    "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
                 }
             ]
         }
 
         res = afip.ElectronicBilling.createVoucher(data, return_full_response)
         print(res)
-        #voucher_number = res["voucher_number"]
+        # voucher_number = res["voucher_number"]
 
         res["CAE"]  # CAE asignado el comprobante
         res["CAEFchVto"]  # Fecha de vencimiento del CAE (yyyy-mm-dd)
@@ -4792,8 +4847,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         res["CAE"]  # CAE asignado el comprobante
         res["CAEFchVto"]  # Fecha de vencimiento del CAE (yyyy-mm-dd)
-        #res["voucher_number"]  # Número asignado al comprobante
-        #res["voucher_number"]  # Número asignado al comprobante
+        # res["voucher_number"]  # Número asignado al comprobante
+        # res["voucher_number"]  # Número asignado al comprobante
 
         # Numero de comprobante
         numero_de_comprobante = next_voucher
@@ -4835,7 +4890,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Mostramos la url del archivo creado
         print(res["file"])
 
-    def facturaA(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
+    def facturaA(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                 inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
+                 domicilio_cliente, condicion_vta, estado, subtotal, iva, total, formapago, alicuota_iva,
+                 detalles_factura):
 
         # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
@@ -4873,167 +4931,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Numero de documento del comprador (0 para consumidor final)
         numero_de_documento = 20300247947
-
-        # Numero de factura
-        numero_de_factura = last_voucher + 1
-
-        # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
-        fecha = int(datetime.today().strftime("%Y%m%d"))
-
-        # Importe sujeto al IVA (sin incluir IVA)
-        #importe_gravado = 100
-        importe_gravado = float(subtotal)
-
-        # Importe exento al IVA
-        importe_exento_iva = 0
-
-        # Importe de IVA
-        #importe_iva = 21
-        importe_iva = float(alicuota_iva)
-
-        # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
-        if concepto == 2 or concepto == 3:
-            # Fecha de inicio de servicio en formato aaaammdd
-            fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de fin de servicio en formato aaaammdd
-            fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de vencimiento del pago en formato aaaammdd
-            fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
-        else:
-            fecha_servicio_desde = None
-            fecha_servicio_hasta = None
-            fecha_vencimiento_pago = None
-
-        # calcular alicuota IVA
-        if alicuota_iva == 21.0:
-            id_iva = 5
-            porcentaje_iva = 0.21
-        else:
-            alicuota_iva == 10.5
-            id_iva = 4
-            porcentaje_iva = 0.105
-
-        data = {
-            "CantReg": 1,  # Cantidad de facturas a registrar
-            "PtoVta": punto_de_venta,
-            "CbteTipo": tipo_de_factura,
-            "Concepto": concepto,
-            "DocTipo": tipo_de_documento,
-            "DocNro": numero_de_documento,
-            "CbteDesde": numero_de_factura,
-            "CbteHasta": numero_de_factura,
-            "CbteFch": fecha,
-            "FchServDesde": fecha_servicio_desde,
-            "FchServHasta": fecha_servicio_hasta,
-            "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(float(subtotal),2) + round(float(subtotal) * porcentaje_iva ,2),
-            "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(subtotal),2),
-            "ImpOpEx": importe_exento_iva,
-            "ImpIVA": round(float(subtotal) * porcentaje_iva ,2) ,  # Importe total de IVA,
-            "ImpTrib": 0,  # Importe total de tributos
-            "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
-            "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
-            "Iva": [  # Alícuotas asociadas al factura
-                {
-                    "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
-                    "BaseImp": round(float(subtotal),2),  # Taxable base
-                    "Importe": round(float(subtotal) * porcentaje_iva ,2)  # Importe
-                }
-            ]
-        }
-
-        # Creamos la Factura
-        res = afip.ElectronicBilling.createVoucher(data)
-
-        # Mostramos por pantalla los datos de la nueva Factura
-        print({
-            "cae": res["CAE"],  # CAE asignado a la Factura
-            "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
-        })
-        cae = res["CAE"]
-        venc_cae = res["CAEFchVto"]
-        # Cargar la plantilla
-        env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('bill.html')
-
-        # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha, nombre_fantasia=fantasia_empresa, razonsocial=razon_social, domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa, iibb=iibb_empresa, inicioactividades=inicio_actividades, cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente, formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
-
-        # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w') as f:
-            f.write(factura_html)
-
-
-
-        # Descargamos el HTML de ejemplo (ver mas arriba)
-        # y lo guardamos como bill.html
-        #html = open("./bill.html").read()
-        html = open("./factura.html").read()
-
-        # Nombre para el archivo (sin .pdf)
-        name = "PDF de prueba"
-
-        # Opciones para el archivo
-        options = {
-            "width": 8,  # Ancho de pagina en pulgadas. Usar 3.1 para ticket
-            "marginLeft": 0.4,  # Margen izquierdo en pulgadas. Usar 0.1 para ticket
-            "marginRight": 0.4,  # Margen derecho en pulgadas. Usar 0.1 para ticket
-            "marginTop": 0.4,  # Margen superior en pulgadas. Usar 0.1 para ticket
-            "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
-        }
-
-        # Creamos el PDF
-        res = afip.ElectronicBilling.createPDF({
-            "html": html,
-            "file_name": name,
-            "options": options
-        })
-
-        # Mostramos la url del archivo creado
-        print(res["file"])
-
-
-    def facturaB(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
-
-        # afip = Afip({"CUIT": 20409378472})
-        afip = Afip({
-            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
-            "CUIT": 20409378472  # Replace with your CUIT
-        })
-
-        # Numero del punto de venta
-        punto_de_venta = 1
-
-        # Tipo de factura
-        tipo_de_factura = 6  # 6 = Factura B
-
-        # Número de la ultima Factura B
-        last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
-
-        # Concepto de la factura
-        #
-        # Opciones:
-        #
-        # 1 = Productos
-        # 2 = Servicios
-        # 3 = Productos y Servicios
-        concepto = 1
-
-        # Tipo de documento del comprador
-        #
-        # Opciones:
-        #
-        # 80 = CUIT
-        # 86 = CUIL
-        # 96 = DNI
-        # 99 = Consumidor Final
-        tipo_de_documento = 99
-
-        # Numero de documento del comprador (0 para consumidor final)
-        numero_de_documento = 0
 
         # Numero de factura
         numero_de_factura = last_voucher + 1
@@ -5089,19 +4986,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "FchServDesde": fecha_servicio_desde,
             "FchServHasta": fecha_servicio_hasta,
             "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(float(subtotal),2) + round(float(subtotal) * porcentaje_iva ,2),
+            "ImpTotal": round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2),
             "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(subtotal),2),
+            "ImpNeto": round(float(subtotal), 2),
             "ImpOpEx": importe_exento_iva,
-            "ImpIVA": round(float(subtotal) * porcentaje_iva ,2) ,  # Importe total de IVA,
+            "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
             "ImpTrib": 0,  # Importe total de tributos
             "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
             "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
             "Iva": [  # Alícuotas asociadas al factura
                 {
                     "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
-                    "BaseImp": round(float(subtotal),2),  # Taxable base
-                    "Importe": round(float(subtotal) * porcentaje_iva ,2)  # Importe
+                    "BaseImp": round(float(subtotal), 2),  # Taxable base
+                    "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
                 }
             ]
         }
@@ -5114,6 +5011,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+
+        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+
+        print("Esta es la información del comprobante:")
+        print(voucher_info)
+
         cae = res["CAE"]
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
@@ -5121,13 +5024,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         template = env.get_template('bill.html')
 
         # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha,
-                                       nombre_fantasia=fantasia_empresa, razonsocial=razon_social,
-                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa,
+        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                       serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
                                        iibb=iibb_empresa, inicioactividades=inicio_actividades,
-                                       cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva,
-                                       direccion=domicilio_cliente,
-                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
+                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
+                                       cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
+                                       detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
+                                       total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
         with open('factura.html', 'w') as f:
@@ -5160,7 +5064,178 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Mostramos la url del archivo creado
         print(res["file"])
 
-    def facturaC(self, tipo, serie, codfactura, fecha, codcliente, cliente, estado, subtotal, iva, total, formapago, alicuota_iva, fantasia_empresa, razon_social, categoria_iva, cuit_empresa, iibb_empresa, inicio_actividades, domicilio_empresa, domicilio_cliente, cuit_cliente, condicion_iva, condicion_vta):
+    def facturaB(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                 inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
+                 domicilio_cliente, condicion_vta, estado, subtotal, iva, total, formapago, alicuota_iva,
+                 detalles_factura):
+
+        # afip = Afip({"CUIT": 20409378472})
+        afip = Afip({
+            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+            "CUIT": 20409378472  # Replace with your CUIT
+        })
+
+        # Numero del punto de venta
+        punto_de_venta = 1
+
+        # Tipo de factura
+        tipo_de_factura = 6  # 6 = Factura B
+
+        # Número de la ultima Factura B
+        last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
+
+        # Concepto de la factura
+        #
+        # Opciones:
+        #
+        # 1 = Productos
+        # 2 = Servicios
+        # 3 = Productos y Servicios
+        concepto = 1
+
+        # Tipo de documento del comprador
+        #
+        # Opciones:
+        #
+        # 80 = CUIT
+        # 86 = CUIL
+        # 96 = DNI
+        # 99 = Consumidor Final
+        tipo_de_documento = 80
+
+        # Numero de documento del comprador (0 para consumidor final)
+        numero_de_documento = 20300247947
+
+        # Numero de factura
+        numero_de_factura = last_voucher + 1
+
+        # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
+        fecha = int(datetime.today().strftime("%Y%m%d"))
+
+        # Importe sujeto al IVA (sin incluir IVA)
+        # importe_gravado = 100
+        importe_gravado = float(subtotal)
+
+        # Importe exento al IVA
+        importe_exento_iva = 0
+
+        # Importe de IVA
+        # importe_iva = 21
+        importe_iva = float(alicuota_iva)
+
+        # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
+        if concepto == 2 or concepto == 3:
+            # Fecha de inicio de servicio en formato aaaammdd
+            fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
+
+            # Fecha de fin de servicio en formato aaaammdd
+            fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
+
+            # Fecha de vencimiento del pago en formato aaaammdd
+            fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
+        else:
+            fecha_servicio_desde = None
+            fecha_servicio_hasta = None
+            fecha_vencimiento_pago = None
+
+        # calcular alicuota IVA
+        if alicuota_iva == 21.0:
+            id_iva = 5
+            porcentaje_iva = 0.21
+        else:
+            alicuota_iva == 10.5
+            id_iva = 4
+            porcentaje_iva = 0.105
+
+        data = {
+            "CantReg": 1,  # Cantidad de facturas a registrar
+            "PtoVta": punto_de_venta,
+            "CbteTipo": tipo_de_factura,
+            "Concepto": concepto,
+            "DocTipo": tipo_de_documento,
+            "DocNro": numero_de_documento,
+            "CbteDesde": numero_de_factura,
+            "CbteHasta": numero_de_factura,
+            "CbteFch": fecha,
+            "FchServDesde": fecha_servicio_desde,
+            "FchServHasta": fecha_servicio_hasta,
+            "FchVtoPago": fecha_vencimiento_pago,
+            "ImpTotal": round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2),
+            "ImpTotConc": 0,  # Importe neto no gravado
+            "ImpNeto": round(float(subtotal), 2),
+            "ImpOpEx": importe_exento_iva,
+            "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
+            "ImpTrib": 0,  # Importe total de tributos
+            "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
+            "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
+            "Iva": [  # Alícuotas asociadas al factura
+                {
+                    "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
+                    "BaseImp": round(float(subtotal), 2),  # Taxable base
+                    "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
+                }
+            ]
+        }
+
+        # Creamos la Factura
+        res = afip.ElectronicBilling.createVoucher(data)
+
+        # Mostramos por pantalla los datos de la nueva Factura
+        print({
+            "cae": res["CAE"],  # CAE asignado a la Factura
+            "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
+        })
+        cae = res["CAE"]
+        venc_cae = res["CAEFchVto"]
+        # Cargar la plantilla
+        env = Environment(loader=FileSystemLoader('.'))
+        template = env.get_template('bill.html')
+
+        # Llenar la plantilla con los datos de la factura
+        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                       serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
+                                       iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
+                                       cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
+                                       detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
+                                       total=total)  # Agrega más campos según sea necesario
+
+        # Guardar el resultado en un nuevo archivo HTML
+        with open('factura.html', 'w') as f:
+            f.write(factura_html)
+
+        # Descargamos el HTML de ejemplo (ver mas arriba)
+        # y lo guardamos como bill.html
+        # html = open("./bill.html").read()
+        html = open("./factura.html").read()
+
+        # Nombre para el archivo (sin .pdf)
+        name = "PDF de prueba"
+
+        # Opciones para el archivo
+        options = {
+            "width": 8,  # Ancho de pagina en pulgadas. Usar 3.1 para ticket
+            "marginLeft": 0.4,  # Margen izquierdo en pulgadas. Usar 0.1 para ticket
+            "marginRight": 0.4,  # Margen derecho en pulgadas. Usar 0.1 para ticket
+            "marginTop": 0.4,  # Margen superior en pulgadas. Usar 0.1 para ticket
+            "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
+        }
+
+        # Creamos el PDF
+        res = afip.ElectronicBilling.createPDF({
+            "html": html,
+            "file_name": name,
+            "options": options
+        })
+
+        # Mostramos la url del archivo creado
+        print(res["file"])
+
+    def facturaC(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
+                 inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
+                 domicilio_cliente, condicion_vta, estado, subtotal, iva, total, formapago, alicuota_iva,
+                 detalles_factura):
 
         # afip = Afip({"CUIT": 20409378472})
         afip = Afip({
@@ -5278,13 +5353,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         template = env.get_template('bill.html')
 
         # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, serie=serie, codfactura=codfactura, fecha=fecha,
-                                       nombre_fantasia=fantasia_empresa, razonsocial=razon_social,
-                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit=cuit_empresa,
+        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                       serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
                                        iibb=iibb_empresa, inicioactividades=inicio_actividades,
-                                       cuit_cliente=cuit_cliente, cliente=cliente, condiva=condicion_iva,
-                                       direccion=domicilio_cliente,
-                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae)  # Agrega más campos según sea necesario
+                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
+                                       cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
+                                       detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
+                                       total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
         with open('factura.html', 'w') as f:
@@ -5318,9 +5394,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print(res["file"])
 
 
-
 if __name__ == '__main__':
-
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()

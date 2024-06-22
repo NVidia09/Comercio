@@ -43,6 +43,7 @@ class detalleFacturaDAO:
             registros = cursor.fetchall()
             detallefacturas = []
             for registro in registros:
+                print(registro)
                 detallefactura = detalleFactura(registro[0], registro[1], registro[2], registro[3], registro[4],
                                                 registro[5], registro[6], registro[7], registro[8])
                 detallefacturas.append(detallefactura)
@@ -75,3 +76,26 @@ class detalleFacturaDAO:
                 facturas.append(detallefactura)
             return facturas
 
+    @classmethod
+    def busca_detalle_lista(cls, detalle_buscar):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._BUSCA_DETALLE, (detalle_buscar,))
+            registros = cursor.fetchall()
+            detallefacturas = []
+            for registro in registros:
+                detalle = {
+                    'codarticulo' : registro[2],
+                    'descripcion' : registro[3],
+                    'cantidad' : registro[4],
+                    'precioventa' : registro[5],
+                    'descuento' : registro[7] + registro[5] - registro[6],
+                    'importe' : registro[4] * registro[5],
+                    'alicuota_iva' : round((registro[7] / registro[5]) * 100,2),
+                    'iva' : registro[7],
+                    'total' : registro[6],
+                }
+                detallefacturas.append(detalle)
+            return detallefacturas
+
+if __name__ == '__main__':
+    print(detalleFacturaDAO.busca_detalle_lista(77))
