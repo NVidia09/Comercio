@@ -1,3 +1,4 @@
+import base64
 import os
 import shutil
 from afip import Afip, afip
@@ -7,6 +8,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
+from pdfkit import pdfkit
 from reportlab.pdfgen import canvas
 from jinja2 import Environment, FileSystemLoader
 
@@ -276,6 +278,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Eliminar_Presupuesto.clicked.connect(self.eliminar_presupuesto)
         self.bt_Eliminar_Articulo_Detalle_Presupuesto.clicked.connect(self.eliminar_articulo_detalle_presupuesto)
         # self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
+        self.bt_Facturar_presupuesto_2.clicked.connect(self.facturar_presupuesto)
+        self.bt_CancelarFactura_3.clicked.connect(self.cancelar_presupuesto)
 
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
@@ -2374,6 +2378,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_telclienteNvaFactura.clear()
         self.lineEdit_emailclienteNvaFactura.clear()
         self.tableWidgetDetalleNvaFactura.clearContents()
+        self.label_subtotal_factura.clear()
+        self.label_iva_factura.clear()
+        self.label_total_Nva_factura.clear()
         return
 
     def buscar_fact_pendiente(self):
@@ -4521,6 +4528,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)
         return
 
+    def cancelar_presupuesto(self):
+        num_rows = self.tableWidgetDetalleNvaFactura_3.rowCount()
+        for i in range(num_rows):
+            self.tableWidgetDetalleNvaFactura_3.removeRow(0)
+        self.lineEdit_clienteNvoPresupuesto.clear()
+        self.lineEdit_domclienteNvoPresupuesto.clear()
+        self.lineEdit_codclienteNvoPresupuesto.clear()
+        self.lineEdit_cuitclienteNvoPresupuesto.clear()
+        self.lineEdit_dniclienteNvoPresupuesto.clear()
+        self.lineEdit_telclienteNvoPresupuesto.clear()
+        self.lineEdit_emailclienteNvoPresupuesto.clear()
+        self.lineEdit_IvaclienteNvoPresupuesto.clear()
+        self.tableWidgetDetalleNvaFactura_3.clearContents()
+        self.label_subtotal_factura_3.clear()
+        self.label_iva_factura_3.clear()
+        self.label_total_Nva_factura_3.clear()
+        return
+
     def modulo_presupuestos(self):
         self.stackedWidget.setCurrentIndex(11)
         presupuestos = PresupuestoDAO.seleccionar()
@@ -4587,7 +4612,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         cliente = ClienteDAO.busca_cliente(codcliente)
         if cliente:
             cliente = cliente[0]
-            self.lineEdit_clienteNvoPresupuesto_2.setText(cliente.nombre)
+
+            nombre_completo = " ".join([cliente.nombre, cliente.apellido])
+            self.lineEdit_clienteNvoPresupuesto_2.setText(nombre_completo)
             direccion_completa = " ".join(
                 [cliente.direccion, cliente.numero, cliente.localidad, cliente.provincia, cliente.pais])
             self.lineEdit_domclienteNvoPresupuesto_2.setText(direccion_completa)
@@ -4766,6 +4793,95 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                         QtWidgets.QTableWidgetItem(str((round(importe_iva_item, 2)))))
 
             self.actualizar_subtotal_presupuesto()
+
+
+    def facturar_presupuesto(self):
+
+        while self.tableWidgetPresupuestos.currentRow() == -1:
+            QMessageBox.information(self, "Facturar Presupuesto", "Por favor, selecciona un presupuesto para facturar.")
+            return
+
+        reply = QMessageBox.question(self, 'Facturar Presupuesto',
+                                     '¿Está seguro de que desea facturar el presupuesto actual? Si selecciona "Sí", el presupuesto se marcará como facturado y no podrá modificarlo más tarde. ¿Desea continuar?',
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.No:
+            return
+        else:
+            pass
+
+        self.nueva_factura()
+
+
+
+
+        self.lineEdit_codclienteNvaFactura.setText(self.lineEdit_codclienteNvoPresupuesto_2.text())
+        self.lineEdit_clienteNvaFactura.setText(self.lineEdit_clienteNvoPresupuesto_2.text())
+        self.lineEdit_fechaNvaFactura.setText(self.lineEdit_fechaNvaFactura_6.text())
+        self.label_subtotal_factura.setText(self.label_subtotal_factura_4.text())
+        self.label_iva_factura.setText(self.label_iva_factura_4.text())
+        self.label_total_Nva_factura.setText(self.label_total_Nva_factura_4.text())
+        self.comboBox_FormaPagoFact.setCurrentText(self.comboBox_FormaPagoFact_4.currentText())
+        self.dateEdit_fechavencimientoFactura.setDate(QDate.fromString(self.dateEdit_fechavencimientoFactura_4.date().toString('dd/MM/yyyy'), 'dd/MM/yyyy'))
+        self.lineEdit_domclienteNvaFactura.setText(self.lineEdit_domclienteNvoPresupuesto_2.text())
+        self.lineEdit_cuitclienteNvaFactura.setText(self.lineEdit_cuitclienteNvoPresupuesto_2.text())
+        self.lineEdit_dniclienteNvaFactura_2.setText(self.lineEdit_dniclienteNvoPresupuesto_2.text())
+        self.lineEdit_telclienteNvaFactura.setText(self.lineEdit_telclienteNvoPresupuesto_2.text())
+        self.lineEdit_emailclienteNvaFactura.setText(self.lineEdit_emailclienteNvoPresupuesto_2.text())
+        self.lineEdit_IvaclienteNvaFactura.setText(self.lineEdit_IvaclienteNvoPresupuesto_2.text())
+
+
+        # Obtener los detalles de la factura
+
+        # Crear una lista vacía para almacenar los datos de la tabla
+        datos_tabla = []
+
+        # Obtén el número de filas en la tabla
+        num_rows = self.tableWidgetDetalleNvaFactura_4.rowCount()
+
+        # Itera sobre cada fila
+        for row in range(num_rows):
+            # Obtén los datos de cada celda en la fila
+            codarticulo = self.tableWidgetDetalleNvaFactura_4.item(row, 1).text()
+            descripcion = self.tableWidgetDetalleNvaFactura_4.item(row, 2).text()
+            cantidad = self.tableWidgetDetalleNvaFactura_4.item(row, 3).text()
+            precio_unitario = self.tableWidgetDetalleNvaFactura_4.item(row, 4).text().replace('$', '').replace(',', '')
+            importe_iva = self.tableWidgetDetalleNvaFactura_4.item(row, 6).text()
+            subtotal = self.tableWidgetDetalleNvaFactura_4.item(row, 5).text()
+            alicuota_iva = round(float(subtotal) / float(importe_iva), 1)
+            importe_prod = float(cantidad) * float(precio_unitario)
+
+            # Agrega los datos de la fila a la lista
+            datos_tabla.append([codarticulo, descripcion, cantidad, precio_unitario, importe_iva, subtotal, alicuota_iva,importe_prod])
+
+        # Ahora, puedes usar la lista datos_tabla para llenar la tabla tableWidgetDetalleNvaFactura
+        self.tableWidgetDetalleNvaFactura.setRowCount(len(datos_tabla))
+        for row, data in enumerate(datos_tabla):
+            self.tableWidgetDetalleNvaFactura.setItem(row, 0, QtWidgets.QTableWidgetItem(data[0]))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 1, QtWidgets.QTableWidgetItem(data[1]))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 2, QtWidgets.QTableWidgetItem(data[2]))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 3, QtWidgets.QTableWidgetItem(data[3]))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 5, QtWidgets.QTableWidgetItem(data[4]))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 4, QtWidgets.QTableWidgetItem(str(data[6])))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 6, QtWidgets.QTableWidgetItem(str(data[7])))
+            self.tableWidgetDetalleNvaFactura.setItem(row, 7, QtWidgets.QTableWidgetItem(data[5]))
+
+        self.tableWidgetDetalleNvaFactura.resizeColumnsToContents()
+        self.tableWidgetDetalleNvaFactura.resizeRowsToContents()
+
+        row = self.tableWidgetPresupuestos.currentRow()
+        codpresupuesto = self.tableWidgetPresupuestos.item(row, 0).text()
+        presupuesto = PresupuestoDAO.eliminar(codpresupuesto)
+        detalle_presupuesto = detallePresupuestoDAO.eliminar(codpresupuesto)
+
+        self.stackedWidget.setCurrentIndex(7)
+
+
+
+
+
+
+
 
     ############################################################################################
     #
@@ -5017,6 +5133,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print("Esta es la información del comprobante:")
         print(voucher_info)
 
+        # Crear el diccionario con los datos requeridos
+        qr_data = {
+            "ver": 1,
+            "fecha": fecha,  # Asegúrate de que esta variable esté en el formato correcto
+            "cuit": cuit_empresa,  # Asegúrate de que esta variable esté en el formato correcto
+            "ptoVta": serie,  # Asegúrate de que esta variable esté en el formato correcto
+            "tipoCmp": tipo_de_factura,  # Asegúrate de que esta variable esté en el formato correcto
+            "nroCmp": codfactura,  # Asegúrate de que esta variable esté en el formato correcto
+            "importe": total,  # Asegúrate de que esta variable esté en el formato correcto
+            "moneda": "PES",  # Asegúrate de que esta variable esté en el formato correcto
+            "ctz": 1,  # Asegúrate de que esta variable esté en el formato correcto
+            "tipoDocRec": 80,  # Asegúrate de que esta variable esté en el formato correcto
+            "nroDocRec": numero_de_documento,  # Asegúrate de que esta variable esté en el formato correcto
+            "tipoCodAut": "E",  # Asegúrate de que esta variable esté en el formato correcto
+            "codAut": res["CAE"]  # Asegúrate de que esta variable esté en el formato correcto
+        }
+
+        # Convertir el diccionario a un string JSON
+        qr_json = json.dumps(qr_data)
+
+        # Codificar el string JSON en base64
+        qr_base64 = base64.b64encode(qr_json.encode()).decode()
+        qr_generado = f'https://www.afip.gob.ar/fe/qr/?p={qr_base64}'
+
+        print(qr_base64)
+        import segno
+        qrcode = segno.make(qr_generado)
+        qrcode.save('qr.png')
+        # Añadir la ruta de la imagen del código QR a los datos de la factura
+        qr_code_image = 'qr.png'
+
         cae = res["CAE"]
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
@@ -5034,7 +5181,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w') as f:
+        with open('factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
@@ -5054,15 +5201,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
         }
 
-        # Creamos el PDF
-        res = afip.ElectronicBilling.createPDF({
-            "html": html,
-            "file_name": name,
-            "options": options
-        })
+        # # Creamos el PDF
+        # res = afip.ElectronicBilling.createPDF({
+        #     "html": html,
+        #     "file_name": name,
+        #     "options": options
+        # })
 
         # Mostramos la url del archivo creado
-        print(res["file"])
+        #print(res["file"])
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'Letter',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Crear el PDF
+        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
+        #pdfkit.from_file('factura.html', 'factura.pdf', options=options)
+
 
     def facturaB(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
                  inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
@@ -5185,6 +5350,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+
+        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+
+        print("Esta es la información del comprobante:")
+        print(voucher_info)
+
         cae = res["CAE"]
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
@@ -5202,7 +5373,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w') as f:
+        with open('factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
@@ -5222,15 +5393,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
         }
 
-        # Creamos el PDF
-        res = afip.ElectronicBilling.createPDF({
-            "html": html,
-            "file_name": name,
-            "options": options
-        })
+        # # Creamos el PDF
+        # res = afip.ElectronicBilling.createPDF({
+        #     "html": html,
+        #     "file_name": name,
+        #     "options": options
+        # })
 
         # Mostramos la url del archivo creado
-        print(res["file"])
+        # print(res["file"])
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'Letter',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Crear el PDF
+        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
+        # pdfkit.from_file('factura.html', 'factura.pdf', options=options)
 
     def facturaC(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
                  inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
@@ -5346,6 +5534,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "cae": res["CAE"],  # CAE asignado a la Factura
             "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
         })
+
+        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+
+        print("Esta es la información del comprobante:")
+        print(voucher_info)
+
         cae = res["CAE"]
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
@@ -5363,7 +5557,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w') as f:
+        with open('factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
@@ -5383,15 +5577,32 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
         }
 
-        # Creamos el PDF
-        res = afip.ElectronicBilling.createPDF({
-            "html": html,
-            "file_name": name,
-            "options": options
-        })
+        # # Creamos el PDF
+        # res = afip.ElectronicBilling.createPDF({
+        #     "html": html,
+        #     "file_name": name,
+        #     "options": options
+        # })
 
         # Mostramos la url del archivo creado
-        print(res["file"])
+        # print(res["file"])
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'Letter',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Crear el PDF
+        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
+        # pdfkit.from_file('factura.html', 'factura.pdf', options=options)
 
 
 if __name__ == '__main__':
