@@ -134,6 +134,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_BuscarCliente.clicked.connect(self.buscar_cliente)
         self.bt_importar_clientes.clicked.connect(self.importar_clientes)
         self.bt_descargar_clientes.clicked.connect(self.descargar_clientes)
+        self.bt_seleccionaClienteNvaFactura_4.clicked.connect(self.cliente_afip)
         # empiezan los botones de los proveedores
         self.lineEdit_BuscarArticulo_3.textChanged.connect(self.buscar_proveedor)
         self.bt_ModificarProveedor.clicked.connect(self.modificar_proveedor)
@@ -142,6 +143,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_BuscarProveedor.clicked.connect(self.buscar_proveedor)
         self.bt_importar_proveedores.clicked.connect(self.importar_proveedores)
         self.bt_descargar_proveedores.clicked.connect(self.descargar_proveedores)
+        self.bt_seleccionaClienteNvaFactura_5.clicked.connect(self.proveedor_afip)
 
         # acciones botones selecciona/agregar nueva categoría
         self.bt_CategoriaNvoArticulo.clicked.connect(self.seleccionar_categoria)
@@ -2363,7 +2365,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             log.debug(f'Facturas insertadas: {pendientes_insertadas}')
 
         # Cerrar la ventana
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         return
 
     def cancelar_factura(self):
@@ -4468,6 +4470,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         total = self.label_total_Nva_factura_3.text()
         formapago = self.comboBox_FormaPagoFact_3.currentText()
         fecha_vto = self.dateEdit_fechavencimientoFactura_3.date().toString('dd/MM/yyyy')
+        subtotal_presupuesto = self.label_subtotal_factura_3.text()
 
         # Crear un objeto Factura
         presupuesto = Presupuesto(codpresupuesto, fecha, codcliente, cliente, subtotal, iva, total, formapago,
@@ -4513,6 +4516,104 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Presupuesto Ingresado",
                                 "El presupuesto ha sido ingresado correctamente", )
 
+
+        empresa = EmpresaDAO.seleccionar()
+        if empresa:
+            empresa = empresa[0]
+            razon_social = empresa.razonsocial
+            fantasia_empresa = empresa.nombrefantasia
+            cuit_empresa = empresa.cuit
+            categoria_iva = empresa.categoria
+            iibb_empresa = empresa.iibb
+            inicio_actividades = empresa.inicioactividades
+
+        else:
+            # Handle the case when there are no empresas
+            print("Primero debe cargar los datos de su empresa en Módulo Empresa para poder continuar.")
+            return
+        domicilio = empresa.domicilio
+        localidad = empresa.localidad
+        provincia = empresa.provincia
+        pais = empresa.pais
+        direccion_completa_empresa = " , ".join([domicilio, localidad, provincia, pais])
+        # self.lineEdit_localidadNvaFactura.setText(empresa.localidad)
+        self.label_72.setText(direccion_completa_empresa)
+        cuit_cliente = self.lineEdit_cuitclienteNvoPresupuesto.text()
+        condicion_iva = self.lineEdit_IvaclienteNvoPresupuesto.text()
+        domicilio_cliente = self.lineEdit_domclienteNvoPresupuesto.text()
+        condicion_vta = self.comboBox_FormaPagoFact_3.currentText()
+
+
+        detalles_presupuesto = detallePresupuestoDAO.busca_detalle_lista(codpresupuesto)
+
+        # # Obtén el directorio base donde se encuentra el archivo main.py
+        # basedir = os.path.dirname(__file__)
+        # ruta_directorio_presupuestos = os.path.join(basedir, 'Presupuestos')
+        # Crear el directorio si no existe
+        # if not os.path.exists(ruta_directorio_presupuestos):
+        #     os.makedirs(ruta_directorio_presupuestos)
+        # # Crea la ruta al archivo modelo_presupuesto.html en el directorio Presupuestos/
+        # #template_path = os.path.join(basedir, 'Presupuestos', 'modelo_presupuesto.html')
+        # ruta_plantilla_presupuesto = os.path.join(ruta_directorio_presupuestos, "modelo_presupuesto.html")
+
+
+        # Carga la plantilla
+        # env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+        # template = env.get_template(ruta_plantilla_presupuesto)
+
+        env = Environment(loader=FileSystemLoader('.'))
+        template = env.get_template('modelo_presupuesto.html')
+
+        # Llenar la plantilla con los datos de la factura
+        presupuesto_html = template.render(nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                        codpresupuesto=codpresupuesto, fecha=fecha, cuit=cuit_empresa,
+                                        iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                        domicilio=direccion_completa_empresa, categoria=categoria_iva,
+                                        cuit_cliente=cuit_cliente,
+                                        cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                        formapago=condicion_vta, detalles_factura=detalles_presupuesto, subtotal=subtotal_presupuesto, iva=iva,
+                                        total=total)  # Agrega más campos según sea necesario
+
+        # Guardar el resultado en un nuevo archivo HTML
+        with open('presupuesto.html', 'w', encoding='utf-8') as f:
+            f.write(presupuesto_html)
+
+        # Descargamos el HTML de ejemplo (ver mas arriba)
+        # y lo guardamos como bill.html
+        # html = open("./bill.html").read()
+        html = open("./presupuesto.html").read()
+
+        # Nombre para el archivo (sin .pdf)
+        name = "PDF de prueba"
+
+        # Opciones para el archivo
+        options = {
+            "width": 8,  # Ancho de pagina en pulgadas. Usar 3.1 para ticket
+            "marginLeft": 0.4,  # Margen izquierdo en pulgadas. Usar 0.1 para ticket
+            "marginRight": 0.4,  # Margen derecho en pulgadas. Usar 0.1 para ticket
+            "marginTop": 0.4,  # Margen superior en pulgadas. Usar 0.1 para ticket
+            "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
+        }
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'Letter',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Crear el nombre del archivo
+        nombre_archivo = f'presupuesto_{codpresupuesto}.pdf'
+
+        # Crear el PDF
+        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+        pdfkit.from_file('presupuesto.html', nombre_archivo, options=options, configuration=config)
+
         self.lineEdit_clienteNvoPresupuesto.clear()
         self.lineEdit_domclienteNvoPresupuesto.clear()
         self.lineEdit_codclienteNvoPresupuesto.clear()
@@ -4524,9 +4625,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         while self.tableWidgetDetalleNvaFactura_3.rowCount() > 0:
             self.tableWidgetDetalleNvaFactura_3.removeRow(0)
 
-            # Cerrar la ventana
-        self.stackedWidget.setCurrentIndex(1)
+        # Cerrar la ventana
+        self.stackedWidget.setCurrentIndex(0)
         return
+
 
     def cancelar_presupuesto(self):
         num_rows = self.tableWidgetDetalleNvaFactura_3.rowCount()
@@ -5102,7 +5204,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "FchServDesde": fecha_servicio_desde,
             "FchServHasta": fecha_servicio_hasta,
             "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2),
+            "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
             "ImpTotConc": 0,  # Importe neto no gravado
             "ImpNeto": round(float(subtotal), 2),
             "ImpOpEx": importe_exento_iva,
@@ -5168,7 +5270,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('bill.html')
+        template = env.get_template('./Facturas/bill.html')
 
         # Llenar la plantilla con los datos de la factura
         factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
@@ -5181,13 +5283,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w', encoding='utf-8') as f:
+        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./factura.html").read()
+        html = open("./Facturas/factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5223,10 +5325,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
+        # Crear el nombre del archivo
+        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
+
         # Crear el PDF
         config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
-        #pdfkit.from_file('factura.html', 'factura.pdf', options=options)
+        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
 
 
     def facturaB(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
@@ -5325,7 +5429,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             "FchServDesde": fecha_servicio_desde,
             "FchServHasta": fecha_servicio_hasta,
             "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2),
+            "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
             "ImpTotConc": 0,  # Importe neto no gravado
             "ImpNeto": round(float(subtotal), 2),
             "ImpOpEx": importe_exento_iva,
@@ -5360,7 +5464,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('bill.html')
+        template = env.get_template('./Facturas/bill.html')
 
         # Llenar la plantilla con los datos de la factura
         factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
@@ -5373,13 +5477,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w', encoding='utf-8') as f:
+        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./factura.html").read()
+        html = open("./Facturas/factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5415,10 +5519,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
+        # Crear el nombre del archivo
+        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
+
         # Crear el PDF
         config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
-        # pdfkit.from_file('factura.html', 'factura.pdf', options=options)
+        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
 
     def facturaC(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
                  inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
@@ -5544,7 +5650,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('bill.html')
+        template = env.get_template('./Facturas/bill.html')
 
         # Llenar la plantilla con los datos de la factura
         factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
@@ -5557,13 +5663,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                        total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('factura.html', 'w', encoding='utf-8') as f:
+        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./factura.html").read()
+        html = open("./Facturas/factura.html").read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5599,10 +5705,121 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
+        # Crear el nombre del archivo
+        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
+
         # Crear el PDF
         config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('factura.html', 'factura.pdf', options=options, configuration=config)
-        # pdfkit.from_file('factura.html', 'factura.pdf', options=options)
+        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
+
+
+    def cliente_afip(self):
+
+        afip = Afip({
+            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+            "CUIT": 20409378472  # Replace with your CUIT
+        })
+
+        # CUIT del contribuyente
+    ####Padrón de constancia de inscripción
+        # tax_id = self.lineEdit_cuitNvoCliente.text()
+        # taxpayer_details = afip.RegisterInscriptionProof.getTaxpayerDetails(tax_id)
+        # print(taxpayer_details)
+        # CUIT del contribuyente
+    ###########################################################################################3
+    ####Padrón alcance 10
+        tax_id = self.lineEdit_cuitNvoCliente.text()
+
+        taxpayer_details = afip.RegisterScopeTen.getTaxpayerDetails(tax_id)
+        print(taxpayer_details)
+
+        # Obtener la razón social
+        razon_social = taxpayer_details['persona']['razonSocial']
+        self.lineEdit_empresaNvoCliente.setText(razon_social)
+        if taxpayer_details['persona']['tipoClave'] == 'CUIT':
+            self.lineEdit_nombreNvoCliente.setText(razon_social)
+            self.lineEdit_lineEdit_dniNvoCliente.setText(str(0))
+        # Obtener el CUIT
+        cuit = taxpayer_details['persona']['idPersona']
+
+        # Obtener la condición del IVA
+        condicion_iva = taxpayer_details['persona']['descripcionActividadPrincipal']
+
+        print(f"Razón Social: {razon_social}")
+        print(f"CUIT: {cuit}")
+        print(f"Condición IVA: {condicion_iva}")
+
+        # Obtener la lista de domicilios
+        domicilios = taxpayer_details['persona']['domicilio']
+
+        # Iterar sobre la lista de domicilios
+        for domicilio in domicilios:
+            # Verificar si el tipo de domicilio es 'FISCAL'
+            if domicilio['tipoDomicilio'] == 'LEGAL/REAL':
+                # Imprimir la dirección
+                print(domicilio['direccion'])
+                self.lineEdit_direccionNvoCliente.setText(domicilio['direccion'])
+                self.lineEdit_localidadNvoCliente.setText(domicilio['localidad'])
+                self.lineEdit_provinciaNvoCliente.setText(domicilio['descripcionProvincia'])
+                self.lineEdit_paisNvoCliente.setText('ARGENTINA')
+        return
+
+
+
+
+    ########################################################################################3##
+        # CUIT del contribuyente
+    ####Padrón alcance 13
+        # tax_id = self.lineEdit_cuitNvoCliente.text()
+        #
+        # taxpayer_details = afip.RegisterScopeThirteen.getTaxpayerDetails(tax_id)
+        # print(taxpayer_details)
+
+
+    def proveedor_afip(self):
+
+        afip = Afip({
+            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+            "CUIT": 20409378472  # Replace with your CUIT
+        })
+
+        # CUIT del contribuyente
+    ####Padrón de constancia de inscripción
+        # tax_id = self.lineEdit_cuitNvoCliente.text()
+        # taxpayer_details = afip.RegisterInscriptionProof.getTaxpayerDetails(tax_id)
+        # print(taxpayer_details)
+        # CUIT del contribuyente
+    ###########################################################################################3
+    ####Padrón alcance 10
+        tax_id = self.lineEdit_cuitNvoProveedor.text()
+
+        taxpayer_details = afip.RegisterScopeTen.getTaxpayerDetails(tax_id)
+        print(taxpayer_details)
+
+        # Obtener la razón social
+        razon_social = taxpayer_details['persona']['razonSocial']
+        self.lineEdit_razonsocialNvoProveedor.setText(razon_social)
+
+        # Obtener el CUIT
+        cuit = taxpayer_details['persona']['idPersona']
+
+        # Obtener la condición del IVA
+        condicion_iva = taxpayer_details['persona']['descripcionActividadPrincipal']
+
+        # Obtener la lista de domicilios
+        domicilios = taxpayer_details['persona']['domicilio']
+
+        # Iterar sobre la lista de domicilios
+        for domicilio in domicilios:
+            # Verificar si el tipo de domicilio es 'FISCAL'
+            if domicilio['tipoDomicilio'] == 'LEGAL/REAL':
+                # Imprimir la dirección
+                print(domicilio['direccion'])
+                self.lineEdit_domicilioNvoProveedor.setText(domicilio['direccion'])
+                self.lineEdit_ciudadNvoProveedor.setText(domicilio['localidad'])
+                self.lineEdit_provinciaNvoProveedor.setText(domicilio['descripcionProvincia'])
+                self.lineEdit_paisNvoProveedor.setText('ARGENTINA')
+        return
 
 
 if __name__ == '__main__':

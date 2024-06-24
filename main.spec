@@ -5,6 +5,8 @@ a = Analysis(
              datas=[
                  ('Conexion', 'Conexion'),
                  ('Interfaz', 'Interfaz'),
+                 ('Facturas', 'Facturas'),
+                 ('Presupuestos', 'Presupuestos'),
                  ('negocio', 'negocio'),
                  ('.venv', '.venv'),
                  ('resources_rc.py', 'resources_rc.py'),

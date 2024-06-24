@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>6</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -7554,6 +7554,41 @@ border:2px solid rgb(127, 90, 240)
            </property>
           </item>
          </widget>
+         <widget class="QPushButton" name="bt_seleccionaClienteNvaFactura_4">
+          <property name="geometry">
+           <rect>
+            <x>510</x>
+            <y>350</y>
+            <width>30</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>38</width>
+            <height>38</height>
+           </size>
+          </property>
+         </widget>
         </widget>
        </widget>
        <widget class="QWidget" name="pgNuevoProveedor">
@@ -8525,6 +8560,41 @@ border:5px;
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bt_seleccionaClienteNvaFactura_5">
+          <property name="geometry">
+           <rect>
+            <x>500</x>
+            <y>200</y>
+            <width>30</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+            <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>38</width>
+            <height>38</height>
+           </size>
           </property>
          </widget>
         </widget>
@@ -19342,6 +19412,7 @@ color:#4c82ff
          </property>
         </widget>
        </widget>
+       <widget class="QWidget" name="pgFacturarPresupuesto"/>
       </widget>
      </item>
     </layout>

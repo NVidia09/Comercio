@@ -82,3 +82,24 @@ class detallePresupuestoDAO:
             cursor.execute(cls._ELIMINAR, valores)
             log.debug(f'Datos de Presupuesto eliminados: {codpresupuesto}')
 
+    @classmethod
+    def busca_detalle_lista(cls, detalle_buscar):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._BUSCA_DETALLE, (detalle_buscar,))
+            registros = cursor.fetchall()
+            detallepresupuestos = []
+            for registro in registros:
+                detalle = {
+                    'codarticulo': registro[1],
+                    'descripcion': registro[2],
+                    'cantidad': registro[3],
+                    'precioventa': registro[4],
+                    #'descuento': registro[7] + registro[5] - registro[6],
+                    'importe': registro[3] * registro[4],
+                    'alicuota_iva': round((registro[6] / (registro[3] * registro[4])) * 100, 1),
+                    'iva': registro[6],
+                    'total': registro[5],
+                }
+                detallepresupuestos.append(detalle)
+            return detallepresupuestos
+
