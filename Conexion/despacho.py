@@ -1,6 +1,6 @@
 
 class Despacho:
-    def __init__(self, coddespacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte, guia):
+    def __init__(self, coddespacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte, guia, observaciones):
         self._coddespacho = coddespacho
         self._fecha = fecha
         self._serie = serie
@@ -11,6 +11,7 @@ class Despacho:
         self._tipo = tipo
         self._transporte = transporte
         self._guia = guia
+        self._observaciones = observaciones
 
     def __str__(self):
         return f'''
@@ -24,6 +25,7 @@ class Despacho:
         TIPO: {self.tipo}
         TRANSPORTE: {self.transporte}
         GUIA: {self.guia}
+        OBSERVACIONES: {self.observaciones}
         '''
 
     @property
@@ -109,4 +111,14 @@ class Despacho:
     @guia.setter
     def guia(self, guia):
         self._guia = guia
+
+    @property
+    def observaciones(self):
+        return self._observaciones
+
+    @observaciones.setter
+    def observaciones(self, observaciones):
+        self._observaciones = observaciones
+
+
 

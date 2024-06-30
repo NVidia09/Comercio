@@ -23,7 +23,7 @@ from Conexion.logger_base import log
 from PyQt5 import QtWidgets
 import sys
 
-
+from Conexion.pruebadni import DNI_captura
 from Interfaz.diseño_nuevo import Ui_MainWindow  # Importa el diseño convertido
 from Conexion.EmpresaDAO import EmpresaDAO
 from Conexion.articulo import Articulo
@@ -296,6 +296,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         ###############################################################################################
         self.bt_Despacho.clicked.connect(self.modulo_despachos)
         self.tableWidget_ultimasFacturas_3.cellClicked.connect(self.seleccionar_factura_despacho)
+        self.bt_escanear_documentos.clicked.connect(self.escanear_documentos)
+        self.bt_Despachar.clicked.connect(self.despachar_factura)
 
 
     def listar_articulos(self):
@@ -5892,6 +5894,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget_ultimasFacturas_3.resizeRowsToContents()
 
     def seleccionar_factura_despacho(self):
+
+        # Crear un QPixmap con la ruta de la imagen
+        logo_pixmap = QPixmap(':/icons/Icons/no-disponible.png')
+
+        # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+        logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
+
+        # Establecer el QPixmap en la QLabel
+        self.label_dni_frente.setPixmap(logo_pixmap)
+
+        # Crear un QPixmap con la ruta de la imagen
+        logo_pixmap1 = QPixmap(':/icons/Icons/no-disponible.png')
+
+        # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+        logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
+
+        # Establecer el QPixmap en la QLabel
+        self.label_dni_dorso.setPixmap(logo_pixmap1)
+
         row = self.tableWidget_ultimasFacturas_3.currentRow()
         codfactura = int(self.tableWidget_ultimasFacturas_3.item(row, 3).text())
         self.lineEdit_numeroNvaFactura_7.setText(str(codfactura).zfill(8))
@@ -5941,23 +5962,162 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_fechaentregada_2.setReadOnly(True)
             self.lineEdit_fechaentregada_3.setReadOnly(True)
 
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_frente.setPixmap(logo_pixmap)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_dorso.setPixmap(logo_pixmap1)
+
+
         elif self.tableWidget_ultimasFacturas_3.item(row,6).text() == 'PENDIENTE':
             self.comboBox_EstadoDespacho.setEnabled(True)
             self.comboBox_EstadoDespacho_2.setEnabled(True)
             self.lineEdit_fechaentregada_2.setReadOnly(False)
             self.lineEdit_fechaentregada_3.setReadOnly(False)
 
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap = QPixmap(':/icons/Icons/no-disponible.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_frente.setPixmap(logo_pixmap)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap1 = QPixmap(':/icons/Icons/no-disponible.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_dorso.setPixmap(logo_pixmap1)
+
+        elif self.tableWidget_ultimasFacturas_3.item(row,6).text() == 'PARCIAL':
+            self.comboBox_EstadoDespacho.setEnabled(True)
+            self.comboBox_EstadoDespacho_2.setEnabled(True)
+            self.lineEdit_fechaentregada_2.setReadOnly(False)
+            self.lineEdit_fechaentregada_3.setReadOnly(False)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_frente.setPixmap(logo_pixmap)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_dorso.setPixmap(logo_pixmap1)
+
+        else:
+            self.comboBox_EstadoDespacho.setEnabled(True)
+            self.comboBox_EstadoDespacho_2.setEnabled(True)
+            self.lineEdit_fechaentregada_2.setReadOnly(False)
+            self.lineEdit_fechaentregada_3.setReadOnly(False)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_frente.setPixmap(logo_pixmap)
+
+            # Crear un QPixmap con la ruta de la imagen
+            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+
+            # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
+            logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
+
+            # Establecer el QPixmap en la QLabel
+            self.label_dni_dorso.setPixmap(logo_pixmap1)
 
 
 
 
-    def generar_despacho(self):
-# ###########################################################################################
-# #
-# #                          GENERAR DESPACHO MERCADERIA
-# ###########################################################################################
-#
-        pass
+
+    def despachar_factura(self):
+        row = self.tableWidget_ultimasFacturas_3.currentRow()
+        mod_despacho_ant = self.tableWidget_ultimasFacturas_3.item(row, 0).text()
+        query_act = "UPDATE despacho SET estado = 'ENTREGADA' WHERE coddespacho = %s"
+        with CursorDelPool() as cursor:
+            cursor.execute(query_act, (mod_despacho_ant,))
+
+        if row == -1:  # No se ha seleccionado ninguna fila
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Debe seleccionar una factura primero")
+            msg.setWindowTitle("Error")
+            msg.exec_()
+        else:
+            query_NroDespacho = "SELECT DISTINCT ON (coddespacho) * FROM despacho ORDER BY coddespacho DESC"
+
+            with CursorDelPool() as cursor:
+                cursor.execute(query_NroDespacho)
+                registros = cursor.fetchall()
+                despachos = []
+                for registro in registros:
+                    despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4],
+                                              registro[5],
+                                              registro[6], registro[7], registro[8], registro[9], registro[10])
+                    despachos.append(despacho)
+                if despachos:
+                    codigo = despachos[0].coddespacho + 1
+                else:
+                    codigo = 1
+
+
+            fecha = self.lineEdit_fechaNvaFactura_7.text()
+            serie = self.lineEdit_serieNvaFactura_7.text()
+            codfactura = int(self.tableWidget_ultimasFacturas_3.item(row, 3).text())
+            codcliente = self.lineEdit_codclienteNvoPresupuesto_3.text()
+            cliente = self.lineEdit_clienteNvoPresupuesto_3.text()
+            estado = self.comboBox_EstadoDespacho.currentText()
+            tipo = self.comboBox_EstadoDespacho_2.currentText()
+            transporte = self.lineEdit_fechaentregada_2.text()
+            guia = self.lineEdit_fechaentregada_3.text()
+            observaciones = self.textEdit_observacionesDespacho.toPlainText()
+
+            # Create a Despacho object
+            despacho = Despacho(codigo, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte,
+                                guia, observaciones)
+
+            # Pass the Despacho object to the insertar method
+            DespachoDAO.insertar(despacho)
+
+            QMessageBox.information(self, "Despacho Ingresado",
+                                    "El despacho ha sido ingresado correctamente", )
+            self.modulo_despachos()
+
+
+
+
+    def escanear_documentos(self):
+        row = self.tableWidget_ultimasFacturas_3.currentRow()
+        codfactura = self.tableWidget_ultimasFacturas_3.item(row, 3).text()
+        dni_captura = DNI_captura(codfactura)
+        dni_captura.capture()
 
 
 

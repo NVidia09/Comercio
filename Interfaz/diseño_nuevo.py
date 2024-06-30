@@ -8958,33 +8958,18 @@ class Ui_MainWindow(object):
         self.lineEdit_fechaentregada_3.setFont(font)
         self.lineEdit_fechaentregada_3.setReadOnly(True)
         self.lineEdit_fechaentregada_3.setObjectName("lineEdit_fechaentregada_3")
-        self.label_382 = QtWidgets.QLabel(self.pgDespacho)
-        self.label_382.setGeometry(QtCore.QRect(1110, 630, 281, 241))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_382.sizePolicy().hasHeightForWidth())
-        self.label_382.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Gill Sans MT")
-        font.setPointSize(10)
-        self.label_382.setFont(font)
-        self.label_382.setStyleSheet("QLabel:{\n"
-"background-color: transparent\n"
-"}")
-        self.label_382.setObjectName("label_382")
-        self.label_383 = QtWidgets.QLabel(self.pgDespacho)
-        self.label_383.setGeometry(QtCore.QRect(1450, 600, 211, 141))
-        self.label_383.setText("")
-        self.label_383.setPixmap(QtGui.QPixmap(":/icons/Icons/no-disponible.png"))
-        self.label_383.setScaledContents(True)
-        self.label_383.setObjectName("label_383")
-        self.label_384 = QtWidgets.QLabel(self.pgDespacho)
-        self.label_384.setGeometry(QtCore.QRect(1450, 760, 211, 141))
-        self.label_384.setText("")
-        self.label_384.setPixmap(QtGui.QPixmap(":/icons/Icons/no-disponible.png"))
-        self.label_384.setScaledContents(True)
-        self.label_384.setObjectName("label_384")
+        self.label_dni_frente = QtWidgets.QLabel(self.pgDespacho)
+        self.label_dni_frente.setGeometry(QtCore.QRect(1450, 600, 211, 141))
+        self.label_dni_frente.setText("")
+        self.label_dni_frente.setPixmap(QtGui.QPixmap(":/icons/Icons/no-disponible.png"))
+        self.label_dni_frente.setScaledContents(True)
+        self.label_dni_frente.setObjectName("label_dni_frente")
+        self.label_dni_dorso = QtWidgets.QLabel(self.pgDespacho)
+        self.label_dni_dorso.setGeometry(QtCore.QRect(1450, 760, 211, 141))
+        self.label_dni_dorso.setText("")
+        self.label_dni_dorso.setPixmap(QtGui.QPixmap(":/icons/Icons/no-disponible.png"))
+        self.label_dni_dorso.setScaledContents(True)
+        self.label_dni_dorso.setObjectName("label_dni_dorso")
         self.tableWidget_ultimasFacturas_3 = QtWidgets.QTableWidget(self.pgDespacho)
         self.tableWidget_ultimasFacturas_3.setGeometry(QtCore.QRect(10, 50, 1191, 351))
         self.tableWidget_ultimasFacturas_3.setStyleSheet("QTableView{\n"
@@ -9229,6 +9214,66 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         item.setFont(font)
         self.tableWidget_detalleultimasFacturas_4.setHorizontalHeaderItem(5, item)
+        self.bt_escanear_documentos = QtWidgets.QPushButton(self.pgDespacho)
+        self.bt_escanear_documentos.setGeometry(QtCore.QRect(1220, 600, 151, 121))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_escanear_documentos.setFont(font)
+        self.bt_escanear_documentos.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}")
+        self.bt_escanear_documentos.setObjectName("bt_escanear_documentos")
+        self.label_382 = QtWidgets.QLabel(self.pgDespacho)
+        self.label_382.setGeometry(QtCore.QRect(1230, 720, 131, 30))
+        self.label_382.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_382.setFont(font)
+        self.label_382.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_382.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_382.setObjectName("label_382")
+        self.bt_escanear_guia = QtWidgets.QPushButton(self.pgDespacho)
+        self.bt_escanear_guia.setGeometry(QtCore.QRect(1220, 760, 151, 121))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.bt_escanear_guia.setFont(font)
+        self.bt_escanear_guia.setStyleSheet("QPushButton{\n"
+"background-color:#2caeff;\n"
+"border-radius:10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:#39ffa3;\n"
+"}")
+        self.bt_escanear_guia.setObjectName("bt_escanear_guia")
+        self.label_386 = QtWidgets.QLabel(self.pgDespacho)
+        self.label_386.setGeometry(QtCore.QRect(1230, 880, 131, 30))
+        self.label_386.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_386.setFont(font)
+        self.label_386.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_386.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_386.setObjectName("label_386")
         self.stackedWidget.addWidget(self.pgDespacho)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -10371,7 +10416,6 @@ class Ui_MainWindow(object):
         self.comboBox_EstadoDespacho_2.setItemText(1, _translate("MainWindow", "ENVIO"))
         self.label_380.setText(_translate("MainWindow", "TRANSPORTE"))
         self.label_381.setText(_translate("MainWindow", "GUIA N° "))
-        self.label_382.setText(_translate("MainWindow", "CAPTURA DNI"))
         item = self.tableWidget_ultimasFacturas_3.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "CODDESPACHO"))
         item = self.tableWidget_ultimasFacturas_3.horizontalHeaderItem(1)
@@ -10404,6 +10448,10 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "IMPORTE"))
         item = self.tableWidget_detalleultimasFacturas_4.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "IVA"))
+        self.bt_escanear_documentos.setText(_translate("MainWindow", " ESCANEAR "))
+        self.label_382.setText(_translate("MainWindow", "DOCUMENTOS"))
+        self.bt_escanear_guia.setText(_translate("MainWindow", " ESCANEAR "))
+        self.label_386.setText(_translate("MainWindow", "GUIA"))
         self.label_111.setText(_translate("MainWindow", "FACTURACION"))
         self.label_112.setText(_translate("MainWindow", "ARTICULOS"))
         self.label_113.setText(_translate("MainWindow", "CLIENTES"))

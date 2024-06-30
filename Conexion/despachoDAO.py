@@ -8,8 +8,8 @@ from Conexion.despacho import Despacho
 class DespachoDAO:
 
     _SELECCIONAR = "SELECT * FROM despacho ORDER BY coddespacho DESC"
-    _INSERTAR = "INSERT INTO despacho(coddespacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte, guia) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    _ACTUALIZAR = 'UPDATE despacho SET fecha=%s, serie=%s, codfactura=%s, codcliente=%s, cliente=%s, estado=%s, tipo=%s, transporte=%s, guia=%s WHERE coddespacho = %s'
+    _INSERTAR = "INSERT INTO despacho(coddespacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte, guia, observaciones) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    _ACTUALIZAR = 'UPDATE despacho SET fecha=%s, serie=%s, codfactura=%s, codcliente=%s, cliente=%s, estado=%s, tipo=%s, transporte=%s, guia=%s, observaciones=%s WHERE coddespacho = %s'
     _ELIMINAR = "DELETE FROM despacho WHERE coddespacho = %s"
     _BUSCA_DESPACHO = "SELECT * FROM despacho WHERE coddespacho = %s"
     _BUSCA_DESPACHO_PENDIENTE = "SELECT * FROM despacho WHERE estado = 'PENDIENTE' ORDER BY coddespacho DESC"
@@ -22,7 +22,7 @@ class DespachoDAO:
             registros = cursor.fetchall()
             despachos = []
             for registro in registros:
-                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9])
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
             return despachos
 
@@ -34,14 +34,14 @@ class DespachoDAO:
             registros = cursor.fetchall()
             despachos = []
             for registro in registros:
-                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9])
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
             return despachos
 
     @classmethod
     def insertar(cls, despacho):
         with CursorDelPool() as cursor:
-            valores = (despacho.coddespacho, despacho.fecha, despacho.serie, despacho.codfactura, despacho.codcliente, despacho.cliente, despacho.estado, despacho.tipo, despacho.transporte, despacho.guia)
+            valores = (despacho.coddespacho, despacho.fecha, despacho.serie, despacho.codfactura, despacho.codcliente, despacho.cliente, despacho.estado, despacho.tipo, despacho.transporte, despacho.guia, despacho.observaciones)
             cursor.execute(cls._INSERTAR, valores)
             log.debug(f'Factura ingresada: {despacho}')
             return cursor.rowcount
@@ -55,7 +55,7 @@ class DespachoDAO:
             registros = cursor.fetchall()
             despachos = []
             for registro in registros:
-                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9])
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
             return despachos
 
@@ -69,7 +69,7 @@ class DespachoDAO:
             registros = cursor.fetchall()
             despachos = []
             for registro in registros:
-                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9])
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
             return despachos
 
@@ -81,7 +81,7 @@ class DespachoDAO:
             registros = cursor.fetchall()
             despachos = []
             for registro in registros:
-                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9])
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5], registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
 
         data = {
@@ -94,7 +94,8 @@ class DespachoDAO:
             'estado': [despacho.estado for despacho in despachos],
             'tipo': [despacho.tipo for despacho in despachos],
             'transporte': [despacho.transporte for despacho in despachos],
-            'guia': [despacho.guia for despacho in despachos]
+            'guia': [despacho.guia for despacho in despachos],
+            'observaciones': [despacho.observaciones for despacho in despachos]
         }
         df = pd.DataFrame(data)
 

@@ -20643,37 +20643,7 @@ color:#ffffff
           </property>
          </widget>
         </widget>
-        <widget class="QLabel" name="label_382">
-         <property name="geometry">
-          <rect>
-           <x>1110</x>
-           <y>630</y>
-           <width>281</width>
-           <height>241</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Gill Sans MT</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel:{
-background-color: transparent
-}</string>
-         </property>
-         <property name="text">
-          <string>CAPTURA DNI</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_383">
+        <widget class="QLabel" name="label_dni_frente">
          <property name="geometry">
           <rect>
            <x>1450</x>
@@ -20692,7 +20662,7 @@ background-color: transparent
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QLabel" name="label_384">
+        <widget class="QLabel" name="label_dni_dorso">
          <property name="geometry">
           <rect>
            <x>1450</x>
@@ -21042,6 +21012,136 @@ QTableView QHeaderView::section:horizontal {
            <set>AlignCenter</set>
           </property>
          </column>
+        </widget>
+        <widget class="QPushButton" name="bt_escanear_documentos">
+         <property name="geometry">
+          <rect>
+           <x>1220</x>
+           <y>600</y>
+           <width>151</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}</string>
+         </property>
+         <property name="text">
+          <string> ESCANEAR </string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_382">
+         <property name="geometry">
+          <rect>
+           <x>1230</x>
+           <y>720</y>
+           <width>131</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Goldman</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+         </property>
+         <property name="text">
+          <string>DOCUMENTOS</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="bt_escanear_guia">
+         <property name="geometry">
+          <rect>
+           <x>1220</x>
+           <y>760</y>
+           <width>151</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+background-color:#2caeff;
+border-radius:10px;
+}
+
+QPushButton:hover{
+background-color:#39ffa3;
+}</string>
+         </property>
+         <property name="text">
+          <string> ESCANEAR </string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_386">
+         <property name="geometry">
+          <rect>
+           <x>1230</x>
+           <y>880</y>
+           <width>131</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Goldman</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+         </property>
+         <property name="text">
+          <string>GUIA</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </widget>
       </widget>
