@@ -2,7 +2,7 @@ import base64
 import os
 import shutil
 from afip import Afip, afip
-
+from PyQt5.QtGui import QImage
 from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
@@ -17,9 +17,13 @@ import json
 from Conexion.cursor_del_pool import CursorDelPool
 from Conexion.clienteDAO import ClienteDAO
 from Conexion.articuloDAO import ArticuloDAO
+from Conexion.despacho import Despacho
+from Conexion.despachoDAO import DespachoDAO
 from Conexion.logger_base import log
 from PyQt5 import QtWidgets
 import sys
+
+
 from Interfaz.diseño_nuevo import Ui_MainWindow  # Importa el diseño convertido
 from Conexion.EmpresaDAO import EmpresaDAO
 from Conexion.articulo import Articulo
@@ -159,6 +163,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_empresa.bt_subir_foto_empresa.clicked.connect(self.subir_foto_empresa)
         # self.factura_logo = QtWidgets.QLabel(self)
 
+
+
         ##################################################################
         ##
         ##                     AGREGAR CLIENTE A NUEVA FACTURA
@@ -282,6 +288,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
         self.bt_Facturar_presupuesto_2.clicked.connect(self.facturar_presupuesto)
         self.bt_CancelarFactura_3.clicked.connect(self.cancelar_presupuesto)
+
+        ###############################################################################################
+        #
+        #                        DESPACHOS
+        #
+        ###############################################################################################
+        self.bt_Despacho.clicked.connect(self.modulo_despachos)
+        self.tableWidget_ultimasFacturas_3.cellClicked.connect(self.seleccionar_factura_despacho)
+
 
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
@@ -2255,6 +2270,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         with open('facturas.json', 'w') as f:
             json.dump(facturas_json, f)
         ###########################################################################################
+        query_NroDespacho = "SELECT DISTINCT ON (coddespacho) * FROM despacho ORDER BY coddespacho DESC"
+
+        with CursorDelPool() as cursor:
+            cursor.execute(query_NroDespacho)
+            registros = cursor.fetchall()
+            despachos = []
+            for registro in registros:
+                despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                    registro[6], registro[7], registro[8], registro[9])
+                despachos.append(despacho)
+            if despachos:
+                codigo_despacho = despachos[0].coddespacho + 1
+            else:
+                codigo_despacho = 1
+        # return despachos
+
+        estado = "PENDIENTE"
+        transporte = ""
+        guia = ""
+        tipo = entrega
+
+        despacho = Despacho(codigo_despacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte,
+                            guia)
+        despachos_insertados = DespachoDAO.insertar(despacho)
+
+        #self.generar_despacho()
+
 
         # Obtener los detalles de la factura
         alicuota_iva = 0
@@ -3641,41 +3683,42 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.lineEdit_ConceptoNvoCobro.setText('')
 
     def generar_recibo(self):
-        # Obtener los datos necesarios
-        nombre_cliente = self.lineEdit_clienteCobrarFactura.text()
-        cantidad_pagada = self.lineEdit_ImporteCobrarFactura.text()
-        fecha_pago = datetime.now().strftime('%d/%m/%Y, %H:%M:%S')
-        numero_factura = self.lineEdit_serieNvaFactura_2.text() + "-" + self.lineEdit_numeroNvaFactura_2.text()
-
-        # Formatear los datos en un formato de recibo
-        recibo = f"""
-        -------------------------------------------------------------
-        Recibo de Pago
-        -------------------------------------------------------------
-        Fecha: {fecha_pago}
-        Nombre del Cliente: {nombre_cliente}
-        Número de Factura: {numero_factura}
-        Cantidad Pagada: $ {cantidad_pagada}
-        -----------------------------------------------------------
-        Gracias por su pago!
-        """
-
-        # Crear un objeto de canvas y especificar el nombre del archivo PDF
-        # Format the date and time to be used in a filename
-        fecha_pago_filename = datetime.now().strftime('%d_%m_%Y_%H-%M-%S')
-
-        # Use the formatted date and time in the filename
-        c = canvas.Canvas(f"recibo{numero_factura}_{fecha_pago_filename}.pdf")
-
-        # Dibujar el texto en el PDF
-        c.drawString(100, 750, recibo)
-
-        # Guardar el PDF
-        c.save()
-
-        # Mostrar, imprimir o guardar el recibo
-        print(
-            recibo)  # Esto es solo un ejemplo, puedes optar por mostrarlo en la interfaz de usuario o guardarlo en un archivo
+        pass
+        # # Obtener los datos necesarios
+        # nombre_cliente = self.lineEdit_clienteCobrarFactura.text()
+        # cantidad_pagada = self.lineEdit_ImporteCobrarFactura.text()
+        # fecha_pago = datetime.now().strftime('%d/%m/%Y, %H:%M:%S')
+        # numero_factura = self.lineEdit_serieNvaFactura_2.text() + "-" + self.lineEdit_numeroNvaFactura_2.text()
+        #
+        # # Formatear los datos en un formato de recibo
+        # recibo = f"""
+        # -------------------------------------------------------------
+        # Recibo de Pago
+        # -------------------------------------------------------------
+        # Fecha: {fecha_pago}
+        # Nombre del Cliente: {nombre_cliente}
+        # Número de Factura: {numero_factura}
+        # Cantidad Pagada: $ {cantidad_pagada}
+        # -----------------------------------------------------------
+        # Gracias por su pago!
+        # """
+        #
+        # # Crear un objeto de canvas y especificar el nombre del archivo PDF
+        # # Format the date and time to be used in a filename
+        # fecha_pago_filename = datetime.now().strftime('%d_%m_%Y_%H-%M-%S')
+        #
+        # # Use the formatted date and time in the filename
+        # c = canvas.Canvas(f"recibo{numero_factura}_{fecha_pago_filename}.pdf")
+        #
+        # # Dibujar el texto en el PDF
+        # c.drawString(100, 750, recibo)
+        #
+        # # Guardar el PDF
+        # c.save()
+        #
+        # # Mostrar, imprimir o guardar el recibo
+        # print(
+        #     recibo)  # Esto es solo un ejemplo, puedes optar por mostrarlo en la interfaz de usuario o guardarlo en un archivo
 
     def importar_proveedores(self):
         # Obtener la ruta del archivo seleccionado
@@ -5820,6 +5863,102 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.lineEdit_provinciaNvoProveedor.setText(domicilio['descripcionProvincia'])
                 self.lineEdit_paisNvoProveedor.setText('ARGENTINA')
         return
+
+
+  #################################################################################################################
+  #
+  #                                    DESPACHOS
+  #
+  #################################################################################################################
+    def modulo_despachos(self):
+        self.stackedWidget.setCurrentIndex(13)
+        self.lineEdit_fechaNvaFactura_7.setText(str(datetime.now().strftime("%d-%m-%Y %H:%M:%S")))
+        despachos = DespachoDAO.seleccionar()
+        self.tableWidget_ultimasFacturas_3.setRowCount(len(despachos))
+        for i, despacho in enumerate(despachos):
+            self.tableWidget_ultimasFacturas_3.setItem(i, 0, QtWidgets.QTableWidgetItem(str(despacho.coddespacho)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 1, QtWidgets.QTableWidgetItem(str(despacho.fecha)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 2, QtWidgets.QTableWidgetItem(str(despacho.serie)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 3, QtWidgets.QTableWidgetItem(str(despacho.codfactura)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 4, QtWidgets.QTableWidgetItem(str(despacho.codcliente)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 5, QtWidgets.QTableWidgetItem(str(despacho.cliente)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 6, QtWidgets.QTableWidgetItem(str(despacho.estado)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 7, QtWidgets.QTableWidgetItem(str(despacho.tipo)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 8, QtWidgets.QTableWidgetItem(str(despacho.transporte)))
+            self.tableWidget_ultimasFacturas_3.setItem(i, 9, QtWidgets.QTableWidgetItem(str(despacho.guia)))
+
+
+        self.tableWidget_ultimasFacturas_3.resizeColumnsToContents()
+        self.tableWidget_ultimasFacturas_3.resizeRowsToContents()
+
+    def seleccionar_factura_despacho(self):
+        row = self.tableWidget_ultimasFacturas_3.currentRow()
+        codfactura = int(self.tableWidget_ultimasFacturas_3.item(row, 3).text())
+        self.lineEdit_numeroNvaFactura_7.setText(str(codfactura).zfill(8))
+        self.lineEdit_serieNvaFactura_7.setText(str(self.tableWidget_ultimasFacturas_3.item(row, 2).text()).zfill(5))
+        detalles = detalleFacturaDAO.busca_detalle(codfactura)
+        self.tableWidget_detalleultimasFacturas_4.setRowCount(len(detalles))
+        for i, detalle in enumerate(detalles):
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 0, QtWidgets.QTableWidgetItem(str(detalle.codarticulo)))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 1, QtWidgets.QTableWidgetItem(detalle.descripcion))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 2, QtWidgets.QTableWidgetItem(str(detalle.cantidad)))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 3, QtWidgets.QTableWidgetItem(str(detalle.precioventa)))
+            #self.tableWidget_detalleultimasFacturas_4.setItem(i, 4, QtWidgets.QTableWidgetItem(str(round((detalle.iva/detalle.importe) *100, 2))))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 4, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 5, QtWidgets.QTableWidgetItem(str(detalle.iva)))
+            self.tableWidget_detalleultimasFacturas_4.setItem(i, 6, QtWidgets.QTableWidgetItem(str(detalle.importe)))
+            self.tableWidget_detalleultimasFacturas_4.resizeColumnsToContents()
+            self.tableWidget_detalleultimasFacturas_4.resizeRowsToContents()
+            log.debug(detalle)
+
+        row = self.tableWidget_ultimasFacturas_3.currentRow()
+        codcliente = self.tableWidget_ultimasFacturas_3.item(row, 4).text()
+        self.lineEdit_codclienteNvoPresupuesto_3.setText(codcliente)
+        self.lineEdit_clienteNvoPresupuesto_3.setText(self.tableWidget_ultimasFacturas_3.item(row, 5).text())
+        #codcliente = self.lineEdit_codclienteNvoPresupuesto_3.text
+        cliente = ClienteDAO.busca_cliente(codcliente)[0]
+        direccion = cliente.direccion
+        numero = cliente.numero
+        localidad = cliente.localidad
+        provincia = cliente.provincia
+        pais = cliente.pais
+        direccion_completa_cliente = " , ".join([direccion, numero, localidad, provincia, pais])
+
+        self.lineEdit_domclienteNvoPresupuesto_3.setText(direccion_completa_cliente)
+        self.lineEdit_cuitclienteNvoPresupuesto_3.setText(cliente.cuit)
+        self.lineEdit_dniclienteNvoPresupuesto_3.setText(cliente.dni)
+        self.lineEdit_telclienteNvoPresupuesto_3.setText(cliente.telefono)
+
+        if self.tableWidget_ultimasFacturas_3.item(row,6).text() == 'ENTREGADA':
+            self.lineEdit_fechaCompra.setText(self.tableWidget_ultimasFacturas_3.item(row,1).text())
+            self.comboBox_EstadoDespacho.setCurrentText('ENTREGADA')
+            self.comboBox_EstadoDespacho_2.setCurrentText(self.tableWidget_ultimasFacturas_3.item(row,7).text())
+            self.lineEdit_fechaentregada_2.setText(self.tableWidget_ultimasFacturas_3.item(row,8).text())
+            self.lineEdit_fechaentregada_3.setText(self.tableWidget_ultimasFacturas_3.item(row,9).text())
+            self.lineEdit_fechaCompra.setReadOnly(True)
+            self.comboBox_EstadoDespacho.setDisabled(True)
+            self.comboBox_EstadoDespacho_2.setDisabled(True)
+            self.lineEdit_fechaentregada_2.setReadOnly(True)
+            self.lineEdit_fechaentregada_3.setReadOnly(True)
+
+        elif self.tableWidget_ultimasFacturas_3.item(row,6).text() == 'PENDIENTE':
+            self.comboBox_EstadoDespacho.setEnabled(True)
+            self.comboBox_EstadoDespacho_2.setEnabled(True)
+            self.lineEdit_fechaentregada_2.setReadOnly(False)
+            self.lineEdit_fechaentregada_3.setReadOnly(False)
+
+
+
+
+
+    def generar_despacho(self):
+# ###########################################################################################
+# #
+# #                          GENERAR DESPACHO MERCADERIA
+# ###########################################################################################
+#
+        pass
+
 
 
 if __name__ == '__main__':
