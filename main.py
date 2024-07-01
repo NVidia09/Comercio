@@ -178,6 +178,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.agregar_cliente_click)
         self.ui_agregar_cliente_Fact.tableWidgetAgregarClienteNvaFactura.doubleClicked.connect(
             self.agregar_cliente_click_presupuesto)
+        self.bt_facturaPDF.clicked.connect(self.factura_pdf)
 
         #################################################################
         #
@@ -288,6 +289,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.tableWidgetDetalleNvaFactura_3.cellChanged.connect(self.actualizar_subtotal_presupuesto)
         self.bt_Facturar_presupuesto_2.clicked.connect(self.facturar_presupuesto)
         self.bt_CancelarFactura_3.clicked.connect(self.cancelar_presupuesto)
+        self.bt_presupuestoPDF.clicked.connect(self.presupuesto_pdf)
 
         ###############################################################################################
         #
@@ -298,6 +300,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidget_ultimasFacturas_3.cellClicked.connect(self.seleccionar_factura_despacho)
         self.bt_escanear_documentos.clicked.connect(self.escanear_documentos)
         self.bt_Despachar.clicked.connect(self.despachar_factura)
+        self.bt_VerDespacho.clicked.connect(self.ver_despacho)
 
 
     def listar_articulos(self):
@@ -2280,7 +2283,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             despachos = []
             for registro in registros:
                 despacho = Despacho(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
-                                    registro[6], registro[7], registro[8], registro[9])
+                                    registro[6], registro[7], registro[8], registro[9], registro[10])
                 despachos.append(despacho)
             if despachos:
                 codigo_despacho = despachos[0].coddespacho + 1
@@ -2289,12 +2292,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # return despachos
 
         estado = "PENDIENTE"
-        transporte = ""
-        guia = ""
+        transporte = "-"
+        guia = "-"
         tipo = entrega
+        observaciones = "-"
 
         despacho = Despacho(codigo_despacho, fecha, serie, codfactura, codcliente, cliente, estado, tipo, transporte,
-                            guia)
+                            guia, observaciones)
         despachos_insertados = DespachoDAO.insertar(despacho)
 
         #self.generar_despacho()
@@ -4605,8 +4609,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Carga la plantilla
         # env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
         # template = env.get_template(ruta_plantilla_presupuesto)
+        basedir = os.path.dirname(__file__)
 
-        env = Environment(loader=FileSystemLoader('.'))
+        subdirectorio = os.path.join(basedir, "Presupuestos")
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Cargar la plantilla
+        env = Environment(loader=FileSystemLoader(subdirectorio))
         template = env.get_template('modelo_presupuesto.html')
 
         # Llenar la plantilla con los datos de la factura
@@ -4620,13 +4630,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                         total=total)  # Agrega más campos según sea necesario
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('presupuesto.html', 'w', encoding='utf-8') as f:
+        with open(os.path.join(subdirectorio, 'presupuesto.html'), 'w', encoding='utf-8') as f:
             f.write(presupuesto_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./presupuesto.html").read()
+        html = open(os.path.join(subdirectorio, 'presupuesto.html')).read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -4653,11 +4663,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         import pdfkit
 
         # Crear el nombre del archivo
-        nombre_archivo = f'presupuesto_{codpresupuesto}.pdf'
+        nombre_archivo = os.path.join(subdirectorio,f'presupuesto_{codpresupuesto}.pdf')
 
         # Crear el PDF
         config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('presupuesto.html', nombre_archivo, options=options, configuration=config)
+        pdfkit.from_file(os.path.join(subdirectorio,'presupuesto.html'), nombre_archivo, options=options, configuration=config)
 
         self.lineEdit_clienteNvoPresupuesto.clear()
         self.lineEdit_domclienteNvoPresupuesto.clear()
@@ -6053,10 +6063,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Establecer el QPixmap en la QLabel
             self.label_dni_dorso.setPixmap(logo_pixmap1)
 
-
-
-
-
     def despachar_factura(self):
         row = self.tableWidget_ultimasFacturas_3.currentRow()
         mod_despacho_ant = self.tableWidget_ultimasFacturas_3.item(row, 0).text()
@@ -6108,9 +6114,149 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             QMessageBox.information(self, "Despacho Ingresado",
                                     "El despacho ha sido ingresado correctamente", )
+
+            row = self.tableWidget_ultimasFacturas_3.currentRow()
+            codcliente = self.tableWidget_ultimasFacturas_3.item(row, 4).text()
+            self.lineEdit_codclienteNvoPresupuesto_3.setText(codcliente)
+            self.lineEdit_clienteNvoPresupuesto_3.setText(self.tableWidget_ultimasFacturas_3.item(row, 5).text())
+            # codcliente = self.lineEdit_codclienteNvoPresupuesto_3.text
+            cliente = ClienteDAO.busca_cliente(codcliente)[0]
+            nombre = cliente.nombre
+            apellido = cliente.apellido
+            nombre_completo = " ".join([nombre, apellido])
+            direccion = cliente.direccion
+            numero = cliente.numero
+            localidad = cliente.localidad
+            provincia = cliente.provincia
+            pais = cliente.pais
+            direccion_completa_cliente = " , ".join([direccion, numero, localidad, provincia, pais])
+            cuit_cliente = self.lineEdit_cuitclienteNvoPresupuesto_3.text()
+            condicion_iva = cliente.condiva
+
+            empresa = EmpresaDAO.seleccionar()
+            fantasia_empresa = empresa[0].nombrefantasia
+            razon_social = empresa[0].razonsocial
+            cuit_empresa = empresa[0].cuit
+            iibb_empresa = empresa[0].iibb
+            inicio_actividades = empresa[0].inicioactividades
+            domicilio_empresa = empresa[0].domicilio
+            categoria_iva = empresa[0].categoria
+
+            detalles_factura = detalleFacturaDAO.busca_detalle_lista(codfactura)
+
+
+
+    #################################################################################################
+            #   GENERAR PDF REMITO
+    #################################################################################################
+            basedir = os.path.dirname(__file__)
+
+            subdirectorio = os.path.join(basedir, "Despacho")
+            if not os.path.exists(subdirectorio):
+                os.mkdir(subdirectorio)
+
+            # Cargar la plantilla
+            env = Environment(loader=FileSystemLoader(subdirectorio))
+
+            template = env.get_template('despacho.html')
+
+            # Llenar la plantilla con los datos de la factura
+            remito_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                           serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
+                                           iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                           domicilio=domicilio_empresa, categoria=categoria_iva,
+                                           cuit_cliente=cuit_cliente,
+                                           cliente=nombre_completo, condiva=condicion_iva, direccion=direccion_completa_cliente,
+                                           detalles_factura=detalles_factura)  # Agrega más campos según sea necesario
+            html = ''
+            # Guardar el resultado en un nuevo archivo HTML
+            with open(os.path.join(subdirectorio,'remito.html'), 'w', encoding='utf-8') as f:
+                f.write(remito_html)
+                f.close()
+                #html = f.read()
+
+            # Descargamos el HTML de ejemplo (ver mas arriba)
+            # y lo guardamos como bill.html
+            # html = open("./bill.html").read()
+            html = open(os.path.join(subdirectorio,'remito.html')).read()
+
+            # Nombre para el archivo (sin .pdf)
+            name = "PDF de prueba"
+
+            # Opciones para el archivo
+            options = {
+                "width": 8,  # Ancho de pagina en pulgadas. Usar 3.1 para ticket
+                "marginLeft": 0.4,  # Margen izquierdo en pulgadas. Usar 0.1 para ticket
+                "marginRight": 0.4,  # Margen derecho en pulgadas. Usar 0.1 para ticket
+                "marginTop": 0.4,  # Margen superior en pulgadas. Usar 0.1 para ticket
+                "marginBottom": 0.4  # Margen inferior en pulgadas. Usar 0.1 para ticket
+            }
+
+            # # Creamos el PDF
+            # res = afip.ElectronicBilling.createPDF({
+            #     "html": html,
+            #     "file_name": name,
+            #     "options": options
+            # })
+
+            # Mostramos la url del archivo creado
+            # print(res["file"])
+
+            # Configuración de opciones para el archivo PDF
+            options = {
+                'page-size': 'Letter',
+                'margin-top': '10mm',
+                'margin-right': '0mm',
+                'margin-bottom': '0mm',
+                'margin-left': '0mm',
+                'encoding': "UTF-8",
+                'no-outline': None
+            }
+            import pdfkit
+
+            # Crear el nombre del archivo
+            nombre_archivo = os.path.join(subdirectorio,f'remito_{codfactura}.pdf')
+
+            # Crear el PDF
+            config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+            pdfkit.from_file(os.path.join(subdirectorio,'remito.html'), nombre_archivo, options=options, configuration=config)
+
+
             self.modulo_despachos()
 
 
+    def ver_despacho(self):
+        row = self.tableWidget_ultimasFacturas_3.currentRow()
+        codfactura = self.tableWidget_ultimasFacturas_3.item(row, 3).text()
+        basedir = os.path.dirname(__file__)
+        subdirectorio = os.path.join(basedir, "Despacho")
+        nombre_archivo = os.path.join(subdirectorio, f'remito_{codfactura}.pdf')
+        os.startfile(nombre_archivo)
+
+    def presupuesto_pdf(self):
+        row = self.tableWidgetPresupuestos.currentRow()
+        codpresupuesto = self.tableWidgetPresupuestos.item(row, 0).text().zfill(8)
+        basedir = os.path.dirname(__file__)
+        subdirectorio = os.path.join(basedir, "Presupuestos")
+        nombre_archivo = os.path.join(subdirectorio, f'presupuesto_{codpresupuesto}.pdf')
+        os.startfile(nombre_archivo)
+
+    def factura_pdf(self):
+        row = self.tableWidget_ultimasFacturas.currentRow()
+        codfactura = self.tableWidget_ultimasFacturas.item(row, 1).text().zfill(8)
+        # Obtienes la fecha desde la interfaz de usuario
+        fecha_str = self.tableWidget_ultimasFacturas.item(row, 3).text()
+
+        # Conviertes el string a un objeto datetime
+        fecha_datetime = datetime.strptime(fecha_str, "%Y-%m-%d")
+
+        # Formateas el objeto datetime a yyyymmdd
+        fecha_formateada = fecha_datetime.strftime("%Y%m%d")
+
+        basedir = os.path.dirname(__file__)
+        subdirectorio = os.path.join(basedir, "Facturas")
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}_{fecha_formateada}.pdf')
+        os.startfile(nombre_archivo)
 
 
     def escanear_documentos(self):

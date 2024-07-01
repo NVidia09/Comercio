@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Presupuesto</title>
+	<title>Remito</title>
 	<style type="text/css">
 		*{
 			box-sizing: border-box;
@@ -157,14 +157,14 @@
 		<tr class="bill-emitter-row">
 			<td>
 				<div class="bill-type">
-					PRESUPUESTO
+					REMITO
 				</div>
 				<div class="text-lg text-center">
-					ZIPCOM INFORMATICA
+					{{nombrefantasia}}
 				</div>
-				<p><strong>Razón social:</strong> MARCELO ALEJANDRO ANTONETTI</p>
-				<p><strong>Domicilio Comercial:</strong> PERRUPATO 152 , SAN MARTIN , MENDOZA , ARGENTINA</p>
-				<p><strong>Condición Frente al IVA:</strong> RESPONSABLE INSCRIPTO</p>
+				<p><strong>Razón social:</strong> {{razonsocial}}</p>
+				<p><strong>Domicilio Comercial:</strong> {{domicilio}}</p>
+				<p><strong>Condición Frente al IVA:</strong> {{categoria}}</p>
 			</td>
 			<td>
 				<div>
@@ -173,15 +173,16 @@
 					</div>
 					<div class="row">
 						<p class="col-6 margin-b-0">
-							<br>
-							<br>
-							<strong>Presupuesto N°:   00000001</strong>
+							<br><strong>Punto de Venta: {{serie}}</strong>
+						</p>
+						<p class="col-6 margin-b-0">
+							<br><strong>Factura N°: {{codfactura}}</strong>
 						</p>
 					</div>
-					<p><strong>Fecha de Emisión:</strong> 01/07/2024, 01:43:51</p>
-					<p><strong>CUIT:</strong> 20300247947</p>
-					<p><strong>Ingresos Brutos:</strong> 225544</p>
-					<p><strong>Fecha de Inicio de Actividades:</strong> 15/05/2015</p>
+					<p><strong>Fecha de Emisión:</strong> {{fecha}}</p>
+					<p><strong>CUIT:</strong> {{cuit}}</p>
+					<p><strong>Ingresos Brutos:</strong> {{iibb}}</p>
+					<p><strong>Fecha de Inicio de Actividades:</strong> {{inicioactividades}}</p>
 				</div>
 			</td>
 		</tr>
@@ -189,13 +190,13 @@
 			<td colspan="2">
 				<div class="row">
 					<p class="col-4 margin-b-0">
-						<strong>Presupuesto Válido Desde: </strong>01/07/2024, 01:43:51
+						<strong>Período Facturado Desde: </strong>{{fecha}}
 					</p>
 					<p class="col-3 margin-b-0">
-						<strong>Hasta: </strong>01/07/2024, 01:43:51
+						<strong>Hasta: </strong>{{fecha}}
 					</p>
 					<p class="col-5 margin-b-0">
-						<strong>Fecha de Vto. : </strong>01/07/2024, 01:43:51
+						<strong>Fecha de Vto. para el pago: </strong>{{fecha}}
 					</p>
 				</div>
 			</td>
@@ -205,23 +206,21 @@
 				<div>
 					<div class="row">
 						<p class="col-4 margin-b-0">
-							<strong>CUIL/CUIT: </strong>27311242684
+							<strong>CUIL/CUIT: </strong>{{cuit_cliente}}
 						</p>
 						<p class="col-8 margin-b-0">
-							<strong>Apellido y Nombre / Razón social: </strong>MARIA TORRES
+							<strong>Apellido y Nombre / Razón social: </strong>{{cliente}}
 						</p>
 					</div>
 					<div class="row">
 						<p class="col-6 margin-b-0">
-							<strong>Condición Frente al IVA: </strong>RESPONSABLE INSCRIPTO
+							<strong>Condición Frente al IVA: </strong>{{condiva}}
 						</p>
 						<p class="col-6 margin-b-0">
-							<strong>Domicilio: </strong>SALTA 566 JUNIN MENDOZA ARGENTINA
+							<strong>Domicilio: </strong>{{direccion}}
 						</p>
 					</div>
-					<p>
-						<strong>Condicion de venta: </strong>CONTADO
-					</p>
+
 				</div>
 			</td>
 		</tr>
@@ -234,34 +233,25 @@
 							<td>Producto / Servicio</td>
 							<td>Cantidad</td>
 							<td>Precio</td>
+							<td>% Bonif.</td>
 							<td>Importe</td>
 							<td>Alic. IVA</td>
 							<td>Iva</td>
 							<td>Subtotal</td>
                         </tr>
-                            
+                            {% for detalle in detalles_factura %}
 							<tr>
-								<td>233383</td>
-								<td>IMPRESORA HP DESKJET 3785</td>
-								<td>1</td>
-								<td>12600.0</td>
-								<td>12600.0</td>
-								<td>10.5</td>
-								<td>1323.0</td>
-								<td>13923.0</td>
+								<td>{{detalle.codarticulo}}</td>
+								<td>{{detalle.descripcion}}</td>
+								<td>{{detalle.cantidad}}</td>
+								<td>{{detalle.precioventa}}</td>
+								<td>{{detalle.descuento}}</td>
+								<td>{{detalle.importe}}</td>
+								<td>{{detalle.alicuota_iva}}</td>
+								<td>{{detalle.iva}}</td>
+								<td>{{detalle.total}}</td>
 							</tr>
-						    
-							<tr>
-								<td>233393</td>
-								<td>IMPRESORA EPSON LT900</td>
-								<td>1</td>
-								<td>460000.0</td>
-								<td>460000.0</td>
-								<td>10.5</td>
-								<td>48300.0</td>
-								<td>508300.0</td>
-							</tr>
-						    
+						    {% endfor %}
 
 					</table>
 				</div>
@@ -270,34 +260,20 @@
 		<tr class="bill-row total-row">
 			<td colspan="2">
 				<div>
-					<div class="row text-right">
-						<p class="col-10 margin-b-0">
-							<strong>Subtotal: $</strong>
-						</p>
-						<p class="col-2 margin-b-0">
-							<strong>472600.0</strong>
-						</p>
-					</div>
-					<div class="row text-right">
-						<p class="col-10 margin-b-0">
-							<strong>Importe Otros Tributos: $</strong>
-						</p>
-						<p class="col-2 margin-b-0">
-							<strong>49623.0</strong>
-						</p>
-					</div>
-					<div class="row text-right">
-						<p class="col-10 margin-b-0">
-							<strong>Importe total: $</strong>
-						</p>
-						<p class="col-2 margin-b-0">
-							<strong>522223.0</strong>
-						</p>
-					</div>
+
 				</div>
 			</td>
 		</tr>
+		<tr class="bill-row row-details">
+			<td>
 
+			</td>
+			<td>
+				<div>
+
+				</div>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>

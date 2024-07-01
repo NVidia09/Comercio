@@ -1,9 +1,10 @@
 <RCC>
   <qresource prefix="icons">
+    <file>Icons/pdf.png</file>
+    <file>Icons/despacho.png</file>
     <file>Icons/agregar-usuario.png</file>
     <file>Icons/articulos-de-compra.png</file>
     <file>Icons/articulos-pagados.png</file>
-    <file>Icons/despacho.png</file>
     <file>Icons/basura.png</file>
     <file>Icons/borrar (1).png</file>
     <file>Icons/borrar.png</file>
