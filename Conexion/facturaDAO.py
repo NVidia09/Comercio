@@ -175,3 +175,14 @@ class FacturaDAO:
         df.to_excel(ruta_archivo, sheet_name="Entrega_Pendiente", merge_cells=True, index=False)
 
 
+    @classmethod
+    def graficoventas(cls):
+        with CursorDelPool() as cursor:
+            query = "SELECT fecha, total FROM facturas"
+            cursor.execute(query)
+            registros = cursor.fetchall()
+            # Assuming you only need fecha and total for the graph
+            ventas = [{'fecha': registro[0], 'total': registro[1]} for registro in registros]
+            return ventas
+
+

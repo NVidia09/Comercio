@@ -1,6 +1,9 @@
 import base64
 import os
 import shutil
+import tempfile
+
+import pandas as pd
 from afip import Afip, afip
 from PyQt5.QtGui import QImage
 from PyQt5.QtCore import Qt, QDate
@@ -11,6 +14,7 @@ from PyQt5 import QtGui
 from pdfkit import pdfkit
 from reportlab.pdfgen import canvas
 from jinja2 import Environment, FileSystemLoader
+import matplotlib.pyplot as plt
 
 import json
 
@@ -103,6 +107,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Empresa.clicked.connect(self.listar_empresa)
         # self.bt_grabar_datos_empresa.clicked.connect(self.grabar_datos_empresa)
 
+        self.bt_inicio.clicked.connect(self.pagina_inicio)
+
         self.bt_Facturacion.clicked.connect(self.modulo_facturacion)
         self.bt_nuevaFactura.clicked.connect(self.nueva_factura)
         self.tableWidget_ultimasFacturas.cellClicked.connect(self.seleccionar_factura)
@@ -163,7 +169,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui_ventana_empresa.bt_subir_foto_empresa.clicked.connect(self.subir_foto_empresa)
         # self.factura_logo = QtWidgets.QLabel(self)
 
-
+        ##################################################################################
+        #
+        #                             PAGINA DE INICIO
+        #
+        ##################################################################################
+        self.stackedWidget.setCurrentIndex(14)
+        self.crear_grafico_ventas()
+        self.grafico_ventas_por_categoria()
 
         ##################################################################
         ##
@@ -302,6 +315,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_Despachar.clicked.connect(self.despachar_factura)
         self.bt_VerDespacho.clicked.connect(self.ver_despacho)
 
+
+    def pagina_inicio(self):
+        self.stackedWidget.setCurrentIndex(14)
 
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
@@ -6264,6 +6280,103 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         codfactura = self.tableWidget_ultimasFacturas_3.item(row, 3).text()
         dni_captura = DNI_captura(codfactura)
         dni_captura.capture()
+
+
+    def crear_grafico_ventas(self):
+        ventas = FacturaDAO.graficoventas()
+
+        # Crear un diccionario para almacenar los datos
+        datos = {
+            'fecha': [],
+            'total': []
+        }
+
+        # Llenar el diccionario con los datos de cada factura
+        for factura in ventas:
+            datos['fecha'].append(factura['fecha'])
+            datos['total'].append(factura['total'])
+
+        # Convertir el diccionario en un DataFrame
+        df = pd.DataFrame(datos)
+
+        # Asegurarse de que la columna fecha es de tipo datetime
+        df['fecha'] = pd.to_datetime(df['fecha'])
+
+        # Agrupar por fecha y sumar los totales
+        ventas_por_dia = df.groupby(df['fecha'].dt.date)['total'].sum()
+        print(ventas_por_dia)
+
+        # Crear el gráfico
+        ventas_por_dia.plot(kind='bar', figsize=(10, 6))
+
+        plt.title('Ventas Totales Distribuidas por Día')
+        plt.xlabel('Fecha')
+        plt.ylabel('Ventas Totales')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+
+        # # Mostrar el gráfico
+        # plt.show()
+
+        # Guardar el gráfico como una imagen temporal
+        temp_file = tempfile.NamedTemporaryFile(suffix='.png', delete=False)
+        plt.savefig(temp_file.name)
+        plt.close()
+
+        # Cargar la imagen en el QLabel
+        self.label_vtastotales.setPixmap(QPixmap(temp_file.name))
+
+    def grafico_ventas_por_categoria(self):
+        # Consulta SQL corregida
+        consulta_sql = """
+        SELECT a.categoria, SUM(df.importe) AS total_ventas
+        FROM detallefactura df
+        JOIN articulos a ON df.codarticulo = a.codigo
+        GROUP BY a.categoria
+        """
+
+        # Ejecutar consulta y cargar los datos en un DataFrame
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql)
+            registros = cursor.fetchall()
+            df = pd.DataFrame(registros, columns=['categoria', 'total_ventas'])
+
+        # Asegurarse de que los montos sean numéricos
+        df['total_ventas'] = pd.to_numeric(df['total_ventas'])
+
+        # Dimensiones deseadas del QLabel en píxeles
+        label_width_px = 721
+        label_height_px = 311
+
+        # Convertir las dimensiones a pulgadas para matplotlib (DPI=100 por defecto)
+        dpi = 100
+        fig_width_in = label_width_px / dpi
+        fig_height_in = label_height_px / dpi
+
+        # Crear el gráfico de barras ajustando el tamaño del gráfico
+        plt.figure(figsize=(fig_width_in, fig_height_in))
+        ax = df.plot(kind='bar', x='categoria', y='total_ventas', legend=True)
+        ax.set_title('Ventas Totales por Categoría de Artículo')
+        ax.set_xlabel('Categoría')
+        ax.set_ylabel('Ventas Totales')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+
+        # Guardar el gráfico como una imagen temporal
+        temp_file_path = tempfile.NamedTemporaryFile(suffix='.png', delete=False).name
+        plt.savefig(temp_file_path)
+        plt.close()
+
+        # Cargar la imagen en el QLabel
+        pixmap = QPixmap(temp_file_path)
+        self.label_vtasxcategoria.setPixmap(pixmap)
+        self.label_vtasxcategoria.setFixedSize(label_width_px, label_height_px)
+
+        # Asegurarse de que el QLabel sea visible
+        self.label_vtasxcategoria.show()
+
+        # Actualizar el QLabel
+        self.label_vtasxcategoria.update()
 
 
 

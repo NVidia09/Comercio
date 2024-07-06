@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>Icons/billete.png</file>
     <file>Icons/pdf.png</file>
     <file>Icons/despacho.png</file>
     <file>Icons/agregar-usuario.png</file>

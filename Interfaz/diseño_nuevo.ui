@@ -39,7 +39,7 @@ background-color:#000000;
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="bt_inicio">
        <property name="text">
         <string/>
        </property>
@@ -226,7 +226,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>11</number>
+        <number>14</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -2905,8 +2905,8 @@ border-radius: 5px;
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>controlar.png</normaloff>controlar.png</iconset>
+              <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+               <normaloff>:/icons/Icons/controlar.png</normaloff>:/icons/Icons/controlar.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -2935,8 +2935,8 @@ border-radius: 5px;
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>controlar.png</normaloff>controlar.png</iconset>
+              <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+               <normaloff>:/icons/Icons/controlar.png</normaloff>:/icons/Icons/controlar.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -17539,8 +17539,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -17925,8 +17925,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -18339,8 +18339,8 @@ color:#ffffff
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>elipsis.png</normaloff>elipsis.png</iconset>
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -21188,6 +21188,2713 @@ color:#ffffff
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="pgPrincipal">
+        <widget class="QGroupBox" name="groupBox_29">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>20</y>
+           <width>1541</width>
+           <height>221</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QGroupBox" name="groupBox_30">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_383">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>0</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_387">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>VENTAS DEL DIA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_388">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Facturas:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_389">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Cobros:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_390">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_391">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_392">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_394">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_395">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_396">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_393">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_31">
+          <property name="geometry">
+           <rect>
+            <x>780</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_384">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>0</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_397">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>VENTAS DE LA SEMANA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_398">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Facturas:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_399">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Cobros:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_400">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_401">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_402">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_403">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_404">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_405">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_406">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_32">
+          <property name="geometry">
+           <rect>
+            <x>1160</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_407">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>0</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_408">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>VENTAS DEL MES</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_409">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Facturas:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_410">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Cobros:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_411">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_412">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_413">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_414">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_415">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_416">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_417">
+          <property name="geometry">
+           <rect>
+            <x>1350</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_33">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_418">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>0</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_419">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>10</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS DEL DIA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_420">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Cantidad:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_421">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Presupuestos:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_423">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>50</y>
+             <width>151</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_424">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>90</y>
+             <width>151</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_422">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Anulaciones:</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_428">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>150</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_34">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>660</y>
+           <width>1541</width>
+           <height>221</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QGroupBox" name="groupBox_35">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_425">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/salario (1).png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_426">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>CUENTAS CORRIENTES</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_427">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Saldos:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_429">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Cobros:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_430">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_431">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_432">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_433">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_434">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_435">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_436">
+          <property name="geometry">
+           <rect>
+            <x>590</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_36">
+          <property name="geometry">
+           <rect>
+            <x>780</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_437">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/articulos-pagados.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_438">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>PAGOS DE LA SEMANA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_439">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Hoy:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_440">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Semana:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_441">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_442">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_443">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_444">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_445">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_446">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_447">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_37">
+          <property name="geometry">
+           <rect>
+            <x>1160</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_448">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/factura (2).png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_449">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>11</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>PRESUPUESTOS PENDIENTES</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_450">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Semana:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_451">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Mes:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_452">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Total:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_453">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>50</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_454">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>90</y>
+             <width>161</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_455">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_456">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>90</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_457">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>130</y>
+             <width>16</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>$</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_458">
+          <property name="geometry">
+           <rect>
+            <x>1350</x>
+            <y>150</y>
+            <width>161</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_38">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>20</y>
+            <width>361</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_459">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/despacho.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_460">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>10</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHO MERCADERIA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_461">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>50</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Hoy día:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_462">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>90</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Semana:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_463">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>50</y>
+             <width>151</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_464">
+           <property name="geometry">
+            <rect>
+             <x>200</x>
+             <y>90</y>
+             <width>151</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_465">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>130</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>Pendientes:</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_466">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>150</y>
+            <width>151</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Goldman</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_39">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>260</y>
+           <width>1541</width>
+           <height>381</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLabel" name="label_vtasxcategoria">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>40</y>
+            <width>721</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_vtastotales">
+          <property name="geometry">
+           <rect>
+            <x>800</x>
+            <y>40</y>
+            <width>721</width>
+            <height>311</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
         </widget>
        </widget>
       </widget>

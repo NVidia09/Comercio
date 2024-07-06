@@ -32,14 +32,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton_5 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_5.setText("")
+        self.bt_inicio = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.bt_inicio.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/Icons/las-compras-en-linea.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_5.setIcon(icon)
-        self.pushButton_5.setIconSize(QtCore.QSize(40, 40))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.horizontalLayout.addWidget(self.pushButton_5)
+        self.bt_inicio.setIcon(icon)
+        self.bt_inicio.setIconSize(QtCore.QSize(40, 40))
+        self.bt_inicio.setObjectName("bt_inicio")
+        self.horizontalLayout.addWidget(self.bt_inicio)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.bt_Minimizar = QtWidgets.QPushButton(self.horizontalLayoutWidget)
@@ -1559,7 +1559,7 @@ class Ui_MainWindow(object):
 "}")
         self.pushButton_ModificarPrecio.setText("")
         icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("Interfaz\\controlar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon11.addPixmap(QtGui.QPixmap(":/icons/Icons/controlar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_ModificarPrecio.setIcon(icon11)
         self.pushButton_ModificarPrecio.setIconSize(QtCore.QSize(40, 40))
         self.pushButton_ModificarPrecio.setObjectName("pushButton_ModificarPrecio")
@@ -7752,9 +7752,7 @@ class Ui_MainWindow(object):
         self.bt_seleccionaClienteNvaFactura_3.setMinimumSize(QtCore.QSize(30, 30))
         self.bt_seleccionaClienteNvaFactura_3.setMaximumSize(QtCore.QSize(30, 30))
         self.bt_seleccionaClienteNvaFactura_3.setText("")
-        icon21 = QtGui.QIcon()
-        icon21.addPixmap(QtGui.QPixmap("Interfaz\\elipsis.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_seleccionaClienteNvaFactura_3.setIcon(icon21)
+        self.bt_seleccionaClienteNvaFactura_3.setIcon(icon17)
         self.bt_seleccionaClienteNvaFactura_3.setIconSize(QtCore.QSize(38, 38))
         self.bt_seleccionaClienteNvaFactura_3.setObjectName("bt_seleccionaClienteNvaFactura_3")
         self.label_299 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
@@ -7945,7 +7943,7 @@ class Ui_MainWindow(object):
         self.bt_seleccionarestadoNvaFactura_4.setMinimumSize(QtCore.QSize(30, 30))
         self.bt_seleccionarestadoNvaFactura_4.setMaximumSize(QtCore.QSize(30, 30))
         self.bt_seleccionarestadoNvaFactura_4.setText("")
-        self.bt_seleccionarestadoNvaFactura_4.setIcon(icon21)
+        self.bt_seleccionarestadoNvaFactura_4.setIcon(icon17)
         self.bt_seleccionarestadoNvaFactura_4.setIconSize(QtCore.QSize(38, 38))
         self.bt_seleccionarestadoNvaFactura_4.setObjectName("bt_seleccionarestadoNvaFactura_4")
         self.factura_logo_2 = QtWidgets.QLabel(self.pgNuevoPresupuesto)
@@ -8069,7 +8067,7 @@ class Ui_MainWindow(object):
         self.bt_formaPagoNvaFactura_3.setMinimumSize(QtCore.QSize(30, 30))
         self.bt_formaPagoNvaFactura_3.setMaximumSize(QtCore.QSize(30, 30))
         self.bt_formaPagoNvaFactura_3.setText("")
-        self.bt_formaPagoNvaFactura_3.setIcon(icon21)
+        self.bt_formaPagoNvaFactura_3.setIcon(icon17)
         self.bt_formaPagoNvaFactura_3.setIconSize(QtCore.QSize(38, 38))
         self.bt_formaPagoNvaFactura_3.setObjectName("bt_formaPagoNvaFactura_3")
         self.lineEdit_clienteNvoPresupuesto = QtWidgets.QLineEdit(self.pgNuevoPresupuesto)
@@ -9289,6 +9287,1085 @@ class Ui_MainWindow(object):
         self.label_386.setAlignment(QtCore.Qt.AlignCenter)
         self.label_386.setObjectName("label_386")
         self.stackedWidget.addWidget(self.pgDespacho)
+        self.pgPrincipal = QtWidgets.QWidget()
+        self.pgPrincipal.setObjectName("pgPrincipal")
+        self.groupBox_29 = QtWidgets.QGroupBox(self.pgPrincipal)
+        self.groupBox_29.setGeometry(QtCore.QRect(70, 20, 1541, 221))
+        self.groupBox_29.setStyleSheet("QGroupBox{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"\n"
+"}")
+        self.groupBox_29.setTitle("")
+        self.groupBox_29.setObjectName("groupBox_29")
+        self.groupBox_30 = QtWidgets.QGroupBox(self.groupBox_29)
+        self.groupBox_30.setGeometry(QtCore.QRect(400, 20, 361, 171))
+        self.groupBox_30.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_30.setTitle("")
+        self.groupBox_30.setObjectName("groupBox_30")
+        self.label_383 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_383.setGeometry(QtCore.QRect(10, 0, 41, 61))
+        self.label_383.setText("")
+        self.label_383.setPixmap(QtGui.QPixmap(":/icons/Icons/billete.png"))
+        self.label_383.setScaledContents(True)
+        self.label_383.setObjectName("label_383")
+        self.label_387 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_387.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_387.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_387.setFont(font)
+        self.label_387.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_387.setObjectName("label_387")
+        self.label_388 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_388.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_388.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_388.setFont(font)
+        self.label_388.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_388.setObjectName("label_388")
+        self.label_389 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_389.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_389.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_389.setFont(font)
+        self.label_389.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_389.setObjectName("label_389")
+        self.label_390 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_390.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_390.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_390.setFont(font)
+        self.label_390.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_390.setObjectName("label_390")
+        self.label_391 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_391.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_391.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_391.setFont(font)
+        self.label_391.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_391.setText("")
+        self.label_391.setObjectName("label_391")
+        self.label_392 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_392.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_392.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_392.setFont(font)
+        self.label_392.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_392.setText("")
+        self.label_392.setObjectName("label_392")
+        self.label_394 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_394.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_394.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_394.setFont(font)
+        self.label_394.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_394.setObjectName("label_394")
+        self.label_395 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_395.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_395.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_395.setFont(font)
+        self.label_395.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_395.setObjectName("label_395")
+        self.label_396 = QtWidgets.QLabel(self.groupBox_30)
+        self.label_396.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_396.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_396.setFont(font)
+        self.label_396.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_396.setObjectName("label_396")
+        self.label_393 = QtWidgets.QLabel(self.groupBox_29)
+        self.label_393.setGeometry(QtCore.QRect(590, 150, 161, 30))
+        self.label_393.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_393.setFont(font)
+        self.label_393.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_393.setText("")
+        self.label_393.setObjectName("label_393")
+        self.groupBox_31 = QtWidgets.QGroupBox(self.groupBox_29)
+        self.groupBox_31.setGeometry(QtCore.QRect(780, 20, 361, 171))
+        self.groupBox_31.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_31.setTitle("")
+        self.groupBox_31.setObjectName("groupBox_31")
+        self.label_384 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_384.setGeometry(QtCore.QRect(10, 0, 41, 61))
+        self.label_384.setText("")
+        self.label_384.setPixmap(QtGui.QPixmap(":/icons/Icons/billete.png"))
+        self.label_384.setScaledContents(True)
+        self.label_384.setObjectName("label_384")
+        self.label_397 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_397.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_397.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_397.setFont(font)
+        self.label_397.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_397.setObjectName("label_397")
+        self.label_398 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_398.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_398.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_398.setFont(font)
+        self.label_398.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_398.setObjectName("label_398")
+        self.label_399 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_399.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_399.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_399.setFont(font)
+        self.label_399.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_399.setObjectName("label_399")
+        self.label_400 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_400.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_400.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_400.setFont(font)
+        self.label_400.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_400.setObjectName("label_400")
+        self.label_401 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_401.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_401.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_401.setFont(font)
+        self.label_401.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_401.setText("")
+        self.label_401.setObjectName("label_401")
+        self.label_402 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_402.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_402.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_402.setFont(font)
+        self.label_402.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_402.setText("")
+        self.label_402.setObjectName("label_402")
+        self.label_403 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_403.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_403.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_403.setFont(font)
+        self.label_403.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_403.setObjectName("label_403")
+        self.label_404 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_404.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_404.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_404.setFont(font)
+        self.label_404.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_404.setObjectName("label_404")
+        self.label_405 = QtWidgets.QLabel(self.groupBox_31)
+        self.label_405.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_405.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_405.setFont(font)
+        self.label_405.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_405.setObjectName("label_405")
+        self.label_406 = QtWidgets.QLabel(self.groupBox_29)
+        self.label_406.setGeometry(QtCore.QRect(970, 150, 161, 30))
+        self.label_406.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_406.setFont(font)
+        self.label_406.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_406.setText("")
+        self.label_406.setObjectName("label_406")
+        self.groupBox_32 = QtWidgets.QGroupBox(self.groupBox_29)
+        self.groupBox_32.setGeometry(QtCore.QRect(1160, 20, 361, 171))
+        self.groupBox_32.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_32.setTitle("")
+        self.groupBox_32.setObjectName("groupBox_32")
+        self.label_407 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_407.setGeometry(QtCore.QRect(10, 0, 41, 61))
+        self.label_407.setText("")
+        self.label_407.setPixmap(QtGui.QPixmap(":/icons/Icons/billete.png"))
+        self.label_407.setScaledContents(True)
+        self.label_407.setObjectName("label_407")
+        self.label_408 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_408.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_408.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_408.setFont(font)
+        self.label_408.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_408.setObjectName("label_408")
+        self.label_409 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_409.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_409.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_409.setFont(font)
+        self.label_409.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_409.setObjectName("label_409")
+        self.label_410 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_410.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_410.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_410.setFont(font)
+        self.label_410.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_410.setObjectName("label_410")
+        self.label_411 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_411.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_411.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_411.setFont(font)
+        self.label_411.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_411.setObjectName("label_411")
+        self.label_412 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_412.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_412.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_412.setFont(font)
+        self.label_412.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_412.setText("")
+        self.label_412.setObjectName("label_412")
+        self.label_413 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_413.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_413.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_413.setFont(font)
+        self.label_413.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_413.setText("")
+        self.label_413.setObjectName("label_413")
+        self.label_414 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_414.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_414.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_414.setFont(font)
+        self.label_414.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_414.setObjectName("label_414")
+        self.label_415 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_415.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_415.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_415.setFont(font)
+        self.label_415.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_415.setObjectName("label_415")
+        self.label_416 = QtWidgets.QLabel(self.groupBox_32)
+        self.label_416.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_416.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_416.setFont(font)
+        self.label_416.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_416.setObjectName("label_416")
+        self.label_417 = QtWidgets.QLabel(self.groupBox_29)
+        self.label_417.setGeometry(QtCore.QRect(1350, 150, 161, 30))
+        self.label_417.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_417.setFont(font)
+        self.label_417.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_417.setText("")
+        self.label_417.setObjectName("label_417")
+        self.groupBox_33 = QtWidgets.QGroupBox(self.groupBox_29)
+        self.groupBox_33.setGeometry(QtCore.QRect(20, 20, 361, 171))
+        self.groupBox_33.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_33.setTitle("")
+        self.groupBox_33.setObjectName("groupBox_33")
+        self.label_418 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_418.setGeometry(QtCore.QRect(10, 0, 41, 61))
+        self.label_418.setText("")
+        self.label_418.setPixmap(QtGui.QPixmap(":/icons/Icons/billete.png"))
+        self.label_418.setScaledContents(True)
+        self.label_418.setObjectName("label_418")
+        self.label_419 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_419.setGeometry(QtCore.QRect(60, 10, 291, 30))
+        self.label_419.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_419.setFont(font)
+        self.label_419.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_419.setObjectName("label_419")
+        self.label_420 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_420.setGeometry(QtCore.QRect(60, 50, 141, 30))
+        self.label_420.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_420.setFont(font)
+        self.label_420.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_420.setObjectName("label_420")
+        self.label_421 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_421.setGeometry(QtCore.QRect(60, 90, 141, 30))
+        self.label_421.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_421.setFont(font)
+        self.label_421.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_421.setObjectName("label_421")
+        self.label_423 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_423.setGeometry(QtCore.QRect(200, 50, 151, 30))
+        self.label_423.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_423.setFont(font)
+        self.label_423.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_423.setText("")
+        self.label_423.setObjectName("label_423")
+        self.label_424 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_424.setGeometry(QtCore.QRect(200, 90, 151, 30))
+        self.label_424.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_424.setFont(font)
+        self.label_424.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_424.setText("")
+        self.label_424.setObjectName("label_424")
+        self.label_422 = QtWidgets.QLabel(self.groupBox_33)
+        self.label_422.setGeometry(QtCore.QRect(60, 130, 141, 30))
+        self.label_422.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_422.setFont(font)
+        self.label_422.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_422.setObjectName("label_422")
+        self.label_428 = QtWidgets.QLabel(self.groupBox_29)
+        self.label_428.setGeometry(QtCore.QRect(220, 150, 151, 30))
+        self.label_428.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_428.setFont(font)
+        self.label_428.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_428.setText("")
+        self.label_428.setObjectName("label_428")
+        self.groupBox_34 = QtWidgets.QGroupBox(self.pgPrincipal)
+        self.groupBox_34.setGeometry(QtCore.QRect(80, 660, 1541, 221))
+        self.groupBox_34.setStyleSheet("QGroupBox{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"\n"
+"}")
+        self.groupBox_34.setTitle("")
+        self.groupBox_34.setObjectName("groupBox_34")
+        self.groupBox_35 = QtWidgets.QGroupBox(self.groupBox_34)
+        self.groupBox_35.setGeometry(QtCore.QRect(400, 20, 361, 171))
+        self.groupBox_35.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_35.setTitle("")
+        self.groupBox_35.setObjectName("groupBox_35")
+        self.label_425 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_425.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        self.label_425.setText("")
+        self.label_425.setPixmap(QtGui.QPixmap(":/icons/Icons/salario (1).png"))
+        self.label_425.setScaledContents(True)
+        self.label_425.setObjectName("label_425")
+        self.label_426 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_426.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_426.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_426.setFont(font)
+        self.label_426.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_426.setObjectName("label_426")
+        self.label_427 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_427.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_427.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_427.setFont(font)
+        self.label_427.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_427.setObjectName("label_427")
+        self.label_429 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_429.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_429.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_429.setFont(font)
+        self.label_429.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_429.setObjectName("label_429")
+        self.label_430 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_430.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_430.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_430.setFont(font)
+        self.label_430.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_430.setObjectName("label_430")
+        self.label_431 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_431.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_431.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_431.setFont(font)
+        self.label_431.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_431.setText("")
+        self.label_431.setObjectName("label_431")
+        self.label_432 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_432.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_432.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_432.setFont(font)
+        self.label_432.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_432.setText("")
+        self.label_432.setObjectName("label_432")
+        self.label_433 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_433.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_433.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_433.setFont(font)
+        self.label_433.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_433.setObjectName("label_433")
+        self.label_434 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_434.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_434.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_434.setFont(font)
+        self.label_434.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_434.setObjectName("label_434")
+        self.label_435 = QtWidgets.QLabel(self.groupBox_35)
+        self.label_435.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_435.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_435.setFont(font)
+        self.label_435.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_435.setObjectName("label_435")
+        self.label_436 = QtWidgets.QLabel(self.groupBox_34)
+        self.label_436.setGeometry(QtCore.QRect(590, 150, 161, 30))
+        self.label_436.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_436.setFont(font)
+        self.label_436.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_436.setText("")
+        self.label_436.setObjectName("label_436")
+        self.groupBox_36 = QtWidgets.QGroupBox(self.groupBox_34)
+        self.groupBox_36.setGeometry(QtCore.QRect(780, 20, 361, 171))
+        self.groupBox_36.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_36.setTitle("")
+        self.groupBox_36.setObjectName("groupBox_36")
+        self.label_437 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_437.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        self.label_437.setText("")
+        self.label_437.setPixmap(QtGui.QPixmap(":/icons/Icons/articulos-pagados.png"))
+        self.label_437.setScaledContents(True)
+        self.label_437.setObjectName("label_437")
+        self.label_438 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_438.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_438.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_438.setFont(font)
+        self.label_438.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_438.setObjectName("label_438")
+        self.label_439 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_439.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_439.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_439.setFont(font)
+        self.label_439.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_439.setObjectName("label_439")
+        self.label_440 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_440.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_440.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_440.setFont(font)
+        self.label_440.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_440.setObjectName("label_440")
+        self.label_441 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_441.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_441.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_441.setFont(font)
+        self.label_441.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_441.setObjectName("label_441")
+        self.label_442 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_442.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_442.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_442.setFont(font)
+        self.label_442.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_442.setText("")
+        self.label_442.setObjectName("label_442")
+        self.label_443 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_443.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_443.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_443.setFont(font)
+        self.label_443.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_443.setText("")
+        self.label_443.setObjectName("label_443")
+        self.label_444 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_444.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_444.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_444.setFont(font)
+        self.label_444.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_444.setObjectName("label_444")
+        self.label_445 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_445.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_445.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_445.setFont(font)
+        self.label_445.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_445.setObjectName("label_445")
+        self.label_446 = QtWidgets.QLabel(self.groupBox_36)
+        self.label_446.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_446.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_446.setFont(font)
+        self.label_446.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_446.setObjectName("label_446")
+        self.label_447 = QtWidgets.QLabel(self.groupBox_34)
+        self.label_447.setGeometry(QtCore.QRect(970, 150, 161, 30))
+        self.label_447.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_447.setFont(font)
+        self.label_447.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_447.setText("")
+        self.label_447.setObjectName("label_447")
+        self.groupBox_37 = QtWidgets.QGroupBox(self.groupBox_34)
+        self.groupBox_37.setGeometry(QtCore.QRect(1160, 20, 361, 171))
+        self.groupBox_37.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_37.setTitle("")
+        self.groupBox_37.setObjectName("groupBox_37")
+        self.label_448 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_448.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        self.label_448.setText("")
+        self.label_448.setPixmap(QtGui.QPixmap(":/icons/Icons/factura (2).png"))
+        self.label_448.setScaledContents(True)
+        self.label_448.setObjectName("label_448")
+        self.label_449 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_449.setGeometry(QtCore.QRect(60, 11, 291, 30))
+        self.label_449.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_449.setFont(font)
+        self.label_449.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_449.setObjectName("label_449")
+        self.label_450 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_450.setGeometry(QtCore.QRect(60, 50, 91, 30))
+        self.label_450.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_450.setFont(font)
+        self.label_450.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_450.setObjectName("label_450")
+        self.label_451 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_451.setGeometry(QtCore.QRect(60, 90, 91, 30))
+        self.label_451.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_451.setFont(font)
+        self.label_451.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_451.setObjectName("label_451")
+        self.label_452 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_452.setGeometry(QtCore.QRect(60, 130, 91, 30))
+        self.label_452.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_452.setFont(font)
+        self.label_452.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_452.setObjectName("label_452")
+        self.label_453 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_453.setGeometry(QtCore.QRect(190, 50, 161, 30))
+        self.label_453.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_453.setFont(font)
+        self.label_453.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_453.setText("")
+        self.label_453.setObjectName("label_453")
+        self.label_454 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_454.setGeometry(QtCore.QRect(190, 90, 161, 30))
+        self.label_454.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_454.setFont(font)
+        self.label_454.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_454.setText("")
+        self.label_454.setObjectName("label_454")
+        self.label_455 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_455.setGeometry(QtCore.QRect(160, 50, 16, 30))
+        self.label_455.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_455.setFont(font)
+        self.label_455.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_455.setObjectName("label_455")
+        self.label_456 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_456.setGeometry(QtCore.QRect(160, 90, 16, 30))
+        self.label_456.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_456.setFont(font)
+        self.label_456.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_456.setObjectName("label_456")
+        self.label_457 = QtWidgets.QLabel(self.groupBox_37)
+        self.label_457.setGeometry(QtCore.QRect(160, 130, 16, 30))
+        self.label_457.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(13)
+        self.label_457.setFont(font)
+        self.label_457.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_457.setObjectName("label_457")
+        self.label_458 = QtWidgets.QLabel(self.groupBox_34)
+        self.label_458.setGeometry(QtCore.QRect(1350, 150, 161, 30))
+        self.label_458.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_458.setFont(font)
+        self.label_458.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_458.setText("")
+        self.label_458.setObjectName("label_458")
+        self.groupBox_38 = QtWidgets.QGroupBox(self.groupBox_34)
+        self.groupBox_38.setGeometry(QtCore.QRect(20, 20, 361, 171))
+        self.groupBox_38.setStyleSheet("QGroupBox{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.groupBox_38.setTitle("")
+        self.groupBox_38.setObjectName("groupBox_38")
+        self.label_459 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_459.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        self.label_459.setText("")
+        self.label_459.setPixmap(QtGui.QPixmap(":/icons/Icons/despacho.png"))
+        self.label_459.setScaledContents(True)
+        self.label_459.setObjectName("label_459")
+        self.label_460 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_460.setGeometry(QtCore.QRect(60, 10, 291, 30))
+        self.label_460.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_460.setFont(font)
+        self.label_460.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_460.setObjectName("label_460")
+        self.label_461 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_461.setGeometry(QtCore.QRect(60, 50, 141, 30))
+        self.label_461.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_461.setFont(font)
+        self.label_461.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_461.setObjectName("label_461")
+        self.label_462 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_462.setGeometry(QtCore.QRect(60, 90, 141, 30))
+        self.label_462.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_462.setFont(font)
+        self.label_462.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_462.setObjectName("label_462")
+        self.label_463 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_463.setGeometry(QtCore.QRect(200, 50, 151, 30))
+        self.label_463.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_463.setFont(font)
+        self.label_463.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_463.setText("")
+        self.label_463.setObjectName("label_463")
+        self.label_464 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_464.setGeometry(QtCore.QRect(200, 90, 151, 30))
+        self.label_464.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_464.setFont(font)
+        self.label_464.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_464.setText("")
+        self.label_464.setObjectName("label_464")
+        self.label_465 = QtWidgets.QLabel(self.groupBox_38)
+        self.label_465.setGeometry(QtCore.QRect(60, 130, 141, 30))
+        self.label_465.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_465.setFont(font)
+        self.label_465.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_465.setObjectName("label_465")
+        self.label_466 = QtWidgets.QLabel(self.groupBox_34)
+        self.label_466.setGeometry(QtCore.QRect(220, 150, 151, 30))
+        self.label_466.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(10)
+        self.label_466.setFont(font)
+        self.label_466.setStyleSheet("QLabel{\n"
+"background-color:#BF060C26;\n"
+"color:#ffffff\n"
+"}")
+        self.label_466.setText("")
+        self.label_466.setObjectName("label_466")
+        self.groupBox_39 = QtWidgets.QGroupBox(self.pgPrincipal)
+        self.groupBox_39.setGeometry(QtCore.QRect(70, 260, 1541, 381))
+        self.groupBox_39.setStyleSheet("QGroupBox{\n"
+"color: #000 ;\n"
+"text-align: center;\n"
+"padding: 5px;\n"
+"margin: 3px;\n"
+"border-radius: 5px;\n"
+"font-size: 14px;\n"
+"background-color: #FFF2F1FC; \n"
+"\n"
+"}")
+        self.groupBox_39.setTitle("")
+        self.groupBox_39.setObjectName("groupBox_39")
+        self.label_vtasxcategoria = QtWidgets.QLabel(self.groupBox_39)
+        self.label_vtasxcategoria.setGeometry(QtCore.QRect(20, 40, 721, 311))
+        self.label_vtasxcategoria.setText("")
+        self.label_vtasxcategoria.setScaledContents(True)
+        self.label_vtasxcategoria.setObjectName("label_vtasxcategoria")
+        self.label_vtastotales = QtWidgets.QLabel(self.groupBox_39)
+        self.label_vtastotales.setGeometry(QtCore.QRect(800, 40, 721, 311))
+        self.label_vtastotales.setText("")
+        self.label_vtastotales.setScaledContents(True)
+        self.label_vtastotales.setObjectName("label_vtastotales")
+        self.stackedWidget.addWidget(self.pgPrincipal)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 50, 161, 921))
@@ -9300,9 +10377,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addItem(spacerItem1)
         self.bt_Facturacion = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Facturacion.setText("")
-        icon22 = QtGui.QIcon()
-        icon22.addPixmap(QtGui.QPixmap(":/icons/Icons/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Facturacion.setIcon(icon22)
+        icon21 = QtGui.QIcon()
+        icon21.addPixmap(QtGui.QPixmap(":/icons/Icons/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Facturacion.setIcon(icon21)
         self.bt_Facturacion.setIconSize(QtCore.QSize(70, 70))
         self.bt_Facturacion.setObjectName("bt_Facturacion")
         self.verticalLayout.addWidget(self.bt_Facturacion)
@@ -9327,9 +10404,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_111)
         self.bt_Articulos = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Articulos.setText("")
-        icon23 = QtGui.QIcon()
-        icon23.addPixmap(QtGui.QPixmap(":/icons/Icons/periodico.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Articulos.setIcon(icon23)
+        icon22 = QtGui.QIcon()
+        icon22.addPixmap(QtGui.QPixmap(":/icons/Icons/periodico.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Articulos.setIcon(icon22)
         self.bt_Articulos.setIconSize(QtCore.QSize(70, 70))
         self.bt_Articulos.setObjectName("bt_Articulos")
         self.verticalLayout.addWidget(self.bt_Articulos)
@@ -9354,9 +10431,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_112)
         self.bt_Clientes = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Clientes.setText("")
-        icon24 = QtGui.QIcon()
-        icon24.addPixmap(QtGui.QPixmap(":/icons/Icons/agregar-usuario.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Clientes.setIcon(icon24)
+        icon23 = QtGui.QIcon()
+        icon23.addPixmap(QtGui.QPixmap(":/icons/Icons/agregar-usuario.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Clientes.setIcon(icon23)
         self.bt_Clientes.setIconSize(QtCore.QSize(70, 70))
         self.bt_Clientes.setObjectName("bt_Clientes")
         self.verticalLayout.addWidget(self.bt_Clientes)
@@ -9381,9 +10458,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_113)
         self.bt_Proveedores = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Proveedores.setText("")
-        icon25 = QtGui.QIcon()
-        icon25.addPixmap(QtGui.QPixmap(":/icons/Icons/proveedor.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Proveedores.setIcon(icon25)
+        icon24 = QtGui.QIcon()
+        icon24.addPixmap(QtGui.QPixmap(":/icons/Icons/proveedor.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Proveedores.setIcon(icon24)
         self.bt_Proveedores.setIconSize(QtCore.QSize(70, 70))
         self.bt_Proveedores.setObjectName("bt_Proveedores")
         self.verticalLayout.addWidget(self.bt_Proveedores)
@@ -9433,9 +10510,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_115)
         self.bt_Despacho = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Despacho.setText("")
-        icon26 = QtGui.QIcon()
-        icon26.addPixmap(QtGui.QPixmap(":/icons/Icons/despacho.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Despacho.setIcon(icon26)
+        icon25 = QtGui.QIcon()
+        icon25.addPixmap(QtGui.QPixmap(":/icons/Icons/despacho.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Despacho.setIcon(icon25)
         self.bt_Despacho.setIconSize(QtCore.QSize(70, 70))
         self.bt_Despacho.setObjectName("bt_Despacho")
         self.verticalLayout.addWidget(self.bt_Despacho)
@@ -9460,9 +10537,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_116)
         self.bt_Empresa = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.bt_Empresa.setText("")
-        icon27 = QtGui.QIcon()
-        icon27.addPixmap(QtGui.QPixmap(":/icons/Icons/empresa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Empresa.setIcon(icon27)
+        icon26 = QtGui.QIcon()
+        icon26.addPixmap(QtGui.QPixmap(":/icons/Icons/empresa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Empresa.setIcon(icon26)
         self.bt_Empresa.setIconSize(QtCore.QSize(70, 70))
         self.bt_Empresa.setObjectName("bt_Empresa")
         self.verticalLayout.addWidget(self.bt_Empresa)
@@ -9490,7 +10567,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(11)
+        self.stackedWidget.setCurrentIndex(14)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -10466,6 +11543,56 @@ class Ui_MainWindow(object):
         self.label_382.setText(_translate("MainWindow", "DOCUMENTOS"))
         self.bt_escanear_guia.setText(_translate("MainWindow", " ESCANEAR "))
         self.label_386.setText(_translate("MainWindow", "GUIA"))
+        self.label_387.setText(_translate("MainWindow", "VENTAS DEL DIA"))
+        self.label_388.setText(_translate("MainWindow", "Facturas:"))
+        self.label_389.setText(_translate("MainWindow", "Cobros:"))
+        self.label_390.setText(_translate("MainWindow", "Total:"))
+        self.label_394.setText(_translate("MainWindow", "$"))
+        self.label_395.setText(_translate("MainWindow", "$"))
+        self.label_396.setText(_translate("MainWindow", "$"))
+        self.label_397.setText(_translate("MainWindow", "VENTAS DE LA SEMANA"))
+        self.label_398.setText(_translate("MainWindow", "Facturas:"))
+        self.label_399.setText(_translate("MainWindow", "Cobros:"))
+        self.label_400.setText(_translate("MainWindow", "Total:"))
+        self.label_403.setText(_translate("MainWindow", "$"))
+        self.label_404.setText(_translate("MainWindow", "$"))
+        self.label_405.setText(_translate("MainWindow", "$"))
+        self.label_408.setText(_translate("MainWindow", "VENTAS DEL MES"))
+        self.label_409.setText(_translate("MainWindow", "Facturas:"))
+        self.label_410.setText(_translate("MainWindow", "Cobros:"))
+        self.label_411.setText(_translate("MainWindow", "Total:"))
+        self.label_414.setText(_translate("MainWindow", "$"))
+        self.label_415.setText(_translate("MainWindow", "$"))
+        self.label_416.setText(_translate("MainWindow", "$"))
+        self.label_419.setText(_translate("MainWindow", "FACTURAS DEL DIA"))
+        self.label_420.setText(_translate("MainWindow", "Cantidad:"))
+        self.label_421.setText(_translate("MainWindow", "Presupuestos:"))
+        self.label_422.setText(_translate("MainWindow", "Anulaciones:"))
+        self.label_426.setText(_translate("MainWindow", "CUENTAS CORRIENTES"))
+        self.label_427.setText(_translate("MainWindow", "Saldos:"))
+        self.label_429.setText(_translate("MainWindow", "Cobros:"))
+        self.label_430.setText(_translate("MainWindow", "Total:"))
+        self.label_433.setText(_translate("MainWindow", "$"))
+        self.label_434.setText(_translate("MainWindow", "$"))
+        self.label_435.setText(_translate("MainWindow", "$"))
+        self.label_438.setText(_translate("MainWindow", "PAGOS DE LA SEMANA"))
+        self.label_439.setText(_translate("MainWindow", "Hoy:"))
+        self.label_440.setText(_translate("MainWindow", "Semana:"))
+        self.label_441.setText(_translate("MainWindow", "Total:"))
+        self.label_444.setText(_translate("MainWindow", "$"))
+        self.label_445.setText(_translate("MainWindow", "$"))
+        self.label_446.setText(_translate("MainWindow", "$"))
+        self.label_449.setText(_translate("MainWindow", "PRESUPUESTOS PENDIENTES"))
+        self.label_450.setText(_translate("MainWindow", "Semana:"))
+        self.label_451.setText(_translate("MainWindow", "Mes:"))
+        self.label_452.setText(_translate("MainWindow", "Total:"))
+        self.label_455.setText(_translate("MainWindow", "$"))
+        self.label_456.setText(_translate("MainWindow", "$"))
+        self.label_457.setText(_translate("MainWindow", "$"))
+        self.label_460.setText(_translate("MainWindow", "DESPACHO MERCADERIA"))
+        self.label_461.setText(_translate("MainWindow", "Hoy día:"))
+        self.label_462.setText(_translate("MainWindow", "Semana:"))
+        self.label_465.setText(_translate("MainWindow", "Pendientes:"))
         self.label_111.setText(_translate("MainWindow", "FACTURACION"))
         self.label_112.setText(_translate("MainWindow", "ARTICULOS"))
         self.label_113.setText(_translate("MainWindow", "CLIENTES"))
