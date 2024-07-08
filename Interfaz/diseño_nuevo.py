@@ -9377,6 +9377,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_391.setText("")
+        self.label_391.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_391.setObjectName("label_391")
         self.label_392 = QtWidgets.QLabel(self.groupBox_30)
         self.label_392.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -9390,6 +9391,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_392.setText("")
+        self.label_392.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_392.setObjectName("label_392")
         self.label_394 = QtWidgets.QLabel(self.groupBox_30)
         self.label_394.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -9439,6 +9441,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_393.setText("")
+        self.label_393.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_393.setObjectName("label_393")
         self.groupBox_31 = QtWidgets.QGroupBox(self.groupBox_29)
         self.groupBox_31.setGeometry(QtCore.QRect(780, 20, 361, 171))
@@ -9514,6 +9517,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_401.setText("")
+        self.label_401.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_401.setObjectName("label_401")
         self.label_402 = QtWidgets.QLabel(self.groupBox_31)
         self.label_402.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -9527,6 +9531,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_402.setText("")
+        self.label_402.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_402.setObjectName("label_402")
         self.label_403 = QtWidgets.QLabel(self.groupBox_31)
         self.label_403.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -9576,6 +9581,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_406.setText("")
+        self.label_406.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_406.setObjectName("label_406")
         self.groupBox_32 = QtWidgets.QGroupBox(self.groupBox_29)
         self.groupBox_32.setGeometry(QtCore.QRect(1160, 20, 361, 171))
@@ -9651,6 +9657,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_412.setText("")
+        self.label_412.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_412.setObjectName("label_412")
         self.label_413 = QtWidgets.QLabel(self.groupBox_32)
         self.label_413.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -9664,6 +9671,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_413.setText("")
+        self.label_413.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_413.setObjectName("label_413")
         self.label_414 = QtWidgets.QLabel(self.groupBox_32)
         self.label_414.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -9713,6 +9721,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_417.setText("")
+        self.label_417.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_417.setObjectName("label_417")
         self.groupBox_33 = QtWidgets.QGroupBox(self.groupBox_29)
         self.groupBox_33.setGeometry(QtCore.QRect(20, 20, 361, 171))
@@ -9771,11 +9780,13 @@ class Ui_MainWindow(object):
         font.setFamily("Goldman")
         font.setPointSize(10)
         self.label_423.setFont(font)
+        self.label_423.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.label_423.setStyleSheet("QLabel{\n"
 "background-color:#BF060C26;\n"
 "color:#ffffff\n"
 "}")
         self.label_423.setText("")
+        self.label_423.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_423.setObjectName("label_423")
         self.label_424 = QtWidgets.QLabel(self.groupBox_33)
         self.label_424.setGeometry(QtCore.QRect(200, 90, 151, 30))
@@ -9789,6 +9800,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_424.setText("")
+        self.label_424.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_424.setObjectName("label_424")
         self.label_422 = QtWidgets.QLabel(self.groupBox_33)
         self.label_422.setGeometry(QtCore.QRect(60, 130, 141, 30))
@@ -9814,6 +9826,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_428.setText("")
+        self.label_428.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_428.setObjectName("label_428")
         self.groupBox_34 = QtWidgets.QGroupBox(self.pgPrincipal)
         self.groupBox_34.setGeometry(QtCore.QRect(80, 660, 1541, 221))
@@ -9903,6 +9916,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_431.setText("")
+        self.label_431.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_431.setObjectName("label_431")
         self.label_432 = QtWidgets.QLabel(self.groupBox_35)
         self.label_432.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -9916,6 +9930,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_432.setText("")
+        self.label_432.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_432.setObjectName("label_432")
         self.label_433 = QtWidgets.QLabel(self.groupBox_35)
         self.label_433.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -9965,6 +9980,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_436.setText("")
+        self.label_436.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_436.setObjectName("label_436")
         self.groupBox_36 = QtWidgets.QGroupBox(self.groupBox_34)
         self.groupBox_36.setGeometry(QtCore.QRect(780, 20, 361, 171))
@@ -10040,6 +10056,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_442.setText("")
+        self.label_442.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_442.setObjectName("label_442")
         self.label_443 = QtWidgets.QLabel(self.groupBox_36)
         self.label_443.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -10053,6 +10070,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_443.setText("")
+        self.label_443.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_443.setObjectName("label_443")
         self.label_444 = QtWidgets.QLabel(self.groupBox_36)
         self.label_444.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -10102,6 +10120,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_447.setText("")
+        self.label_447.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_447.setObjectName("label_447")
         self.groupBox_37 = QtWidgets.QGroupBox(self.groupBox_34)
         self.groupBox_37.setGeometry(QtCore.QRect(1160, 20, 361, 171))
@@ -10177,6 +10196,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_453.setText("")
+        self.label_453.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_453.setObjectName("label_453")
         self.label_454 = QtWidgets.QLabel(self.groupBox_37)
         self.label_454.setGeometry(QtCore.QRect(190, 90, 161, 30))
@@ -10190,6 +10210,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_454.setText("")
+        self.label_454.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_454.setObjectName("label_454")
         self.label_455 = QtWidgets.QLabel(self.groupBox_37)
         self.label_455.setGeometry(QtCore.QRect(160, 50, 16, 30))
@@ -10239,6 +10260,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_458.setText("")
+        self.label_458.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_458.setObjectName("label_458")
         self.groupBox_38 = QtWidgets.QGroupBox(self.groupBox_34)
         self.groupBox_38.setGeometry(QtCore.QRect(20, 20, 361, 171))
@@ -10302,6 +10324,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_463.setText("")
+        self.label_463.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_463.setObjectName("label_463")
         self.label_464 = QtWidgets.QLabel(self.groupBox_38)
         self.label_464.setGeometry(QtCore.QRect(200, 90, 151, 30))
@@ -10315,6 +10338,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_464.setText("")
+        self.label_464.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_464.setObjectName("label_464")
         self.label_465 = QtWidgets.QLabel(self.groupBox_38)
         self.label_465.setGeometry(QtCore.QRect(60, 130, 141, 30))
@@ -10340,6 +10364,7 @@ class Ui_MainWindow(object):
 "color:#ffffff\n"
 "}")
         self.label_466.setText("")
+        self.label_466.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_466.setObjectName("label_466")
         self.groupBox_39 = QtWidgets.QGroupBox(self.pgPrincipal)
         self.groupBox_39.setGeometry(QtCore.QRect(70, 260, 1541, 381))
@@ -10365,6 +10390,28 @@ class Ui_MainWindow(object):
         self.label_vtastotales.setText("")
         self.label_vtastotales.setScaledContents(True)
         self.label_vtastotales.setObjectName("label_vtastotales")
+        self.graficoFechas = QtWidgets.QComboBox(self.pgPrincipal)
+        self.graficoFechas.setGeometry(QtCore.QRect(1462, 240, 141, 22))
+        font = QtGui.QFont()
+        font.setFamily("Orbitron")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.graficoFechas.setFont(font)
+        self.graficoFechas.setObjectName("graficoFechas")
+        self.graficoFechas.addItem("")
+        self.graficoFechas.addItem("")
+        self.graficoFechas.addItem("")
+        self.label_467 = QtWidgets.QLabel(self.pgPrincipal)
+        self.label_467.setGeometry(QtCore.QRect(1270, 242, 181, 20))
+        font = QtGui.QFont()
+        font.setFamily("Goldman")
+        font.setPointSize(9)
+        self.label_467.setFont(font)
+        self.label_467.setStyleSheet("QLabel{\n"
+"color: #268fff\n"
+"}")
+        self.label_467.setObjectName("label_467")
         self.stackedWidget.addWidget(self.pgPrincipal)
         self.horizontalLayout_3.addWidget(self.stackedWidget)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -11593,6 +11640,10 @@ class Ui_MainWindow(object):
         self.label_461.setText(_translate("MainWindow", "Hoy día:"))
         self.label_462.setText(_translate("MainWindow", "Semana:"))
         self.label_465.setText(_translate("MainWindow", "Pendientes:"))
+        self.graficoFechas.setItemText(0, _translate("MainWindow", "DIARIO"))
+        self.graficoFechas.setItemText(1, _translate("MainWindow", "SEMANAL"))
+        self.graficoFechas.setItemText(2, _translate("MainWindow", "MENSUAL"))
+        self.label_467.setText(_translate("MainWindow", "Mostrar gráfico como"))
         self.label_111.setText(_translate("MainWindow", "FACTURACION"))
         self.label_112.setText(_translate("MainWindow", "ARTICULOS"))
         self.label_113.setText(_translate("MainWindow", "CLIENTES"))

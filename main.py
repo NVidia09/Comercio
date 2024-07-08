@@ -56,7 +56,7 @@ from Interfaz.ventana_nueva_marca import Ui_ventana_nueva_marca
 from Interfaz.ventana_proveedor import Ui_ventana_proveedores
 from Interfaz.ventana_categoria import Ui_ventana_Categorias
 import locale
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import resources_rc
 
@@ -175,8 +175,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #
         ##################################################################################
         self.stackedWidget.setCurrentIndex(14)
-        self.crear_grafico_ventas()
+        self.crear_grafico_ventas("DIARIO")
+        # self.crear_grafico_ventas()
         self.grafico_ventas_por_categoria()
+        self.graficoFechas.currentIndexChanged.connect(self.graficoFechas_change)
 
         ##################################################################
         ##
@@ -318,6 +320,296 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def pagina_inicio(self):
         self.stackedWidget.setCurrentIndex(14)
+        ######################################################
+        # CANTIDAD DE FACTURAS DEL DIA
+        # 1. Obtener la fecha actual
+        fecha_actual = datetime.now().date()
+
+        # 2. Formatear la fecha actual al formato utilizado en la base de datos (Asumiendo formato YYYY-MM-DD)
+        fecha_formateada = fecha_actual.strftime('%Y-%m-%d')
+
+        # 3. Crear una consulta SQL
+        consulta_sql = f"""
+            SELECT COUNT(*) FROM facturas
+            WHERE fecha = '{fecha_formateada}'
+            """
+
+        # 4. Ejecutar la consulta SQL
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql)
+            resultado = cursor.fetchone()
+
+        # 5. Asignar el resultado de la consulta a la variable facturasDia
+        facturasDia = resultado[0] if resultado else 0
+        self.label_423.setText(str(facturasDia))
+        ###############################################################
+        # CANTIDAD PRESUPUESTOS DEL DIA
+        # 3. Crear una consulta SQL
+        consulta_sql = f"""
+                    SELECT COUNT(*) FROM presupuestos
+                    WHERE fecha = '{fecha_formateada}'
+                    """
+
+        # 4. Ejecutar la consulta SQL
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql)
+            resultado = cursor.fetchone()
+
+        # 5. Asignar el resultado de la consulta a la variable facturasDia
+        presupuestosDia = resultado[0] if resultado else 0
+        self.label_424.setText(str(presupuestosDia))
+
+        ###############################################################
+        #  VENTAS DEL DIA
+        # Crear una consulta SQL para sumar el total facturado del día
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM facturas
+                WHERE fecha = '{fecha_formateada}'
+                """
+
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        totalFacturadoDia = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_391.setText(str(totalFacturadoDia))
+
+        ###############################################################
+        #  COBROS DEL DIA
+        # Crear una consulta SQL para sumar el total facturado del día
+        consulta_sql_total = f"""
+        SELECT SUM(total) FROM caja
+        WHERE fecha = '{fecha_formateada}' AND tipo = 'COBRO'
+        """
+
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        cobrosDia = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_392.setText(str(cobrosDia))
+
+        ###############################################################
+        # TOTAL DEL DIA
+        totalDia = totalFacturadoDia
+        self.label_393.setText(str(totalDia))
+
+        ###############################################################
+        # VENTAS DE LA SEMANA
+        # Crear una consulta SQL para sumar el total facturado de la semana
+        consulta_sql_total = f"""
+        SELECT SUM(total) FROM facturas
+        WHERE fecha BETWEEN '{fecha_actual - timedelta(days=fecha_actual.weekday())}' AND '{fecha_actual + timedelta(days=6 - fecha_actual.weekday())}'
+        """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        facturasSemana = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_401.setText(str(facturasSemana))
+
+        ###############################################################
+        # COBROS DE LA SEMANA
+        # Convertir fecha_actual y fecha_actual - 30 días al formato 'dd/mm/yyyy, hh:mm:ss'
+        fecha_inicio = (fecha_actual - timedelta(days=7)).strftime('%d/%m/%Y, %H:%M:%S')
+        fecha_fin = fecha_actual.strftime('%d/%m/%Y, %H:%M:%S')
+
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM caja
+                WHERE TO_TIMESTAMP(fecha, 'DD/MM/YYYY, HH24:MI:SS') BETWEEN TO_TIMESTAMP('{fecha_inicio}', 'DD/MM/YYYY, HH24:MI:SS') AND TO_TIMESTAMP('{fecha_fin}', 'DD/MM/YYYY, HH24:MI:SS') AND tipo = 'COBRO'
+                """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        cobrosSemana = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_402.setText(str(cobrosSemana))
+
+        ###############################################################
+        # TOTAL DE LA SEMANA
+        totalSemana = facturasSemana
+        self.label_406.setText(str(totalSemana))
+
+        ###############################################################
+        # VENTAS DEL MES
+        # Crear una consulta SQL para sumar el total facturado del mes
+        consulta_sql_total = f"""
+        SELECT SUM(total) FROM facturas
+        WHERE fecha BETWEEN '{(fecha_actual - timedelta(days=30)).strftime('%Y-%m-%d')}' AND '{fecha_actual.strftime('%Y-%m-%d')}'
+        """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado = cursor.fetchone()
+        facturasMes = resultado[0] if resultado and resultado[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_412.setText(str(facturasMes))
+
+        ###############################################################
+        # COBROS DEL MES
+        # Convertir fecha_actual y fecha_actual - 30 días al formato 'dd/mm/yyyy, hh:mm:ss'
+        fecha_inicio = (fecha_actual - timedelta(days=30)).strftime('%d/%m/%Y, %H:%M:%S')
+        fecha_fin = fecha_actual.strftime('%d/%m/%Y, %H:%M:%S')
+
+        consulta_sql_total = f"""
+        SELECT SUM(total) FROM caja
+        WHERE TO_TIMESTAMP(fecha, 'DD/MM/YYYY, HH24:MI:SS') BETWEEN TO_TIMESTAMP('{fecha_inicio}', 'DD/MM/YYYY, HH24:MI:SS') AND TO_TIMESTAMP('{fecha_fin}', 'DD/MM/YYYY, HH24:MI:SS') AND tipo = 'COBRO'
+        """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        cobrosMes = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_413.setText(str(cobrosMes))
+
+        ###############################################################
+        # TOTAL DEL MES
+        totalMes = facturasMes
+        self.label_417.setText(str(totalMes))
+
+        ###############################################################
+        # SALDOS PENDIENTES CUENTAS CORRIENTES
+        consulta_sql_total = f"""
+                        SELECT SUM(saldo) FROM pendientes
+                        WHERE estado = 'PENDIENTE'
+                        """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        saldoCtaCte = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_431.setText(str(saldoCtaCte))
+
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM caja
+                WHERE tipo = 'COBRO'
+                """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        cobrosTotal = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_432.setText(str(cobrosTotal))
+
+        self.label_436.setText(str(saldoCtaCte))
+
+        #######################################################################
+        # RESUMEN DESPACHOS MERCADERIA
+        consulta_sql = f"""
+        SELECT COUNT(DISTINCT codfactura) FROM despacho
+        WHERE fecha = '{fecha_formateada}'
+        """
+
+        # 4. Ejecutar la consulta SQL
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql)
+            resultado = cursor.fetchone()
+
+        # 5. Asignar el resultado de la consulta a la variable facturasDia
+        despachosDia = resultado[0] if resultado else 0
+        self.label_463.setText(str(despachosDia))
+
+        #######################################################################
+        # RESUMEN DESPACHOS MERCADERIA SEMANA
+        fecha_inicio = (fecha_actual - timedelta(days=7)).strftime('%d/%m/%Y, %H:%M:%S')
+        fecha_fin = fecha_actual.strftime('%d/%m/%Y, %H:%M:%S')
+
+        consulta_sql_total = f"""
+                        SELECT COUNT(DISTINCT codfactura) FROM despacho
+                        WHERE TO_TIMESTAMP(fecha, 'DD/MM/YYYY, HH24:MI:SS') BETWEEN TO_TIMESTAMP('{fecha_inicio}', 'DD/MM/YYYY, HH24:MI:SS') AND TO_TIMESTAMP('{fecha_fin}', 'DD/MM/YYYY, HH24:MI:SS')
+                        """
+
+        # 4. Ejecutar la consulta SQL
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado = cursor.fetchone()
+
+        # 5. Asignar el resultado de la consulta a la variable facturasDia
+        despachosSemana = resultado[0] if resultado else 0
+        self.label_464.setText(str(despachosSemana))
+
+        #######################################################################
+        # RESUMEN DESPACHOS PENDIENTES
+        consulta_sql = f"""
+                SELECT COUNT(*) FROM despacho
+                WHERE estado = 'PENDIENTE'
+                """
+
+        # 4. Ejecutar la consulta SQL
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql)
+            resultado = cursor.fetchone()
+
+        # 5. Asignar el resultado de la consulta a la variable facturasDia
+        despachosPendientes = resultado[0] if resultado else 0
+        self.label_466.setText(str(despachosPendientes))
+
+        #######################################################################
+        # PAGOS DEL DIA
+        # Crear una consulta SQL para sumar el total facturado del día
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM caja
+                WHERE fecha = '{fecha_formateada}' AND tipo = 'PAGO'
+                """
+
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        pagoDia = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_442.setText(str(pagoDia))
+
+        ###############################################################
+        # PAGOS DE LA SEMANA
+        # Convertir fecha_actual y fecha_actual - 30 días al formato 'dd/mm/yyyy, hh:mm:ss'
+        fecha_inicio = (fecha_actual - timedelta(days=7)).strftime('%d/%m/%Y, %H:%M:%S')
+        fecha_fin = fecha_actual.strftime('%d/%m/%Y, %H:%M:%S')
+
+        consulta_sql_total = f"""
+                        SELECT SUM(total) FROM caja
+                        WHERE TO_TIMESTAMP(fecha, 'DD/MM/YYYY, HH24:MI:SS') BETWEEN TO_TIMESTAMP('{fecha_inicio}', 'DD/MM/YYYY, HH24:MI:SS') AND TO_TIMESTAMP('{fecha_fin}', 'DD/MM/YYYY, HH24:MI:SS') AND tipo = 'PAGO'
+                        """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        pagoSemana = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_443.setText(str(pagoSemana))
+
+        self.label_447.setText(str(pagoSemana))
+
+        ###############################################################
+        # PRESUPUESTOS DE LA SEMANA
+        # Crear una consulta SQL para sumar el total facturado de la semana
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM presupuestos
+                WHERE fecha BETWEEN '{fecha_actual - timedelta(days=fecha_actual.weekday())}' AND '{fecha_actual + timedelta(days=6 - fecha_actual.weekday())}'
+                """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado_total = cursor.fetchone()
+        presupuestosSemana = resultado_total[0] if resultado_total and resultado_total[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_453.setText(str(presupuestosSemana))
+
+        ###############################################################
+        # PRESUPUESTOS DEL MES
+        # Crear una consulta SQL para sumar el total facturado del mes
+        consulta_sql_total = f"""
+                SELECT SUM(total) FROM presupuestos
+                WHERE fecha BETWEEN '{(fecha_actual - timedelta(days=30)).strftime('%Y-%m-%d')}' AND '{fecha_actual.strftime('%Y-%m-%d')}'
+                """
+        with CursorDelPool() as cursor:
+            cursor.execute(consulta_sql_total)
+            resultado = cursor.fetchone()
+        presupuestosMes = resultado[0] if resultado and resultado[0] is not None else 0
+        # Aquí asumimos que tienes un QLabel para mostrar el total facturado del día
+        self.label_454.setText(str(presupuestosMes))
+
+        self.label_458.setText(str(presupuestosMes))
+
+###############################################################
+    ###############################################################
+    ###############################################################
 
     def listar_articulos(self):
         articulos = ArticuloDAO.seleccionar()
@@ -6282,36 +6574,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dni_captura.capture()
 
 
-    def crear_grafico_ventas(self):
+    def crear_grafico_ventas(self, tipo):
+
         ventas = FacturaDAO.graficoventas()
+        df_ventas = pd.DataFrame(ventas)
+        df_ventas['fecha'] = pd.to_datetime(df_ventas['fecha'])  # Convert 'fecha' to datetime
+        df_ventas['total'] = pd.to_numeric(df_ventas['total'], errors='coerce')  # Ensure 'total' is numeric
 
-        # Crear un diccionario para almacenar los datos
-        datos = {
-            'fecha': [],
-            'total': []
-        }
+        if tipo == "DIARIO":
+            df_agrupado = df_ventas.groupby(df_ventas['fecha'].dt.date)['total'].sum()
+        elif tipo == "SEMANAL":
+            df_agrupado = df_ventas.groupby(df_ventas['fecha'].dt.to_period('W'))['total'].sum()
+        elif tipo == "MENSUAL":
+            df_agrupado = df_ventas.groupby(df_ventas['fecha'].dt.to_period('M'))['total'].sum()
+        elif tipo == "ANUAL":
+            df_agrupado = df_ventas.groupby(df_ventas['fecha'].dt.to_period('Y'))['total'].sum()
 
-        # Llenar el diccionario con los datos de cada factura
-        for factura in ventas:
-            datos['fecha'].append(factura['fecha'])
-            datos['total'].append(factura['total'])
+        # Convert PeriodIndex to DateTimeIndex if necessary
+        if isinstance(df_agrupado.index, pd.PeriodIndex):
+            df_agrupado.index = df_agrupado.index.to_timestamp()
 
-        # Convertir el diccionario en un DataFrame
-        df = pd.DataFrame(datos)
+        # Convert the index to string to avoid plotting issues
+        df_agrupado.index = df_agrupado.index.astype(str)
 
-        # Asegurarse de que la columna fecha es de tipo datetime
-        df['fecha'] = pd.to_datetime(df['fecha'])
-
-        # Agrupar por fecha y sumar los totales
-        ventas_por_dia = df.groupby(df['fecha'].dt.date)['total'].sum()
-        print(ventas_por_dia)
-
-        # Crear el gráfico
-        ventas_por_dia.plot(kind='bar', figsize=(10, 6))
-
-        plt.title('Ventas Totales Distribuidas por Día')
+        plt.figure(figsize=(10, 6))
+        plt.plot(df_agrupado.index, df_agrupado, marker='o')  # Plot using df_agrupado directly if it's a Series
+        plt.title(f'Ventas {tipo}')
         plt.xlabel('Fecha')
-        plt.ylabel('Ventas Totales')
+        plt.ylabel('Ventas')
         plt.xticks(rotation=45)
         plt.tight_layout()
 
@@ -6353,30 +6643,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fig_width_in = label_width_px / dpi
         fig_height_in = label_height_px / dpi
 
-        # Crear el gráfico de barras ajustando el tamaño del gráfico
         plt.figure(figsize=(fig_width_in, fig_height_in))
-        ax = df.plot(kind='bar', x='categoria', y='total_ventas', legend=True)
-        ax.set_title('Ventas Totales por Categoría de Artículo')
-        ax.set_xlabel('Categoría')
-        ax.set_ylabel('Ventas Totales')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
+        df.plot.pie(y='total_ventas', labels=df['categoria'], autopct='%1.1f%%', startangle=140)
+        plt.title('Ventas Totales por Categoría de Artículo')
+        plt.ylabel('')  # Eliminar la etiqueta del eje y
 
-        # Guardar el gráfico como una imagen temporal
-        temp_file_path = tempfile.NamedTemporaryFile(suffix='.png', delete=False).name
-        plt.savefig(temp_file_path)
+        temp_file_path1 = tempfile.NamedTemporaryFile(suffix='.png', delete=False).name
+        plt.savefig(temp_file_path1)
         plt.close()
 
-        # Cargar la imagen en el QLabel
-        pixmap = QPixmap(temp_file_path)
+        pixmap = QPixmap(temp_file_path1)
         self.label_vtasxcategoria.setPixmap(pixmap)
         self.label_vtasxcategoria.setFixedSize(label_width_px, label_height_px)
-
-        # Asegurarse de que el QLabel sea visible
         self.label_vtasxcategoria.show()
-
-        # Actualizar el QLabel
         self.label_vtasxcategoria.update()
+
+    def graficoFechas_change(self):
+        tipo = self.graficoFechas.currentText()
+        self.crear_grafico_ventas(tipo)
+
+
 
 
 

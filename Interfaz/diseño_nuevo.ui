@@ -21406,6 +21406,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_392">
            <property name="geometry">
@@ -21436,6 +21439,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_394">
@@ -21561,6 +21567,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_31">
@@ -21754,6 +21763,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_402">
            <property name="geometry">
@@ -21784,6 +21796,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_403">
@@ -21909,6 +21924,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_32">
@@ -22102,6 +22120,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_413">
            <property name="geometry">
@@ -22132,6 +22153,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_414">
@@ -22257,6 +22281,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_33">
@@ -22410,6 +22437,9 @@ color:#ffffff
              <pointsize>10</pointsize>
             </font>
            </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">QLabel{
 background-color:#BF060C26;
@@ -22418,6 +22448,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_424">
@@ -22449,6 +22482,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_422">
@@ -22512,6 +22548,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </widget>
@@ -22730,6 +22769,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_432">
            <property name="geometry">
@@ -22760,6 +22802,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_433">
@@ -22885,6 +22930,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_36">
@@ -23078,6 +23126,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_443">
            <property name="geometry">
@@ -23108,6 +23159,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_444">
@@ -23233,6 +23287,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_37">
@@ -23426,6 +23483,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_454">
            <property name="geometry">
@@ -23456,6 +23516,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_455">
@@ -23581,6 +23644,9 @@ color:#ffffff
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
          <widget class="QGroupBox" name="groupBox_38">
@@ -23743,6 +23809,9 @@ color:#ffffff
            <property name="text">
             <string/>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
           <widget class="QLabel" name="label_464">
            <property name="geometry">
@@ -23773,6 +23842,9 @@ color:#ffffff
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
           <widget class="QLabel" name="label_465">
@@ -23837,6 +23909,9 @@ color:#ffffff
           <property name="text">
            <string/>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
          </widget>
         </widget>
         <widget class="QGroupBox" name="groupBox_39">
@@ -23895,6 +23970,63 @@ background-color: #FFF2F1FC;
            <bool>true</bool>
           </property>
          </widget>
+        </widget>
+        <widget class="QComboBox" name="graficoFechas">
+         <property name="geometry">
+          <rect>
+           <x>1462</x>
+           <y>240</y>
+           <width>141</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>9</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>DIARIO</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SEMANAL</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>MENSUAL</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="label_467">
+         <property name="geometry">
+          <rect>
+           <x>1270</x>
+           <y>242</y>
+           <width>181</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Goldman</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+color: #268fff
+}</string>
+         </property>
+         <property name="text">
+          <string>Mostrar gráfico como</string>
+         </property>
         </widget>
        </widget>
       </widget>
