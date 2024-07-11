@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icons">
+    <file>Icons/ajustar.png</file>
+    <file>Icons/respaldo.png</file>
     <file>Icons/billete.png</file>
     <file>Icons/pdf.png</file>
     <file>Icons/despacho.png</file>

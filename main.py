@@ -174,6 +174,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #                             PAGINA DE INICIO
         #
         ##################################################################################
+        self.pagina_inicio()
         self.stackedWidget.setCurrentIndex(14)
         self.crear_grafico_ventas("DIARIO")
         # self.crear_grafico_ventas()
@@ -319,7 +320,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def pagina_inicio(self):
-        self.stackedWidget.setCurrentIndex(14)
+
         ######################################################
         # CANTIDAD DE FACTURAS DEL DIA
         # 1. Obtener la fecha actual
@@ -606,6 +607,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label_454.setText(str(presupuestosMes))
 
         self.label_458.setText(str(presupuestosMes))
+
+        self.stackedWidget.setCurrentIndex(14)
 
 ###############################################################
     ###############################################################
