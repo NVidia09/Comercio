@@ -1,16 +1,21 @@
 import base64
 import os
 import shutil
+import subprocess
 import tempfile
+import zipfile
+from distutils.command.build import build
 
 import pandas as pd
 from afip import Afip, afip
 from PyQt5.QtGui import QImage
 from PyQt5.QtCore import Qt, QDate
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QFileDialog
 from PyQt5.uic.properties import QtGui
 from PyQt5 import QtGui
+from credentials import Credentials
+from googleapiclient.http import MediaFileUpload
 from pdfkit import pdfkit
 from reportlab.pdfgen import canvas
 from jinja2 import Environment, FileSystemLoader
@@ -59,6 +64,8 @@ import locale
 from datetime import datetime, timedelta
 
 import resources_rc
+from backup import subir_a_google_drive, comprimir_proyecto, realizar_backup_completo
+from token_drive import SCOPES
 
 # Establecer la localización en español (España)
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -108,6 +115,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # self.bt_grabar_datos_empresa.clicked.connect(self.grabar_datos_empresa)
 
         self.bt_inicio.clicked.connect(self.pagina_inicio)
+        self.bt_Ajustes.clicked.connect(self.modulo_ajustes)
 
         self.bt_Facturacion.clicked.connect(self.modulo_facturacion)
         self.bt_nuevaFactura.clicked.connect(self.nueva_factura)
@@ -182,6 +190,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.graficoFechas.currentIndexChanged.connect(self.graficoFechas_change)
 
         ##################################################################
+        #
+        #                            PAGINA AJUSTES
+        ###################################################################
+        self.bt_BackupArchivosDrive.clicked.connect(self.ejecutar_backup_archivos)
+        self.bt_BackupDirectorioDrive.clicked.connect(self.ejecutar_backup_completo)
+        self.bt_BackupBDDrive.clicked.connect(self.ejecutar_backup_bd)
+
+
+        #####################################################################################
         ##
         ##                     AGREGAR CLIENTE A NUEVA FACTURA
         ##
@@ -6664,6 +6681,72 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def graficoFechas_change(self):
         tipo = self.graficoFechas.currentText()
         self.crear_grafico_ventas(tipo)
+
+    def modulo_ajustes(self):
+        self.stackedWidget.setCurrentIndex(15)
+
+    def ejecutar_backup_archivos(self):
+        ruta_proyecto = self.seleccionar_directorio()
+        if ruta_proyecto:
+            nombre_archivo_zip = 'backup_proyecto.zip'
+            basedir = os.path.dirname(os.path.abspath(__file__))
+            credentials_path = os.path.join(basedir, 'token.json')
+            comprimir_proyecto(ruta_proyecto, nombre_archivo_zip)
+            subir_a_google_drive(nombre_archivo_zip, credentials_path)
+            QMessageBox.information(self, "Backup Exitoso", "El backup fue realizado exitosamente y se ha subido a Google Drive")
+            self.stackedWidget.setCurrentIndex(15)
+
+        else:
+            QMessageBox.information(self, "Backup Cancelado",
+                                    "El backup fue cancelado o no se seleccionó un directorio.")
+            self.stackedWidget.setCurrentIndex(15)
+            # También puedes llamar a mostrar_menu_principal aquí si deseas volver al menú principal incluso cuando se cancela la operación
+        return  # Asegura que la función finaliza aquí
+
+    def seleccionar_directorio(self):
+        directorio_seleccionado = QFileDialog.getExistingDirectory(self, "Seleccionar Directorio para Backup")
+        return directorio_seleccionado
+
+    def ejecutar_backup_completo(self):
+        realizar_backup_completo()
+
+    def ejecutar_backup_bd(self):
+        nombre_db = 'comercio'
+        usuario = 'postgres'
+        password = 'root'  # Considerar usar variables de entorno para manejar contraseñas
+        host = '127.0.0.1'
+        puerto = '5432'
+        # ruta_backup = os.path.join(os.getcwd(), "backup_comercio.sql")
+
+        # Abrir ventana de diálogo para seleccionar dónde guardar el archivo de backup
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar Backup", "", "SQL Files (*.sql);;All Files (*)",
+                                                  options=options)
+        if fileName:
+            ruta_backup = fileName
+        else:
+            return  # Cancelar la operación si el usuario no selecciona un archivo
+
+
+        try:
+            # Establecer la variable de entorno PGPASSWORD
+            os.environ["PGPASSWORD"] = password
+
+            # Construir el comando de backup
+            # comando_backup = f"pg_dump -h {host} -p {puerto} -U {usuario} -F c -b -v -f \"{ruta_backup}\" {nombre_db}"
+            comando_backup = f"\"C:\\Archivos de Programa\\PostgreSQL\\16\\bin\\pg_dump\" -h {host} -p {puerto} -U {usuario} -F c -b -v -f \"{ruta_backup}\" {nombre_db}"
+            # Ejecutar el comando de backup
+            subprocess.run(comando_backup, check=True, shell=True)
+            print(f"Backup realizado con éxito en {ruta_backup}")
+            QMessageBox.information(self, "Backup Exitoso",
+                                    "El backup de la Base de Datos fue realizado exitosamente y se ha guardado en la ruta seleccionada.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error al realizar el backup: {e}")
+        finally:
+            # Eliminar la variable de entorno PGPASSWORD por seguridad
+            del os.environ["PGPASSWORD"]
+
 
 
 
