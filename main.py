@@ -6711,6 +6711,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def ejecutar_backup_completo(self):
         realizar_backup_completo()
+        self.stackedWidget.setCurrentIndex(15)
 
     def ejecutar_backup_bd(self):
         nombre_db = 'comercio'
@@ -6754,6 +6755,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         actualizar = check_for_updates()
         QMessageBox.information(self, "Actualización Exitosa",
                                 "La Actualización fue realizada exitosamente y se ha actualizado el programa a la versión mas reciente.")
+        self.stackedWidget.setCurrentIndex(15)
 
 
 
