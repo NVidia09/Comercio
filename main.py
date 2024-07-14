@@ -66,6 +66,7 @@ from datetime import datetime, timedelta
 import resources_rc
 from backup import subir_a_google_drive, comprimir_proyecto, realizar_backup_completo
 from token_drive import SCOPES
+from update import check_for_updates
 
 # Establecer la localización en español (España)
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -196,6 +197,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.bt_BackupArchivosDrive.clicked.connect(self.ejecutar_backup_archivos)
         self.bt_BackupDirectorioDrive.clicked.connect(self.ejecutar_backup_completo)
         self.bt_BackupBDDrive.clicked.connect(self.ejecutar_backup_bd)
+        self.bt_ActualizarPrograma.clicked.connect(self.actualizar_programa)
 
 
         #####################################################################################
@@ -6746,6 +6748,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         finally:
             # Eliminar la variable de entorno PGPASSWORD por seguridad
             del os.environ["PGPASSWORD"]
+
+
+    def actualizar_programa(self):
+        actualizar = check_for_updates()
+        QMessageBox.information(self, "Actualización Exitosa",
+                                "La Actualización fue realizada exitosamente y se ha actualizado el programa a la versión mas reciente.")
 
 
 

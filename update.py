@@ -3,6 +3,7 @@ import os
 import subprocess
 from datetime import datetime, timedelta
 
+
 # Configuración
 REPO_URL = "https://api.github.com/repos/NVidia09/Comercio/commits"
 LOCAL_VERSION_FILE = "version.txt"
@@ -21,15 +22,15 @@ def check_for_updates():
     if response.status_code == 200:
         latest_commit_date = datetime.strptime(response.json()[0]['commit']['committer']['date'], "%Y-%m-%dT%H:%M:%SZ")
         if latest_commit_date > last_update:
-            print("Hay una nueva actualización disponible.")
-            update_program()
+             print("Hay una nueva actualización disponible.")
+             update_program()
         else:
             print("El programa está actualizado.")
     else:
         print("Error al consultar la API de GitHub.")
 
 def update_program():
-    repo_path = "comercio"  # Asegúrate de que esta sea la ruta correcta del repositorio local
+    repo_path = "_internal"  # Asegúrate de que esta sea la ruta correcta del repositorio local
     if os.path.isdir(repo_path):
         # Actualizar el repositorio existente
         subprocess.run(["git", "-C", repo_path, "pull"], check=True)
@@ -40,6 +41,7 @@ def update_program():
     with open(LOCAL_VERSION_FILE, "w") as file:
         file.write(datetime.now().strftime("%Y-%m-%d"))
     print("El programa ha sido actualizado.")
+    return
 
 if __name__ == "__main__":
     check_for_updates()
