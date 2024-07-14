@@ -6752,7 +6752,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def actualizar_programa(self):
-        actualizar = check_for_updates()
+        check_for_updates()
         QMessageBox.information(self, "Actualización Exitosa",
                                 "La Actualización fue realizada exitosamente y se ha actualizado el programa a la versión mas reciente.")
         self.stackedWidget.setCurrentIndex(15)

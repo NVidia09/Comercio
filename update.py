@@ -1,3 +1,5 @@
+import sys
+
 import requests
 import os
 import subprocess
@@ -29,8 +31,20 @@ def check_for_updates():
     else:
         print("Error al consultar la API de GitHub.")
 
+
+# Determinar si el script se ejecuta como un archivo .py o como un ejecutable .exe
+if getattr(sys, 'frozen', False):
+    # Si se ejecuta como un ejecutable .exe, el directorio base es el directorio del ejecutable
+    basedir = sys._MEIPASS
+else:
+    # Si se ejecuta como un archivo .py, el directorio base es el directorio del script
+    basedir = os.path.dirname(os.path.abspath(__file__))
+
+# Configurar el repo_path para que apunte al subdirectorio _internal dentro del basedir
+repo_path = os.path.join(basedir, "_internal")
+
 def update_program():
-    repo_path = "_internal"  # Asegúrate de que esta sea la ruta correcta del repositorio local
+    # repo_path = "_internal"  # Asegúrate de que esta sea la ruta correcta del repositorio local
     if os.path.isdir(repo_path):
         # Actualizar el repositorio existente
         subprocess.run(["git", "-C", repo_path, "pull"], check=True)
