@@ -32,29 +32,48 @@ def check_for_updates():
         print("Error al consultar la API de GitHub.")
 
 
-# Determinar si el script se ejecuta como un archivo .py o como un ejecutable .exe
-if getattr(sys, 'frozen', False):
-    # Si se ejecuta como un ejecutable .exe, el directorio base es el directorio del ejecutable
-    basedir = sys._MEIPASS
-else:
-    # Si se ejecuta como un archivo .py, el directorio base es el directorio del script
-    basedir = os.path.dirname(os.path.abspath(__file__))
-
-# Configurar el repo_path para que apunte al subdirectorio _internal dentro del basedir
-repo_path = os.path.join(basedir, "_internal")
+# # Determinar si el script se ejecuta como un archivo .py o como un ejecutable .exe
+# if getattr(sys, 'frozen', False):
+#     # Si se ejecuta como un ejecutable .exe, el directorio base es el directorio del ejecutable
+#     basedir = sys._MEIPASS
+# else:
+#     # Si se ejecuta como un archivo .py, el directorio base es el directorio del script
+#     basedir = os.path.dirname(os.path.abspath(__file__))
+#
+# # Configurar el repo_path para que apunte al subdirectorio _internal dentro del basedir
+# repo_path = os.path.join(basedir, "_internal")
 
 def update_program():
-    # repo_path = "_internal"  # Asegúrate de que esta sea la ruta correcta del repositorio local
-    if os.path.isdir(repo_path):
-        # Actualizar el repositorio existente
-        subprocess.run(["git", "-C", repo_path, "pull"], check=True)
+    # Determinar si el script se ejecuta como un archivo .py o como un ejecutable .exe
+    if getattr(sys, 'frozen', False):
+        basedir = sys._MEIPASS
     else:
-        # Clonar el repositorio porque no existe localmente
-        subprocess.run(GIT_CLONE_COMMAND, shell=True, check=True)
-    # Actualizar la fecha de la última actualización en el archivo de versión
+        basedir = os.path.dirname(os.path.abspath(__file__))
+
+    repo_path = os.path.join(basedir, "_internal")
+
+    if not os.path.isdir(repo_path):
+        os.makedirs(repo_path)
+
+    current_dir = os.getcwd()
+    os.chdir(repo_path)
+
+    try:
+        if os.path.isdir(".git"):
+            # Actualizar el repositorio existente
+            subprocess.run(["git", "pull"], check=True)
+        else:
+            # Clonar el repositorio porque no existe localmente, sin crear un subdirectorio adicional
+            subprocess.run(["git", "clone", GIT_CLONE_COMMAND.split()[-1], "."], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error al actualizar el repositorio: {e}")
+    finally:
+        os.chdir(current_dir)
+
     with open(LOCAL_VERSION_FILE, "w") as file:
         file.write(datetime.now().strftime("%Y-%m-%d"))
     print("El programa ha sido actualizado.")
+
     return
 
 if __name__ == "__main__":
