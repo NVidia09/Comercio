@@ -50,7 +50,11 @@ def update_program():
     else:
         basedir = os.path.dirname(os.path.abspath(__file__))
 
-    repo_path = os.path.join(basedir, "_internal")
+    # Verificar si basedir ya termina con "_internal"
+    if basedir.endswith("_internal"):
+        repo_path = basedir
+    else:
+        repo_path = os.path.join(basedir, "_internal")
 
     if not os.path.isdir(repo_path):
         os.makedirs(repo_path)
