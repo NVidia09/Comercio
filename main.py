@@ -1,4 +1,5 @@
 import base64
+import logging
 import os
 import shutil
 import subprocess
@@ -4862,8 +4863,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         presupuesto_json = presupuesto.__dict__
 
         # Guardar las facturas en un archivo JSON
-        with open('negocio/presupuestos.json', 'w') as f:
-            json.dump(presupuesto_json, f)
+        # with open('negocio/presupuestos.json', 'w') as f:
+        #     json.dump(presupuesto_json, f)
         ###########################################################################################
 
         # Obtener los detalles de la factura
@@ -4925,32 +4926,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         detalles_presupuesto = detallePresupuestoDAO.busca_detalle_lista(codpresupuesto)
 
+        logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
         # # Obtén el directorio base donde se encuentra el archivo main.py
         # basedir = os.path.dirname(__file__)
         # ruta_directorio_presupuestos = os.path.join(basedir, 'Presupuestos')
+
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        ruta_directorio_presupuestos = os.path.join(application_path, 'Presupuestos')
+
+
         # Crear el directorio si no existe
-        # if not os.path.exists(ruta_directorio_presupuestos):
-        #     os.makedirs(ruta_directorio_presupuestos)
-        # # Crea la ruta al archivo modelo_presupuesto.html en el directorio Presupuestos/
-        # #template_path = os.path.join(basedir, 'Presupuestos', 'modelo_presupuesto.html')
-        # ruta_plantilla_presupuesto = os.path.join(ruta_directorio_presupuestos, "modelo_presupuesto.html")
+        if not os.path.exists(ruta_directorio_presupuestos):
+             os.makedirs(ruta_directorio_presupuestos)
 
+        try:
+            # Carga la plantilla
+            logging.info('Inicio del programa')
+            env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+            template = env.get_template('modelo_presupuesto.html')
+            logging.info('carga plantilla correctamente')
 
-        # Carga la plantilla
-        # env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
-        # template = env.get_template(ruta_plantilla_presupuesto)
-        basedir = os.path.dirname(__file__)
-
-        subdirectorio = os.path.join(basedir, "Presupuestos")
-        if not os.path.exists(subdirectorio):
-            os.mkdir(subdirectorio)
-
-        # Cargar la plantilla
-        env = Environment(loader=FileSystemLoader(subdirectorio))
-        template = env.get_template('modelo_presupuesto.html')
-
-        # Llenar la plantilla con los datos de la factura
-        presupuesto_html = template.render(nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+            # Llenar la plantilla con los datos de la factura
+            presupuesto_html = template.render(nombrefantasia=fantasia_empresa, razonsocial=razon_social,
                                         codpresupuesto=codpresupuesto, fecha=fecha, cuit=cuit_empresa,
                                         iibb=iibb_empresa, inicioactividades=inicio_actividades,
                                         domicilio=direccion_completa_empresa, categoria=categoria_iva,
@@ -4959,14 +4961,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                         formapago=condicion_vta, detalles_factura=detalles_presupuesto, subtotal=subtotal_presupuesto, iva=iva,
                                         total=total)  # Agrega más campos según sea necesario
 
+            logging.info('Llenado de plantilla correctamente')
+
+        except Exception as e:
+            logging.exception("Error inesperado: " + str(e))
+            # Opcionalmente, puedes imprimir el error si la consola está habilitada
+            print("Error inesperado:", e)
+
         # Guardar el resultado en un nuevo archivo HTML
-        with open(os.path.join(subdirectorio, 'presupuesto.html'), 'w', encoding='utf-8') as f:
-            f.write(presupuesto_html)
+        # html_file_path = os.path.join(base_path, 'Presupuestos', 'presupuesto.html')
+        html_file_path = os.path.join(ruta_directorio_presupuestos, 'presupuesto.html')
+
+        try:
+            with open(html_file_path, 'w', encoding='utf-8') as f:
+                f.write(presupuesto_html)  # Write the HTML content to the file
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open(os.path.join(subdirectorio, 'presupuesto.html')).read()
+        # html_file_path = os.path.join(base_path, 'Presupuestos', 'presupuesto.html')
+                html = open(html_file_path).read()
+                logging.info('Lecturas correctas')
+        except Exception as e:
+            logging.exception("Error inesperado: " + str(e))
+            # Opcionalmente, puedes imprimir el error si la consola está habilitada
+            print("Error inesperado:", e)
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -4992,12 +5011,41 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
-        # Crear el nombre del archivo
-        nombre_archivo = os.path.join(subdirectorio,f'presupuesto_{codpresupuesto}.pdf')
+        # ## Ruta del archivo HTML generado
+        html_file_path = os.path.join(ruta_directorio_presupuestos, 'presupuesto.html')
+        # ## Ruta donde se guardará el PDF
+        output_pdf_path = os.path.join(ruta_directorio_presupuestos, f'presupuesto_{codpresupuesto}.pdf')
+        #
+        # ## Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = self.get_wkhtmltopdf_path()
+        # ## config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+        #
+        # ## Intentar convertir HTML a PDF y guardar
+        # ## pdfkit.from_file(html_file_path, output_pdf_path, configuration=config)
+        try:
+             pdfkit.from_file(html_file_path, output_pdf_path, configuration=config)
+             QMessageBox.information(self, "Presupuesto Guardado",
+                                     f"El presupuesto {codpresupuesto} ha sido guardado correctamente en PDF.")
+        except Exception as e:
+             QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar el presupuesto: {e}")
+             print(f"Error al convertir HTML a PDF: {e}")
 
-        # Crear el PDF
-        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file(os.path.join(subdirectorio,'presupuesto.html'), nombre_archivo, options=options, configuration=config)
+        # Asegúrate de que la ruta al archivo HTML es correcta
+        # html_file_path = os.path.join(ruta_directorio_presupuestos, 'presupuesto.html')
+        # pdf_file_path = os.path.join(ruta_directorio_presupuestos, 'presupuesto.pdf')
+
+        # try:
+        #     # Opción para especificar la ruta de wkhtmltopdf si no está en el PATH
+        #     # config = pdfkit.configuration(wkhtmltopdf='/path/to/wkhtmltopdf')
+        #
+        #     # Generar el PDF a partir del HTML
+        #     pdfkit.from_file(html_file_path, pdf_file_path)
+        #
+        #     logging.info('PDF generado correctamente en: ' + pdf_file_path)
+        # except Exception as e:
+        #     logging.exception("Error al generar el PDF: " + str(e))
+
 
         self.lineEdit_clienteNvoPresupuesto.clear()
         self.lineEdit_domclienteNvoPresupuesto.clear()
@@ -5498,161 +5546,161 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                  domicilio_cliente, condicion_vta, estado, subtotal, iva, total, formapago, alicuota_iva,
                  detalles_factura):
 
-        # afip = Afip({"CUIT": 20409378472})
-        afip = Afip({
-            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
-            "CUIT": 20409378472  # Replace with your CUIT
-        })
-
-        # Numero del punto de venta
-        punto_de_venta = serie
-
-        # Tipo de factura
-        tipo_de_factura = 1  # 1 = Factura A
-
-        # Número de la ultima Factura A
-        last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
-
-        # Concepto de la factura
+        # # afip = Afip({"CUIT": 20409378472})
+        # afip = Afip({
+        #     "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+        #     "CUIT": 20409378472  # Replace with your CUIT
+        # })
         #
-        # Opciones:
+        # # Numero del punto de venta
+        # punto_de_venta = serie
         #
-        # 1 = Productos
-        # 2 = Servicios
-        # 3 = Productos y Servicios
-        concepto = 1
-
-        # Tipo de documento del comprador
+        # # Tipo de factura
+        # tipo_de_factura = 1  # 1 = Factura A
         #
-        # Opciones:
+        # # Número de la ultima Factura A
+        # last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
         #
-        # 80 = CUIT
-        # 86 = CUIL
-        # 96 = DNI
-        # 99 = Consumidor Final
-        tipo_de_documento = 80
-
-        # Numero de documento del comprador (0 para consumidor final)
-        numero_de_documento = 20300247947
-
-        # Numero de factura
-        numero_de_factura = last_voucher + 1
-
-        # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
-        fecha = int(datetime.today().strftime("%Y%m%d"))
-
-        # Importe sujeto al IVA (sin incluir IVA)
-        # importe_gravado = 100
-        importe_gravado = float(subtotal)
-
-        # Importe exento al IVA
-        importe_exento_iva = 0
-
-        # Importe de IVA
-        # importe_iva = 21
-        importe_iva = float(alicuota_iva)
-
-        # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
-        if concepto == 2 or concepto == 3:
-            # Fecha de inicio de servicio en formato aaaammdd
-            fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de fin de servicio en formato aaaammdd
-            fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de vencimiento del pago en formato aaaammdd
-            fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
-        else:
-            fecha_servicio_desde = None
-            fecha_servicio_hasta = None
-            fecha_vencimiento_pago = None
-
-        # calcular alicuota IVA
-        if alicuota_iva == 21.0:
-            id_iva = 5
-            porcentaje_iva = 0.21
-        else:
-            alicuota_iva == 10.5
-            id_iva = 4
-            porcentaje_iva = 0.105
-
-        data = {
-            "CantReg": 1,  # Cantidad de facturas a registrar
-            "PtoVta": punto_de_venta,
-            "CbteTipo": tipo_de_factura,
-            "Concepto": concepto,
-            "DocTipo": tipo_de_documento,
-            "DocNro": numero_de_documento,
-            "CbteDesde": numero_de_factura,
-            "CbteHasta": numero_de_factura,
-            "CbteFch": fecha,
-            "FchServDesde": fecha_servicio_desde,
-            "FchServHasta": fecha_servicio_hasta,
-            "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
-            "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(subtotal), 2),
-            "ImpOpEx": importe_exento_iva,
-            "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
-            "ImpTrib": 0,  # Importe total de tributos
-            "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
-            "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
-            "Iva": [  # Alícuotas asociadas al factura
-                {
-                    "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
-                    "BaseImp": round(float(subtotal), 2),  # Taxable base
-                    "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
-                }
-            ]
-        }
-
-        # Creamos la Factura
-        res = afip.ElectronicBilling.createVoucher(data)
-
-        # Mostramos por pantalla los datos de la nueva Factura
-        print({
-            "cae": res["CAE"],  # CAE asignado a la Factura
-            "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
-        })
-
-        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
-
-        print("Esta es la información del comprobante:")
-        print(voucher_info)
-
-        # Crear el diccionario con los datos requeridos
-        qr_data = {
-            "ver": 1,
-            "fecha": fecha,  # Asegúrate de que esta variable esté en el formato correcto
-            "cuit": cuit_empresa,  # Asegúrate de que esta variable esté en el formato correcto
-            "ptoVta": serie,  # Asegúrate de que esta variable esté en el formato correcto
-            "tipoCmp": tipo_de_factura,  # Asegúrate de que esta variable esté en el formato correcto
-            "nroCmp": codfactura,  # Asegúrate de que esta variable esté en el formato correcto
-            "importe": total,  # Asegúrate de que esta variable esté en el formato correcto
-            "moneda": "PES",  # Asegúrate de que esta variable esté en el formato correcto
-            "ctz": 1,  # Asegúrate de que esta variable esté en el formato correcto
-            "tipoDocRec": 80,  # Asegúrate de que esta variable esté en el formato correcto
-            "nroDocRec": numero_de_documento,  # Asegúrate de que esta variable esté en el formato correcto
-            "tipoCodAut": "E",  # Asegúrate de que esta variable esté en el formato correcto
-            "codAut": res["CAE"]  # Asegúrate de que esta variable esté en el formato correcto
-        }
-
-        # Convertir el diccionario a un string JSON
-        qr_json = json.dumps(qr_data)
-
-        # Codificar el string JSON en base64
-        qr_base64 = base64.b64encode(qr_json.encode()).decode()
-        qr_generado = f'https://www.afip.gob.ar/fe/qr/?p={qr_base64}'
-
-        print(qr_base64)
-        import segno
-        qrcode = segno.make(qr_generado)
-        qrcode.save('qr.png')
-        # Añadir la ruta de la imagen del código QR a los datos de la factura
-        qr_code_image = 'qr.png'
-
-        cae = res["CAE"]
-        venc_cae = res["CAEFchVto"]
+        # # Concepto de la factura
+        # #
+        # # Opciones:
+        # #
+        # # 1 = Productos
+        # # 2 = Servicios
+        # # 3 = Productos y Servicios
+        # concepto = 1
+        #
+        # # Tipo de documento del comprador
+        # #
+        # # Opciones:
+        # #
+        # # 80 = CUIT
+        # # 86 = CUIL
+        # # 96 = DNI
+        # # 99 = Consumidor Final
+        # tipo_de_documento = 80
+        #
+        # # Numero de documento del comprador (0 para consumidor final)
+        # numero_de_documento = 20300247947
+        #
+        # # Numero de factura
+        # numero_de_factura = last_voucher + 1
+        #
+        # # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
+        # fecha = int(datetime.today().strftime("%Y%m%d"))
+        #
+        # # Importe sujeto al IVA (sin incluir IVA)
+        # # importe_gravado = 100
+        # importe_gravado = float(subtotal)
+        #
+        # # Importe exento al IVA
+        # importe_exento_iva = 0
+        #
+        # # Importe de IVA
+        # # importe_iva = 21
+        # importe_iva = float(alicuota_iva)
+        #
+        # # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
+        # if concepto == 2 or concepto == 3:
+        #     # Fecha de inicio de servicio en formato aaaammdd
+        #     fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de fin de servicio en formato aaaammdd
+        #     fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de vencimiento del pago en formato aaaammdd
+        #     fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
+        # else:
+        #     fecha_servicio_desde = None
+        #     fecha_servicio_hasta = None
+        #     fecha_vencimiento_pago = None
+        #
+        # # calcular alicuota IVA
+        # if alicuota_iva == 21.0:
+        #     id_iva = 5
+        #     porcentaje_iva = 0.21
+        # else:
+        #     alicuota_iva == 10.5
+        #     id_iva = 4
+        #     porcentaje_iva = 0.105
+        #
+        # data = {
+        #     "CantReg": 1,  # Cantidad de facturas a registrar
+        #     "PtoVta": punto_de_venta,
+        #     "CbteTipo": tipo_de_factura,
+        #     "Concepto": concepto,
+        #     "DocTipo": tipo_de_documento,
+        #     "DocNro": numero_de_documento,
+        #     "CbteDesde": numero_de_factura,
+        #     "CbteHasta": numero_de_factura,
+        #     "CbteFch": fecha,
+        #     "FchServDesde": fecha_servicio_desde,
+        #     "FchServHasta": fecha_servicio_hasta,
+        #     "FchVtoPago": fecha_vencimiento_pago,
+        #     "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
+        #     "ImpTotConc": 0,  # Importe neto no gravado
+        #     "ImpNeto": round(float(subtotal), 2),
+        #     "ImpOpEx": importe_exento_iva,
+        #     "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
+        #     "ImpTrib": 0,  # Importe total de tributos
+        #     "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
+        #     "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
+        #     "Iva": [  # Alícuotas asociadas al factura
+        #         {
+        #             "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
+        #             "BaseImp": round(float(subtotal), 2),  # Taxable base
+        #             "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
+        #         }
+        #     ]
+        # }
+        #
+        # # Creamos la Factura
+        # res = afip.ElectronicBilling.createVoucher(data)
+        #
+        # # Mostramos por pantalla los datos de la nueva Factura
+        # print({
+        #     "cae": res["CAE"],  # CAE asignado a la Factura
+        #     "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
+        # })
+        #
+        # voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+        #
+        # print("Esta es la información del comprobante:")
+        # print(voucher_info)
+        #
+        # # Crear el diccionario con los datos requeridos
+        # qr_data = {
+        #     "ver": 1,
+        #     "fecha": fecha,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "cuit": cuit_empresa,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "ptoVta": serie,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "tipoCmp": tipo_de_factura,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "nroCmp": codfactura,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "importe": total,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "moneda": "PES",  # Asegúrate de que esta variable esté en el formato correcto
+        #     "ctz": 1,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "tipoDocRec": 80,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "nroDocRec": numero_de_documento,  # Asegúrate de que esta variable esté en el formato correcto
+        #     "tipoCodAut": "E",  # Asegúrate de que esta variable esté en el formato correcto
+        #     "codAut": res["CAE"]  # Asegúrate de que esta variable esté en el formato correcto
+        # }
+        #
+        # # Convertir el diccionario a un string JSON
+        # qr_json = json.dumps(qr_data)
+        #
+        # # Codificar el string JSON en base64
+        # qr_base64 = base64.b64encode(qr_json.encode()).decode()
+        # qr_generado = f'https://www.afip.gob.ar/fe/qr/?p={qr_base64}'
+        #
+        # print(qr_base64)
+        # import segno
+        # qrcode = segno.make(qr_generado)
+        # qrcode.save('qr.png')
+        # # Añadir la ruta de la imagen del código QR a los datos de la factura
+        # qr_code_image = 'qr.png'
+        #
+        # cae = res["CAE"]
+        # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template('./Facturas/bill.html')
@@ -5724,129 +5772,129 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                  detalles_factura):
 
         # afip = Afip({"CUIT": 20409378472})
-        afip = Afip({
-            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
-            "CUIT": 20409378472  # Replace with your CUIT
-        })
-
-        # Numero del punto de venta
-        punto_de_venta = 1
-
-        # Tipo de factura
-        tipo_de_factura = 6  # 6 = Factura B
-
-        # Número de la ultima Factura B
-        last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
-
-        # Concepto de la factura
+        # afip = Afip({
+        #     "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+        #     "CUIT": 20409378472  # Replace with your CUIT
+        # })
         #
-        # Opciones:
+        # # Numero del punto de venta
+        # punto_de_venta = 1
         #
-        # 1 = Productos
-        # 2 = Servicios
-        # 3 = Productos y Servicios
-        concepto = 1
-
-        # Tipo de documento del comprador
+        # # Tipo de factura
+        # tipo_de_factura = 6  # 6 = Factura B
         #
-        # Opciones:
+        # # Número de la ultima Factura B
+        # last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
         #
-        # 80 = CUIT
-        # 86 = CUIL
-        # 96 = DNI
-        # 99 = Consumidor Final
-        tipo_de_documento = 80
-
-        # Numero de documento del comprador (0 para consumidor final)
-        numero_de_documento = 20300247947
-
-        # Numero de factura
-        numero_de_factura = last_voucher + 1
-
-        # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
-        fecha = int(datetime.today().strftime("%Y%m%d"))
-
-        # Importe sujeto al IVA (sin incluir IVA)
-        # importe_gravado = 100
-        importe_gravado = float(subtotal)
-
-        # Importe exento al IVA
-        importe_exento_iva = 0
-
-        # Importe de IVA
-        # importe_iva = 21
-        importe_iva = float(alicuota_iva)
-
-        # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
-        if concepto == 2 or concepto == 3:
-            # Fecha de inicio de servicio en formato aaaammdd
-            fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de fin de servicio en formato aaaammdd
-            fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de vencimiento del pago en formato aaaammdd
-            fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
-        else:
-            fecha_servicio_desde = None
-            fecha_servicio_hasta = None
-            fecha_vencimiento_pago = None
-
-        # calcular alicuota IVA
-        if alicuota_iva == 21.0:
-            id_iva = 5
-            porcentaje_iva = 0.21
-        else:
-            alicuota_iva == 10.5
-            id_iva = 4
-            porcentaje_iva = 0.105
-
-        data = {
-            "CantReg": 1,  # Cantidad de facturas a registrar
-            "PtoVta": punto_de_venta,
-            "CbteTipo": tipo_de_factura,
-            "Concepto": concepto,
-            "DocTipo": tipo_de_documento,
-            "DocNro": numero_de_documento,
-            "CbteDesde": numero_de_factura,
-            "CbteHasta": numero_de_factura,
-            "CbteFch": fecha,
-            "FchServDesde": fecha_servicio_desde,
-            "FchServHasta": fecha_servicio_hasta,
-            "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
-            "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(subtotal), 2),
-            "ImpOpEx": importe_exento_iva,
-            "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
-            "ImpTrib": 0,  # Importe total de tributos
-            "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
-            "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
-            "Iva": [  # Alícuotas asociadas al factura
-                {
-                    "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
-                    "BaseImp": round(float(subtotal), 2),  # Taxable base
-                    "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
-                }
-            ]
-        }
-
-        # Creamos la Factura
-        res = afip.ElectronicBilling.createVoucher(data)
-
-        # Mostramos por pantalla los datos de la nueva Factura
-        print({
-            "cae": res["CAE"],  # CAE asignado a la Factura
-            "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
-        })
-
-        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
-
-        print("Esta es la información del comprobante:")
-        print(voucher_info)
-
-        cae = res["CAE"]
-        venc_cae = res["CAEFchVto"]
+        # # Concepto de la factura
+        # #
+        # # Opciones:
+        # #
+        # # 1 = Productos
+        # # 2 = Servicios
+        # # 3 = Productos y Servicios
+        # concepto = 1
+        #
+        # # Tipo de documento del comprador
+        # #
+        # # Opciones:
+        # #
+        # # 80 = CUIT
+        # # 86 = CUIL
+        # # 96 = DNI
+        # # 99 = Consumidor Final
+        # tipo_de_documento = 80
+        #
+        # # Numero de documento del comprador (0 para consumidor final)
+        # numero_de_documento = 20300247947
+        #
+        # # Numero de factura
+        # numero_de_factura = last_voucher + 1
+        #
+        # # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
+        # fecha = int(datetime.today().strftime("%Y%m%d"))
+        #
+        # # Importe sujeto al IVA (sin incluir IVA)
+        # # importe_gravado = 100
+        # importe_gravado = float(subtotal)
+        #
+        # # Importe exento al IVA
+        # importe_exento_iva = 0
+        #
+        # # Importe de IVA
+        # # importe_iva = 21
+        # importe_iva = float(alicuota_iva)
+        #
+        # # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
+        # if concepto == 2 or concepto == 3:
+        #     # Fecha de inicio de servicio en formato aaaammdd
+        #     fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de fin de servicio en formato aaaammdd
+        #     fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de vencimiento del pago en formato aaaammdd
+        #     fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
+        # else:
+        #     fecha_servicio_desde = None
+        #     fecha_servicio_hasta = None
+        #     fecha_vencimiento_pago = None
+        #
+        # # calcular alicuota IVA
+        # if alicuota_iva == 21.0:
+        #     id_iva = 5
+        #     porcentaje_iva = 0.21
+        # else:
+        #     alicuota_iva == 10.5
+        #     id_iva = 4
+        #     porcentaje_iva = 0.105
+        #
+        # data = {
+        #     "CantReg": 1,  # Cantidad de facturas a registrar
+        #     "PtoVta": punto_de_venta,
+        #     "CbteTipo": tipo_de_factura,
+        #     "Concepto": concepto,
+        #     "DocTipo": tipo_de_documento,
+        #     "DocNro": numero_de_documento,
+        #     "CbteDesde": numero_de_factura,
+        #     "CbteHasta": numero_de_factura,
+        #     "CbteFch": fecha,
+        #     "FchServDesde": fecha_servicio_desde,
+        #     "FchServHasta": fecha_servicio_hasta,
+        #     "FchVtoPago": fecha_vencimiento_pago,
+        #     "ImpTotal": round(round(float(subtotal), 2) + round(float(subtotal) * porcentaje_iva, 2), 2),
+        #     "ImpTotConc": 0,  # Importe neto no gravado
+        #     "ImpNeto": round(float(subtotal), 2),
+        #     "ImpOpEx": importe_exento_iva,
+        #     "ImpIVA": round(float(subtotal) * porcentaje_iva, 2),  # Importe total de IVA,
+        #     "ImpTrib": 0,  # Importe total de tributos
+        #     "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
+        #     "MonCotiz": 1,  # Cotización de la moneda usada (1 para pesos argentinos)
+        #     "Iva": [  # Alícuotas asociadas al factura
+        #         {
+        #             "Id": id_iva,  # Id del tipo de IVA (5 = 21%)
+        #             "BaseImp": round(float(subtotal), 2),  # Taxable base
+        #             "Importe": round(float(subtotal) * porcentaje_iva, 2)  # Importe
+        #         }
+        #     ]
+        # }
+        #
+        # # Creamos la Factura
+        # res = afip.ElectronicBilling.createVoucher(data)
+        #
+        # # Mostramos por pantalla los datos de la nueva Factura
+        # print({
+        #     "cae": res["CAE"],  # CAE asignado a la Factura
+        #     "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
+        # })
+        #
+        # voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+        #
+        # print("Esta es la información del comprobante:")
+        # print(voucher_info)
+        #
+        # cae = res["CAE"]
+        # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template('./Facturas/bill.html')
@@ -5917,122 +5965,122 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                  detalles_factura):
 
         # afip = Afip({"CUIT": 20409378472})
-        afip = Afip({
-            "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
-            "CUIT": 20409378472  # Replace with your CUIT
-        })
-
-        # Numero del punto de venta
-        punto_de_venta = 1
-
-        # Tipo de factura
-        tipo_de_factura = 11  # 11 = Factura C
-
-        # Número de la ultima Factura B
-        last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
-
-        # Concepto de la factura
+        # afip = Afip({
+        #     "access_token": "e3CBc6TtcOYTPYLBPdke6bilMiqrjIE5xc9PNsxxryHU9NtomipEZD32LC9XznWI",
+        #     "CUIT": 20409378472  # Replace with your CUIT
+        # })
         #
-        # Opciones:
+        # # Numero del punto de venta
+        # punto_de_venta = 1
         #
-        # 1 = Productos
-        # 2 = Servicios
-        # 3 = Productos y Servicios
-        concepto = 1
-
-        # Tipo de documento del comprador
+        # # Tipo de factura
+        # tipo_de_factura = 11  # 11 = Factura C
         #
-        # Opciones:
+        # # Número de la ultima Factura B
+        # last_voucher = afip.ElectronicBilling.getLastVoucher(punto_de_venta, tipo_de_factura)
         #
-        # 80 = CUIT
-        # 86 = CUIL
-        # 96 = DNI
-        # 99 = Consumidor Final
-        tipo_de_documento = 99
-
-        # Numero de documento del comprador (0 para consumidor final)
-        numero_de_documento = 0
-
-        # Numero de factura
-        numero_de_factura = last_voucher + 1
-
-        # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
-        fecha = int(datetime.today().strftime("%Y%m%d"))
-
-        # Importe sujeto al IVA (sin incluir IVA)
-        # importe_gravado = 100
-        importe_gravado = float(subtotal)
-
-        # Importe exento al IVA
-        importe_exento_iva = 0
-
-        # Importe de IVA
-        # importe_iva = 21
-        importe_iva = float(alicuota_iva)
-
-        # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
-        if concepto == 2 or concepto == 3:
-            # Fecha de inicio de servicio en formato aaaammdd
-            fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de fin de servicio en formato aaaammdd
-            fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
-
-            # Fecha de vencimiento del pago en formato aaaammdd
-            fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
-        else:
-            fecha_servicio_desde = None
-            fecha_servicio_hasta = None
-            fecha_vencimiento_pago = None
-
-        # calcular alicuota IVA
-        if alicuota_iva == 21.0:
-            id_iva = 5
-            porcentaje_iva = 0.21
-        else:
-            alicuota_iva == 10.5
-            id_iva = 4
-            porcentaje_iva = 0.105
-
-        data = {
-            "CantReg": 1,  # Cantidad de facturas a registrar
-            "PtoVta": punto_de_venta,
-            "CbteTipo": tipo_de_factura,
-            "Concepto": concepto,
-            "DocTipo": tipo_de_documento,
-            "DocNro": numero_de_documento,
-            "CbteDesde": numero_de_factura,
-            "CbteHasta": numero_de_factura,
-            "CbteFch": fecha,
-            "FchServDesde": fecha_servicio_desde,
-            "FchServHasta": fecha_servicio_hasta,
-            "FchVtoPago": fecha_vencimiento_pago,
-            "ImpTotal": round(float(total), 2),
-            "ImpTotConc": 0,  # Importe neto no gravado
-            "ImpNeto": round(float(total), 2),
-            "ImpOpEx": 0,
-            "ImpIVA": 0,
-            "ImpTrib": 0,  # Importe total de tributos
-            "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
-            "MonCotiz": 1  # Cotización de la moneda usada (1 para pesos argentinos)
-        }
-
-        # Creamos la Factura
-        res = afip.ElectronicBilling.createVoucher(data)
-
-        # Mostramos por pantalla los datos de la nueva Factura
-        print({
-            "cae": res["CAE"],  # CAE asignado a la Factura
-            "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
-        })
-
-        voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
-
-        print("Esta es la información del comprobante:")
-        print(voucher_info)
-
-        cae = res["CAE"]
-        venc_cae = res["CAEFchVto"]
+        # # Concepto de la factura
+        # #
+        # # Opciones:
+        # #
+        # # 1 = Productos
+        # # 2 = Servicios
+        # # 3 = Productos y Servicios
+        # concepto = 1
+        #
+        # # Tipo de documento del comprador
+        # #
+        # # Opciones:
+        # #
+        # # 80 = CUIT
+        # # 86 = CUIL
+        # # 96 = DNI
+        # # 99 = Consumidor Final
+        # tipo_de_documento = 99
+        #
+        # # Numero de documento del comprador (0 para consumidor final)
+        # numero_de_documento = 0
+        #
+        # # Numero de factura
+        # numero_de_factura = last_voucher + 1
+        #
+        # # Fecha de la factura en formato aaaammdd (hasta 10 dias antes y 10 dias despues)
+        # fecha = int(datetime.today().strftime("%Y%m%d"))
+        #
+        # # Importe sujeto al IVA (sin incluir IVA)
+        # # importe_gravado = 100
+        # importe_gravado = float(subtotal)
+        #
+        # # Importe exento al IVA
+        # importe_exento_iva = 0
+        #
+        # # Importe de IVA
+        # # importe_iva = 21
+        # importe_iva = float(alicuota_iva)
+        #
+        # # Los siguientes campos solo son obligatorios para los conceptos 2 y 3
+        # if concepto == 2 or concepto == 3:
+        #     # Fecha de inicio de servicio en formato aaaammdd
+        #     fecha_servicio_desde = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de fin de servicio en formato aaaammdd
+        #     fecha_servicio_hasta = int(datetime.today().strftime("%Y%m%d"))
+        #
+        #     # Fecha de vencimiento del pago en formato aaaammdd
+        #     fecha_vencimiento_pago = int(datetime.today().strftime("%Y%m%d"))
+        # else:
+        #     fecha_servicio_desde = None
+        #     fecha_servicio_hasta = None
+        #     fecha_vencimiento_pago = None
+        #
+        # # calcular alicuota IVA
+        # if alicuota_iva == 21.0:
+        #     id_iva = 5
+        #     porcentaje_iva = 0.21
+        # else:
+        #     alicuota_iva == 10.5
+        #     id_iva = 4
+        #     porcentaje_iva = 0.105
+        #
+        # data = {
+        #     "CantReg": 1,  # Cantidad de facturas a registrar
+        #     "PtoVta": punto_de_venta,
+        #     "CbteTipo": tipo_de_factura,
+        #     "Concepto": concepto,
+        #     "DocTipo": tipo_de_documento,
+        #     "DocNro": numero_de_documento,
+        #     "CbteDesde": numero_de_factura,
+        #     "CbteHasta": numero_de_factura,
+        #     "CbteFch": fecha,
+        #     "FchServDesde": fecha_servicio_desde,
+        #     "FchServHasta": fecha_servicio_hasta,
+        #     "FchVtoPago": fecha_vencimiento_pago,
+        #     "ImpTotal": round(float(total), 2),
+        #     "ImpTotConc": 0,  # Importe neto no gravado
+        #     "ImpNeto": round(float(total), 2),
+        #     "ImpOpEx": 0,
+        #     "ImpIVA": 0,
+        #     "ImpTrib": 0,  # Importe total de tributos
+        #     "MonId": "PES",  # Tipo de moneda usada en la factura ("PES" = pesos argentinos)
+        #     "MonCotiz": 1  # Cotización de la moneda usada (1 para pesos argentinos)
+        # }
+        #
+        # # Creamos la Factura
+        # res = afip.ElectronicBilling.createVoucher(data)
+        #
+        # # Mostramos por pantalla los datos de la nueva Factura
+        # print({
+        #     "cae": res["CAE"],  # CAE asignado a la Factura
+        #     "vencimiento": res["CAEFchVto"]  # Fecha de vencimiento del CAE
+        # })
+        #
+        # voucher_info = afip.ElectronicBilling.getVoucherInfo(numero_de_factura, punto_de_venta, tipo_de_factura)
+        #
+        # print("Esta es la información del comprobante:")
+        # print(voucher_info)
+        #
+        # cae = res["CAE"]
+        # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template('./Facturas/bill.html')
@@ -6303,7 +6351,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_fechaentregada_3.setReadOnly(True)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_frente.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                f'Despacho/FacturaN-{codfactura}_frente.png')
+            logo_pixmap = QPixmap(logo_pixmap_path)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
@@ -6312,7 +6367,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_dni_frente.setPixmap(logo_pixmap)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path1 = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_dorso.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path1 = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                f'Despacho/FacturaN-{codfactura}_dorso.png')
+            logo_pixmap1 = QPixmap(logo_pixmap_path1)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
@@ -6352,7 +6414,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_fechaentregada_3.setReadOnly(False)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_frente.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                f'Despacho/FacturaN-{codfactura}_frente.png')
+            logo_pixmap = QPixmap(logo_pixmap_path)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
@@ -6361,7 +6430,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_dni_frente.setPixmap(logo_pixmap)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path1 = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_dorso.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path1 = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                 f'Despacho/FacturaN-{codfactura}_dorso.png')
+            logo_pixmap1 = QPixmap(logo_pixmap_path1)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
@@ -6376,7 +6452,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.lineEdit_fechaentregada_3.setReadOnly(False)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap = QPixmap(f'Despacho/FacturaN-{codfactura}_frente.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_frente.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                f'Despacho/FacturaN-{codfactura}_frente.png')
+            logo_pixmap = QPixmap(logo_pixmap_path)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap = logo_pixmap.scaled(self.label_dni_frente.size(), Qt.KeepAspectRatio)
@@ -6385,7 +6468,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_dni_frente.setPixmap(logo_pixmap)
 
             # Crear un QPixmap con la ruta de la imagen
-            logo_pixmap1 = QPixmap(f'Despacho/FacturaN-{codfactura}_dorso.png')
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                logo_pixmap_path1 = os.path.join(sys._MEIPASS, f'Despacho/FacturaN-{codfactura}_dorso.png')
+            else:
+                # Ejecutado como un archivo .py
+                logo_pixmap_path1 = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                 f'Despacho/FacturaN-{codfactura}_dorso.png')
+            logo_pixmap1 = QPixmap(logo_pixmap_path1)
 
             # Asegúrate de que la imagen se ajuste al tamaño de la QLabel redimensionándola
             logo_pixmap1 = logo_pixmap1.scaled(self.label_dni_dorso.size(), Qt.KeepAspectRatio)
@@ -6756,6 +6846,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QMessageBox.information(self, "Actualización Exitosa",
                                 "La Actualización fue realizada exitosamente y se ha actualizado el programa a la versión mas reciente.")
         self.stackedWidget.setCurrentIndex(15)
+
+    def get_wkhtmltopdf_path(self):
+        # if getattr(sys, 'frozen', False):
+        #     # If the application is run as a bundle, the PyInstaller bootloader
+        #     # extends the sys module by a flag frozen=True and sets the app
+        #     # path into variable _MEIPASS'.
+        #     base_path = sys._MEIPASS
+        # else:
+        #     # If running in a development environment, specify the path to
+        #     # wkhtmltopdf executable directly. Adjust the path as necessary.
+        #     base_path = r'C:\Program Files\wkhtmltopdf\bin'
+        # return os.path.join(base_path, 'wkhtmltopdf.exe')
+
+        if getattr(sys, 'frozen', False):
+            # If the application is run as a bundle, the PyInstaller bootloader
+            # extends the sys module by a flag frozen=True and sets the app
+            # path into variable _MEIPASS'.
+            base_path = sys._MEIPASS
+            wkhtmltopdf_path = os.path.join(base_path, 'bin', 'wkhtmltopdf.exe')
+        else:
+            # If running in a development environment, specify the path to
+            # wkhtmltopdf executable directly. Adjust the path as necessary.
+            wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        return wkhtmltopdf_path
+
+    import os
+
+    def asegurar_permisos_directorio(self, directorio):
+        # Verificar si el directorio existe
+        if not os.path.exists(directorio):
+            # Crear el directorio y establecer permisos de escritura/lectura/ejecución para el propietario
+            # y de lectura/ejecución para el grupo y otros (755 en octal)
+            os.makedirs(directorio, exist_ok=True)
+            os.chmod(directorio, 0o777)  # Usar 0o777 si realmente necesitas permisos totales
 
 
 

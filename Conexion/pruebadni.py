@@ -1,3 +1,6 @@
+import os
+import sys
+
 import cv2
 import pygame
 
@@ -34,6 +37,21 @@ class DNI_captura:
 
             cv2.putText(frame, "PRESIONE 'c' PARA CAPTURAR", (200, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+            # Definir la ruta base dependiendo de si se ejecuta como .exe o .py
+            if getattr(sys, 'frozen', False):
+                # Ejecutado como un archivo .exe
+                basedir = sys._MEIPASS
+            else:
+                # Ejecutado como un archivo .py
+                basedir = os.path.dirname(os.path.abspath(__file__))
+
+            # Construir la ruta al directorio Despacho
+            despacho_dir = os.path.join(basedir, "Despacho")
+
+            # Asegurarse de que el directorio Despacho existe
+            if not os.path.exists(despacho_dir):
+                os.makedirs(despacho_dir)
+
             cv2.imshow('scanner', frame)
 
             key = cv2.waitKey(1) & 0xFF
@@ -41,9 +59,16 @@ class DNI_captura:
             if key in [ord('c'), ord('C')] and photo_count < 2:
                 photo_count += 1
                 if photo_count == 1:
-                    cv2.imwrite(f"Despacho/FacturaN-{self.codfactura}_frente.png", frame)
+                    # cv2.imwrite(f"Despacho/FacturaN-{self.codfactura}_frente.png", frame)
+                    file_path = os.path.join(despacho_dir,
+                                             f"FacturaN-{self.codfactura}_frente.png")
+                    cv2.imwrite(file_path, frame)
                 else:
-                    cv2.imwrite(f"Despacho/FacturaN-{self.codfactura}_dorso.png", frame)
+                    file_path = os.path.join(
+                        despacho_dir, f"FacturaN-{self.codfactura}_dorso.png")
+                    cv2.imwrite(file_path, frame)
+                # else:
+                #     cv2.imwrite(f"Despacho/FacturaN-{self.codfactura}_dorso.png", frame)
                 self.play_sound()
 
             elif key in [ord('q'), ord('Q')] or photo_count == 2:
