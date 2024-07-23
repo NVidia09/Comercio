@@ -5702,27 +5702,63 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # cae = res["CAE"]
         # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
-        env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('./Facturas/bill.html')
 
-        # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+        # if getattr(sys, 'frozen', False):
+        #     application_path = sys._MEIPASS
+        # else:
+        #     application_path = os.path.dirname(os.path.abspath(__file__))
+        #
+        # ruta_directorio_facturas = os.path.join(application_path, 'Facturas')
+        #
+        # # Crear el directorio si no existe
+        # if not os.path.exists(ruta_directorio_facturas):
+        #     os.makedirs(ruta_directorio_facturas)
+
+        basedir = os.path.dirname(__file__)
+
+        subdirectorio = os.path.join(basedir, "Facturas")
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        try:
+            # Carga la plantilla
+            logging.info('Inicio del programa')
+            env = Environment(loader=FileSystemLoader(subdirectorio))
+            template = env.get_template('bill.html')
+            logging.info('carga plantilla correctamente')
+
+            # env = Environment(loader=FileSystemLoader('.'))
+            # template = env.get_template('./Facturas/bill.html')
+
+            # Llenar la plantilla con los datos de la factura
+            factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
                                        serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
                                        iibb=iibb_empresa, inicioactividades=inicio_actividades,
                                        domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
                                        cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
-                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
+                                       formapago=condicion_vta, cae=0, vto_cae=0,
                                        detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
                                        total=total)  # Agrega más campos según sea necesario
 
+            logging.info('Llenado de plantilla correctamente')
+
+        except Exception as e:
+            logging.exception("Error inesperado: " + str(e))
+            # Opcionalmente, puedes imprimir el error si la consola está habilitada
+            print("Error inesperado:", e)
+
         # Guardar el resultado en un nuevo archivo HTML
-        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
+        html = ''
+        html_file_path = os.path.join(subdirectorio, 'factura.html')
+        with open(os.path.join(subdirectorio, 'factura.html'), 'w', encoding='utf-8') as f:
             f.write(factura_html)
+            f.close()
+            # html = f.read(
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./Facturas/factura.html").read()
+        html = open(os.path.join(subdirectorio, 'factura.html')).read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5758,12 +5794,39 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
-        # Crear el nombre del archivo
-        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
 
-        # Crear el PDF
-        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
+
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Facturas")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                      False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,
+                         configuration=config)
+            QMessageBox.information(self, "Factura Guardada",
+                                    f"La Factura {codfactura} ha sido guardada correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
 
 
     def facturaB(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
@@ -5896,27 +5959,54 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # cae = res["CAE"]
         # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
-        env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('./Facturas/bill.html')
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
 
-        # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
-                                       serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
-                                       iibb=iibb_empresa, inicioactividades=inicio_actividades,
-                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
-                                       cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
-                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
-                                       detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
-                                       total=total)  # Agrega más campos según sea necesario
+        ruta_directorio_facturas = os.path.join(application_path, 'Facturas')
+
+        # Crear el directorio si no existe
+        if not os.path.exists(ruta_directorio_facturas):
+            os.makedirs(ruta_directorio_facturas)
+
+        try:
+            # Carga la plantilla
+            logging.info('Inicio del programa')
+            env = Environment(loader=FileSystemLoader(ruta_directorio_facturas))
+            template = env.get_template('bill.html')
+            logging.info('carga plantilla correctamente')
+
+            # env = Environment(loader=FileSystemLoader('.'))
+            # template = env.get_template('./Facturas/bill.html')
+
+            # Llenar la plantilla con los datos de la factura
+            factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                           serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
+                                           iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                           domicilio=domicilio_empresa, categoria=categoria_iva,
+                                           cuit_cliente=cuit_cliente,
+                                           cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                           formapago=condicion_vta, cae=0, vto_cae=0,
+                                           detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
+                                           total=total)  # Agrega más campos según sea necesario
+
+            logging.info('Llenado de plantilla correctamente')
+
+        except Exception as e:
+            logging.exception("Error inesperado: " + str(e))
+            # Opcionalmente, puedes imprimir el error si la consola está habilitada
+            print("Error inesperado:", e)
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
+        html_file_path = os.path.join(ruta_directorio_facturas, 'factura.html')
+        with open(html_file_path, 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./Facturas/factura.html").read()
+        html = open(html_file_path).read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -5952,12 +6042,38 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
-        # Crear el nombre del archivo
-        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
 
-        # Crear el PDF
-        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Facturas")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                      False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options, configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,
+                         configuration=config)
+            QMessageBox.information(self, "Factura Guardada",
+                                    f"La Factura {codfactura} ha sido guardada correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
 
     def facturaC(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
                  inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
@@ -6082,27 +6198,54 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # cae = res["CAE"]
         # venc_cae = res["CAEFchVto"]
         # Cargar la plantilla
-        env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('./Facturas/bill.html')
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
 
-        # Llenar la plantilla con los datos de la factura
-        factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
-                                       serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
-                                       iibb=iibb_empresa, inicioactividades=inicio_actividades,
-                                       domicilio=domicilio_empresa, categoria=categoria_iva, cuit_cliente=cuit_cliente,
-                                       cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
-                                       formapago=condicion_vta, cae=cae, vto_cae=venc_cae,
-                                       detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
-                                       total=total)  # Agrega más campos según sea necesario
+        ruta_directorio_facturas = os.path.join(application_path, 'Facturas')
+
+        # Crear el directorio si no existe
+        if not os.path.exists(ruta_directorio_facturas):
+            os.makedirs(ruta_directorio_facturas)
+
+        try:
+            # Carga la plantilla
+            logging.info('Inicio del programa')
+            env = Environment(loader=FileSystemLoader(ruta_directorio_facturas))
+            template = env.get_template('bill.html')
+            logging.info('carga plantilla correctamente')
+
+            # env = Environment(loader=FileSystemLoader('.'))
+            # template = env.get_template('./Facturas/bill.html')
+
+            # Llenar la plantilla con los datos de la factura
+            factura_html = template.render(tipo_factura=tipo, nombrefantasia=fantasia_empresa, razonsocial=razon_social,
+                                           serie=serie, codfactura=codfactura, fecha=fecha, cuit=cuit_empresa,
+                                           iibb=iibb_empresa, inicioactividades=inicio_actividades,
+                                           domicilio=domicilio_empresa, categoria=categoria_iva,
+                                           cuit_cliente=cuit_cliente,
+                                           cliente=cliente, condiva=condicion_iva, direccion=domicilio_cliente,
+                                           formapago=condicion_vta, cae=0, vto_cae=0,
+                                           detalles_factura=detalles_factura, subtotal=subtotal, iva=iva,
+                                           total=total)  # Agrega más campos según sea necesario
+
+            logging.info('Llenado de plantilla correctamente')
+
+        except Exception as e:
+            logging.exception("Error inesperado: " + str(e))
+            # Opcionalmente, puedes imprimir el error si la consola está habilitada
+            print("Error inesperado:", e)
 
         # Guardar el resultado en un nuevo archivo HTML
-        with open('./Facturas/factura.html', 'w', encoding='utf-8') as f:
+        html_file_path = os.path.join(ruta_directorio_facturas, 'factura.html')
+        with open(html_file_path, 'w', encoding='utf-8') as f:
             f.write(factura_html)
 
         # Descargamos el HTML de ejemplo (ver mas arriba)
         # y lo guardamos como bill.html
         # html = open("./bill.html").read()
-        html = open("./Facturas/factura.html").read()
+        html = open(html_file_path).read()
 
         # Nombre para el archivo (sin .pdf)
         name = "PDF de prueba"
@@ -6138,13 +6281,37 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         }
         import pdfkit
 
-        # Crear el nombre del archivo
-        nombre_archivo = f'./Facturas/factura_{codfactura}_{fecha}.pdf'
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
 
-        # Crear el PDF
-        config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-        pdfkit.from_file('./Facturas/factura.html', nombre_archivo, options=options, configuration=config)
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Facturas")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
 
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                      False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,
+                         configuration=config)
+            QMessageBox.information(self, "Factura Guardada",
+                                    f"La Factura {codfactura} ha sido guardada correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
 
     def cliente_afip(self):
 
