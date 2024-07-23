@@ -5809,8 +5809,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if not os.path.exists(subdirectorio):
             os.mkdir(subdirectorio)
 
+        fecha_str = fecha
+
+        # Conviertes el string a un objeto datetime
+        fecha_datetime = datetime.strptime(fecha_str, "%d/%m/%Y, %H:%M:%S")
+
+        # Formateas el objeto datetime a yyyymmdd
+        fecha_formateada = fecha_datetime.strftime("%Y%m%d")
+
+
+
         # Construye la ruta completa al archivo PDF que se va a generar
-        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}_{fecha_formateada}.pdf')
+
+
 
         # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
         wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
@@ -5827,6 +5839,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
             print(f"Error al convertir HTML a PDF: {e}")
+        self.stackedWidget.setCurrentIndex(0)
 
 
     def facturaB(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
@@ -6056,8 +6069,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if not os.path.exists(subdirectorio):
             os.mkdir(subdirectorio)
 
+        fecha_str = fecha
+
+        # Conviertes el string a un objeto datetime
+        fecha_datetime = datetime.strptime(fecha_str, "%d/%m/%Y, %H:%M:%S")
+
+        # Formateas el objeto datetime a yyyymmdd
+        fecha_formateada = fecha_datetime.strftime("%Y%m%d")
+
         # Construye la ruta completa al archivo PDF que se va a generar
-        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}_{fecha_formateada}.pdf')
 
         # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
         wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
@@ -6074,6 +6095,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
             print(f"Error al convertir HTML a PDF: {e}")
+
+        self.stackedWidget.setCurrentIndex(0)
 
     def facturaC(self, tipo, fantasia_empresa, razon_social, serie, codfactura, fecha, cuit_empresa, iibb_empresa,
                  inicio_actividades, domicilio_empresa, categoria_iva, cuit_cliente, codcliente, cliente, condicion_iva,
@@ -6295,8 +6318,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if not os.path.exists(subdirectorio):
             os.mkdir(subdirectorio)
 
+        fecha_str = fecha
+
+        # Conviertes el string a un objeto datetime
+        fecha_datetime = datetime.strptime(fecha_str, "%d/%m/%Y, %H:%M:%S")
+
+        # Formateas el objeto datetime a yyyymmdd
+        fecha_formateada = fecha_datetime.strftime("%Y%m%d")
+
         # Construye la ruta completa al archivo PDF que se va a generar
-        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}.pdf')
+        nombre_archivo = os.path.join(subdirectorio, f'factura_{codfactura}_{fecha_formateada}.pdf')
 
         # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
         wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
@@ -6312,6 +6343,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar la factura: {e}")
             print(f"Error al convertir HTML a PDF: {e}")
+
+        self.stackedWidget.setCurrentIndex(0)
 
     def cliente_afip(self):
 
