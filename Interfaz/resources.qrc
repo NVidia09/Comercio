@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>Icons/investigacion.png</file>
     <file>Icons/flecha.png</file>
     <file>Icons/ajustar.png</file>
     <file>Icons/respaldo.png</file>

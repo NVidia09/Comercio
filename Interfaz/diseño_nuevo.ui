@@ -243,7 +243,7 @@ background-color:#ffffff;
 </string>
        </property>
        <property name="currentIndex">
-        <number>15</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="pgFacturacion">
         <widget class="QGroupBox" name="groupBox">
@@ -311,7 +311,7 @@ border-radius: 5px;
            </size>
           </property>
          </widget>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pb_moduloReportes">
           <property name="geometry">
            <rect>
             <x>380</x>
@@ -9064,7 +9064,7 @@ color:#ffffff
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>no-disponible.png</pixmap>
+          <pixmap>../.designer/backup/no-disponible.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -17977,7 +17977,7 @@ color:#ffffff
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>no-disponible.png</pixmap>
+          <pixmap>../.designer/backup/no-disponible.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -24530,6 +24530,1817 @@ background-color: #FFF2F1FC;
          </property>
         </widget>
        </widget>
+       <widget class="QWidget" name="pgReportes">
+        <widget class="QLabel" name="label_474">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>301</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>15</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+color: #268fff
+}</string>
+         </property>
+         <property name="text">
+          <string>Reportes Generales</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>90</y>
+           <width>1111</width>
+           <height>291</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QGroupBox" name="groupBox_42">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>1091</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_476">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_477">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>20</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS POR DIA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_480">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>60</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS POR PERIODO</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_481">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>100</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS POR CLIENTE</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_482">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>180</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS POR N° CUIT</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_483">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>140</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS ENTRE CLIENTES</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_484">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>220</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>FACTURAS POR IMPORTE</string>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_reportexfecha">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>20</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_rptefactdesdefecha">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>60</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_rptefacthastafecha">
+           <property name="geometry">
+            <rect>
+             <x>680</x>
+             <y>60</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_485">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>60</y>
+             <width>81</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESDE:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_486">
+           <property name="geometry">
+            <rect>
+             <x>600</x>
+             <y>60</y>
+             <width>71</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>HASTA:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_487">
+           <property name="geometry">
+            <rect>
+             <x>650</x>
+             <y>220</y>
+             <width>71</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>HASTA:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_488">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>220</y>
+             <width>91</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESDE $:</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptefactdesdeimporte">
+           <property name="geometry">
+            <rect>
+             <x>460</x>
+             <y>220</y>
+             <width>181</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptefacthastaimporte">
+           <property name="geometry">
+            <rect>
+             <x>730</x>
+             <y>220</y>
+             <width>181</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptefactxcuitcliente">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>180</y>
+             <width>231</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptexcliente">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>100</y>
+             <width>341</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_facturasentreimportes">
+           <property name="geometry">
+            <rect>
+             <x>920</x>
+             <y>218</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_facturasxcuit">
+           <property name="geometry">
+            <rect>
+             <x>600</x>
+             <y>178</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_facturasentrefechas">
+           <property name="geometry">
+            <rect>
+             <x>830</x>
+             <y>58</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptefactdesdecliente">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>140</y>
+             <width>211</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_489">
+           <property name="geometry">
+            <rect>
+             <x>700</x>
+             <y>140</y>
+             <width>71</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>HASTA:</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_rptefacthastacliente">
+           <property name="geometry">
+            <rect>
+             <x>780</x>
+             <y>140</y>
+             <width>211</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_490">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>140</y>
+             <width>81</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESDE:</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_facturasentreclientes">
+           <property name="geometry">
+            <rect>
+             <x>1030</x>
+             <y>138</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="bt_MarcaNvoArticulo_2">
+           <property name="geometry">
+            <rect>
+             <x>660</x>
+             <y>140</y>
+             <width>30</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>38</width>
+             <height>38</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="bt_MarcaNvoArticulo_3">
+           <property name="geometry">
+            <rect>
+             <x>990</x>
+             <y>140</y>
+             <width>30</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>38</width>
+             <height>38</height>
+            </size>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QLabel" name="label_478">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>70</y>
+           <width>301</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>15</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+color: #268fff
+}</string>
+         </property>
+         <property name="text">
+          <string>Buscar Facturas</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pb_facturasxdia">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>118</y>
+           <width>41</width>
+           <height>33</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_479">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>400</y>
+           <width>301</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Orbitron</family>
+           <pointsize>15</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{
+color: #268fff
+}</string>
+         </property>
+         <property name="text">
+          <string>Buscar Despachos</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_9">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>422</y>
+           <width>1111</width>
+           <height>261</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QGroupBox{
+color: #000 ;
+text-align: center;
+padding: 5px;
+margin: 3px;
+border-radius: 5px;
+font-size: 14px;
+background-color: #FFF2F1FC; 
+
+}</string>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QGroupBox" name="groupBox_43">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>1091</width>
+            <height>231</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QGroupBox{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <widget class="QLabel" name="label_491">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>41</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">:/icons/Icons/billete.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_492">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>20</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHOS POR DIA</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_493">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>60</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHOS POR PERIODO</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_494">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>100</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHOS POR CLIENTE</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_495">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>180</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHOS POR N° CUIT</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_496">
+           <property name="geometry">
+            <rect>
+             <x>60</x>
+             <y>140</y>
+             <width>291</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESPACHOS ENTRE CLIENTES</string>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_fechavencimientoFactura_7">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>20</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_fechavencimientoFactura_8">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>60</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QDateEdit" name="dateEdit_fechavencimientoFactura_9">
+           <property name="geometry">
+            <rect>
+             <x>680</x>
+             <y>60</y>
+             <width>141</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="timeSpec">
+            <enum>Qt::LocalTime</enum>
+           </property>
+           <property name="date">
+            <date>
+             <year>2024</year>
+             <month>5</month>
+             <day>25</day>
+            </date>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_498">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>60</y>
+             <width>81</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESDE:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_499">
+           <property name="geometry">
+            <rect>
+             <x>600</x>
+             <y>60</y>
+             <width>71</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>HASTA:</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_10">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>180</y>
+             <width>231</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_11">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>100</y>
+             <width>341</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_13">
+           <property name="geometry">
+            <rect>
+             <x>600</x>
+             <y>178</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="geometry">
+            <rect>
+             <x>830</x>
+             <y>58</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_12">
+           <property name="geometry">
+            <rect>
+             <x>450</x>
+             <y>140</y>
+             <width>211</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_502">
+           <property name="geometry">
+            <rect>
+             <x>700</x>
+             <y>140</y>
+             <width>71</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>HASTA:</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_13">
+           <property name="geometry">
+            <rect>
+             <x>780</x>
+             <y>140</y>
+             <width>211</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_503">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>140</y>
+             <width>81</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Goldman</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QLabel{
+background-color:#BF060C26;
+color:#ffffff
+}</string>
+           </property>
+           <property name="text">
+            <string>DESDE:</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_15">
+           <property name="geometry">
+            <rect>
+             <x>1030</x>
+             <y>138</y>
+             <width>41</width>
+             <height>33</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>33</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="bt_MarcaNvoArticulo_4">
+           <property name="geometry">
+            <rect>
+             <x>660</x>
+             <y>140</y>
+             <width>30</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>38</width>
+             <height>38</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="bt_MarcaNvoArticulo_5">
+           <property name="geometry">
+            <rect>
+             <x>990</x>
+             <y>140</y>
+             <width>30</width>
+             <height>30</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+             <normaloff>:/icons/Icons/elipsis.png</normaloff>:/icons/Icons/elipsis.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>38</width>
+             <height>38</height>
+            </size>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="pushButton_16">
+         <property name="geometry">
+          <rect>
+           <x>640</x>
+           <y>450</y>
+           <width>41</width>
+           <height>33</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
+           <normaloff>:/icons/Icons/investigacion.png</normaloff>:/icons/Icons/investigacion.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>
@@ -24564,7 +26375,7 @@ background-color: #FFF2F1FC;
        </property>
        <property name="icon">
         <iconset resource="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc">
-         <normaloff>:/icons/Icons/logo.png</normaloff>:/icons/Icons/logo.png</iconset>
+         <normaloff>:/icons/Icons/articulos-de-compra.png</normaloff>:/icons/Icons/articulos-de-compra.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -24898,6 +26709,7 @@ color:#000000
  </widget>
  <resources>
   <include location="../../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc"/>
+  <include location="../../Cursos/Python/Cursos/Comercio/Comercio/Interfaz/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

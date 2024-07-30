@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Facturas</title>
+</head>
+<body>
+    <div style="display: flex; align-items: center;">
+        <img src="{{ logo_path }}" alt="Logo" style="height: 150px; margin-right: 20px;">
+        <div>
+            <h1>{{ fantasia_empresa }}</h1>
+            <p>{{ razon_social }}</p>
+            <p>CUIT: {{ cuit_empresa }}</p>
+            <p>IIBB: {{ iibb_empresa }}</p>
+            <p>Inicio de Actividades: {{ inicio_actividades }}</p>
+            <p>Domicilio: {{ domicilio_empresa }}</p>
+            <p>Categoría IVA: {{ categoria_iva }}</p>
+        </div>
+    </div>
+    <h2>Fecha: {{ fecha_actual }}</h2>
+    <h3>Reportes entre {{ fechainicio }} y {{ fechafin }}</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Serie</th>
+                <th>Código de Factura</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Importe</th>
+                <th>IVA</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.serie }}</td>
+                <td>{{ factura.codfactura }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.cliente }}</td>
+                <td>{{ factura.importe }}</td>
+                <td>{{ factura.iva }}</td>
+                <td>{{ factura.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
