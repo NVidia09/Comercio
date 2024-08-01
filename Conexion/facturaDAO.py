@@ -15,6 +15,8 @@ class FacturaDAO:
     _BUSCA_FACT_PENDIENTE = "SELECT * FROM facturas WHERE entrega = 'ENVIO' ORDER BY codfactura DESC"
     _BUSCA_FACT_COBRAR = "SELECT * FROM facturas WHERE formapago = %s AND formapago = %s ORDER BY codfactura DESC"
     _COBRAR_FACT_CLIENTE = "SELECT * FROM facturas WHERE estado = 'PENDIENTE' AND serie = %s AND codfactura = %s AND codcliente = %s ORDER BY codfactura DESC"
+    _REPORTE_FACTURAS_X_CUIT_CLIENTE = "SELECT * FROM facturas WHERE codcliente = %s ORDER BY codfactura DESC"
+
 
     @classmethod
     def seleccionar(cls):
@@ -195,6 +197,115 @@ class FacturaDAO:
             for registro in registros:
                 factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
                                   registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                factura = {
+                    'serie': factura.serie,
+                    'codfactura': factura.codfactura,
+                    'fecha': factura.fecha,
+                    'cliente': factura.cliente,
+                    'importe': factura.subtotal,
+                    'iva': factura.iva,
+                    'total': factura.total,
+                }
+                facturas.append(factura)
+            return facturas
+
+    @classmethod
+    def reporte_facturas_de_fecha(cls, fechainicio):
+        with CursorDelPool() as cursor:
+            query = "SELECT * FROM facturas WHERE fecha = %s  ORDER BY codfactura DESC"
+            cursor.execute(query, (fechainicio,))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                factura = {
+                    'serie': factura.serie,
+                    'codfactura': factura.codfactura,
+                    'fecha': factura.fecha,
+                    'cliente': factura.cliente,
+                    'importe': factura.subtotal,
+                    'iva': factura.iva,
+                    'total': factura.total,
+                }
+                facturas.append(factura)
+            return facturas
+
+    @classmethod
+    def reporte_facturas_entre_clientes(cls, clienteinicio, clientefin):
+        with CursorDelPool() as cursor:
+            query = "SELECT * FROM facturas WHERE cliente >= %s AND cliente <= %s ORDER BY codfactura DESC"
+            cursor.execute(query, (clienteinicio, clientefin))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                factura = {
+                    'serie': factura.serie,
+                    'codfactura': factura.codfactura,
+                    'fecha': factura.fecha,
+                    'cliente': factura.cliente,
+                    'importe': factura.subtotal,
+                    'iva': factura.iva,
+                    'total': factura.total,
+                }
+                facturas.append(factura)
+            return facturas
+
+    @classmethod
+    def reporte_facturas_x_clientes(cls, clienteinicio):
+        with CursorDelPool() as cursor:
+            query = "SELECT * FROM facturas WHERE cliente = %s ORDER BY codfactura DESC"
+            cursor.execute(query, (clienteinicio, ))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                factura = {
+                    'serie': factura.serie,
+                    'codfactura': factura.codfactura,
+                    'fecha': factura.fecha,
+                    'cliente': factura.cliente,
+                    'importe': factura.subtotal,
+                    'iva': factura.iva,
+                    'total': factura.total,
+                }
+                facturas.append(factura)
+            return facturas
+
+    # @classmethod
+    # def reporte_facturas_x_cuit_cliente(cls, clienteinicio):
+    #     with CursorDelPool() as cursor:
+    #         query = "SELECT * FROM facturas WHERE cuit = %s ORDER BY codfactura DESC"
+    #         cursor.execute(query, (clienteinicio,))
+    #         registros = cursor.fetchall()
+    #         facturas = []
+    #         for registro in registros:
+    #             factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+    #                               registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+    #             factura = {
+    #                 'serie': factura.serie,
+    #                 'codfactura': factura.codfactura,
+    #                 'fecha': factura.fecha,
+    #                 'cliente': factura.cliente,
+    #                 'importe': factura.subtotal,
+    #                 'iva': factura.iva,
+    #                 'total': factura.total,
+    #             }
+    #             facturas.append(factura)
+    #         return facturas
+
+    @classmethod
+    def reporte_facturas_x_cuit_cliente(cls, codigo_cliente):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._REPORTE_FACTURAS_X_CUIT_CLIENTE, (codigo_cliente,))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                           registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
                 factura = {
                     'serie': factura.serie,
                     'codfactura': factura.codfactura,

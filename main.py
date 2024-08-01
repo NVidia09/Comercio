@@ -344,6 +344,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         #
         ###############################################################################################
         self.pb_facturasentrefechas.clicked.connect(self.generar_reporte_facturas)
+        self.pb_facturasxdia.clicked.connect(self.generar_reporte_facturasXFecha)
+        self.pb_facturasentreclientes.clicked.connect(self.generar_reporte_entre_clientes)
+        self.pb_facturasxclientes.clicked.connect(self.generar_reporte_x_cliente)
+        self.pb_facturasxcuit.clicked.connect(self.generar_reporte_x_cuit_cliente)
         self.pb_moduloReportes.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(16))
 
 
@@ -5796,7 +5800,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Configuración de opciones para el archivo PDF
         options = {
-            'page-size': 'Letter',
+            'page-size': 'A4',
             'margin-top': '10mm',
             'margin-right': '0mm',
             'margin-bottom': '0mm',
@@ -6057,7 +6061,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Configuración de opciones para el archivo PDF
         options = {
-            'page-size': 'Letter',
+            'page-size': 'A4',
             'margin-top': '10mm',
             'margin-right': '0mm',
             'margin-bottom': '0mm',
@@ -6306,7 +6310,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Configuración de opciones para el archivo PDF
         options = {
-            'page-size': 'Letter',
+            'page-size': 'A4',
             'margin-top': '10mm',
             'margin-right': '0mm',
             'margin-bottom': '0mm',
@@ -6836,7 +6840,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             # Configuración de opciones para el archivo PDF
             options = {
-                'page-size': 'Letter',
+                'page-size': 'A4',
                 'margin-top': '10mm',
                 'margin-right': '0mm',
                 'margin-bottom': '0mm',
@@ -7126,13 +7130,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         fecha_actual = datetime.now().strftime('%Y-%m-%d')
         # logo_path = self.factura_logo.pixmap().toImage().save('logo.png')  # Save the QPixmap to a file
         logo_path = os.path.join(application_path, 'Interfaz', 'Icons', 'logo.png')
+
+        with open(logo_path, 'rb') as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
         data = {
             'fecha_actual': fecha_actual,
             'fechainicio': fechainicio,
             'fechafin': fechafin,
             'facturas': facturas,
             # 'logo_path': 'logo.png'
-            'logo_path': logo_path,
+            # 'logo_path': logo_path,
+            'logo_base64': logo_base64,
             'fantasia_empresa': fantasia_empresa,
             'razon_social': razon_social,
             'cuit_empresa': cuit_empresa,
@@ -7165,7 +7174,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Configuración de opciones para el archivo PDF
         options = {
-            'page-size': 'Letter',
+            'page-size': 'A4',
             'margin-top': '10mm',
             'margin-right': '0mm',
             'margin-bottom': '0mm',
@@ -7187,6 +7196,438 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
         try:
             pdfkit.from_file(os.path.join(subdirectorio, 'reporte_facturas_x_fechas.html'), nombre_archivo, options=options,
+                                configuration=config)
+            QMessageBox.information(self, "Reporte Guardado",
+                                        f" El reporte ha sido guardado correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar el reporte: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
+        self.stackedWidget.setCurrentIndex(16)
+
+
+    def generar_reporte_facturasXFecha(self):
+        # Configurar Jinja2
+
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        ruta_directorio_presupuestos = os.path.join(application_path, 'Reportes')
+
+        env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+        template = env.get_template('template_rptexfecha.html')
+
+        fechainicio = self.dateEdit_reportexfecha.date().toString('dd-MM-yyyy')
+
+
+        # Obtener las facturas entre las fechas seleccionadas
+        facturas = FacturaDAO.reporte_facturas_de_fecha(fechainicio)
+
+        # Obtener la información de la empresa
+        empresa = EmpresaDAO.seleccionar()
+        fantasia_empresa = empresa[0].nombrefantasia
+        razon_social = empresa[0].razonsocial
+        cuit_empresa = empresa[0].cuit
+        iibb_empresa = empresa[0].iibb
+        inicio_actividades = empresa[0].inicioactividades
+        domicilio_empresa = empresa[0].domicilio
+        categoria_iva = empresa[0].categoria
+
+        # Datos para el template
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
+        # logo_path = self.factura_logo.pixmap().toImage().save('logo.png')  # Save the QPixmap to a file
+        logo_path = os.path.join(application_path, 'Interfaz', 'Icons', 'logo.png')
+
+        with open(logo_path, 'rb') as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
+        data = {
+            'fecha_actual': fecha_actual,
+            'fechainicio': fechainicio,
+            'facturas': facturas,
+            # 'logo_path': 'logo.png'
+            # 'logo_path': logo_path,
+            'logo_base64': logo_base64,
+            'fantasia_empresa': fantasia_empresa,
+            'razon_social': razon_social,
+            'cuit_empresa': cuit_empresa,
+            'iibb_empresa': iibb_empresa,
+            'inicio_actividades': inicio_actividades,
+            'domicilio_empresa': domicilio_empresa,
+            'categoria_iva': categoria_iva
+        }
+
+        # Renderizar el template con los datos
+        html_content = template.render(data)
+
+        # Guardar el contenido HTML en un archivo
+        with open(os.path.join(ruta_directorio_presupuestos, 'reporte_facturas_de_fecha.html'), 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
+
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Reportes")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'A4',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'reporte_{fechainicio}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                          False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'reporte_facturas_de_fecha.html'), nombre_archivo, options=options,
+                                configuration=config)
+            QMessageBox.information(self, "Reporte Guardado",
+                                        f" El reporte ha sido guardado correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar el reporte: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
+        self.stackedWidget.setCurrentIndex(16)
+
+    def generar_reporte_entre_clientes(self):
+        # Configurar Jinja2
+
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        ruta_directorio_presupuestos = os.path.join(application_path, 'Reportes')
+
+        env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+        template = env.get_template('template_rpteentreclientes.html')
+
+        clienteinicio = self.lineEdit_rptefactdesdecliente.text()
+        clientefin = self.lineEdit_rptefacthastacliente.text()
+
+        # Obtener las facturas entre las fechas seleccionadas
+        facturas = FacturaDAO.reporte_facturas_entre_clientes(clienteinicio, clientefin)
+
+        # Obtener la información de la empresa
+        empresa = EmpresaDAO.seleccionar()
+        fantasia_empresa = empresa[0].nombrefantasia
+        razon_social = empresa[0].razonsocial
+        cuit_empresa = empresa[0].cuit
+        iibb_empresa = empresa[0].iibb
+        inicio_actividades = empresa[0].inicioactividades
+        domicilio_empresa = empresa[0].domicilio
+        categoria_iva = empresa[0].categoria
+
+        # Datos para el template
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
+        # logo_path = self.factura_logo.pixmap().toImage().save('logo.png')  # Save the QPixmap to a file
+        logo_path = os.path.join(application_path, 'Interfaz', 'Icons', 'logo.png')
+
+        # Convertir la imagen a base64
+        with open(logo_path, 'rb') as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
+        data = {
+            'fecha_actual': fecha_actual,
+            'clienteinicio': clienteinicio,
+            'clientefin': clientefin,
+            'facturas': facturas,
+            # 'logo_path': 'logo.png'
+            # 'logo_path': logo_path,
+            'logo_base64': logo_base64,
+            'fantasia_empresa': fantasia_empresa,
+            'razon_social': razon_social,
+            'cuit_empresa': cuit_empresa,
+            'iibb_empresa': iibb_empresa,
+            'inicio_actividades': inicio_actividades,
+            'domicilio_empresa': domicilio_empresa,
+            'categoria_iva': categoria_iva
+        }
+
+        # Renderizar el template con los datos
+        html_content = template.render(data)
+
+        # Guardar el contenido HTML en un archivo
+        with open(os.path.join(ruta_directorio_presupuestos, 'reporte_facturas_entre_clientes.html'), 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
+
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Reportes")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'A4',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'reporte_{clienteinicio}_{clientefin}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                          False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'reporte_facturas_entre_clientes.html'), nombre_archivo, options=options,
+                                configuration=config)
+            QMessageBox.information(self, "Reporte Guardado",
+                                        f" El reporte ha sido guardado correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar el reporte: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
+        self.stackedWidget.setCurrentIndex(16)
+
+    def generar_reporte_x_cliente(self):
+        # Configurar Jinja2
+
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        ruta_directorio_presupuestos = os.path.join(application_path, 'Reportes')
+
+        env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+        template = env.get_template('template_rptexcliente.html')
+
+        clienteinicio = self.lineEdit_rptexcliente.text()
+
+
+        # Obtener las facturas entre las fechas seleccionadas
+        facturas = FacturaDAO.reporte_facturas_x_clientes(clienteinicio)
+
+        # Obtener la información de la empresa
+        empresa = EmpresaDAO.seleccionar()
+        fantasia_empresa = empresa[0].nombrefantasia
+        razon_social = empresa[0].razonsocial
+        cuit_empresa = empresa[0].cuit
+        iibb_empresa = empresa[0].iibb
+        inicio_actividades = empresa[0].inicioactividades
+        domicilio_empresa = empresa[0].domicilio
+        categoria_iva = empresa[0].categoria
+
+        # Datos para el template
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
+        # logo_path = self.factura_logo.pixmap().toImage().save('logo.png')  # Save the QPixmap to a file
+        logo_path = os.path.join(application_path, 'Interfaz', 'Icons', 'logo.png')
+
+        # Convertir la imagen a base64
+        with open(logo_path, 'rb') as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
+        data = {
+            'fecha_actual': fecha_actual,
+            'clienteinicio': clienteinicio,
+            'facturas': facturas,
+            # 'logo_path': 'logo.png'
+            # 'logo_path': logo_path,
+            'logo_base64': logo_base64,
+            'fantasia_empresa': fantasia_empresa,
+            'razon_social': razon_social,
+            'cuit_empresa': cuit_empresa,
+            'iibb_empresa': iibb_empresa,
+            'inicio_actividades': inicio_actividades,
+            'domicilio_empresa': domicilio_empresa,
+            'categoria_iva': categoria_iva
+        }
+
+        # Renderizar el template con los datos
+        html_content = template.render(data)
+
+        # Guardar el contenido HTML en un archivo
+        with open(os.path.join(ruta_directorio_presupuestos, 'reporte_facturas_x_cliente.html'), 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
+
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Reportes")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'A4',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'reporte_facturas_{clienteinicio}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                          False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'reporte_facturas_x_cliente.html'), nombre_archivo, options=options,
+                                configuration=config)
+            QMessageBox.information(self, "Reporte Guardado",
+                                        f" El reporte ha sido guardado correctamente en PDF.")
+        except Exception as e:
+            QMessageBox.critical(self, "Error al guardar", f"Se produjo un error al guardar el reporte: {e}")
+            print(f"Error al convertir HTML a PDF: {e}")
+        self.stackedWidget.setCurrentIndex(16)
+
+
+    def generar_reporte_x_cuit_cliente(self):
+        # Configurar Jinja2
+
+        if getattr(sys, 'frozen', False):
+            application_path = sys._MEIPASS
+        else:
+            application_path = os.path.dirname(os.path.abspath(__file__))
+
+        ruta_directorio_presupuestos = os.path.join(application_path, 'Reportes')
+
+        env = Environment(loader=FileSystemLoader(ruta_directorio_presupuestos))
+        template = env.get_template('template_rptexcuitcliente.html')
+
+        clienteinicio = self.lineEdit_rptefactxcuitcliente.text()
+
+        # Obtener el codigo del cliente desde la tabla clientes
+        codigo_cliente = ClienteDAO.obtener_codigo_por_cuit(clienteinicio)
+
+        # Obtener las facturas entre las fechas seleccionadas
+        facturas = FacturaDAO.reporte_facturas_x_cuit_cliente(codigo_cliente)
+
+        # Obtener la información de la empresa
+        empresa = EmpresaDAO.seleccionar()
+        fantasia_empresa = empresa[0].nombrefantasia
+        razon_social = empresa[0].razonsocial
+        cuit_empresa = empresa[0].cuit
+        iibb_empresa = empresa[0].iibb
+        inicio_actividades = empresa[0].inicioactividades
+        domicilio_empresa = empresa[0].domicilio
+        categoria_iva = empresa[0].categoria
+
+        # Datos para el template
+        fecha_actual = datetime.now().strftime('%Y-%m-%d')
+        # logo_path = self.factura_logo.pixmap().toImage().save('logo.png')  # Save the QPixmap to a file
+        logo_path = os.path.join(application_path, 'Interfaz', 'Icons', 'logo.png')
+
+        # Convertir la imagen a base64
+        with open(logo_path, 'rb') as image_file:
+            logo_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+
+        data = {
+            'fecha_actual': fecha_actual,
+            'clienteinicio': clienteinicio,
+            'facturas': facturas,
+            # 'logo_path': 'logo.png'
+            # 'logo_path': logo_path,
+            'logo_base64': logo_base64,
+            'fantasia_empresa': fantasia_empresa,
+            'razon_social': razon_social,
+            'cuit_empresa': cuit_empresa,
+            'iibb_empresa': iibb_empresa,
+            'inicio_actividades': inicio_actividades,
+            'domicilio_empresa': domicilio_empresa,
+            'categoria_iva': categoria_iva
+        }
+
+        # Renderizar el template con los datos
+        html_content = template.render(data)
+
+        # Guardar el contenido HTML en un archivo
+        with open(os.path.join(ruta_directorio_presupuestos, 'reporte_facturas_cuit_cliente.html'), 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        # Determina si el programa se está ejecutando como un archivo .exe
+        if getattr(sys, 'frozen', False):
+            # Si es así, utiliza sys._MEIPASS para obtener el directorio base del ejecutable
+            basedir = sys._MEIPASS
+        else:
+            # Si no, utiliza __file__ para obtener el directorio del script actual
+            basedir = os.path.dirname(__file__)
+
+        # Construye la ruta al directorio donde se guardarán las facturas
+        subdirectorio = os.path.join(basedir, "Reportes")
+        # Asegúrate de que el directorio existe, si no, créalo
+        if not os.path.exists(subdirectorio):
+            os.mkdir(subdirectorio)
+
+        # Configuración de opciones para el archivo PDF
+        options = {
+            'page-size': 'A4',
+            'margin-top': '10mm',
+            'margin-right': '0mm',
+            'margin-bottom': '0mm',
+            'margin-left': '0mm',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        import pdfkit
+
+        # Construye la ruta completa al archivo PDF que se va a generar
+        nombre_archivo = os.path.join(subdirectorio, f'reporte_facturas_cuit_{clienteinicio}.pdf')
+
+        # Configuración de pdfkit para especificar la ruta de wkhtmltopdf
+        wkhtmltopdf_path = os.path.join(basedir, "bin", "wkhtmltopdf.exe") if getattr(sys, 'frozen',
+                                                                                          False) else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+        # Genera el archivo PDF
+        # pdfkit.from_file(os.path.join(subdirectorio, 'factura.html'), nombre_archivo, options=options,configuration=config)
+        try:
+            pdfkit.from_file(os.path.join(subdirectorio, 'reporte_facturas_cuit_cliente.html'), nombre_archivo, options=options,
                                 configuration=config)
             QMessageBox.information(self, "Reporte Guardado",
                                         f" El reporte ha sido guardado correctamente en PDF.")

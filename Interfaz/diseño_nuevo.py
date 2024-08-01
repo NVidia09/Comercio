@@ -10899,6 +10899,15 @@ class Ui_MainWindow(object):
         self.bt_MarcaNvoArticulo_3.setIcon(icon18)
         self.bt_MarcaNvoArticulo_3.setIconSize(QtCore.QSize(38, 38))
         self.bt_MarcaNvoArticulo_3.setObjectName("bt_MarcaNvoArticulo_3")
+        self.pb_facturasxclientes = QtWidgets.QPushButton(self.groupBox_42)
+        self.pb_facturasxclientes.setGeometry(QtCore.QRect(710, 98, 41, 33))
+        self.pb_facturasxclientes.setMinimumSize(QtCore.QSize(0, 33))
+        self.pb_facturasxclientes.setMaximumSize(QtCore.QSize(16777215, 33))
+        self.pb_facturasxclientes.setStyleSheet("")
+        self.pb_facturasxclientes.setText("")
+        self.pb_facturasxclientes.setIcon(icon24)
+        self.pb_facturasxclientes.setIconSize(QtCore.QSize(30, 30))
+        self.pb_facturasxclientes.setObjectName("pb_facturasxclientes")
         self.label_478 = QtWidgets.QLabel(self.pgReportes)
         self.label_478.setGeometry(QtCore.QRect(330, 70, 301, 31))
         font = QtGui.QFont()
@@ -11369,7 +11378,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(16)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

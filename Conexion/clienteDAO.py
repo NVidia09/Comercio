@@ -15,6 +15,7 @@ class ClienteDAO:
     _ACTUALIZAR = 'UPDATE clientes SET nombre=%s, apellido=%s, dni=%s, empresa=%s, cuit=%s, telefono=%s, email=%s, direccion=%s, numero=%s, localidad=%s, provincia=%s, pais=%s, observaciones=%s, condiva=%s WHERE codigo = %s'
     _ELIMINAR = "DELETE FROM clientes WHERE codigo = %s"
     _BUSCA_CLIENTE = "SELECT * FROM clientes WHERE codigo = %s"
+    _OBTENER_CODIGO_POR_CUIT = "SELECT codigo FROM clientes WHERE cuit = %s"
 
 
 
@@ -191,4 +192,14 @@ class ClienteDAO:
 
         # Guardar el DataFrame en un archivo Excel
         df.to_excel(ruta_archivo, sheet_name="Clientes", merge_cells=True, index=False)
+
+    @classmethod
+    def obtener_codigo_por_cuit(cls, cuit):
+        with CursorDelPool() as cursor:
+            cursor.execute(cls._OBTENER_CODIGO_POR_CUIT, (cuit,))
+            registro = cursor.fetchone()
+            if registro:
+                return registro[0]
+            else:
+                return None
 
