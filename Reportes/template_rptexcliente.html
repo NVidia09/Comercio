@@ -5,19 +5,22 @@
     <title>Reporte de Facturas</title>
 </head>
 <body>
-    <div style="display: flex; align-items: center;">
-<!--        <img src="{{ logo_path }}" alt="Logo" style="height: 150px; margin-right: 20px;">-->
-        <img src="data:image/png;base64,{{ logo_base64 }}" alt="Logo" style="height: 150px; margin-right: 20px;">
-        <div>
-            <h1>{{ fantasia_empresa }}</h1>
-            <p>{{ razon_social }}</p>
-            <p>CUIT: {{ cuit_empresa }}</p>
-            <p>IIBB: {{ iibb_empresa }}</p>
-            <p>Inicio de Actividades: {{ inicio_actividades }}</p>
-            <p>Domicilio: {{ domicilio_empresa }}</p>
-            <p>Categoría IVA: {{ categoria_iva }}</p>
-        </div>
-    </div>
+    <table style="width: 100%; border: none;">
+        <tr>
+            <td style="width: 20%; vertical-align: center;">
+                <img src="data:image/png;base64,{{ logo_base64 }}" alt="Logo" style="height: 150px;">
+            </td>
+            <td style="width: 80%; vertical-align: top;">
+                <h1>{{ fantasia_empresa }}</h1>
+                <p>{{ razon_social }}</p>
+                <p>CUIT: {{ cuit_empresa }}</p>
+                <p>IIBB: {{ iibb_empresa }}</p>
+                <p>Inicio de Actividades: {{ inicio_actividades }}</p>
+                <p>Domicilio: {{ domicilio_empresa }}</p>
+                <p>Categoría IVA: {{ categoria_iva }}</p>
+            </td>
+        </tr>
+    </table>
     <h2>Fecha: {{ fecha_actual }}</h2>
     <h3>Reportes de Facturas del cliente {{ clienteinicio }} </h3>
     <table border="1">
