@@ -318,4 +318,26 @@ class FacturaDAO:
                 facturas.append(factura)
             return facturas
 
+    @classmethod
+    def reporte_facturas_entre_importes(cls, clienteinicio, clientefin):
+        with CursorDelPool() as cursor:
+            query = "SELECT * FROM facturas WHERE total >= %s AND total <= %s ORDER BY codfactura DESC"
+            cursor.execute(query, (clienteinicio, clientefin))
+            registros = cursor.fetchall()
+            facturas = []
+            for registro in registros:
+                factura = Factura(registro[0], registro[1], registro[2], registro[3], registro[4], registro[5],
+                                  registro[6], registro[7], registro[8], registro[9], registro[10], registro[11])
+                factura = {
+                    'serie': factura.serie,
+                    'codfactura': factura.codfactura,
+                    'fecha': factura.fecha,
+                    'cliente': factura.cliente,
+                    'importe': factura.subtotal,
+                    'iva': factura.iva,
+                    'total': factura.total,
+                }
+                facturas.append(factura)
+            return facturas
+
 
